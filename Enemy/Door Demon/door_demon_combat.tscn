@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2svvjwki6yja"]
+
+[ext_resource type="Script" uid="uid://bpag0qa5pfj2t" path="res://Enemy/Door Demon/Scripts/door_demon_combat.gd" id="1_6305u"]
+[ext_resource type="Texture2D" uid="uid://dgh3bh5x6hi6f" path="res://Assets/characters/Door_Gonk.png" id="2_wh7c4"]
+
+[node name="Door_Demon_Combat" type="Node2D"]
+script = ExtResource("1_6305u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wh7c4")

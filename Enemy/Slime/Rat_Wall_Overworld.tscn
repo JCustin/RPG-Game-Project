@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ma7yi7cub4gk"]
+
+[ext_resource type="Script" uid="uid://jxbijoiyog73" path="res://Enemy/Slime/Script/Rat_Wall_Script.gd" id="1_mncdf"]
+[ext_resource type="Texture2D" uid="uid://d11rr3xlc85mu" path="res://Assets/Backgrounds/Wall_Rat_Overworld.png" id="2_811qt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urlfy"]
+size = Vector2(16, 16)
+
+[node name="Rat_Wall_Overworld" type="CharacterBody2D" unique_id=646941188]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_mncdf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1573992987]
+texture = ExtResource("2_811qt")
+
+[node name="Rat_Wall_Collision" type="CollisionShape2D" parent="." unique_id=1673610948]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_urlfy")

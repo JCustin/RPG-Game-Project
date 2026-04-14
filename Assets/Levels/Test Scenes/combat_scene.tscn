@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://dfyhhan4a538f"]
+
+[ext_resource type="Texture2D" uid="uid://bvlldjc2b4hwx" path="res://Assets/Backgrounds/Dungeon_BG2.png" id="1_5edmq"]
+[ext_resource type="Script" uid="uid://c044ij7jqnb7c" path="res://Scene/Combat_Scene/Scripts/combat_scene.gd" id="1_is5av"]
+[ext_resource type="Script" uid="uid://vj3njbsn2cte" path="res://Scene/Combat_Scene/Scripts/combat_logic.gd" id="2_k71d7"]
+[ext_resource type="Script" uid="uid://bvqi23ogopjqh" path="res://Assets/Levels/Test Scenes/player_turn.gd" id="3_k71d7"]
+[ext_resource type="Script" uid="uid://bkfa5052gned" path="res://Assets/Levels/Test Scenes/enemy_turn.gd" id="4_blgq8"]
+[ext_resource type="Texture2D" uid="uid://doqpl3iertoje" path="res://Assets/Backgrounds/Witch_Hunter_Thumbnail.png" id="4_g4ma3"]
+[ext_resource type="Script" uid="uid://7a0g7gmqao50" path="res://Assets/Levels/Test Scenes/attack.gd" id="5_68jq4"]
+[ext_resource type="Script" uid="uid://clhodsdgl7gnn" path="res://Assets/Levels/Test Scenes/health_bar.gd" id="5_k71d7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4ma3"]
+bg_color = Color(0.905882, 0, 0, 1)
+
+[node name="Combat_Scene" type="Node2D" unique_id=1794279814]
+script = ExtResource("1_is5av")
+
+[node name="Combat_Logic" type="Node2D" parent="." unique_id=1724305136]
+unique_name_in_owner = true
+script = ExtResource("2_k71d7")
+
+[node name="Actors" type="Node2D" parent="Combat_Logic" unique_id=1757067425]
+unique_name_in_owner = true
+
+[node name="Behavior States" type="Node" parent="Combat_Logic" unique_id=1203246952]
+
+[node name="Player_Turn" type="Node" parent="Combat_Logic/Behavior States" unique_id=1719375175]
+unique_name_in_owner = true
+script = ExtResource("3_k71d7")
+
+[node name="Enemy_Turn" type="Node" parent="Combat_Logic/Behavior States" unique_id=1878459413]
+unique_name_in_owner = true
+script = ExtResource("4_blgq8")
+
+[node name="Combat_Camera" type="Camera2D" parent="." unique_id=1555953051]
+position = Vector2(-6, -82)
+zoom = Vector2(2, 2)
+
+[node name="Beach_BG" type="Sprite2D" parent="." unique_id=142921365]
+z_index = -1
+position = Vector2(-11, -88)
+scale = Vector2(0.085, 0.085)
+texture = ExtResource("1_5edmq")
+metadata/_edit_lock_ = true
+
+[node name="GUI" type="Control" parent="." unique_id=386074542]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -280.0
+offset_right = 259.0
+offset_bottom = 75.0
+
+[node name="Action_Panel" type="Panel" parent="GUI" unique_id=1410743519]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Action_Panel_Button_Container" type="GridContainer" parent="GUI/Action_Panel" unique_id=1634216443]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+theme_override_constants/h_separation = 400
+columns = 2
+
+[node name="Attack" type="Button" parent="GUI/Action_Panel/Action_Panel_Button_Container" unique_id=1516092212]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Perform a basic attack. "
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../Guard")
+focus_neighbor_right = NodePath("../Run")
+focus_neighbor_bottom = NodePath("../Item")
+text = "Attack"
+script = ExtResource("5_68jq4")
+
+[node name="Guard" type="Button" parent="GUI/Action_Panel/Action_Panel_Button_Container" unique_id=829079370]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Perform a basic attack. "
+text = "Guard
+"
+
+[node name="Item" type="Button" parent="GUI/Action_Panel/Action_Panel_Button_Container" unique_id=1607814619]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Perform a basic attack. "
+text = "Item"
+
+[node name="Run" type="Button" parent="GUI/Action_Panel/Action_Panel_Button_Container" unique_id=1980426658]
+layout_mode = 2
+text = "Run"
+
+[node name="HealthBar" type="ProgressBar" parent="GUI/Action_Panel" unique_id=1151134632]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 253.0
+offset_top = 6.0
+offset_right = 443.0
+offset_bottom = 33.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_g4ma3")
+value = 50.0
+show_percentage = false
+script = ExtResource("5_k71d7")
+
+[node name="Player_Character_Name" type="Label" parent="GUI/Action_Panel" unique_id=1894300706]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 6.0
+offset_right = 190.0
+offset_bottom = 28.3333
+text = "Witch Hunter"
+
+[node name="Player_Character_Thumbnail" type="Sprite2D" parent="GUI/Action_Panel" unique_id=246854070]
+position = Vector2(221, 22)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_g4ma3")
+
+[node name="Combat_Description" type="Panel" parent="GUI" unique_id=1026279196]
+unique_name_in_owner = true
+visible = false
+z_index = 12
+layout_mode = 0
+offset_left = 16.0
+offset_top = -218.0
+offset_right = 530.0
+offset_bottom = -178.0
+
+[node name="Combat_Text" type="Label" parent="GUI/Combat_Description" unique_id=1017450580]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 22.3333
+text = "text"
+
+[node name="Enemy_Selection_Panel" type="Panel" parent="GUI" unique_id=1546727718]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 514.0
+offset_bottom = 40.0
+
+[node name="Enemy_Selection_Text" type="Label" parent="GUI/Enemy_Selection_Panel" unique_id=1384817800]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="GUI/Action_Panel/Action_Panel_Button_Container/Attack" to="Combat_Logic/Behavior States/Player_Turn" method="_on_attack_pressed"]
+[connection signal="pressed" from="GUI/Action_Panel/Action_Panel_Button_Container/Run" to="Combat_Logic/Behavior States/Player_Turn" method="_on_run_pressed"]

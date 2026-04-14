@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://chulciiin8j6l"]
+
+[ext_resource type="Script" uid="uid://b8gle4gn46qvb" path="res://Enemy/Wall Rat/Script/wall_rat.gd" id="1_oj8aj"]
+[ext_resource type="Texture2D" uid="uid://dlurmx7l55m21" path="res://Assets/Backgrounds/Squishy.png" id="2_kohtr"]
+
+[node name="Wall_Rat_Combat" type="Node2D" unique_id=1883826159]
+script = ExtResource("1_oj8aj")
+
+[node name="Squishy" type="Sprite2D" parent="." unique_id=417902673]
+texture = ExtResource("2_kohtr")

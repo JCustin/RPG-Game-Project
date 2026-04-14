@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7gn0k5q18gyc"]
+
+[ext_resource type="Script" uid="uid://b8gle4gn46qvb" path="res://Enemy/Wall Rat/Script/wall_rat.gd" id="1_t4oko"]
+[ext_resource type="Texture2D" uid="uid://16vrj5rlhu8g" path="res://Assets/characters/Floating_Mummo.png" id="2_eflvk"]
+
+[node name="Combat_Wild_Mummo" type="Node2D"]
+script = ExtResource("1_t4oko")
+
+[node name="Wild_Mummo_Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_eflvk")

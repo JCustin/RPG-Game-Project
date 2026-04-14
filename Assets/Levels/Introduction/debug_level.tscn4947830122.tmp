@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b006rehojke71"]
+
+[ext_resource type="PackedScene" uid="uid://ch488n2mdridh" path="res://Assets/Levels/Introduction/introduction_level_scene1.tscn" id="1_ngams"]
+[ext_resource type="PackedScene" uid="uid://me74bim4mpx7" path="res://Player Characters/Kevin/Kevin_Player_Overworld.tscn" id="2_ucdtk"]
+[ext_resource type="PackedScene" uid="uid://ma7yi7cub4gk" path="res://Enemy/Slime/Slime_Overworld.tscn" id="3_ucdtk"]
+
+[node name="Debug Level" type="Node2D"]
+
+[node name="Actor Controller" type="Node2D" parent="."]
+
+[node name="Slime_Overworld" parent="Actor Controller" instance=ExtResource("3_ucdtk")]
+position = Vector2(152, 40)
+
+[node name="Player" parent="Actor Controller" instance=ExtResource("2_ucdtk")]
+z_index = 10
+position = Vector2(152, 88)
+speed = 200
+
+[node name="Camera" type="Camera2D" parent="Actor Controller/Player"]
+position = Vector2(-152, -88)
+zoom = Vector2(2, 2)
+
+[node name="Introduction_level_scene1" parent="." instance=ExtResource("1_ngams")]

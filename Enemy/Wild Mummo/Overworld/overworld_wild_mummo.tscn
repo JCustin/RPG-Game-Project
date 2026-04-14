@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c56t5yr54rban"]
+
+[ext_resource type="Script" uid="uid://jxbijoiyog73" path="res://Enemy/Slime/Script/Rat_Wall_Script.gd" id="1_jg8xu"]
+[ext_resource type="Texture2D" uid="uid://di251dxka3ksd" path="res://Assets/characters/Overworld_Wild_Mummo.png" id="2_6fakq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urlfy"]
+size = Vector2(16, 12)
+
+[node name="Wild_Mummo_Overworld" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_jg8xu")
+unit_id = "Wild_Mummo"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6fakq")
+
+[node name="Wild_Mummo_Collision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_urlfy")

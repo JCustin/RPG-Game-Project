@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cwj3drr7ohmnm"]
+
+[ext_resource type="Script" uid="uid://11ugkfs5r0cr" path="res://Player Characters/Kevin/Script/kevin_combat_script.gd" id="1_ji7kt"]
+[ext_resource type="Texture2D" uid="uid://xy02hf35uhws" path="res://Assets/characters/player.png" id="2_qwv6i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq1fa"]
+atlas = ExtResource("2_qwv6i")
+region = Rect2(16, 112, 18, 30)
+
+[node name="Kevin_Fighting" type="Node2D" unique_id=614801498]
+script = ExtResource("1_ji7kt")
+
+[node name="Combat_Sprite" type="Sprite2D" parent="." unique_id=1088550104]
+unique_name_in_owner = true
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_uq1fa")
