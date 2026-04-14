@@ -24,6 +24,7 @@ func start_player_turn():
 	acting_player = player_queue[player_index]
 	player_turn = true
 	player_choosing_target = false
+	
 	for button in %Action_Panel_Button_Container.get_children():
 		button.disabled = false
 
@@ -33,8 +34,6 @@ func continue_or_end_player_turn():
 			acting_player = player_queue[player_index + 1]
 		else:
 			player_turn = false
-			
-			#await get_tree().create_timer(2.0).timeout
 			player_turn_ended.emit()
 			for button in %Action_Panel_Button_Container.get_children():
 				button.disabled = true
@@ -61,8 +60,10 @@ func attack_target():
 	%Action_Panel.visible = true
 	for button in %Action_Panel_Button_Container.get_children():
 		button.disabled = false
+		
 	player_choosing_target = false
 	stop_highlighting_target_enemy(target_enemy)
+	
 	acting_player.basic_attack(target_enemy)
 	players_acted_this_turn += [acting_player]
 	continue_or_end_player_turn()

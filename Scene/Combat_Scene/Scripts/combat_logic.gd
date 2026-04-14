@@ -1,6 +1,5 @@
 extends Node2D
 
-var combat_description_open: bool = false
 signal combat_end
 
 var player_turn: Node
@@ -12,9 +11,8 @@ func _ready() -> void:
 	
 	player_turn.fled_combat.connect(end_combat)
 	player_turn.prompt_combat_description.connect(prompt_combat_description)
-	#enemy_turn.prompt_combat_description.connect(prompt_combat_description)
-	#%Player_Turn.player_turn_ended.connect(start_enemy_turn)
-	#%Enemy_Turn.enemy_turn_ended.connect(end_enemy_turn)
+	player_turn.player_turn_ended.connect(start_enemy_turn)
+	enemy_turn.enemy_turn_ended.connect(end_enemy_turn)
 	
 	for player in get_tree().get_nodes_in_group('Player'):
 		var player_combat_counterpart = player.combat_unit_counterpart.instantiate()
@@ -33,33 +31,34 @@ func _ready() -> void:
 
 func handle_attack(target, attack_value, attack_description):
 	prompt_combat_description(attack_description)
-	target.health_stat -= attack_value
-	print(target, target.health_stat)
+	#target.health_stat -= attack_value
+	#print(target, target.health_stat)
 	#TODO expand this to accomodate for DEF and resistances. 
 
 func prompt_combat_description(description):
 	%Combat_Text.text = description
 	%Combat_Description.visible = true
-	combat_description_open = true
 	await get_tree().create_timer(2.00).timeout
-	if combat_description_open == true:
+	if %Combat_Description.visible == true:
 		close_prompt_description()
 	
 func close_prompt_description():
 	%Combat_Description.visible = false
-	combat_description_open = false
 
 func end_combat():
 	combat_end.emit()
 	get_parent().queue_free()
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_accept") and combat_description_open == true:
-		combat_description_open = false
+	if Input.is_key_pressed(KEY_SPACE) and %Combat_Description.visible == true:
 		close_prompt_description()
 
-#func start_enemy_turn():
-	#%Enemy_Turn.start_turn()
-	#
-#func end_enemy_turn():
-	#%Player_Turn.start_player_turn()
+
+func start_enemy_turn():
+	if %Combat_Description.visible == true:
+		await get_tree().create_timer(2.00).timeout
+		
+	%Enemy_Turn.start_turn()
+	
+func end_enemy_turn():
+	%Player_Turn.start_player_turn()

@@ -8,8 +8,7 @@ var enemies_acted_this_turn: Array
 
 var enemy_index: int = 0
 
-signal enemy_turn_ended()
-
+signal enemy_turn_ended
 func _ready() -> void:
 	pass
 	
