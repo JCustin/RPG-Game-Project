@@ -87,8 +87,7 @@ func _input(event: InputEvent) -> void:
 			highlight_target_enemy(target_enemy)
 			
 	if Input.is_action_just_pressed("ui_accept") and player_choosing_target == true:
-		#attack_target()
-		prompt_combat_description.emit("TEST")
+		attack_target()
 
 func _on_run_pressed() -> void:
 	if player_turn == true and %Combat_Description.visible == false:
