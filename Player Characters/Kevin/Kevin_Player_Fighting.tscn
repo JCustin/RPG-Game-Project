@@ -1,16 +1,51 @@
 [gd_scene format=3 uid="uid://cwj3drr7ohmnm"]
 
 [ext_resource type="Script" uid="uid://11ugkfs5r0cr" path="res://Player Characters/Kevin/Script/kevin_combat_script.gd" id="1_ji7kt"]
-[ext_resource type="Texture2D" uid="uid://xy02hf35uhws" path="res://Assets/characters/player.png" id="2_qwv6i"]
+[ext_resource type="Texture2D" uid="uid://d1hiu7vdhgfkv" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0001.png" id="2_viqst"]
+[ext_resource type="Texture2D" uid="uid://3ktdho8cprsk" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0002.png" id="3_kwlfo"]
+[ext_resource type="Texture2D" uid="uid://n2ivk503s0io" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0003.png" id="4_4bnst"]
+[ext_resource type="Texture2D" uid="uid://dtpfv8wffe4vx" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0004.png" id="5_3xkcm"]
+[ext_resource type="Texture2D" uid="uid://cq1rwxlhxba2m" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0005.png" id="6_gwspi"]
+[ext_resource type="Texture2D" uid="uid://ojtn8sx6t0ac" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0006.png" id="7_cawlu"]
+[ext_resource type="Texture2D" uid="uid://cw7jqtbplonol" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0007.png" id="8_25oma"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uq1fa"]
-atlas = ExtResource("2_qwv6i")
-region = Rect2(16, 112, 18, 30)
+[sub_resource type="SpriteFrames" id="SpriteFrames_vhr2v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_viqst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kwlfo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4bnst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3xkcm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gwspi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cawlu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_25oma")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [node name="Kevin_Fighting" type="Node2D" unique_id=614801498]
+z_index = 20
 script = ExtResource("1_ji7kt")
 
-[node name="Combat_Sprite" type="Sprite2D" parent="." unique_id=1088550104]
+[node name="Combat_Sprite" type="AnimatedSprite2D" parent="." unique_id=1531112781]
 unique_name_in_owner = true
-scale = Vector2(3, 3)
-texture = SubResource("AtlasTexture_uq1fa")
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_vhr2v")
+animation = &"Idle"
+autoplay = "Idle"
+speed_scale = 1.4

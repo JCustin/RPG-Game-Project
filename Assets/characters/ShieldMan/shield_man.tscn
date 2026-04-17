@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dr5bfgnwws2pj"]
+
+[ext_resource type="Texture2D" uid="uid://c576lo8t4bx82" path="res://Assets/characters/ShieldMan/Front/ShieldMan_Front_0001.png" id="1_aafow"]
+[ext_resource type="Script" uid="uid://c8ansoj6f3sab" path="res://Assets/characters/ShieldMan/shield_man.gd" id="1_efjs4"]
+
+[node name="Combat_Shield_Man" type="Node2D" unique_id=34828944]
+script = ExtResource("1_efjs4")
+
+[node name="Front_Facing" type="Node2D" parent="." unique_id=2076364728]
+
+[node name="Shield_Front" type="Node2D" parent="Front_Facing" unique_id=19386634]
+
+[node name="Shield_Sprite" type="Sprite2D" parent="Front_Facing/Shield_Front" unique_id=585290813]
+texture = ExtResource("1_aafow")
+
+[node name="Man_Front" type="Node2D" parent="Front_Facing" unique_id=265783297]
+
+[node name="Sprite2D" type="Sprite2D" parent="Front_Facing/Man_Front" unique_id=1703524321]
+
+[node name="Rear_Facing" type="Node2D" parent="." unique_id=1065159589]
+visible = false
+
+[node name="Shield_Rear" type="Node2D" parent="Rear_Facing" unique_id=25917027]
+
+[node name="Man_Rear" type="Node2D" parent="Rear_Facing" unique_id=771219540]

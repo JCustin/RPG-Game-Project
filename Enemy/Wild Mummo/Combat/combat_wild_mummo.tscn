@@ -1,10 +1,60 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7gn0k5q18gyc"]
+[gd_scene format=3 uid="uid://c7gn0k5q18gyc"]
 
-[ext_resource type="Script" uid="uid://b8gle4gn46qvb" path="res://Enemy/Wall Rat/Script/wall_rat.gd" id="1_t4oko"]
+[ext_resource type="Script" uid="uid://b75wjlvw1efw5" path="res://Enemy/Wild Mummo/Combat/combat_wild_mummo.gd" id="1_eflvk"]
 [ext_resource type="Texture2D" uid="uid://16vrj5rlhu8g" path="res://Assets/characters/Floating_Mummo.png" id="2_eflvk"]
+[ext_resource type="Texture2D" uid="uid://day0rmepypwr5" path="res://Assets/characters/Floating_Mummo_SpriteSheet_0002.png" id="3_eflvk"]
 
-[node name="Combat_Wild_Mummo" type="Node2D"]
-script = ExtResource("1_t4oko")
+[sub_resource type="Animation" id="Animation_eflvk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Wild_Mummo_Sprite_Front/..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.2, 1, 1)]
+}
 
-[node name="Wild_Mummo_Sprite" type="Sprite2D" parent="."]
+[sub_resource type="Animation" id="Animation_agg2v"]
+resource_name = "Targeted"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Wild_Mummo_Sprite_Front/..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.2, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdmc8"]
+_data = {
+&"RESET": SubResource("Animation_eflvk"),
+&"Targeted": SubResource("Animation_agg2v")
+}
+
+[node name="Combat_Wild_Mummo" type="Node2D" unique_id=1996487792]
+modulate = Color(1, 0.2, 1, 1)
+script = ExtResource("1_eflvk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=924664528]
+root_node = NodePath("../Wild_Mummo_Sprite_Front")
+libraries/ = SubResource("AnimationLibrary_hdmc8")
+speed_scale = 0.5
+
+[node name="Wild_Mummo_Sprite_Front" type="Sprite2D" parent="." unique_id=1998650770]
+unique_name_in_owner = true
 texture = ExtResource("2_eflvk")
+
+[node name="Wild_Mummo_Sprite_Back" type="Sprite2D" parent="." unique_id=1594188692]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("3_eflvk")

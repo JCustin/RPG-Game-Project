@@ -11,18 +11,19 @@ func initiate_combat(enemy_node: Node2D):
 	%Player.initiate_combat()
 	acting_enemy = enemy_node
 	acting_enemy.add_to_group('Combat_Enemies')
-	acting_enemy.initiate_combat()
+	acting_enemy.overworld_behavior.initiate_combat()
 	
-	var combat_scene = preload("res://Assets/Levels/Test Scenes/combat_scene.tscn").instantiate()
-	if len(get_children()) < 2:
-		add_child(combat_scene)
-	combat_scene = get_child(-1).get_child(0)
-	combat_scene.combat_end.connect(resume_overworld)
+	var combat_scene = preload("uid://buylh0rmqi1ll").instantiate()
+	combat_scene.custom_initialize(acting_enemy)
+	add_child(combat_scene)
+	
+	#combat_scene.end_combat.connect(resume_overworld)
+	#if len(get_children()) < 2:
+		#add_child(combat_scene)
+	#combat_scene.end_combat.connect(resume_overworld)
 	
 	%Overworld.visible = false
-	%Camera.enabled = false
-	
-	
+	%Camera.enabled = false	
 
 func resume_overworld():
 	%Overworld.visible = true

@@ -50,8 +50,8 @@ func start_choosing_target():
 	for button in %Action_Panel_Button_Container.get_children():
 		button.disabled = true
 	
-	var enemy_queue = %Enemy_Turn.enemy_queue 
-	target_enemy = enemy_queue[target_enemy_index]
+	var acting_enemy = %Enemy_Turn.acting_enemy
+	target_enemy = acting_enemy
 	
 	player_choosing_target = true
 	highlight_target_enemy(target_enemy)
@@ -69,26 +69,45 @@ func attack_target():
 	continue_or_end_player_turn()
 
 func _input(event: InputEvent) -> void:
-	var enemy_queue = %Enemy_Turn.enemy_queue
-	if Input.is_action_just_pressed("ui_left") and player_choosing_target == true: # logic checks if there even is an item BEFORE the current index. 
-		if enemy_queue.size() > (target_enemy_index - 1):
-			target_enemy = enemy_queue[target_enemy_index - 1]
-			highlight_target_enemy(target_enemy)
-		else:
-			target_enemy = enemy_queue[-1] # if there is not an item before the current item, go to the last enemy
-			highlight_target_enemy(target_enemy)
-
-			
-	if Input.is_action_just_pressed("ui_right") and player_choosing_target == true: # logic checks if there is an item AFTER the current index
-		if enemy_queue.size() > (target_enemy_index + 1):
-			target_enemy = enemy_queue[target_enemy_index + 1]
-			highlight_target_enemy(target_enemy)
-		else:
-			target_enemy = enemy_queue[0] # if  there is not an item after the current item, go to the first enemy
-			highlight_target_enemy(target_enemy)
-			
-	if Input.is_action_just_pressed("ui_accept") and player_choosing_target == true:
-		attack_target()
+	if player_choosing_target == true:
+		var enemy_queue : Array = %Enemy_Turn.find_available_body_parts().values()
+		
+		if Input.is_action_just_pressed("ui_left"): # logic checks if there even is an item BEFORE the current index. 
+			if enemy_queue.size() > (target_enemy_index - 1):
+				target_enemy = enemy_queue[target_enemy_index - 1]
+			else:
+				target_enemy_index = (enemy_queue.size() - 1)
+				target_enemy = enemy_queue[target_enemy_index]
+				%Enemy_Turn.acting_enemy.highlight_bodypart(target_enemy)
+		
+		if Input.is_action_just_pressed("ui_right"):
+			if enemy_queue.size() > (target_enemy_index + 1):
+				target_enemy_index += 1
+				target_enemy = enemy_queue[target_enemy_index]
+				%Enemy_Turn.acting_enemy.highlight_bodypart(target_enemy)
+				
+			else:
+				target_enemy_index = 0
+				target_enemy = enemy_queue[target_enemy_index]
+		
+		#if enemy_queue.size() > (target_enemy_index - 1):
+			#target_enemy = enemy_queue[target_enemy_index - 1]
+			#highlight_target_enemy(target_enemy)
+		#else:
+			#target_enemy = enemy_queue[-1] # if there is not an item before the current item, go to the last enemy
+			#highlight_target_enemy(target_enemy)
+#
+			##
+	#if Input.is_action_just_pressed("ui_right") and player_choosing_target == true: # logic checks if there is an item AFTER the current index
+		#if enemy_queue.size() > (target_enemy_index + 1):
+			#target_enemy = enemy_queue[target_enemy_index + 1]
+			#highlight_target_enemy(target_enemy)
+		#else:
+			#target_enemy = enemy_queue[0] # if  there is not an item after the current item, go to the first enemy
+			#highlight_target_enemy(target_enemy)
+			#
+	#if Input.is_action_just_pressed("ui_accept") and player_choosing_target == true:
+		#attack_target()
 
 func _on_run_pressed() -> void:
 	if player_turn == true and %Combat_Description.visible == false:
@@ -103,12 +122,13 @@ func _on_run_pressed() -> void:
 	pass # Replace with function body.
 	
 func highlight_target_enemy(enemy):
-	enemy.modulate = Color(12, 0, 149)
+	print_debug(enemy)
+	#enemy.modulate = Color(12, 0, 149)
 	
 	pass
 
 func stop_highlighting_target_enemy(enemy):
-	enemy.modulate = Color(1.0, 1.0, 1.0)
+	#enemy.modulate = Color(1.0, 1.0, 1.0)
 	pass
 
 	

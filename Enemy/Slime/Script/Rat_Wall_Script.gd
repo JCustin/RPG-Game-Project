@@ -7,7 +7,8 @@ var fighting: bool = false
 @export var unit_id: String = "Wall_Rat"
 @export var patrol_timer_ms: int = 100
 
-var combat_unit_counterpart = preload("res://Enemy/Wall Rat/Wall_Rat_Combat.tscn")
+#var combat_unit_counterpart = preload("res://Enemy/Wall Rat/Wall_Rat_Combat.tscn")
+var combat_unit_counterpart = preload("uid://dr5bfgnwws2pj") # TESTING
 var unit_name = "Wall Rat"
 
 var patrolling: bool = false

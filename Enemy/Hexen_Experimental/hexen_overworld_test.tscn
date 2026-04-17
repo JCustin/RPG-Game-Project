@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ssuhgxbsjc44"]
+
+[ext_resource type="Script" uid="uid://k2we62iuoi1e" path="res://Enemy/Hexen_Experimental/Scripts/hexen_overworld_test.gd" id="1_iscii"]
+[ext_resource type="Texture2D" uid="uid://os1m5a7ny2ek" path="res://Enemy/Hexen_Experimental/Hexen_Overworld.png" id="1_n53g0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iscii"]
+size = Vector2(35, 36)
+
+[node name="Hexen_Overworld_TEST" type="CharacterBody2D" unique_id=942029254]
+collision_layer = 4
+script = ExtResource("1_iscii")
+
+[node name="Hexen_Overworld_Sprite" type="Sprite2D" parent="." unique_id=2079451848]
+texture = ExtResource("1_n53g0")
+
+[node name="Combat_Collision_Hitbox" type="CollisionShape2D" parent="." unique_id=1288911544]
+position = Vector2(-7.5, -8)
+shape = SubResource("RectangleShape2D_iscii")

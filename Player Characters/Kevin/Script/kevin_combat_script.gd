@@ -2,6 +2,8 @@ extends Node2D
 var health_stat: int = 100
 var attack_stat: int = 10
 
+var facing_front: bool
+
 signal attack(attack_value: int, attack_description: String)
 
 func _ready() -> void:

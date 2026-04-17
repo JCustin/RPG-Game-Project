@@ -1,17 +1,21 @@
 extends Node2D
 
-var health_stat: int = 100
+var stat_block : Dictionary  = wild_mummo_stats.new().stat_block
+
+var health_stat: int = stat_block["head_HP"]
 var stats = wall_rat_stats.new()
 var most_vulnerable_target: Node2D
-var unit_id = "Wall_Rat"
-var unit_name = "Wall Rat"
+var unit_id = "Wild Mummo"
+var unit_name = "Wild Mummo"
 
 var facing_front: bool = true
 
 signal attack(target: Node2D, attack_value: int, combat_description: TextParagraph)
 
 func _ready() -> void:
+	#stat_block = wild_mummo_stats.new()
 	add_to_group('Enemy')
+	print_debug(stat_block["head_HP"])
 	position = Vector2(0, -150)
 
 func tackle():
@@ -51,3 +55,10 @@ func choose_attack(potential_targets: Array):
 		wait()
 	elif random_attack == "roar":
 		roar()
+
+
+func switch_sprite():
+	%Wild_Mummo_Sprite_Front.visible = not %Wild_Mummo_Sprite_Front.visible
+	%Wild_Mummo_Sprite_Back.visible = not %Wild_Mummo_Sprite_Back.visible 
+	
+	

@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://b006rehojke71"]
+
+[ext_resource type="Script" uid="uid://cqvte1takp1su" path="res://Assets/Levels/Introduction/Scripts/debug_level.gd" id="1_a5wmo"]
+[ext_resource type="PackedScene" uid="uid://ch488n2mdridh" path="res://Assets/Levels/Introduction/introduction_level_scene1.tscn" id="1_ngams"]
+[ext_resource type="Script" uid="uid://ovtkhcrhwh4b" path="res://Managers/actor_controller.gd" id="1_nhxuj"]
+[ext_resource type="PackedScene" uid="uid://me74bim4mpx7" path="res://Player Characters/Kevin/Kevin_Player_Overworld.tscn" id="2_ucdtk"]
+[ext_resource type="PackedScene" uid="uid://ma7yi7cub4gk" path="res://Enemy/Slime/Rat_Wall_Overworld.tscn" id="4_qtbh1"]
+[ext_resource type="PackedScene" uid="uid://c56t5yr54rban" path="res://Enemy/Wild Mummo/Overworld/overworld_wild_mummo.tscn" id="5_35con"]
+[ext_resource type="Script" uid="uid://d3s5nkc7fknij" path="res://Enemy/Wild Mummo/overworld_wild_mummo.gd" id="6_ppatb"]
+[ext_resource type="PackedScene" uid="uid://cftodwj83fks6" path="res://Assets/Levels/Introduction/introduction_level_fight_arena.tscn" id="7_35con"]
+
+[node name="Game" type="Node2D" unique_id=115325983]
+script = ExtResource("1_a5wmo")
+
+[node name="Overworld" type="Node2D" parent="." unique_id=1845968887]
+unique_name_in_owner = true
+
+[node name="Actor Controller" type="Node2D" parent="Overworld" unique_id=968486888]
+script = ExtResource("1_nhxuj")
+
+[node name="Player" parent="Overworld/Actor Controller" unique_id=1229629479 instance=ExtResource("2_ucdtk")]
+unique_name_in_owner = true
+z_index = 10
+position = Vector2(152, 88)
+speed = 200
+
+[node name="Rat_Wall_Overworld" parent="Overworld/Actor Controller" unique_id=646941188 instance=ExtResource("4_qtbh1")]
+
+[node name="Wild_Mummo_Overworld" parent="Overworld/Actor Controller" unique_id=1164233114 instance=ExtResource("5_35con")]
+position = Vector2(128, 64)
+script = ExtResource("6_ppatb")
+
+[node name="Introduction_level_fight_arena" parent="Overworld" unique_id=1809784248 instance=ExtResource("7_35con")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Camera" type="Camera2D" parent="Overworld" unique_id=1898397555]
+unique_name_in_owner = true
+offset = Vector2(20, 25)
+zoom = Vector2(3, 3)
+
+[node name="Combat_GUI" type="Control" parent="Overworld/Camera" unique_id=1827933794]
+visible = false
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_left = -176.0
+offset_top = 48.0
+offset_right = 216.0
+offset_bottom = 112.0
+
+[node name="Player_Action_Panel" type="Panel" parent="Overworld/Camera/Combat_GUI" unique_id=1254929083]
+visible = false
+custom_minimum_size = Vector2(190, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overworld/Camera/Combat_GUI/Player_Action_Panel" unique_id=1293847733]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Run" type="Button" parent="Overworld/Camera/Combat_GUI/Player_Action_Panel/HBoxContainer" unique_id=1457822275]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0877643, 0.280766, 0.223047, 1)
+theme_override_colors/font_hover_color = Color(1, 0.449521, 0.381014, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.531171, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0.422371, 0.422371, 0.422371, 1)
+theme_override_colors/font_outline_color = Color(0.413415, 0.00174965, 0.669143, 1)
+theme_override_constants/outline_size = 1
+text = "Run"
+
+[node name="Attack" type="Button" parent="Overworld/Camera/Combat_GUI/Player_Action_Panel/HBoxContainer" unique_id=363771527]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "Attack"
+
+[node name="Button" type="Button" parent="Overworld/Camera/Combat_GUI/Player_Action_Panel/HBoxContainer" unique_id=144857576]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "Item"
+
+[node name="Combat_Action_Panel" type="Panel" parent="Overworld/Camera/Combat_GUI" unique_id=1689672098]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = -0.422
+anchor_right = 0.5
+anchor_bottom = -0.422
+offset_left = -86.0
+offset_top = -19.992
+offset_right = 108.0
+offset_bottom = 20.008
+
+[node name="Label" type="Label" parent="Overworld/Camera/Combat_GUI/Combat_Action_Panel" unique_id=824754409]
+visible = false
+layout_mode = 0
+offset_right = 194.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 8
+text = "Sample Text"
+
+[node name="Introduction_level_scene1" parent="Overworld" unique_id=1443023022 instance=ExtResource("1_ngams")]
+unique_name_in_owner = true
+z_index = -2

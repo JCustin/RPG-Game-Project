@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed = 10
 signal contacted_enemy(enemy: CharacterBody2D)
 var active: bool = true
-var combat_unit_counterpart = preload("res://Player Characters/Kevin/Kevin_Player_Fighting.tscn")
+var combat_scene = preload("res://Player Characters/Kevin/Kevin_Player_Fighting.tscn")
 
 
 func _ready() -> void:
@@ -34,6 +34,7 @@ func end_combat():
 	
 func send_collision_data():
 	var enemy_collided_with: Node2D = get_last_slide_collision().get_collider()
+	#print_debug(enemy_collided_with)
 	if enemy_collided_with.is_in_group('Enemy'):
 		active = false
 		contacted_enemy.emit(enemy_collided_with)

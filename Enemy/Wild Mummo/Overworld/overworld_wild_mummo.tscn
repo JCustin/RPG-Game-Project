@@ -6,17 +6,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urlfy"]
 size = Vector2(16, 12)
 
-[node name="Wild_Mummo_Overworld" type="CharacterBody2D"]
+[node name="Wild_Mummo_Overworld" type="CharacterBody2D" unique_id=1214945530]
 z_index = 10
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_jg8xu")
 unit_id = "Wild_Mummo"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1877387315]
 texture = ExtResource("2_6fakq")
 
-[node name="Wild_Mummo_Collision" type="CollisionShape2D" parent="."]
+[node name="Wild_Mummo_Collision" type="CollisionShape2D" parent="." unique_id=1271024051]
 unique_name_in_owner = true
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_urlfy")
