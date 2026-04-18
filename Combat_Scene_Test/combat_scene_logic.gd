@@ -5,11 +5,19 @@ var player_turn = player_turn_logic.new(self)
 
 var acting_player: Node2D
 var active_players_in_combat : Array
+var player_choosing_target : bool = false
 
 var front_facing_enemy_parts_in_combat: Array
 var rear_facing_enemy_parts_in_combat: Array
 
+var potential_enemy_targets : Array
+var potential_enemy_target_index: int = 0
+var target_enemy : Node2D
+
 var primary_enemy: Node2D
+
+var forward_combat_direction : bool = true # true means front, false means rear
+
 
 func custom_initialize(enemy: Node2D):
 	primary_enemy = enemy
@@ -22,16 +30,14 @@ func _ready() -> void:
 		%Player_Actors.add_child(player_combat_scene)
 		player_combat_scene.attack.connect(execute_attack_calculation)
 		active_players_in_combat += [player_combat_scene]
-		
-	#active_players_in_combat = get_tree().get_nodes_in_group('Players')
+	
+	acting_player = active_players_in_combat[0]
 	
 	primary_enemy = primary_enemy.combat_scene.instantiate()
 	%Enemy_Actors.add_child(primary_enemy)
 	primary_enemy.attack.connect(execute_attack_calculation)
 	
-	enemy_turn.set_primary_enemy(primary_enemy)	
-	
-	acting_player = active_players_in_combat[0]
+	#acting_player = active_players_in_combat[0]
 	spawn_and_position_actors()
 	#player_turn.start_player_turn()
 	
@@ -49,5 +55,35 @@ func execute_attack_calculation(target: Node2D, attack_value: int, attack_descri
 func end_combat():
 	pass
 
-func end_player_combat():
+func end_player_turn():
 	enemy_turn.start_enemy_turn()
+
+func _on_attack_pressed() -> void:
+	potential_enemy_targets = enemy_turn.return_active_enemy_parts(forward_combat_direction, primary_enemy)
+	player_choosing_target = true
+	
+func _input(event: InputEvent) -> void:
+	if player_choosing_target == true:
+		if Input.is_action_just_pressed("ui_left"):
+			if (potential_enemy_target_index - 1) < 0:
+				potential_enemy_target_index = 0
+				target_enemy = potential_enemy_targets[potential_enemy_target_index]
+				#print_debug(target_enemy)
+				
+			elif (potential_enemy_target_index - 1) >= 0:
+				potential_enemy_target_index -= 1
+				target_enemy = potential_enemy_targets[potential_enemy_target_index]
+				#print_debug(target_enemy)
+				
+		if Input.is_action_just_pressed("ui_right"):
+			if potential_enemy_targets.size() > (potential_enemy_target_index + 1):
+				potential_enemy_target_index += 1
+				target_enemy = potential_enemy_targets[potential_enemy_target_index]
+				player_turn.highlight_enemy(target_enemy)
+			elif potential_enemy_targets.size() <= (potential_enemy_target_index + 1):
+				potential_enemy_target_index = 0
+				target_enemy = potential_enemy_targets[potential_enemy_target_index]
+				
+		
+		
+		print_debug(target_enemy)

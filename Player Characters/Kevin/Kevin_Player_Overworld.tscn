@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://me74bim4mpx7"]
+[gd_scene format=3 uid="uid://me74bim4mpx7"]
 
 [ext_resource type="Texture2D" uid="uid://xy02hf35uhws" path="res://Assets/characters/player.png" id="1_5332c"]
 [ext_resource type="Script" uid="uid://d0qug6ahbgetu" path="res://Player Characters/Kevin/Script/kevin_player_overworld.gd" id="1_xl0in"]
@@ -14,24 +14,24 @@ region = Rect2(16, 112, 18, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5oa8n"]
 size = Vector2(13, 21)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1175498703]
 collision_mask = 6
 script = ExtResource("1_xl0in")
 speed = 300
 
-[node name="AnimationPlayer [GAP]" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer [GAP]" type="AnimationPlayer" parent="." unique_id=1882057001]
 
-[node name="Overworld_Sprite" type="Sprite2D" parent="."]
+[node name="Overworld_Sprite" type="Sprite2D" parent="." unique_id=939530011]
 unique_name_in_owner = true
 texture = SubResource("AtlasTexture_kg8ro")
 
-[node name="Combat_Sprite" type="Sprite2D" parent="."]
+[node name="Combat_Sprite" type="Sprite2D" parent="." unique_id=950571571]
 unique_name_in_owner = true
 visible = false
 scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_xl0in")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=987864371]
 unique_name_in_owner = true
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_5oa8n")

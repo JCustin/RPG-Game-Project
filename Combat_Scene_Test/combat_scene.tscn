@@ -6,10 +6,63 @@
 script = ExtResource("1_ll8bp")
 
 [node name="GUI" type="Control" parent="." unique_id=1718813478]
+z_index = 100
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Attack" type="Button" parent="GUI" unique_id=578863900]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -368.0
+offset_top = 133.0
+offset_right = -345.6316
+offset_bottom = 147.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(4.56, 4.3199997)
+theme_override_font_sizes/font_size = 4
+text = "Attack"
+
+[node name="Flank" type="Button" parent="GUI" unique_id=1064733739]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = 132.0
+offset_right = -233.63158
+offset_bottom = 146.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(4.56, 4.3199997)
+theme_override_font_sizes/font_size = 4
+text = "Flank"
+
+[node name="Flee" type="Button" parent="GUI" unique_id=575689669]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = 132.00002
+offset_right = -120.63158
+offset_bottom = 146.00002
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(4.56, 4.3199997)
+theme_override_font_sizes/font_size = 4
+text = "Flee
+"
 
 [node name="Player_Actors" type="Node" parent="." unique_id=1754292711]
 unique_name_in_owner = true
@@ -22,3 +75,5 @@ unique_name_in_owner = true
 
 [node name="Combat_Camera" type="Camera2D" parent="." unique_id=1907014766]
 zoom = Vector2(1.2, 1.2)
+
+[connection signal="pressed" from="GUI/Attack" to="." method="_on_attack_pressed"]

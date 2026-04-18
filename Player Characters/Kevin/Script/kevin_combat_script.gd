@@ -2,7 +2,7 @@ extends Node2D
 var health_stat: int = 100
 var attack_stat: int = 10
 
-var facing_front: bool
+var facing_forward: bool = true
 
 signal attack(attack_value: int, attack_description: String)
 
