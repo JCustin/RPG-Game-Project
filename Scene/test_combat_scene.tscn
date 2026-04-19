@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2nq1y6rtl6jm"]
+[gd_scene format=3 uid="uid://d2218qglav1eq"]
 
 [ext_resource type="Texture2D" uid="uid://dgh3bh5x6hi6f" path="res://Assets/characters/Door_Gonk.png" id="1_x8lmn"]
 [ext_resource type="Texture2D" uid="uid://dn2vfskqr1erd" path="res://Assets/characters/Door_Gonk_Alt.png" id="2_bianx"]
 
-[node name="Test_Combat_Scene" type="Node2D"]
+[node name="Test_Combat_Scene" type="Node2D" unique_id=1078237725]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=486890525]
 modulate = Color(0, 0, 0, 1)
 scale = Vector2(10, 10)
 texture = ExtResource("1_x8lmn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2125665980]
 scale = Vector2(2, 2)
 texture = ExtResource("2_bianx")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=753792243]

@@ -63,7 +63,7 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("ui_left"):
 			if (potential_enemy_target_index - 1) < 0:
 				player_turn.unhighlight_enemy(target_enemy)
-				potential_enemy_target_index = 0
+				potential_enemy_target_index = (potential_enemy_targets.size() - 1)
 				target_enemy = potential_enemy_targets[potential_enemy_target_index]
 				player_turn.highlight_enemy(target_enemy)
 				

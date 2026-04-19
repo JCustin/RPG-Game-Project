@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dkvtmm11iu3dc"]
+
+[ext_resource type="Script" uid="uid://bc1wg7u8ijl52" path="res://Enemy/Foot_Soldier/Scripts/foot_soldier_overworld.gd" id="1_vlanb"]
+[ext_resource type="Texture2D" uid="uid://dn41yqjjlxnhu" path="res://icon.svg" id="2_711ym"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eda3s"]
+size = Vector2(127, 127)
+
+[node name="foot_soldier_overworld" type="CharacterBody2D" unique_id=1154605635]
+script = ExtResource("1_vlanb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1490009832]
+texture = ExtResource("2_711ym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=759412206]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_eda3s")

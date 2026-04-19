@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://ovtkhcrhwh4b" path="res://Managers/actor_controller.gd" id="1_nhxuj"]
 [ext_resource type="PackedScene" uid="uid://me74bim4mpx7" path="res://Player Characters/Kevin/Kevin_Player_Overworld.tscn" id="2_ucdtk"]
 [ext_resource type="PackedScene" uid="uid://ssuhgxbsjc44" path="res://Enemy/Hexen_Experimental/hexen_overworld_test.tscn" id="4_a5wmo"]
+[ext_resource type="PackedScene" uid="uid://dkvtmm11iu3dc" path="res://Enemy/Foot_Soldier/foot_soldier_overworld.tscn" id="5_qtbh1"]
 
 [node name="Game" type="Node2D" unique_id=115325983]
 script = ExtResource("1_a5wmo")
@@ -22,6 +23,9 @@ position = Vector2(152, 88)
 speed = 200
 
 [node name="Hexen_Overworld_TEST" parent="Overworld/Actor Controller" unique_id=942029254 instance=ExtResource("4_a5wmo")]
+
+[node name="foot_soldier_overworld" parent="Overworld/Actor Controller" unique_id=1154605635 instance=ExtResource("5_qtbh1")]
+collision_layer = 4
 
 [node name="Camera" type="Camera2D" parent="Overworld" unique_id=1898397555]
 unique_name_in_owner = true
