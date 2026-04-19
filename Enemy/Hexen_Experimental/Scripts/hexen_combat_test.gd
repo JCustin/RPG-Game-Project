@@ -16,5 +16,8 @@ func _ready() -> void:
 	}
 	#debug("The HP of the Hexen's right arm is: ", right_arm_stats["HP"])
 
+func tackle(target):
+	attack.emit(target, 10, "The hexen strikes at you.")
+
 func choose_attack(target):
-	attack.emit()
+	tackle(target)

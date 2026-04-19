@@ -1,7 +1,7 @@
 extends Node
 class_name player_turn_logic
 
-var animation_library = AnimationLibrary.new()
+var tween_controller: Tween
 
 var parent_script : Node2D
 
@@ -46,23 +46,13 @@ func trigger_target_select(potential_enemy_targets: Array):
 	target_enemy = enemy_queue[0]
 			
 func highlight_enemy(enemy):
-	var tween = create_tween()
-	tween.tween_property(enemy, "modulate", Color(2.224, 2.224, 2.224), 2.0)
-	
-	
-	
-	#var tween = create_tween()
-	#tween.set_loops()
-	#tween.tween_property(enemy, "modulate:v", Color(2.224, 2.224, 2.224), 2.0)
-	#tween.tween_property(enemy, "modulate:v", Color(10, 20, 30, 0), 2.0)	
-	
-	print_debug(enemy)
-	enemy.modulate = Color(100, 0, 40)
-	#var tween = create_tween()
-	#tween.tween_property(enemy, "modulate:v", 1, 0.25).from(15)
-	pass
+	tween_controller = enemy.create_tween()
+	tween_controller.set_loops()
+	tween_controller.tween_property(enemy, "modulate", Color.RED, 0.5)
+	tween_controller.tween_property(enemy, "modulate", Color.WHITE, 0.5)
 	
 func unhighlight_enemy(enemy):
+	tween_controller.kill()
 	enemy.modulate = Color(1.0, 1.0, 1.0)
 	
 func kill_player(player: Node2D):

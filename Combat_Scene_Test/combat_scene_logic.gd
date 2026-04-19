@@ -35,6 +35,8 @@ func _ready() -> void:
 	%Enemy_Actors.add_child(primary_enemy)
 	primary_enemy.attack.connect(execute_attack_calculation)
 	
+	print_debug(primary_enemy)
+	
 	acting_player = active_players_in_combat[0]
 	spawn_and_position_actors()
 	#target_enemy = potential_enemy_targets[0]
@@ -107,20 +109,20 @@ func continue_or_end_player_turn():
 				button.visible = false
 				
 		elif players_acted_this_turn.size() <= (player_index + 1):
-			#enemy_turn.start_enemy_turn()
+			enemy_turn.start_enemy_turn(primary_enemy, active_players_in_combat)
 			pass
 	pass
 
 	
 func start_enemy_turn():
-	enemy_turn.start_enemy_turn(active_players_in_combat)
+	enemy_turn.start_enemy_turn(primary_enemy, active_players_in_combat)
 	
 func start_player_turn():
+	print_debug("Should be my turn now")
 	players_acted_this_turn.clear()
 	acting_player = active_players_in_combat[0]
-	
 	for button in %GUI.get_children():
-		button.disabled = true
+		button.disabled = false
 		button.visible = true
 		
 		
