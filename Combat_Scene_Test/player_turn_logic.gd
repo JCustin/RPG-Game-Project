@@ -34,33 +34,32 @@ func continue_or_end_turn():
 		else:
 			parent_script.end_player_turn()
 			
-			
+
 func trigger_target_select(potential_enemy_targets: Array):
+	
 	player_choosing_target = true
 	enemy_queue = potential_enemy_targets
 	target_enemy = enemy_queue[0]
 			
 func highlight_enemy(enemy):
-	var animplayer = AnimationPlayer.new()
-	var enemy_path = enemy.get_path()
-	enemy_path = String(enemy_path) + ":modulate"
-	print_debug(enemy_path)
-	var highlight_animation = Animation.new()
-	highlight_animation.loop_mode = Animation.LOOP_LINEAR
-	highlight_animation.length = 1.0
-	var track_index = highlight_animation.add_track(Animation.TYPE_VALUE)
-	highlight_animation.track_set_path(track_index, enemy_path)
-	highlight_animation.track_insert_key(track_index, 0.00, Color(100,100,100))
-	highlight_animation.track_insert_key(track_index, 1.00, Color(100,100,100))
-	highlight_animation.track_insert_key(track_index, 0.50, Color(0, 10, 100, 50))
-	var short_animation_name : String = "highlight_enemy"
-	var full_animation_name : String = "animation_library" + "\\" + short_animation_name
-	
-	animation_library.add_animation("highlight_enemy", highlight_animation)
-	animplayer.play(full_animation_name)
+	var tween = create_tween()
+	tween.tween_property(enemy, "modulate", Color(2.224, 2.224, 2.224), 2.0)
 	
 	
 	
+	#var tween = create_tween()
+	#tween.set_loops()
+	#tween.tween_property(enemy, "modulate:v", Color(2.224, 2.224, 2.224), 2.0)
+	#tween.tween_property(enemy, "modulate:v", Color(10, 20, 30, 0), 2.0)	
+	
+	print_debug(enemy)
+	enemy.modulate = Color(100, 0, 40)
+	#var tween = create_tween()
+	#tween.tween_property(enemy, "modulate:v", 1, 0.25).from(15)
+	pass
+	
+func unhighlight_enemy(enemy):
+	enemy.modulate = Color(1.0, 1.0, 1.0)
 	
 func kill_player(player: Node2D):
 	# TODO write code for killing a player 

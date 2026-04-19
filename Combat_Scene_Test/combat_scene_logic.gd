@@ -5,6 +5,7 @@ var player_turn = player_turn_logic.new(self)
 
 var acting_player: Node2D
 var active_players_in_combat : Array
+var players_acted_this_turn : Array
 var player_choosing_target : bool = false
 
 var front_facing_enemy_parts_in_combat: Array
@@ -18,7 +19,6 @@ var primary_enemy: Node2D
 
 var forward_combat_direction : bool = true # true means front, false means rear
 
-
 func custom_initialize(enemy: Node2D):
 	primary_enemy = enemy
 	#TODO this function needs to pass through the background
@@ -31,59 +31,86 @@ func _ready() -> void:
 		player_combat_scene.attack.connect(execute_attack_calculation)
 		active_players_in_combat += [player_combat_scene]
 	
-	acting_player = active_players_in_combat[0]
-	
 	primary_enemy = primary_enemy.combat_scene.instantiate()
 	%Enemy_Actors.add_child(primary_enemy)
 	primary_enemy.attack.connect(execute_attack_calculation)
 	
-	#acting_player = active_players_in_combat[0]
+	acting_player = active_players_in_combat[0]
 	spawn_and_position_actors()
-	#player_turn.start_player_turn()
+	#target_enemy = potential_enemy_targets[0]
 	
 func spawn_and_position_actors():
 	acting_player.position = Vector2(200, -50)
-	print(primary_enemy)
 	primary_enemy.scale = Vector2(2,2)
 	primary_enemy.position = Vector2(-75, 0)
 	pass
 	
-func execute_attack_calculation(target: Node2D, attack_value: int, attack_description: String):
-	
-	pass
-	
-func end_combat():
-	pass
-
-func end_player_turn():
-	enemy_turn.start_enemy_turn()
-
 func _on_attack_pressed() -> void:
 	potential_enemy_targets = enemy_turn.return_active_enemy_parts(forward_combat_direction, primary_enemy)
+	target_enemy = potential_enemy_targets[0]
+	player_turn.highlight_enemy(target_enemy)
+	
+	for button in %GUI.get_children():
+		button.disabled = true
+	
 	player_choosing_target = true
 	
 func _input(event: InputEvent) -> void:
 	if player_choosing_target == true:
 		if Input.is_action_just_pressed("ui_left"):
 			if (potential_enemy_target_index - 1) < 0:
+				player_turn.unhighlight_enemy(target_enemy)
 				potential_enemy_target_index = 0
 				target_enemy = potential_enemy_targets[potential_enemy_target_index]
-				#print_debug(target_enemy)
+				player_turn.highlight_enemy(target_enemy)
 				
 			elif (potential_enemy_target_index - 1) >= 0:
+				player_turn.unhighlight_enemy(target_enemy)
 				potential_enemy_target_index -= 1
 				target_enemy = potential_enemy_targets[potential_enemy_target_index]
-				#print_debug(target_enemy)
+				player_turn.highlight_enemy(target_enemy)
 				
 		if Input.is_action_just_pressed("ui_right"):
 			if potential_enemy_targets.size() > (potential_enemy_target_index + 1):
+				player_turn.unhighlight_enemy(target_enemy)
 				potential_enemy_target_index += 1
 				target_enemy = potential_enemy_targets[potential_enemy_target_index]
 				player_turn.highlight_enemy(target_enemy)
+				
 			elif potential_enemy_targets.size() <= (potential_enemy_target_index + 1):
+				player_turn.unhighlight_enemy(target_enemy)
 				potential_enemy_target_index = 0
 				target_enemy = potential_enemy_targets[potential_enemy_target_index]
+				player_turn.highlight_enemy(target_enemy)
 				
-		
-		
-		print_debug(target_enemy)
+		if Input.is_action_just_pressed("ui_accept"):
+			player_choosing_target = false
+			player_turn.unhighlight_enemy(target_enemy)
+			acting_player.basic_attack(target_enemy)
+
+func execute_attack_calculation(target: Node2D, attack_value: int, attack_description: String):
+	print_debug(attack_description)
+	players_acted_this_turn.append(acting_player)
+	continue_or_end_player_turn()
+	
+	pass
+
+func continue_or_end_player_turn():
+	var player_index = active_players_in_combat.find(acting_player)
+	if players_acted_this_turn.has(acting_player):
+		if players_acted_this_turn.size() > (player_index + 1):
+			acting_player = players_acted_this_turn[player_index + 1]
+			
+			for button in %GUI.get_children():
+				button.disabled = false
+				
+		elif players_acted_this_turn.size() <= (player_index + 1):
+			enemy_turn.start_enemy_turn()
+	pass
+
+	
+func end_player_turn():
+	enemy_turn.start_enemy_turn()
+	
+func end_combat():
+	pass

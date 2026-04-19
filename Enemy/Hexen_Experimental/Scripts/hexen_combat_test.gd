@@ -14,4 +14,4 @@ func _ready() -> void:
 	"body": %Front_Body,
 	"right_arm": %Front_Right_Arm
 	}
-	print_debug("The HP of the Hexen's right arm is: ", right_arm_stats["HP"])
+	#debug("The HP of the Hexen's right arm is: ", right_arm_stats["HP"])

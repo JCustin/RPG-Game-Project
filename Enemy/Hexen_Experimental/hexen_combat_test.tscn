@@ -4,6 +4,42 @@
 [ext_resource type="Script" uid="uid://bim8kiun2rx64" path="res://Enemy/Hexen_Experimental/Scripts/hexen_combat_test.gd" id="1_kek2o"]
 [ext_resource type="Texture2D" uid="uid://c8jnnkdojrud0" path="res://Enemy/Hexen_Experimental/Hexen_Experimental_0003.png" id="3_h3hyq"]
 
+[sub_resource type="Animation" id="Animation_8m0nq"]
+resource_name = "Front_Body_Highlighted"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Front_Facing/Front_Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kek2o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Front_Facing/Front_Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h3hyq"]
+_data = {
+&"Front_Body_Highlighted": SubResource("Animation_8m0nq"),
+&"RESET": SubResource("Animation_kek2o")
+}
+
 [node name="Hexen_Combat_Test" type="Node2D" unique_id=1507951464]
 script = ExtResource("1_kek2o")
 
@@ -28,3 +64,6 @@ texture = ExtResource("3_h3hyq")
 
 [node name="Rear_Facing" type="Node2D" parent="." unique_id=1898816199]
 unique_name_in_owner = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2040830224]
+libraries/ = SubResource("AnimationLibrary_h3hyq")

@@ -15,7 +15,7 @@ func _ready() -> void:
 	enemy_turn.enemy_turn_ended.connect(end_enemy_turn)
 	
 	for player in get_tree().get_nodes_in_group('Player'):
-		var player_combat = player.combat_unit_counterpart.instantiate()
+		var player_combat = player.combat_scene.instantiate()
 		%Actors.add_child(player_combat)
 		player_turn.player_queue += [player_combat]
 		player_combat.attack.connect(handle_attack)
@@ -61,7 +61,8 @@ func start_enemy_turn():
 	
 func end_enemy_turn():
 	%Player_Turn.start_player_turn()
-	
+	for child in %Action_Panel_Button_Container.get_children():
+		child.disabled = true
 	
 func _on_switch_pressed() -> void:
 	player_turn.acting_player.facing_front = not player_turn.acting_player.facing_front

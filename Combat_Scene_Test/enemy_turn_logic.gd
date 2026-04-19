@@ -27,6 +27,9 @@ func return_active_enemy_parts(combat_direction: bool, enemy):
 		#rear_facing_enemy_parts_in_combat = primary_enemy.rear_facing_body_parts.values()
 		return rear_facing_enemy_parts_in_combat
 
+func start_enemy_turn():
+	print_debug("Enemy turn started, bitch")
+
 #func set_primary_enemy(primary_enemy_node: Node2D) -> void:
 	#primary_enemy = primary_enemy_node
 	#front_facing_enemy_parts_in_combat = primary_enemy.front_facing_body_parts.values()
@@ -45,10 +48,9 @@ func return_active_enemy_parts(combat_direction: bool, enemy):
 	## enemy health is dropped to 0 or less
 	#pass
 	#
-#func direct_enemy_to_choose_attack():
-	#enemy_turn = true
-	#await acting_enemy.choose_attack()
-	#enemies_acted_this_turn.append(acting_enemy)
+func direct_enemy_to_choose_attack():
+	await acting_enemy.choose_attack()
+	enemies_acted_this_turn.append(acting_enemy)
 #
 #func continue_or_end_turn(): # applicable if enemy has multiple moves
 	#
