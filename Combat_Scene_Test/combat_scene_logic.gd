@@ -59,6 +59,7 @@ func _on_attack_pressed() -> void:
 	player_choosing_target = true
 	
 func _input(event: InputEvent) -> void:
+	
 	if player_choosing_target == true:
 		if Input.is_action_just_pressed("ui_left"):
 			if (potential_enemy_target_index - 1) < 0:
@@ -92,11 +93,16 @@ func _input(event: InputEvent) -> void:
 			acting_player.basic_attack(target_enemy)
 
 func execute_attack_calculation(target: Node2D, attack_value: int, attack_description: String):
-	print_debug(attack_description)
-	players_acted_this_turn.append(acting_player)
-	continue_or_end_player_turn()
+	#print_debug(attack_description)
+	await prompt_combat_description(attack_description)
+	if %Player_Actors.get_children().has(target): # in other words, if the target is a PLAYER
+		pass
 	
-	pass
+	else: # in other words, if the target is an ENEMY
+		print_debug("OK the target is an enemy")
+		players_acted_this_turn.append(acting_player)
+		continue_or_end_player_turn()
+		
 
 func continue_or_end_player_turn():
 	var player_index = active_players_in_combat.find(acting_player)
@@ -112,6 +118,18 @@ func continue_or_end_player_turn():
 			enemy_turn.start_enemy_turn(primary_enemy, active_players_in_combat)
 			pass
 	pass
+
+func prompt_combat_description(attack_description: String) -> void:
+	%Combat_Description_Master.visible = true
+	%Combat_Description_Label.text = attack_description
+	
+	
+	await get_tree().create_timer(1.5).timeout
+	
+	if %Combat_Description_Master.visible == true:
+		%Combat_Description_Master.visible = false
+		
+	return
 
 	
 func start_enemy_turn():
