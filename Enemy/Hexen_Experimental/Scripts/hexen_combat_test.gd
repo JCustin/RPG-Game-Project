@@ -15,3 +15,6 @@ func _ready() -> void:
 	"right_arm": %Front_Right_Arm
 	}
 	#debug("The HP of the Hexen's right arm is: ", right_arm_stats["HP"])
+
+func choose_attack(target):
+	attack.emit()
