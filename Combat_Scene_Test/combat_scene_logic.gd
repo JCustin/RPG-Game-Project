@@ -52,6 +52,7 @@ func _on_attack_pressed() -> void:
 	
 	for button in %GUI.get_children():
 		button.disabled = true
+		button.visible = false
 	
 	player_choosing_target = true
 	
@@ -103,14 +104,26 @@ func continue_or_end_player_turn():
 			
 			for button in %GUI.get_children():
 				button.disabled = false
+				button.visible = false
 				
 		elif players_acted_this_turn.size() <= (player_index + 1):
-			enemy_turn.start_enemy_turn()
+			#enemy_turn.start_enemy_turn()
+			pass
 	pass
 
 	
-func end_player_turn():
-	enemy_turn.start_enemy_turn()
+func start_enemy_turn():
+	enemy_turn.start_enemy_turn(active_players_in_combat)
+	
+func start_player_turn():
+	players_acted_this_turn.clear()
+	acting_player = active_players_in_combat[0]
+	
+	for button in %GUI.get_children():
+		button.disabled = true
+		button.visible = true
+		
+		
 	
 func end_combat():
 	pass

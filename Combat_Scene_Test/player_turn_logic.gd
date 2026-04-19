@@ -23,6 +23,10 @@ func _init(parent_script_node: Node2D) -> void:
 func _ready() -> void:
 	acting_player = player_queue[0]
 	
+func start_player_turn(available_players: Array):
+	players_acted_this_turn.clear()
+
+	
 func update_enemy_queue(enemy_queue_dict: Dictionary):
 	enemy_queue = enemy_queue_dict.values()
 

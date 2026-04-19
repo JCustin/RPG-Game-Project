@@ -3,7 +3,6 @@ class_name enemy_turn_logic
 
 var parent_script 
 
-var enemy_turn : bool = false
 var enemy_queue : Array
 
 var primary_enemy: Node2D
@@ -27,8 +26,10 @@ func return_active_enemy_parts(combat_direction: bool, enemy):
 		#rear_facing_enemy_parts_in_combat = primary_enemy.rear_facing_body_parts.values()
 		return rear_facing_enemy_parts_in_combat
 
-func start_enemy_turn():
-	print_debug("Enemy turn started, bitch")
+func start_enemy_turn(active_players_in_combat: Array):
+	#print_debug("Enemy turn started, bitch")
+	var target_player = active_players_in_combat.pick_random()
+	direct_enemy_to_choose_attack(target_player)
 
 #func set_primary_enemy(primary_enemy_node: Node2D) -> void:
 	#primary_enemy = primary_enemy_node
@@ -48,9 +49,10 @@ func start_enemy_turn():
 	## enemy health is dropped to 0 or less
 	#pass
 	#
-func direct_enemy_to_choose_attack():
-	await acting_enemy.choose_attack()
+func direct_enemy_to_choose_attack(target_player: Node2D):
+	await acting_enemy.choose_attack(target_player)
 	enemies_acted_this_turn.append(acting_enemy)
+	continue_or_end_enemy_turn()
 #
 #func continue_or_end_turn(): # applicable if enemy has multiple moves
 	#
@@ -64,15 +66,15 @@ func direct_enemy_to_choose_attack():
 	#acting_enemy = enemy_queue[0]
 	#direct_enemy_to_choose_attack()
 #
-#func continue_or_end_enemy_turn():
-	#if enemies_acted_this_turn.has(acting_enemy) == false:
-		#pass
-	#
-	#if enemy_queue.size() > (acting_enemy_index + 1):
-		#if enemy_queue[acting_enemy_index + 1].has_method("choose_attack") == true:
-			#acting_enemy = enemy_queue[acting_enemy_index + 1]
-			#acting_enemy_index += 1
-			#direct_enemy_to_choose_attack()
-	#
-	#elif enemy_queue.size() <= (acting_enemy_index + 1):
-		#pass
+func continue_or_end_enemy_turn():
+	if enemies_acted_this_turn.has(acting_enemy) == false:
+		pass
+	
+	if enemy_queue.size() > (acting_enemy_index + 1):
+		if enemy_queue[acting_enemy_index + 1].has_method("choose_attack") == true:
+			acting_enemy = enemy_queue[acting_enemy_index + 1]
+			acting_enemy_index += 1
+			parent_script.start_enemy_turn()
+	
+	elif enemy_queue.size() <= (acting_enemy_index + 1):
+		parent_script.end_enemy_turn()
