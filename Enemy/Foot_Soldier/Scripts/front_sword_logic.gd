@@ -4,5 +4,5 @@ var HP: int
 var DEF: int
 
 func _ready() -> void:
-	stat_block.body_stat_block["HP"] = stat_block.HP
-	stat_block.body_stat_block["DEF"] = stat_block.DEF
+	HP = stat_block.sword_stat_block["HP"]
+	DEF = stat_block.sword_stat_block["DEF"]

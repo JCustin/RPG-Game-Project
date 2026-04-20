@@ -1,6 +1,7 @@
 extends Node2D
-var health_stat: int = 100
-var attack_stat: int = 10
+var HP: int = 100
+var ATK: int = 10
+var SPD : int = 1
 
 var facing_forward: bool = true
 
@@ -10,4 +11,4 @@ func _ready() -> void:
 	add_to_group('Fighting_Player')
 
 func basic_attack(target_enemy):
-	attack.emit(target_enemy, attack_stat + 10, "Witch Hunter thrusts forward with a strong jab.")
+	attack.emit(target_enemy, ATK + 10, "Witch Hunter thrusts forward with a strong jab.")

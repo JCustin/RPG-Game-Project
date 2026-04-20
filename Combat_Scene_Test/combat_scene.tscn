@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://buylh0rmqi1ll"]
 
 [ext_resource type="Script" uid="uid://fj1b5pj5r2n7" path="res://Combat_Scene_Test/combat_scene_logic.gd" id="1_ll8bp"]
+[ext_resource type="Script" uid="uid://bg5je5jkc3nj6" path="res://Combat_Scene_Test/timeline_system_logic.gd" id="2_0hnhl"]
 
 [node name="Combat_Scene" type="Node2D" unique_id=391493345]
 script = ExtResource("1_ll8bp")
@@ -92,6 +93,7 @@ unique_name_in_owner = true
 
 [node name="Timeline_System" type="Node" parent="." unique_id=1784731328]
 unique_name_in_owner = true
+script = ExtResource("2_0hnhl")
 
 [node name="Combat_Camera" type="Camera2D" parent="." unique_id=1907014766]
 zoom = Vector2(1.2, 1.2)

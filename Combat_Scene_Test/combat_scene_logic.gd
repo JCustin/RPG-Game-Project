@@ -37,6 +37,8 @@ func _ready() -> void:
 	
 	print_debug(primary_enemy)
 	
+	%Timeline_System.assign_turn_queue()
+	
 	acting_player = active_players_in_combat[0]
 	spawn_and_position_actors()
 	#target_enemy = potential_enemy_targets[0]
@@ -96,7 +98,7 @@ func execute_attack(target: Node2D, attack_value: int, attack_description: Strin
 	await prompt_combat_description(attack_description)
 	#print_debug(target, attack_value)
 	
-	target.stat_block.HP
+	target.HP
 	
 	if %Player_Actors.get_children().has(target): # in other words, if the target is a PLAYER
 		pass
@@ -140,6 +142,7 @@ func start_enemy_turn():
 	
 func start_player_turn():
 	print_debug("Should be my turn now")
+	potential_enemy_target_index = 0
 	players_acted_this_turn.clear()
 	acting_player = active_players_in_combat[0]
 	for button in %GUI.get_children():
