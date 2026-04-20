@@ -94,8 +94,9 @@ func _input(event: InputEvent) -> void:
 
 func execute_attack(target: Node2D, attack_value: int, attack_description: String):
 	await prompt_combat_description(attack_description)
-	print_debug(target, attack_value)
+	#print_debug(target, attack_value)
 	
+	target.stat_block.HP
 	
 	if %Player_Actors.get_children().has(target): # in other words, if the target is a PLAYER
 		pass
