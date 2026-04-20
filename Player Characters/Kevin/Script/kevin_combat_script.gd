@@ -3,6 +3,8 @@ var HP: int = 100
 var ATK: int = 10
 var SPD : int = 1
 
+var alive : bool = true
+
 var facing_forward: bool = true
 
 signal attack(attack_value: int, attack_description: String)

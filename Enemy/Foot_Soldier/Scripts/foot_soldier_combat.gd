@@ -2,6 +2,7 @@ extends Node2D
 
 var facing_forward : bool = true
 var stat_block = foot_soldier_statblocks.new()
+var alive : bool = true
 
 #var body_stats = stat_blocks.body_stat_block
 #var right_arm_stats = stat_blocks.right_arm_stat_block

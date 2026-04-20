@@ -44,10 +44,10 @@ func refresh_enemy_queue(primary_enemy: Node2D):
 	#pass
 	#
 func direct_enemy_to_choose_attack(target_player: Node2D):
-	#print_debug("made it to the direct_enemy_to_choose_attack function")
+	print_debug("made it to the direct_enemy_to_choose_attack function")
 	print_debug(acting_enemy)
 	acting_enemy.choose_attack(target_player)
-	enemies_acted_this_turn.append(acting_enemy)
+	#enemies_acted_this_turn.append(acting_enemy)
 	continue_or_end_enemy_turn()
 
 #func scramble_timeline():
