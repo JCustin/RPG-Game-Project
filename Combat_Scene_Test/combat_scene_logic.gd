@@ -28,12 +28,12 @@ func _ready() -> void:
 	for player in get_tree().get_nodes_in_group('Player'):
 		var player_combat_scene = player.combat_scene.instantiate()
 		%Player_Actors.add_child(player_combat_scene)
-		player_combat_scene.attack.connect(execute_attack_calculation)
+		player_combat_scene.attack.connect(execute_attack)
 		active_players_in_combat += [player_combat_scene]
 	
 	primary_enemy = primary_enemy.combat_scene.instantiate()
 	%Enemy_Actors.add_child(primary_enemy)
-	primary_enemy.attack.connect(execute_attack_calculation)
+	primary_enemy.attack.connect(execute_attack)
 	
 	print_debug(primary_enemy)
 	
@@ -92,9 +92,11 @@ func _input(event: InputEvent) -> void:
 			player_turn.unhighlight_enemy(target_enemy)
 			acting_player.basic_attack(target_enemy)
 
-func execute_attack_calculation(target: Node2D, attack_value: int, attack_description: String):
-	#print_debug(attack_description)
+func execute_attack(target: Node2D, attack_value: int, attack_description: String):
 	await prompt_combat_description(attack_description)
+	print_debug(target, attack_value)
+	
+	
 	if %Player_Actors.get_children().has(target): # in other words, if the target is a PLAYER
 		pass
 	
@@ -120,18 +122,18 @@ func continue_or_end_player_turn():
 	pass
 
 func prompt_combat_description(attack_description: String) -> void:
-	%Combat_Description_Master.visible = true
-	%Combat_Description_Label.text = attack_description
+	var combat_label = Label.new()
+	combat_label.anchor_left
+	combat_label.text = attack_description
 	
+	%Combat_Description_Panel.add_child(combat_label)
+	%Combat_Description_Master.visible = true
 	
 	await get_tree().create_timer(1.5).timeout
-	
-	if %Combat_Description_Master.visible == true:
-		%Combat_Description_Master.visible = false
-		
+	combat_label.free()
+	%Combat_Description_Master.visible = false
 	return
 
-	
 func start_enemy_turn():
 	enemy_turn.start_enemy_turn(primary_enemy, active_players_in_combat)
 	

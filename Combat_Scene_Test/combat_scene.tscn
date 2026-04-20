@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://buylh0rmqi1ll"]
 
 [ext_resource type="Script" uid="uid://fj1b5pj5r2n7" path="res://Combat_Scene_Test/combat_scene_logic.gd" id="1_ll8bp"]
-[ext_resource type="Script" uid="uid://buct3t22ohxlu" path="res://Combat_Scene_Test/combat_description_label.gd" id="2_0hnhl"]
 
 [node name="Combat_Scene" type="Node2D" unique_id=391493345]
 script = ExtResource("1_ll8bp")
@@ -68,15 +67,15 @@ text = "Flee
 
 [node name="Combat_Description_Master" type="Control" parent="." unique_id=340558569]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -456.0
-offset_top = -288.0
+offset_top = -193.0
 offset_right = 2.0
-offset_bottom = -214.0
+offset_bottom = -119.0
 
 [node name="Combat_Description_Panel" type="Panel" parent="Combat_Description_Master" unique_id=808177212]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,16 +83,6 @@ anchor_bottom = 1.0
 offset_right = 454.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Combat_Description_Label" type="Label" parent="Combat_Description_Master/Combat_Description_Panel" unique_id=1973911247]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_0hnhl")
 
 [node name="Player_Actors" type="Node" parent="." unique_id=1754292711]
 unique_name_in_owner = true
