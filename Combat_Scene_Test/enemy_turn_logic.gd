@@ -44,25 +44,4 @@ func refresh_enemy_queue(primary_enemy: Node2D):
 	#pass
 	#
 func direct_enemy_to_choose_attack(target_player: Node2D):
-	print_debug("made it to the direct_enemy_to_choose_attack function")
-	print_debug(acting_enemy)
 	acting_enemy.choose_attack(target_player)
-	#enemies_acted_this_turn.append(acting_enemy)
-	continue_or_end_enemy_turn()
-
-#func scramble_timeline():
-	#pass #TODO work on this code when timeline system is built out
-	#
-
-func continue_or_end_enemy_turn():
-	if enemies_acted_this_turn.has(acting_enemy) == false:
-		pass
-	
-	if enemy_queue.size() > (acting_enemy_index + 1):
-		if enemy_queue[acting_enemy_index + 1].has_method("choose_attack") == true:
-			acting_enemy = enemy_queue[acting_enemy_index + 1]
-			acting_enemy_index += 1
-			parent_script.start_enemy_turn()
-	
-	elif enemy_queue.size() <= (acting_enemy_index + 1):
-		parent_script.start_player_turn()

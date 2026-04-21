@@ -1,10 +1,17 @@
 extends Node
 
 var round_count : int = 0
+var static_timeline: bool = false
+# idea for static_timeline is to handle speed between starting a round vs within a round.
+# if static_timeline == true, then speed values greater than 100 are set to 100.
+# if static_timeline == false, then speed values that are increased over 100 are now pushed 
+# out of the current round and the remainder affects their turn placement next round
+
 
 @export var maximum_timeline_value : int = 100
 
 func assign_turn_queue(active_players_in_combat: Array):
+	var static_timeline = true
 	var final_turn_queue : Array
 	var actor_speed_turn_queue : Array
 	
@@ -20,6 +27,7 @@ func assign_turn_queue(active_players_in_combat: Array):
 
 	print_debug(final_turn_queue)
 	
+	static_timeline = false
 	return final_turn_queue
 
 func sort_by_speed(a, b):

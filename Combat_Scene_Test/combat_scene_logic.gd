@@ -41,12 +41,19 @@ func _ready() -> void:
 	turn_queue = %Timeline_System.assign_turn_queue(active_players_in_combat)
 	active_players_in_combat = turn_queue
 	
-	spawn_and_position_actors()
 	acting_player = turn_queue[0]
+	spawn_and_position_actors()
 	start_combat_round()
 	
 func spawn_and_position_actors():
-	#acting_player.position = Vector2(200, -50)
+	var first_player_actor: Node2D
+	if acting_player == primary_enemy:
+		first_player_actor = turn_queue[1]
+		print_debug(first_player_actor)
+	else:
+		first_player_actor = acting_player
+		
+	first_player_actor.position = Vector2(200, -50)
 	primary_enemy.scale = Vector2(2,2)
 	primary_enemy.position = Vector2(-75, 0)
 	pass

@@ -96,6 +96,6 @@ unique_name_in_owner = true
 script = ExtResource("2_0hnhl")
 
 [node name="Combat_Camera" type="Camera2D" parent="." unique_id=1907014766]
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(1.3, 1.3)
 
 [connection signal="pressed" from="GUI/Attack" to="." method="_on_attack_pressed"]
