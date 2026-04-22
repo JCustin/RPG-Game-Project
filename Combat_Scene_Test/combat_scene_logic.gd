@@ -127,7 +127,7 @@ func prompt_combat_description(attack_description: String) -> void:
 	return
 
 func start_enemy_turn():
-	enemy_logic.start_enemy_turn(primary_enemy, turn_queue)
+	enemy_logic.execute_enemy_turn(primary_enemy, turn_queue)
 	for button in %GUI.get_children():
 		button.disabled = true
 		button.visible = false
