@@ -14,6 +14,7 @@
 script = ExtResource("1_6tsb2")
 
 [node name="Front_Facing" type="Node2D" parent="." unique_id=659003580]
+unique_name_in_owner = true
 
 [node name="Front_Body" type="Node2D" parent="Front_Facing" unique_id=248860029]
 unique_name_in_owner = true
@@ -37,17 +38,17 @@ script = ExtResource("6_h5l1i")
 texture = ExtResource("3_fq14j")
 
 [node name="Rear_Facing" type="Node2D" parent="." unique_id=28297393]
+unique_name_in_owner = true
 visible = false
+
+[node name="Rear_Shield" type="Node2D" parent="Rear_Facing" unique_id=91891057]
+unique_name_in_owner = true
+
+[node name="Rear_Shield_Sprite" type="Sprite2D" parent="Rear_Facing/Rear_Shield" unique_id=1160848004]
+texture = ExtResource("5_asrxv")
 
 [node name="Rear_Body" type="Node2D" parent="Rear_Facing" unique_id=2012274774]
 unique_name_in_owner = true
 
 [node name="Rear_Body_Sprite" type="Sprite2D" parent="Rear_Facing/Rear_Body" unique_id=1073676446]
 texture = ExtResource("4_ny6bs")
-
-[node name="Rear_Shield" type="Node2D" parent="Rear_Facing" unique_id=91891057]
-unique_name_in_owner = true
-visible = false
-
-[node name="Rear_Shield_Sprite" type="Sprite2D" parent="Rear_Facing/Rear_Shield" unique_id=1160848004]
-texture = ExtResource("5_asrxv")

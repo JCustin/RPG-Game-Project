@@ -19,13 +19,10 @@ func assign_turn_queue(active_players_in_combat: Array):
 		actor_speed_turn_queue.append([player, (100 - player.SPD)])
 			
 	actor_speed_turn_queue.sort_custom(sort_by_speed)
-	print_debug(actor_speed_turn_queue)
 	
 	for index in range(actor_speed_turn_queue.size()):
 		var actor = actor_speed_turn_queue[index][0]
 		final_turn_queue.append(actor)
-
-	print_debug(final_turn_queue)
 	
 	static_timeline = false
 	return final_turn_queue

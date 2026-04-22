@@ -9,9 +9,6 @@ var player_choosing_target : bool = false
 
 var active_players_in_combat : Array
 
-var front_facing_enemy_parts_in_combat: Array
-var rear_facing_enemy_parts_in_combat: Array
-
 var potential_enemy_targets : Array
 var potential_enemy_target_index: int = 0
 var target_enemy : Node2D
@@ -27,19 +24,22 @@ func custom_initialize(enemy: Node2D):
 	# and then apply from the parent level node.
 
 func _ready() -> void:
+	primary_enemy = primary_enemy.combat_scene.instantiate()
+	%Enemy_Actors.add_child(primary_enemy)
+	primary_enemy.attack.connect(execute_attack)
+	active_players_in_combat += [primary_enemy]
+	
 	for player in get_tree().get_nodes_in_group('Player'):
 		var player_combat_scene = player.combat_scene.instantiate()
 		%Player_Actors.add_child(player_combat_scene)
 		player_combat_scene.attack.connect(execute_attack)
 		active_players_in_combat += [player_combat_scene]
 	
-	primary_enemy = primary_enemy.combat_scene.instantiate()
-	%Enemy_Actors.add_child(primary_enemy)
-	primary_enemy.attack.connect(execute_attack)
-	active_players_in_combat += [primary_enemy]
+	
+	print_debug(active_players_in_combat)
 	
 	turn_queue = %Timeline_System.assign_turn_queue(active_players_in_combat)
-	active_players_in_combat = turn_queue
+	#active_players_in_combat = turn_queue
 	
 	acting_player = turn_queue[0]
 	spawn_and_position_actors()
@@ -49,7 +49,6 @@ func spawn_and_position_actors():
 	var first_player_actor: Node2D
 	if acting_player == primary_enemy:
 		first_player_actor = turn_queue[1]
-		print_debug(first_player_actor)
 	else:
 		first_player_actor = acting_player
 		
@@ -62,6 +61,7 @@ func _on_attack_pressed() -> void:
 	potential_enemy_targets = enemy_logic.return_active_enemy_parts(forward_combat_direction, primary_enemy)
 	target_enemy = potential_enemy_targets[0]
 	player_logic.highlight_enemy(target_enemy)
+	potential_enemy_target_index = 0
 	
 	for button in %GUI.get_children():
 		button.disabled = true
@@ -101,16 +101,27 @@ func _input(event: InputEvent) -> void:
 			player_choosing_target = false
 			player_logic.unhighlight_enemy(target_enemy)
 			acting_player.basic_attack(target_enemy)
+			
+		if Input.is_key_pressed(KEY_ESCAPE):
+			player_choosing_target = false
+			player_logic.unhighlight_enemy(target_enemy)
+			for button in %GUI.get_children():
+				button.disabled = false
+				button.visible = true
+			
+			
 
 func execute_attack(target: Node2D, attack_value: int, attack_description: String):
 	await prompt_combat_description(attack_description)
 	
-	if target == primary_enemy:
-		pass
-		
-	else:
-		pass
-		
+	print_debug("I am: ", acting_player, " and I am attacking: ", target)
+	
+	var modified_attack_value : int = (attack_value - target.DEF)
+	target.HP -= modified_attack_value
+	
+	if acting_player == primary_enemy:
+		%Player_HP_Bar.value = target.HP
+	
 	proceed_with_turn_queue()
 
 func prompt_combat_description(attack_description: String) -> void:
@@ -153,6 +164,7 @@ func proceed_with_turn_queue():
 	
 	if turn_queue.size() <= (next_turn_queue_index):
 		turn_queue = %Timeline_System.refresh_turn_queue(active_players_in_combat)
+		print_debug("turn queue is: ", turn_queue, " active_players_in_combat is: ", active_players_in_combat)
 		acting_player = turn_queue[0]
 		start_combat_round()
 	else:
@@ -165,3 +177,12 @@ func check_if_actor_alive(actor):
 		start_combat_round()
 	else:
 		proceed_with_turn_queue()
+		print_debug("The actor is dead")
+
+
+func _on_flank_pressed() -> void:
+	if player_choosing_target == false:
+		forward_combat_direction = not forward_combat_direction
+		acting_player.facing_forward = not acting_player.facing_forward
+		potential_enemy_targets = enemy_logic.return_active_enemy_parts(forward_combat_direction, primary_enemy)
+		potential_enemy_target_index = 0

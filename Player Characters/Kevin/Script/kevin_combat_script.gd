@@ -1,6 +1,7 @@
 extends Node2D
 var HP: int = 100
 var ATK: int = 10
+var DEF : int = 3
 var SPD : int = 1
 
 var alive : bool = true

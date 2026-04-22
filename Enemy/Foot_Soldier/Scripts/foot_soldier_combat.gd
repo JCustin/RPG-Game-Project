@@ -44,6 +44,15 @@ func remove_body_part(body_part: Node2D) -> void:
 		var key = rear_facing_body_parts.find_key(body_part)
 		rear_facing_body_parts.erase(key)
 
+func change_position_by_combat_direction(forward_combat_direction: bool):
+	if forward_combat_direction == true:
+		%Front_Facing.visible = true
+		%Rear_Facing.visible = false
+	else:
+		%Front_Facing.visible = false
+		%Rear_Facing.visible = true
+
+
 func tackle(target):
 	attack.emit(target, 10, "The hexen strikes at you.")
 
