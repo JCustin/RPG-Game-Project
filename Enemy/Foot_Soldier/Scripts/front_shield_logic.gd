@@ -4,12 +4,10 @@ var stat_block = foot_soldier_statblocks.new()
 var HP : int
 var DEF: int
 
-var rear_counterpart: Node2D 
+var counterpart: Node2D
 
 func _ready() -> void:
-	HP = stat_block.shield_stat_block["HP"]
+	#HP = stat_block.shield_stat_block["HP"]
+	HP = 10
 	DEF = stat_block.shield_stat_block["DEF"]
-	rear_counterpart = %Rear_Shield
 	
-func sync_damage():
-	rear_counterpart.HP = HP

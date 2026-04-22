@@ -17,6 +17,7 @@ var primary_enemy: Node2D
 
 var forward_combat_direction : bool = true # true means front, false means rear
 
+signal combat_complete
 
 func custom_initialize(enemy: Node2D):
 	primary_enemy = enemy
@@ -27,6 +28,7 @@ func _ready() -> void:
 	primary_enemy = primary_enemy.combat_scene.instantiate()
 	%Enemy_Actors.add_child(primary_enemy)
 	primary_enemy.attack.connect(execute_attack)
+	primary_enemy.defeated.connect(end_combat)
 	active_players_in_combat += [primary_enemy]
 	
 	for player in get_tree().get_nodes_in_group('Player'):
@@ -36,7 +38,7 @@ func _ready() -> void:
 		active_players_in_combat += [player_combat_scene]
 	
 	
-	print_debug(active_players_in_combat)
+	#print_debug(active_players_in_combat)
 	
 	turn_queue = %Timeline_System.assign_turn_queue(active_players_in_combat)
 	#active_players_in_combat = turn_queue
@@ -114,15 +116,21 @@ func _input(event: InputEvent) -> void:
 func execute_attack(target: Node2D, attack_value: int, attack_description: String):
 	await prompt_combat_description(attack_description)
 	
-	print_debug("I am: ", acting_player, " and I am attacking: ", target)
+	#print_debug("I am: ", acting_player, " and I am attacking: ", target)
 	
 	var modified_attack_value : int = (attack_value - target.DEF)
 	target.HP -= modified_attack_value
 	
 	if acting_player == primary_enemy:
 		%Player_HP_Bar.value = target.HP
-	
+	else:
+		if target.HP <= 0:
+			primary_enemy.remove_body_part(target)
+	#if target.HP <= 0 and target == primary_enemy:
+		
+		#print_debug(target, target.HP)
 	proceed_with_turn_queue()
+
 
 func prompt_combat_description(attack_description: String) -> void:
 	var combat_label = Label.new()
@@ -149,7 +157,12 @@ func start_player_turn():
 		button.visible = true
 
 func end_combat():
-	pass
+	for child in %Combat_Description_Panel.get_children():
+		child.free()
+		
+	await prompt_combat_description("Yay!")
+	combat_complete.emit()
+	queue_free()
 
 func start_combat_round():
 	if acting_player == primary_enemy:
@@ -164,7 +177,7 @@ func proceed_with_turn_queue():
 	
 	if turn_queue.size() <= (next_turn_queue_index):
 		turn_queue = %Timeline_System.refresh_turn_queue(active_players_in_combat)
-		print_debug("turn queue is: ", turn_queue, " active_players_in_combat is: ", active_players_in_combat)
+		#print_debug("turn queue is: ", turn_queue, " active_players_in_combat is: ", active_players_in_combat)
 		acting_player = turn_queue[0]
 		start_combat_round()
 	else:
@@ -177,7 +190,7 @@ func check_if_actor_alive(actor):
 		start_combat_round()
 	else:
 		proceed_with_turn_queue()
-		print_debug("The actor is dead")
+		#print_debug("The actor is dead")
 
 
 func _on_flank_pressed() -> void:

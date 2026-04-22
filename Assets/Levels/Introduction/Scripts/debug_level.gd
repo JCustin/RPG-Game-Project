@@ -16,6 +16,7 @@ func initiate_combat(enemy_node: Node2D):
 	var combat_scene = preload("uid://buylh0rmqi1ll").instantiate()
 	combat_scene.custom_initialize(acting_enemy)
 	add_child(combat_scene)
+	combat_scene.combat_complete.connect(resume_overworld)
 	
 	#combat_scene.end_combat.connect(resume_overworld)
 	#if len(get_children()) < 2:
@@ -28,6 +29,6 @@ func initiate_combat(enemy_node: Node2D):
 func resume_overworld():
 	%Overworld.visible = true
 	%Camera.enabled = true
-	for enemy in get_tree().get_nodes_in_group('Combat_Enemies'):
-		enemy.end_combat()
+	# TODO create a function for the enemy to handle their deletion. 
+	acting_enemy.free()
 	%Player.end_combat()

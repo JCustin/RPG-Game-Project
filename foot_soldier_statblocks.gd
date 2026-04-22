@@ -14,7 +14,7 @@ var shield_stat_block = {
 }
 
 var sword_stat_block = {
-	"HP": 30,
+	"HP": 10,
 	"DEF": 0
 }
 

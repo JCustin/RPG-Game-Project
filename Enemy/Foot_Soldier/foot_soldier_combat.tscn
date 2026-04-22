@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cexxhtuub5t3t" path="res://Enemy/Foot_Soldier/Scripts/foot_soldier_combat.gd" id="1_6tsb2"]
 [ext_resource type="Texture2D" uid="uid://n0xt01mbpa8c" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_0004.png" id="1_ok7t8"]
 [ext_resource type="Texture2D" uid="uid://30knqq8e422d" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_0001.png" id="2_6tsb2"]
-[ext_resource type="Script" uid="uid://byo7y402f7cno" path="res://Enemy/Foot_Soldier/Scripts/front_body_logic.gd" id="2_clifn"]
+[ext_resource type="Script" uid="uid://byo7y402f7cno" path="res://Enemy/Foot_Soldier/Scripts/body_logic.gd" id="2_clifn"]
 [ext_resource type="Texture2D" uid="uid://d2vwuf13jspq4" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_0003.png" id="3_fq14j"]
 [ext_resource type="Script" uid="uid://dlokk7g7v51vp" path="res://Enemy/Foot_Soldier/Scripts/front_shield_logic.gd" id="4_28vdj"]
 [ext_resource type="Texture2D" uid="uid://xwmfqupnr3ea" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_0006.png" id="4_ny6bs"]
@@ -13,42 +13,31 @@
 [node name="Foot_Soldier" type="Node2D" unique_id=599961970]
 script = ExtResource("1_6tsb2")
 
-[node name="Front_Facing" type="Node2D" parent="." unique_id=659003580]
-unique_name_in_owner = true
-
-[node name="Front_Body" type="Node2D" parent="Front_Facing" unique_id=248860029]
+[node name="Body" type="Node2D" parent="." unique_id=1786321106]
 unique_name_in_owner = true
 script = ExtResource("2_clifn")
 
-[node name="Front_Body_Sprite" type="Sprite2D" parent="Front_Facing/Front_Body" unique_id=1210150781]
+[node name="Front_Body_Sprite" type="Sprite2D" parent="Body" unique_id=1210150781 groups=["Front_Limb"]]
 texture = ExtResource("1_ok7t8")
 
-[node name="Front_Shield" type="Node2D" parent="Front_Facing" unique_id=1115892825]
+[node name="Rear_Body_Sprite" type="Sprite2D" parent="Body" unique_id=1073676446 groups=["Rear_Limb"]]
+visible = false
+texture = ExtResource("4_ny6bs")
+
+[node name="Shield" type="Node2D" parent="." unique_id=1642503641]
 unique_name_in_owner = true
 script = ExtResource("4_28vdj")
 
-[node name="Front_Shield_Sprite" type="Sprite2D" parent="Front_Facing/Front_Shield" unique_id=2103054619]
+[node name="Front_Shield_Sprite" type="Sprite2D" parent="Shield" unique_id=2103054619 groups=["Front_Limb"]]
 texture = ExtResource("2_6tsb2")
 
-[node name="Front_Sword" type="Node2D" parent="Front_Facing" unique_id=2024401446]
+[node name="Rear_Shield_Sprite" type="Sprite2D" parent="Shield" unique_id=1160848004 groups=["Rear_Limb"]]
+visible = false
+texture = ExtResource("5_asrxv")
+
+[node name="Sword" type="Node2D" parent="." unique_id=1824166031]
 unique_name_in_owner = true
 script = ExtResource("6_h5l1i")
 
-[node name="Front_Sword_Sprite" type="Sprite2D" parent="Front_Facing/Front_Sword" unique_id=569502722]
+[node name="Front_Sword_Sprite" type="Sprite2D" parent="Sword" unique_id=569502722 groups=["Front_Limb"]]
 texture = ExtResource("3_fq14j")
-
-[node name="Rear_Facing" type="Node2D" parent="." unique_id=28297393]
-unique_name_in_owner = true
-visible = false
-
-[node name="Rear_Shield" type="Node2D" parent="Rear_Facing" unique_id=91891057]
-unique_name_in_owner = true
-
-[node name="Rear_Shield_Sprite" type="Sprite2D" parent="Rear_Facing/Rear_Shield" unique_id=1160848004]
-texture = ExtResource("5_asrxv")
-
-[node name="Rear_Body" type="Node2D" parent="Rear_Facing" unique_id=2012274774]
-unique_name_in_owner = true
-
-[node name="Rear_Body_Sprite" type="Sprite2D" parent="Rear_Facing/Rear_Body" unique_id=1073676446]
-texture = ExtResource("4_ny6bs")

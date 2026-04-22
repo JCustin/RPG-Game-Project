@@ -7,50 +7,65 @@ var alive : bool = true
 #var body_stats = stat_blocks.body_stat_block
 #var right_arm_stats = stat_blocks.right_arm_stat_block
 
-var front_facing_body_parts : Dictionary
-var rear_facing_body_parts : Dictionary
+@export var SPD : int = 10
 
-var HP: int 
-var DEF: int
-var SPD: int
-var ATK: int
 
+var front_facing_body_parts : Array
+var rear_facing_body_parts : Array
 
 signal attack
+signal defeated
 
 func _ready() -> void:
-	front_facing_body_parts = {
-	"shield": %Front_Shield,
-	"body": %Front_Body,
-	"sword": %Front_Sword
-	}
+	front_facing_body_parts = [
+		%Shield,
+		%Body,
+		%Sword
+	]
 	#debug("The HP of the Hexen's right arm is: ", right_arm_stats["HP"])
 
-	rear_facing_body_parts = {
-		"body": %Rear_Body,
-		"shield": %Rear_Shield
-	}
+	rear_facing_body_parts = [
+		%Body,
+		%Shield
+	]
 
-	HP = stat_block.body_stat_block["HP"]
-	DEF = stat_block.body_stat_block["DEF"]
-	SPD = stat_block.body_stat_block["SPD"]
-	ATK = stat_block.body_stat_block["ATK"]
 
 func remove_body_part(body_part: Node2D) -> void:
+	var tween_controller = Tween
+	tween_controller = body_part.create_tween()
+	
+	tween_controller.tween_property(body_part, "scale", Vector2(1.2, 1.2), 0.4)
+	tween_controller.tween_property(body_part, "scale", Vector2(0.0, 0.0), 0.3)
+	tween_controller.parallel()
+	tween_controller.tween_property(body_part, "modulate", Color.BROWN, 0.3)
+	tween_controller.tween_callback(body_part.queue_free)
+	
+
+	front_facing_body_parts.erase(body_part)
+	rear_facing_body_parts.erase(body_part)
+	
+	if body_part == %Body:
+		defeated.emit()
+		alive = false
+	
 	if facing_forward == true:
-		var key = front_facing_body_parts.find_key(body_part)
-		front_facing_body_parts.erase(key)
+		front_facing_body_parts.erase(body_part)
 	else:
-		var key = rear_facing_body_parts.find_key(body_part)
-		rear_facing_body_parts.erase(key)
+		rear_facing_body_parts.erase(body_part)
+		
 
 func change_position_by_combat_direction(forward_combat_direction: bool):
 	if forward_combat_direction == true:
-		%Front_Facing.visible = true
-		%Rear_Facing.visible = false
+		for node in get_tree().get_nodes_in_group('Front_Limb'):
+			node.visible = true
+		for node in get_tree().get_nodes_in_group('Rear_Limb'):
+			node.visible = false
+			
 	else:
-		%Front_Facing.visible = false
-		%Rear_Facing.visible = true
+		for node in get_tree().get_nodes_in_group('Front_Limb'):
+			node.visible = false
+		for node in get_tree().get_nodes_in_group('Rear_Limb'):
+			node.visible = true
 
 
 func tackle(target):
