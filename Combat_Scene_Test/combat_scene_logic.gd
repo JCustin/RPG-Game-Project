@@ -25,18 +25,21 @@ func custom_initialize(enemy: Node2D):
 	# and then apply from the parent level node.
 
 func _ready() -> void:
-	primary_enemy = primary_enemy.combat_scene.instantiate()
-	%Enemy_Actors.add_child(primary_enemy)
-	primary_enemy.attack.connect(execute_attack)
-	primary_enemy.defeated.connect(end_combat)
-	active_players_in_combat += [primary_enemy]
 	
 	for player in get_tree().get_nodes_in_group('Player'):
 		var player_combat_scene = player.combat_scene.instantiate()
 		%Player_Actors.add_child(player_combat_scene)
 		player_combat_scene.attack.connect(execute_attack)
+		player.add_to_group('Combat_Player')
 		active_players_in_combat += [player_combat_scene]
 	
+	%Player_Stamina.connect_to_players(active_players_in_combat)
+	
+	primary_enemy = primary_enemy.combat_scene.instantiate()
+	%Enemy_Actors.add_child(primary_enemy)
+	primary_enemy.attack.connect(execute_attack)
+	primary_enemy.defeated.connect(end_combat)
+	active_players_in_combat += [primary_enemy]
 	
 	#print_debug(active_players_in_combat)
 	
@@ -60,16 +63,19 @@ func spawn_and_position_actors():
 	pass
 	
 func _on_attack_pressed() -> void:
-	potential_enemy_targets = enemy_logic.return_active_enemy_parts(forward_combat_direction, primary_enemy)
-	target_enemy = potential_enemy_targets[0]
-	player_logic.highlight_enemy(target_enemy)
-	potential_enemy_target_index = 0
+	if acting_player.validate_basic_attack_stamina_cost() == true:
+		potential_enemy_targets = enemy_logic.return_active_enemy_parts(forward_combat_direction, primary_enemy)
+		target_enemy = potential_enemy_targets[0]
+		player_logic.highlight_enemy(target_enemy)
+		potential_enemy_target_index = 0
+		
+		for button in %GUI.get_children():
+			button.disabled = true
+			button.visible = false
 	
-	for button in %GUI.get_children():
-		button.disabled = true
-		button.visible = false
-	
-	player_choosing_target = true
+		player_choosing_target = true
+	else:
+		prompt_combat_description("Insufficient stamina!")
 	
 func _input(event: InputEvent) -> void:
 	if player_choosing_target == true:
@@ -152,6 +158,7 @@ func start_enemy_turn():
 		button.visible = false
 	
 func start_player_turn():
+	acting_player.restore_partial_stamina()
 	for button in %GUI.get_children():
 		button.disabled = false
 		button.visible = true

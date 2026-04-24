@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fj1b5pj5r2n7" path="res://Combat_Scene_Test/combat_scene_logic.gd" id="1_ll8bp"]
 [ext_resource type="Script" uid="uid://bg5je5jkc3nj6" path="res://Combat_Scene_Test/timeline_system_logic.gd" id="2_0hnhl"]
+[ext_resource type="Script" uid="uid://bf6g3ycwbjnag" path="res://Combat_Scene_Test/player_stamina.gd" id="3_xe5l4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hnhl"]
 bg_color = Color(5.2943824e-07, 0.72285295, 0.2737877, 1)
@@ -110,6 +111,17 @@ offset_bottom = -220.0
 theme_override_styles/background = SubResource("StyleBoxFlat_0hnhl")
 value = 100.0
 rounded = true
+
+[node name="Player_Stamina" type="ProgressBar" parent="." unique_id=628497605]
+unique_name_in_owner = true
+offset_left = -72.0
+offset_top = -248.0
+offset_right = 229.0
+offset_bottom = -221.0
+theme_override_styles/background = SubResource("StyleBoxFlat_0hnhl")
+value = 100.0
+rounded = true
+script = ExtResource("3_xe5l4")
 
 [connection signal="pressed" from="GUI/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="GUI/Flank" to="." method="_on_flank_pressed"]

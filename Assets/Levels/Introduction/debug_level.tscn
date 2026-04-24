@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://ovtkhcrhwh4b" path="res://Managers/actor_controller.gd" id="1_nhxuj"]
 [ext_resource type="PackedScene" uid="uid://me74bim4mpx7" path="res://Player Characters/Kevin/Kevin_Player_Overworld.tscn" id="2_ucdtk"]
 [ext_resource type="PackedScene" uid="uid://dkvtmm11iu3dc" path="res://Enemy/Foot_Soldier/foot_soldier_overworld.tscn" id="5_qtbh1"]
+[ext_resource type="PackedScene" uid="uid://1dh71oabjed3" path="res://Items/Rapiers/Rusted Rapier/rusted_rapier.tscn" id="6_qtbh1"]
+[ext_resource type="Script" uid="uid://b5dsmqvwaiq3e" path="res://Assets/Levels/Introduction/Overworld_Event_Description_Logic.gd" id="7_yal86"]
 
 [node name="Game" type="Node2D" unique_id=115325983]
 script = ExtResource("1_a5wmo")
@@ -29,6 +31,37 @@ unique_name_in_owner = true
 offset = Vector2(20, 25)
 zoom = Vector2(2, 2)
 
+[node name="Overworld_GUI" type="Control" parent="Overworld/Camera" unique_id=1172369645]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 72.0
+offset_right = 40.0
+offset_bottom = 112.0
+
+[node name="Overworld_Event_Desc_Panel" type="Panel" parent="Overworld/Camera/Overworld_GUI" unique_id=1810568104]
+visible = false
+layout_mode = 0
+offset_left = -96.0
+offset_top = -65.0
+offset_right = 590.0
+offset_bottom = 16.0
+script = ExtResource("7_yal86")
+
+[node name="Overworld_Event_Describer" type="Label" parent="Overworld/Camera/Overworld_GUI/Overworld_Event_Desc_Panel" unique_id=642816997]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "sample"
+
 [node name="Introduction_level_scene1" parent="Overworld" unique_id=1443023022 instance=ExtResource("1_ngams")]
 unique_name_in_owner = true
 z_index = -2
+
+[node name="Item Controller" type="Node" parent="Overworld" unique_id=1797822058]
+
+[node name="Rusted_Rapier" parent="Overworld/Item Controller" unique_id=846039171 instance=ExtResource("6_qtbh1")]
+position = Vector2(297, 135)
+scale = Vector2(0.015, 0.015)
