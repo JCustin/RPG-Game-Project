@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://xy02hf35uhws" path="res://Assets/characters/player.png" id="1_5332c"]
 [ext_resource type="Script" uid="uid://d0qug6ahbgetu" path="res://Player Characters/Kevin/Script/kevin_player_overworld.gd" id="1_xl0in"]
 [ext_resource type="Script" uid="uid://ddgt4a8somriu" path="res://Player Characters/Kevin/player_inventory.gd" id="3_s7s7p"]
+[ext_resource type="PackedScene" uid="uid://qhv78cbt13cn" path="res://Assets/Levels/Introduction/inventory_gui.tscn" id="4_a1w8o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kg8ro"]
 atlas = ExtResource("1_5332c")
@@ -45,3 +46,5 @@ script = ExtResource("3_s7s7p")
 unique_name_in_owner = true
 target_position = Vector2(0, 25)
 collision_mask = 3
+
+[node name="Inventory GUI" parent="." unique_id=1928950353 instance=ExtResource("4_a1w8o")]

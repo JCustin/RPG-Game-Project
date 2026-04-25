@@ -43,7 +43,7 @@ unique_name_in_owner = true
 offset = Vector2(20, 25)
 zoom = Vector2(2, 2)
 
-[node name="Control" type="Control" parent="Camera" unique_id=1795744800]
+[node name="Event_GUI" type="Control" parent="Camera" unique_id=1795744800]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -216.0
@@ -51,20 +51,20 @@ offset_top = -176.0
 offset_right = -176.0
 offset_bottom = -136.0
 
-[node name="Event_Description_Panel" type="Panel" parent="Camera/Control" unique_id=1888676100]
+[node name="Event_Description_Panel" type="Panel" parent="Camera/Event_GUI" unique_id=1888676100]
 visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 24.0
-offset_right = 160.0
+offset_right = 300.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_yal86")
 
-[node name="Event_Description" type="Label" parent="Camera/Control/Event_Description_Panel" unique_id=168082312]
+[node name="Event_Description" type="Label" parent="Camera/Event_GUI/Event_Description_Panel" unique_id=168082312]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

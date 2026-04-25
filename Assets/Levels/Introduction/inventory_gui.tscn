@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://qhv78cbt13cn"]
+
+[ext_resource type="Script" uid="uid://dd7fcpo132ov6" path="res://Assets/Levels/Introduction/inventory_gui.gd" id="1_gthcq"]
+
+[node name="Inventory GUI" type="Control" unique_id=1928950353 node_paths=PackedStringArray("inventory_list")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gthcq")
+inventory_list = NodePath("Inventory_Panel/Inventory_List")
+
+[node name="Inventory_Panel" type="Panel" parent="." unique_id=735472407]
+layout_mode = 0
+offset_left = 198.0
+offset_top = -65.0
+offset_right = 320.0
+offset_bottom = 118.0
+
+[node name="Inventory_List" type="ItemList" parent="Inventory_Panel" unique_id=1739028567]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="item_selected" from="Inventory_Panel/Inventory_List" to="." method="_on_inventory_list_item_selected"]
