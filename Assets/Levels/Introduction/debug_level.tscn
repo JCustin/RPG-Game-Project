@@ -32,10 +32,11 @@ collision_layer = 4
 unique_name_in_owner = true
 z_index = -2
 
-[node name="Item Controller" type="Node" parent="Overworld" unique_id=1797822058]
+[node name="Item_Controller" type="Node" parent="Overworld" unique_id=1797822058]
+unique_name_in_owner = true
 script = ExtResource("6_35con")
 
-[node name="Rusted_Rapier" parent="Overworld/Item Controller" unique_id=846039171 instance=ExtResource("6_qtbh1")]
+[node name="Rusted_Rapier" parent="Overworld/Item_Controller" unique_id=846039171 instance=ExtResource("6_qtbh1")]
 position = Vector2(297, 135)
 scale = Vector2(0.015, 0.015)
 
@@ -74,3 +75,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Inventory GUI" parent="Camera" unique_id=1928950353 instance=ExtResource("9_ppatb")]
+offset_left = -34.0
+offset_top = 1.0
+offset_right = 6.0
+offset_bottom = 41.0

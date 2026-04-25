@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dd7fcpo132ov6" path="res://Assets/Levels/Introduction/inventory_gui.gd" id="1_gthcq"]
 
 [node name="Inventory GUI" type="Control" unique_id=1928950353 node_paths=PackedStringArray("inventory_list")]
-visible = false
 z_index = 1000
 layout_mode = 3
 anchors_preset = 0
@@ -64,17 +63,11 @@ text = "Equip"
 
 [node name="Inspection_Panel" type="Panel" parent="." unique_id=173440375]
 unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -143.0
-offset_top = -152.0
-offset_right = 150.0
-offset_bottom = 68.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_left = -87.0
+offset_top = -131.0
+offset_right = 181.0
+offset_bottom = 5.0
 
 [node name="Inspection_Description" type="Label" parent="Inspection_Panel" unique_id=1454008317]
 unique_name_in_owner = true
@@ -86,7 +79,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 14
 autowrap_mode = 3
-metadata/_edit_lock_ = true
 
 [connection signal="item_clicked" from="Inventory_Panel/Inventory_List" to="." method="_on_inventory_list_item_clicked"]
 [connection signal="item_selected" from="Inventory_Panel/Inventory_List" to="." method="_on_inventory_list_item_selected"]

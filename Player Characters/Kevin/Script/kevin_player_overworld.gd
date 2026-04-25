@@ -6,6 +6,7 @@ signal contacted_enemy(enemy: CharacterBody2D)
 signal prompt_overworld_event_description(description: String)
 signal combat_started()
 signal picked_up_item(object: StaticBody2D)
+signal open_inventory()
 
 var active: bool = true
 var combat_scene = preload("res://Player Characters/Kevin/Kevin_Player_Fighting.tscn")
@@ -48,25 +49,10 @@ func _input(event: InputEvent) -> void:
 					interact_with_terrain(object)
 				else:
 					pass
-				
-#func _input(event: InputEvent) -> void:
-		#if active == true:
-			#var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-			#velocity = direction * speed
-			#
-			#if direction == Vector2.LEFT:
-				#%Object_Raycast_Detection.rotation_degrees = 90
-			#if direction == Vector2.RIGHT:
-				#%Object_Raycast_Detection.rotation_degrees = -90
-			#if direction == Vector2.UP:
-				#%Object_Raycast_Detection.rotation_degrees = 180
-			#if direction == Vector2.DOWN:
-				#%Object_Raycast_Detection.rotation_degrees = 0
-		#
-		#if Input.is_action_pressed("ui_accept"):
-			#var object : Variant = %Object_Raycast_Detection.get_collider()
-#
-			
+					
+		if Input.is_action_just_pressed("Inventory"):
+			open_inventory.emit()
+			#active = false
 			
 
 
