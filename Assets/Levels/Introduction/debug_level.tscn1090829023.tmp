@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://ovtkhcrhwh4b" path="res://Managers/actor_controller.gd" id="1_nhxuj"]
 [ext_resource type="PackedScene" uid="uid://me74bim4mpx7" path="res://Player Characters/Kevin/Kevin_Player_Overworld.tscn" id="2_ucdtk"]
 [ext_resource type="PackedScene" uid="uid://dkvtmm11iu3dc" path="res://Enemy/Foot_Soldier/foot_soldier_overworld.tscn" id="5_qtbh1"]
-[ext_resource type="Script" uid="uid://okon6v6a4v6u" path="res://Assets/Levels/Introduction/item_controller_logic.gd" id="6_35con"]
 [ext_resource type="PackedScene" uid="uid://1dh71oabjed3" path="res://Items/Rapiers/Rusted Rapier/rusted_rapier.tscn" id="6_qtbh1"]
 [ext_resource type="Script" uid="uid://b5dsmqvwaiq3e" path="res://Assets/Levels/Introduction/Overworld_Event_Description_Logic.gd" id="7_yal86"]
 
@@ -32,7 +31,6 @@ unique_name_in_owner = true
 z_index = -2
 
 [node name="Item Controller" type="Node" parent="Overworld" unique_id=1797822058]
-script = ExtResource("6_35con")
 
 [node name="Rusted_Rapier" parent="Overworld/Item Controller" unique_id=846039171 instance=ExtResource("6_qtbh1")]
 position = Vector2(297, 135)

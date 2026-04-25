@@ -4,7 +4,8 @@ extends CharacterBody2D
 
 signal contacted_enemy(enemy: CharacterBody2D)
 signal prompt_overworld_event_description(description: String)
-
+signal combat_started()
+signal picked_up_item(object: StaticBody2D)
 
 var active: bool = true
 var combat_scene = preload("res://Player Characters/Kevin/Kevin_Player_Fighting.tscn")
@@ -34,10 +35,14 @@ func _input(event: InputEvent) -> void:
 				%Object_Raycast_Detection.rotation_degrees = 0
 		
 		if Input.is_action_pressed("ui_accept"):
-			var object = %Object_Raycast_Detection.get_collider()
-			prompt_overworld_event_description.emit("You pick up a Squishy!")
-			
-			#print_debug(%Object_Raycast_Detection.get_collision_mask_value())
+			var object : Variant = %Object_Raycast_Detection.get_collider()
+
+			if object.is_class("StaticBody2D"):
+				interact_with_object(object)
+			elif object.is_class("TileMapLayer"):
+				interact_with_terrain(object)
+			else:
+				pass
 			
 
 
@@ -47,6 +52,7 @@ func initiate_combat():
 	%CollisionShape2D.disabled = true
 	%Overworld_Sprite.visible = false
 	%Combat_Sprite.visible = true
+	combat_started.emit()
 	
 func end_combat():
 	active = true
@@ -62,3 +68,21 @@ func send_collision_data():
 		contacted_enemy.emit(enemy_collided_with)
 	else:
 		pass
+		
+func interact_with_object(object: StaticBody2D) -> void:
+	if object.collision_layer == 2: # item on the ground
+		var object_name : String = object.item_name
+		prompt_overworld_event_description.emit("You have picked up " + object_name)
+		object.reparent(%Player_Inventory)
+		object.visible = false
+		object.collision_layer = 1
+		object.position = Vector2(1000, 1000)
+		
+		#prompt_overworld_event_description.emit("WHOA")
+		print_debug(object)
+	
+	#prompt_overworld_event_description.emit("You pick up a Squishy!")
+	
+
+func interact_with_terrain(object: TileMapLayer) -> void:
+	return

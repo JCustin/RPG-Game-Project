@@ -38,6 +38,7 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_5oa8n")
 
 [node name="Player_Inventory" type="Node" parent="." unique_id=940482939]
+unique_name_in_owner = true
 script = ExtResource("3_s7s7p")
 
 [node name="Object_Raycast_Detection" type="RayCast2D" parent="." unique_id=372720552]
