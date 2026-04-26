@@ -13,6 +13,7 @@ func _ready() -> void:
 	for player in get_tree().get_nodes_in_group('Player'):
 		player.picked_up_item.connect(add_item_to_list)
 		player.open_inventory.connect(open_inventory)
+		player.contacted_enemy.connect(close_inventory_for_combat)
 
 func add_item_to_list(item: StaticBody2D) -> void:
 	#inventory_list.add_item(item.item_name, null, true)
@@ -34,29 +35,21 @@ func _on_inventory_list_item_selected(index: int) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and item_dragged == true:
-		item_being_dragged.visible = true
-		item_being_dragged.position = get_global_mouse_position()
-		print_debug(item_being_dragged.position)
-		
-		print_debug(item_being_dragged.position.distance_to(get_tree().get_first_node_in_group('Player').position))
-		if item_being_dragged.position.distance_to(get_tree().get_first_node_in_group('Player').position) > 160.00:
-			item_being_dragged.modulate = Color.RED
+		if item_being_dragged == null:
+			return
 		else:
-			item_being_dragged.modulate = Color(10,10,10)
+			item_being_dragged.visible = true
+			validate_throw_range_and_collision()
+			item_being_dragged.position = get_global_mouse_position()
+
 		
 		
 	if Input.is_action_just_released("Inventory_Click") and item_dragged == true:
 		if mouse_inside_inventory == true:
-			await add_item_to_list(item_being_dragged)
-			item_being_dragged.visible = false
-			item_being_dragged.position = Vector2(1000,1000)
-			item_dragged = false
+			return_dragged_item_to_inventory()
 			
 		else:
-			item_being_dragged.position = get_global_mouse_position()
-			item_being_dragged.collision_layer = 2
-			item_being_dragged.reparent(%Item_Controller)
-			item_dragged = false
+			throw_item_in_world()
 			
 			
 	if Input.is_key_pressed(KEY_ESCAPE) and visible == true:
@@ -95,22 +88,6 @@ func throw_item(item: StaticBody2D) -> void:
 	%Inspection_Panel.visible = false
 	%Extended_Inventory_Panel.visible = false
 	
-	
-	
-	
-	
-	#item_dragged = true
-		#var item_name = inventory_list.get_item_text(index)
-		#item_being_dragged = internal_item_scene_packaging[item_name]
-		#inventory_list.remove_item(index)
-	#
-			#
-		#else:
-			#item_being_dragged.position = get_global_mouse_position()
-			#item_being_dragged.collision_layer = 2
-			#item_being_dragged.reparent(%Item_Controller)
-			#item_dragged = false
-
 
 func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
 		if mouse_button_index == 2:
@@ -122,7 +99,6 @@ func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_but
 			var item_name = inventory_list.get_item_text(item_index)
 			
 			item_being_inspected = internal_item_scene_packaging[item_name]
-			print_debug("we are inspecting the following item ", item_being_inspected)
 
 
 func _on_inspect_pressed() -> void:
@@ -131,17 +107,46 @@ func _on_inspect_pressed() -> void:
 	string_sub_data["ATK"] = item_being_inspected.ATK
 	string_sub_data["item_description"] = item_being_inspected.item_description
 	%Inspection_Description.text = "Strength: {ATK}. \n \n {item_description}".format(string_sub_data)
-	
-	
-	#%Inspection_Description.text = "Strength: ", String(item_being_inspected.ATK_addition), "
-	#
-	#", String(item_being_inspected.item_descrption)
-	
-	#%Inspection_Description.text = item_being_inspected.item_description
-	
-	pass # Replace with function body.
+
 	
 func _on_throw_pressed() -> void:
 	throw_item(item_being_inspected)
 	
-	pass # Replace with function body.
+func close_inventory_for_combat(contacted_enemy: CharacterBody2D):
+	# if item is being dragged, then return it to the list
+	if item_being_inspected != null:
+		return_dragged_item_to_inventory()
+		
+	item_dragged = false
+	item_being_dragged = null
+	item_being_inspected = null
+	visible = false
+	
+func return_dragged_item_to_inventory() -> void:
+	await add_item_to_list(item_being_dragged)
+	item_being_dragged.visible = false
+	item_being_dragged.position = Vector2(1000,1000)
+	item_dragged = false
+	
+func throw_item_in_world() -> void:
+	if validate_throw_range_and_collision() == true:
+		item_being_dragged.position = get_global_mouse_position()
+		item_being_dragged.collision_layer = 2
+		item_being_dragged.reparent(%Item_Controller)
+		item_dragged = false
+	
+func validate_throw_range_and_collision() -> bool:
+	if item_being_dragged.position.distance_to(get_tree().get_first_node_in_group('Player').position) <= 160.00:
+		item_being_dragged.modulate = Color.WHITE
+		return true
+	else:
+		item_being_dragged.modulate = Color.RED
+		return false
+		
+		#if item_being_dragged.collision
+	#item_being_dragged.modulate = Color.RED
+	#else:
+		#item_being_dragged.modulate = Color(10,10,10)
+	#return true
+	#return false
+	

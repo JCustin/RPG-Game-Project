@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://gyqyluef4arc" path="res://Assets/Backgrounds/Squishy_Pixelated.png" id="2_dqoko"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqoko"]
-size = Vector2(1192.5005, 83.3916)
+size = Vector2(1192.5005, 106.64336)
 
 [node name="Rusted_Rapier" type="StaticBody2D" unique_id=1794653080]
 scale = Vector2(0.4, 0.4)
@@ -16,6 +16,6 @@ script = ExtResource("1_am13q")
 texture = ExtResource("2_dqoko")
 
 [node name="Rusted_Rapier_Collision_Box" type="CollisionShape2D" parent="." unique_id=976940578]
-position = Vector2(18.749964, 153.74982)
-scale = Vector2(0.9999995, 14.299995)
+position = Vector2(18.74996, -12.500178)
+scale = Vector2(0.99999946, 14.299994)
 shape = SubResource("RectangleShape2D_dqoko")
