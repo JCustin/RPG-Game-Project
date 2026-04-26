@@ -38,6 +38,13 @@ func _input(event: InputEvent) -> void:
 		item_being_dragged.position = get_global_mouse_position()
 		print_debug(item_being_dragged.position)
 		
+		print_debug(item_being_dragged.position.distance_to(get_tree().get_first_node_in_group('Player').position))
+		if item_being_dragged.position.distance_to(get_tree().get_first_node_in_group('Player').position) > 160.00:
+			item_being_dragged.modulate = Color.RED
+		else:
+			item_being_dragged.modulate = Color(10,10,10)
+		
+		
 	if Input.is_action_just_released("Inventory_Click") and item_dragged == true:
 		if mouse_inside_inventory == true:
 			await add_item_to_list(item_being_dragged)
@@ -51,8 +58,18 @@ func _input(event: InputEvent) -> void:
 			item_being_dragged.reparent(%Item_Controller)
 			item_dragged = false
 			
+			
 	if Input.is_key_pressed(KEY_ESCAPE) and visible == true:
-		close_inventory()
+		if %Inspection_Panel.visible == true:
+			%Inspection_Panel.visible = false
+			return
+		if %Extended_Inventory_Panel.visible == true:
+			%Extended_Inventory_Panel.visible = false
+			return
+		if visible == true:
+			visible = false
+			
+		
 
 
 func _on_inventory_list_mouse_entered() -> void:
@@ -69,6 +86,30 @@ func open_inventory():
 func close_inventory():
 	visible = false
 	inventory_list.deselect_all()
+
+func throw_item(item: StaticBody2D) -> void:
+	item_dragged = true
+	item_being_dragged = item
+	var index = inventory_list.get_item_at_position(get_global_mouse_position())
+	inventory_list.remove_item(index)
+	%Inspection_Panel.visible = false
+	%Extended_Inventory_Panel.visible = false
+	
+	
+	
+	
+	
+	#item_dragged = true
+		#var item_name = inventory_list.get_item_text(index)
+		#item_being_dragged = internal_item_scene_packaging[item_name]
+		#inventory_list.remove_item(index)
+	#
+			#
+		#else:
+			#item_being_dragged.position = get_global_mouse_position()
+			#item_being_dragged.collision_layer = 2
+			#item_being_dragged.reparent(%Item_Controller)
+			#item_dragged = false
 
 
 func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
@@ -97,5 +138,10 @@ func _on_inspect_pressed() -> void:
 	#", String(item_being_inspected.item_descrption)
 	
 	#%Inspection_Description.text = item_being_inspected.item_description
+	
+	pass # Replace with function body.
+	
+func _on_throw_pressed() -> void:
+	throw_item(item_being_inspected)
 	
 	pass # Replace with function body.
