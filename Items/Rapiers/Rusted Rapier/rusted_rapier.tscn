@@ -7,15 +7,20 @@
 size = Vector2(1192.5005, 106.64336)
 
 [node name="Rusted_Rapier" type="StaticBody2D" unique_id=1794653080]
+z_index = 20
 scale = Vector2(0.4, 0.4)
 collision_layer = 2
-collision_mask = 5
+collision_mask = 9
 script = ExtResource("1_am13q")
 
 [node name="Rusted_Rapier_Sprite" type="Sprite2D" parent="." unique_id=1230899979]
 texture = ExtResource("2_dqoko")
 
 [node name="Rusted_Rapier_Collision_Box" type="CollisionShape2D" parent="." unique_id=976940578]
-position = Vector2(18.74996, -12.500178)
-scale = Vector2(0.99999946, 14.299994)
+position = Vector2(18.749958, -12.500177)
+scale = Vector2(0.99999934, 14.299993)
 shape = SubResource("RectangleShape2D_dqoko")
+
+[node name="Collision_Raycast" type="RayCast2D" parent="." unique_id=1582948]
+collision_mask = 15
+hit_from_inside = true

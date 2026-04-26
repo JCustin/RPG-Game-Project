@@ -9,11 +9,20 @@ var item_being_inspected: StaticBody2D
 
 var mouse_inside_inventory: bool = false
 
+var obstacle_tilemaplayer : TileMapLayer
+
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group('Player'):
 		player.picked_up_item.connect(add_item_to_list)
 		player.open_inventory.connect(open_inventory)
 		player.contacted_enemy.connect(close_inventory_for_combat)
+		
+	obstacle_tilemaplayer = get_tree().get_first_node_in_group('Obstacles')
+
+func _physics_process(delta: float) -> void:
+	if item_dragged == true:
+		item_being_dragged.position = get_global_mouse_position()
+		validate_throw_range()
 
 func add_item_to_list(item: StaticBody2D) -> void:
 	#inventory_list.add_item(item.item_name, null, true)
@@ -29,25 +38,23 @@ func _on_inventory_list_item_selected(index: int) -> void:
 		item_being_dragged = internal_item_scene_packaging[item_name]
 		inventory_list.remove_item(index)
 		
-
-		
-		#print_debug(item_name)
+#
+		#
+		##print_debug(item_name)
 	
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and item_dragged == true:
+	if Input.is_anything_pressed() and item_dragged == true:
 		if item_being_dragged == null:
 			return
 		else:
 			item_being_dragged.visible = true
-			validate_throw_range_and_collision()
-			item_being_dragged.position = get_global_mouse_position()
+			validate_throw_range()
+			#item_being_dragged.position = get_global_mouse_position()
 
-		
-		
+	
 	if Input.is_action_just_released("Inventory_Click") and item_dragged == true:
 		if mouse_inside_inventory == true:
 			return_dragged_item_to_inventory()
-			
 		else:
 			throw_item_in_world()
 			
@@ -80,9 +87,10 @@ func close_inventory():
 	visible = false
 	inventory_list.deselect_all()
 
-func throw_item(item: StaticBody2D) -> void:
+func begin_dragging_item(item: StaticBody2D) -> void:
 	item_dragged = true
 	item_being_dragged = item
+	item_being_dragged.visible = true
 	var index = inventory_list.get_item_at_position(get_global_mouse_position())
 	inventory_list.remove_item(index)
 	%Inspection_Panel.visible = false
@@ -110,7 +118,7 @@ func _on_inspect_pressed() -> void:
 
 	
 func _on_throw_pressed() -> void:
-	throw_item(item_being_inspected)
+	begin_dragging_item(item_being_inspected)
 	
 func close_inventory_for_combat(contacted_enemy: CharacterBody2D):
 	# if item is being dragged, then return it to the list
@@ -129,24 +137,45 @@ func return_dragged_item_to_inventory() -> void:
 	item_dragged = false
 	
 func throw_item_in_world() -> void:
-	if validate_throw_range_and_collision() == true:
+	if validate_throw_range() == true and validate_placement_in_world() == true:
 		item_being_dragged.position = get_global_mouse_position()
 		item_being_dragged.collision_layer = 2
 		item_being_dragged.reparent(%Item_Controller)
 		item_dragged = false
+		
+	else:
+		return_dragged_item_to_inventory()
 	
-func validate_throw_range_and_collision() -> bool:
-	if item_being_dragged.position.distance_to(get_tree().get_first_node_in_group('Player').position) <= 160.00:
-		item_being_dragged.modulate = Color.WHITE
-		return true
+	
+func validate_throw_range() -> bool:
+	if item_being_dragged.position.distance_to(get_tree().get_first_node_in_group('Player').position) <= 160.00:	
+			item_being_dragged.modulate = Color(1.0, 1.0, 1.0)
+			return true
+	
 	else:
 		item_being_dragged.modulate = Color.RED
 		return false
 		
-		#if item_being_dragged.collision
-	#item_being_dragged.modulate = Color.RED
-	#else:
-		#item_being_dragged.modulate = Color(10,10,10)
-	#return true
-	#return false
+func validate_placement_in_world() -> bool:
+	var item_placement = item_being_dragged.position
+	var space_rid = get_world_2d().direct_space_state
+	var query = PhysicsPointQueryParameters2D.new()
+	query.set_position(item_placement)
+	#var point_position = query.set_position(item_placement)
 	
+	#var query = PhysicsRayQueryParameters2D.create(item_placement, item_placement, 4)
+	var result = space_rid.intersect_point(query)
+	print_debug(result)
+	
+	if result.size() == 0:
+		return false
+		
+	else:
+		var first_collision_result = result[0]
+		var colliding_object = first_collision_result["collider"]
+		if colliding_object != item_being_dragged: # if the colliding object is NOT the item itself
+			print_debug(colliding_object)
+			return false
+		
+		else:
+			return true

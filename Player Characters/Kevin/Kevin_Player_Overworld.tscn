@@ -16,7 +16,7 @@ region = Rect2(16, 112, 18, 30)
 size = Vector2(13, 21)
 
 [node name="Player" type="CharacterBody2D" unique_id=1175498703]
-collision_mask = 6
+collision_mask = 14
 script = ExtResource("1_xl0in")
 speed = 300
 
