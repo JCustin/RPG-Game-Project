@@ -39,6 +39,14 @@ script = ExtResource("6_35con")
 position = Vector2(297, 135)
 scale = Vector2(0.015, 0.015)
 
+[node name="Rusted_Rapier2" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1794653080 instance=ExtResource("6_qtbh1")]
+position = Vector2(186.00003, 196.00002)
+scale = Vector2(0.015, 0.015)
+
+[node name="Rusted_Rapier3" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1556203520 instance=ExtResource("6_qtbh1")]
+position = Vector2(376.00003, 39.000023)
+scale = Vector2(0.015, 0.015)
+
 [node name="Camera" type="Camera2D" parent="." unique_id=1898397555]
 unique_name_in_owner = true
 offset = Vector2(20, 25)

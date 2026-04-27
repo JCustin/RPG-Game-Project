@@ -11,6 +11,7 @@ var mouse_inside_inventory: bool = false
 
 var obstacle_tilemaplayer : TileMapLayer
 
+
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group('Player'):
 		player.picked_up_item.connect(add_item_to_list)
@@ -26,21 +27,18 @@ func _physics_process(delta: float) -> void:
 
 func add_item_to_list(item: StaticBody2D) -> void:
 	#inventory_list.add_item(item.item_name, null, true)
-	inventory_list.set_item_tooltip(inventory_list.add_item(item.item_name, null, true), item.item_description)
-	internal_item_scene_packaging[item.item_name] = item
+	inventory_list.set_item_tooltip(inventory_list.add_item(item.name, null, true), item.item_description)
+	internal_item_scene_packaging[item.name] = item
 		#print_debug(internal_item_scene_packaging)
 	
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_released("Inventory_Click") and item_dragged == true:
+	if Input.is_action_just_pressed("Inventory_Click") and item_dragged == true:
 		if mouse_inside_inventory == true:
-			return_dragged_item_to_inventory()
-		if item_dragged == false:
 			return_dragged_item_to_inventory()
 		else:
 			throw_item_in_world()
-			
-			
-	if Input.is_key_pressed(KEY_ESCAPE) and visible == true:
+
+	if Input.is_action_just_pressed("Exit_GUI") and visible == true:
 		if %Inspection_Panel.visible == true:
 			%Inspection_Panel.visible = false
 			return
@@ -60,7 +58,8 @@ func _on_inventory_list_mouse_exited() -> void:
 
 func open_inventory():
 	visible = true
-	
+
+ #code to click and drag the item out of the inventory	
 func _on_inventory_list_item_selected(index: int) -> void:
 	if Input.is_action_just_pressed("Inventory_Click") and item_dragged == false:
 		var item_name = inventory_list.get_item_text(index)
@@ -103,8 +102,11 @@ func close_inventory(enemy_contacted: CharacterBody2D):
 	
 func return_dragged_item_to_inventory() -> void:
 	await add_item_to_list(item_being_dragged)
-	item_being_dragged.visible = false
-	item_being_dragged.position = Vector2(1000,1000)
+	item_being_dragged.disable_collision()
+	#item_being_dragged.visible = false
+	#item_being_dragged.position = Vector2(1000,1000)
+	item_dragged = false
+	item_being_dragged = null
 	
 func begin_dragging_item(item: StaticBody2D) -> void:
 	item_dragged = true
