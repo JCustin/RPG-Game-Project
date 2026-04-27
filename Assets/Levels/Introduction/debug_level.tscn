@@ -26,17 +26,16 @@ position = Vector2(152, 88)
 speed = 200
 
 [node name="foot_soldier_overworld" parent="Overworld/Actor Controller" unique_id=1154605635 instance=ExtResource("5_qtbh1")]
-collision_layer = 4
 
 [node name="Introduction_level_scene1" parent="Overworld" unique_id=1443023022 instance=ExtResource("1_ngams")]
 unique_name_in_owner = true
 z_index = -2
 
-[node name="Item_Controller" type="Node" parent="Overworld" unique_id=1797822058]
+[node name="Item_Controller" type="Node" parent="Overworld/Introduction_level_scene1" unique_id=1797822058]
 unique_name_in_owner = true
 script = ExtResource("6_35con")
 
-[node name="Rusted_Rapier" parent="Overworld/Item_Controller" unique_id=846039171 instance=ExtResource("6_qtbh1")]
+[node name="Rusted_Rapier" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=846039171 instance=ExtResource("6_qtbh1")]
 position = Vector2(297, 135)
 scale = Vector2(0.015, 0.015)
 

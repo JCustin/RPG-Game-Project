@@ -206,3 +206,9 @@ func _on_flank_pressed() -> void:
 		acting_player.facing_forward = not acting_player.facing_forward
 		potential_enemy_targets = enemy_logic.return_active_enemy_parts(forward_combat_direction, primary_enemy)
 		potential_enemy_target_index = 0
+
+
+func _on_flee_pressed() -> void:
+	combat_complete.emit()
+	queue_free()
+	# TODO - expand on the different functions for the damn thing. 

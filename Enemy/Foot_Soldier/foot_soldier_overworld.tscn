@@ -4,14 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://dn41yqjjlxnhu" path="res://icon.svg" id="2_711ym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eda3s"]
-size = Vector2(127, 127)
+size = Vector2(64, 63)
 
 [node name="foot_soldier_overworld" type="CharacterBody2D" unique_id=1154605635]
+collision_layer = 4
+collision_mask = 11
+safe_margin = 0.001
 script = ExtResource("1_vlanb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1490009832]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_711ym")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=759412206]
-position = Vector2(-0.5, 0.5)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_eda3s")

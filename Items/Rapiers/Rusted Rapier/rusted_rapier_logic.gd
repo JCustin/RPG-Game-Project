@@ -14,3 +14,9 @@ func _ready() -> void:
 	item_weight = stat_block.item_weight
 	item_value = stat_block.item_value
 	item_description = stat_block.item_description
+
+func enable_collision():
+	%Rusted_Rapier_Collision_Box.disabled = false
+	
+func disable_collision():
+	%Rusted_Rapier_Collision_Box.disabled = true

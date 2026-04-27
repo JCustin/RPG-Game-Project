@@ -17,10 +17,7 @@ script = ExtResource("1_am13q")
 texture = ExtResource("2_dqoko")
 
 [node name="Rusted_Rapier_Collision_Box" type="CollisionShape2D" parent="." unique_id=976940578]
+unique_name_in_owner = true
 position = Vector2(18.749958, -12.500177)
 scale = Vector2(0.99999934, 14.299993)
 shape = SubResource("RectangleShape2D_dqoko")
-
-[node name="Collision_Raycast" type="RayCast2D" parent="." unique_id=1582948]
-collision_mask = 15
-hit_from_inside = true

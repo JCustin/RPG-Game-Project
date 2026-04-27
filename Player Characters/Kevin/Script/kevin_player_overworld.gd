@@ -44,7 +44,7 @@ func _input(event: InputEvent) -> void:
 				
 				var object : Variant = %Object_Raycast_Detection.get_collider()
 				if object.is_class("StaticBody2D"):
-					interact_with_object(object)
+					pick_up_item(object)
 				elif object.is_class("TileMapLayer"):
 					interact_with_terrain(object)
 				else:
@@ -79,16 +79,15 @@ func send_collision_data():
 	else:
 		pass
 		
-func interact_with_object(object: StaticBody2D) -> void:
+func pick_up_item(object: StaticBody2D) -> void:
 	if object.collision_layer == 2: # item on the ground
 		var object_name : String = object.item_name
 		prompt_overworld_event_description.emit("You have picked up " + object_name)
 		object.reparent(%Player_Inventory)
 		picked_up_item.emit(object)
 		object.visible = false
-		object.collision_layer = 1
+		object.disable_collision()
 		object.position = Vector2(1000, 1000)
-		
 		#prompt_overworld_event_description.emit("WHOA")
 		print_debug(object)
 	

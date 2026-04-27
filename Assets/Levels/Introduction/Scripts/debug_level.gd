@@ -30,5 +30,5 @@ func resume_overworld():
 	%Overworld.visible = true
 	%Camera.enabled = true
 	# TODO create a function for the enemy to handle their deletion. 
-	acting_enemy.free()
+	#acting_enemy.free()
 	%Player.end_combat()

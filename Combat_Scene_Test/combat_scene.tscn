@@ -125,3 +125,4 @@ script = ExtResource("3_xe5l4")
 
 [connection signal="pressed" from="GUI/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="GUI/Flank" to="." method="_on_flank_pressed"]
+[connection signal="pressed" from="GUI/Flee" to="." method="_on_flee_pressed"]
