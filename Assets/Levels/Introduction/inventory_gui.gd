@@ -31,13 +31,14 @@ func _on_inventory_list_mouse_exited() -> void:
 		mouse_inside_inventory = false
 	inventory_list.deselect_all()
 
+# TODO - implement the inspect window better.
+# see what stats we need for items and whatnot.
 func _on_inspect_pressed() -> void:
 	pass
 
 func _on_throw_pressed() -> void:
 	_start_dragging_item(inspected_item_index)
 	
-
 func open_inventory():
 	visible = true
 	
@@ -52,11 +53,6 @@ func close_inventory(enemy_contacted: CharacterBody2D):
 func _add_item_to_list(item: StaticBody2D) -> void:
 	var new_item_index = inventory_list.add_item(item.item_name)
 	inventory_list.set_item_metadata(new_item_index, item)
-	
-	
-	#inventory_list.set_item_tooltip(inventory_list.add_item(item.item_name), item.item_description)
-	#
-	#internal_item_scene_packaging.append(item)
 
 func remove_item_from_list(item_index: int) -> void:
 	inventory_list.remove_item(item_index)
@@ -90,7 +86,6 @@ func _physics_process(delta: float) -> void:
 func _start_dragging_item(item_index: int) -> void:
 	%Extended_Inventory_Panel.visible = false
 	item_being_dragged = inventory_list.get_item_metadata(item_index)
-	#item_being_dragged = internal_item_scene_packaging[item_index]
 	item_being_dragged.disable_collision()
 	item_being_dragged.visible = true
 	remove_item_from_list(item_index)

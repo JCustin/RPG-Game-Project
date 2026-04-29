@@ -11,19 +11,13 @@ signal open_inventory()
 var active: bool = true
 var combat_scene = preload("res://Player Characters/Kevin/Kevin_Player_Fighting.tscn")
 
-
-
 func _ready() -> void:
 	add_to_group('Player')
 
 func _physics_process(delta: float) -> void:	
-		
-		
 		move_and_slide()
 		if get_slide_collision_count() > 0:
 			send_collision_data()
-			
-			
 			
 func _input(event: InputEvent) -> void:
 	if active == true:
@@ -52,12 +46,8 @@ func _input(event: InputEvent) -> void:
 					
 		if Input.is_action_just_pressed("Inventory"):
 			open_inventory.emit()
-			#active = false
-			
-
 
 func initiate_combat():
-	#print('This is running multiple times huh')
 	active = false
 	%CollisionShape2D.disabled = true
 	%Overworld_Sprite.visible = false
@@ -72,7 +62,6 @@ func end_combat():
 	
 func send_collision_data():
 	var enemy_collided_with: Node2D = get_last_slide_collision().get_collider()
-	#print_debug(enemy_collided_with)
 	if enemy_collided_with.is_in_group('Enemy'):
 		active = false
 		contacted_enemy.emit(enemy_collided_with)
@@ -88,11 +77,7 @@ func pick_up_item(object: StaticBody2D) -> void:
 		object.visible = false
 		object.disable_collision()
 		object.position = Vector2(1000, 1000)
-		#prompt_overworld_event_description.emit("WHOA")
 		print_debug(object)
-	
-	#prompt_overworld_event_description.emit("You pick up a Squishy!")
-	
 
 func interact_with_terrain(object: TileMapLayer) -> void:
 	return
