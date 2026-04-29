@@ -27,16 +27,16 @@ func _physics_process(delta: float) -> void:
 			
 func _input(event: InputEvent) -> void:
 	if active == true:
-		var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		var direction = Input.get_vector("Movement_Left", "Movement_Right", "Movement_Up", "Movement_Down")
 		velocity = direction * speed
 		
-		if Input.is_action_just_pressed("ui_left"):
+		if Input.is_action_just_pressed("Movement_Left"):
 			%Object_Raycast_Detection.rotation_degrees = 90
-		if Input.is_action_just_pressed("ui_right"):
+		if Input.is_action_just_pressed("Movement_Right"):
 			%Object_Raycast_Detection.rotation_degrees = -90
-		if Input.is_action_just_pressed("ui_up"):
+		if Input.is_action_just_pressed("Movement_Up"):
 			%Object_Raycast_Detection.rotation_degrees = 180
-		if Input.is_action_just_pressed("ui_down"):
+		if Input.is_action_just_pressed("Movement_Down"):
 			%Object_Raycast_Detection.rotation_degrees = 0
 			
 		if Input.is_action_just_pressed("ui_accept"):

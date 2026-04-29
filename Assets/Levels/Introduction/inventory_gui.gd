@@ -1,53 +1,28 @@
 extends Control
 @export var inventory_list : ItemList
 
-var internal_item_scene_packaging: Dictionary
-var item_dragged: bool = false
-
 var item_being_dragged: StaticBody2D 
-var item_being_inspected: StaticBody2D
+var inspected_item_index: int
 
 var mouse_inside_inventory: bool = false
 
 var obstacle_tilemaplayer : TileMapLayer
 
+# TODO
+# maybe implement a weight system? 
+# one way to hit that shih is to just enter that value in the item 
+# then maintain a global array that adds the sum of the items
+# which is then updated when items are added or removed
+
 
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group('Player'):
-		player.picked_up_item.connect(add_item_to_list)
+		player.picked_up_item.connect(_add_item_to_list)
 		player.open_inventory.connect(open_inventory)
 		player.contacted_enemy.connect(close_inventory)
 		
 	obstacle_tilemaplayer = get_tree().get_first_node_in_group('Obstacles')
-
-func _physics_process(delta: float) -> void:
-	if item_dragged == true:
-		item_being_dragged.position = get_global_mouse_position()
-		validate_throw_range()
-
-func add_item_to_list(item: StaticBody2D) -> void:
-	#inventory_list.add_item(item.item_name, null, true)
-	inventory_list.set_item_tooltip(inventory_list.add_item(item.name, null, true), item.item_description)
-	internal_item_scene_packaging[item.name] = item
-		#print_debug(internal_item_scene_packaging)
 	
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("Inventory_Click") and item_dragged == true:
-		if mouse_inside_inventory == true:
-			return_dragged_item_to_inventory()
-		else:
-			throw_item_in_world()
-
-	if Input.is_action_just_pressed("Exit_GUI") and visible == true:
-		if %Inspection_Panel.visible == true:
-			%Inspection_Panel.visible = false
-			return
-		if %Extended_Inventory_Panel.visible == true:
-			%Extended_Inventory_Panel.visible = false
-			return
-		if visible == true:
-			visible = false
-
 func _on_inventory_list_mouse_entered() -> void:
 	mouse_inside_inventory = true
 
@@ -56,90 +31,86 @@ func _on_inventory_list_mouse_exited() -> void:
 		mouse_inside_inventory = false
 	inventory_list.deselect_all()
 
+func _on_inspect_pressed() -> void:
+	pass
+
+func _on_throw_pressed() -> void:
+	_start_dragging_item(inspected_item_index)
+	
+
 func open_inventory():
 	visible = true
-
- #code to click and drag the item out of the inventory	
-func _on_inventory_list_item_selected(index: int) -> void:
-	if Input.is_action_just_pressed("Inventory_Click") and item_dragged == false:
-		var item_name = inventory_list.get_item_text(index)
-		item_being_dragged = internal_item_scene_packaging[item_name]
-		begin_dragging_item(item_being_dragged)
-	
-
-func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
-		if mouse_button_index == 2:
-			%Extended_Inventory_Panel.position = get_local_mouse_position()
-			%Extended_Inventory_Panel.pivot_offset = Vector2(30, 10)
-			
-			%Extended_Inventory_Panel.visible = true
-			var item_index = inventory_list.get_item_at_position(get_local_mouse_position())
-			var item_name = inventory_list.get_item_text(item_index)
-			
-			item_being_inspected = internal_item_scene_packaging[item_name]
-
-
-func _on_inspect_pressed() -> void:
-	%Inspection_Panel.visible = true
-	var string_sub_data : Dictionary
-	string_sub_data["ATK"] = item_being_inspected.ATK
-	string_sub_data["item_description"] = item_being_inspected.item_description
-	%Inspection_Description.text = "Strength: {ATK}. \n \n {item_description}".format(string_sub_data)
-
-	
-func _on_throw_pressed() -> void:
-	begin_dragging_item(item_being_inspected)
 	
 func close_inventory(enemy_contacted: CharacterBody2D):
 	# if item is being dragged, then return it to the list
 	if item_being_dragged != null:
-		await return_dragged_item_to_inventory()
+		await return_item_to_inventory()
 		
-	item_dragged = false
 	item_being_dragged = null
-	item_being_inspected = null
 	visible = false
+
+func _add_item_to_list(item: StaticBody2D) -> void:
+	var new_item_index = inventory_list.add_item(item.item_name)
+	inventory_list.set_item_metadata(new_item_index, item)
 	
-func return_dragged_item_to_inventory() -> void:
-	await add_item_to_list(item_being_dragged)
+	
+	#inventory_list.set_item_tooltip(inventory_list.add_item(item.item_name), item.item_description)
+	#
+	#internal_item_scene_packaging.append(item)
+
+func remove_item_from_list(item_index: int) -> void:
+	inventory_list.remove_item(item_index)
+	
+##code to handle clicking input for items on the list. 
+func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+		if mouse_button_index == 1 and item_being_dragged == null: #left-click
+			_start_dragging_item(inventory_list.get_item_at_position(at_position))
+		
+		if mouse_button_index == 2 and item_being_dragged == null: # right-click
+			%Extended_Inventory_Panel.position = get_local_mouse_position()
+			%Extended_Inventory_Panel.pivot_offset = Vector2(30, 10)
+			
+			%Extended_Inventory_Panel.visible = true
+			inspected_item_index = inventory_list.get_item_at_position(at_position)
+
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_released("Inventory_Click") and item_being_dragged != null:
+		if mouse_inside_inventory == true:
+			return_item_to_inventory()
+		if mouse_inside_inventory == false:
+			throw_item_in_world()
+			
+
+func _physics_process(delta: float) -> void:
+	if item_being_dragged != null:
+		item_being_dragged.position = get_global_mouse_position()
+		validate_throw_range()
+
+func _start_dragging_item(item_index: int) -> void:
+	%Extended_Inventory_Panel.visible = false
+	item_being_dragged = inventory_list.get_item_metadata(item_index)
+	#item_being_dragged = internal_item_scene_packaging[item_index]
 	item_being_dragged.disable_collision()
-	#item_being_dragged.visible = false
-	#item_being_dragged.position = Vector2(1000,1000)
-	item_dragged = false
+	item_being_dragged.visible = true
+	remove_item_from_list(item_index)
+	
+	
+func throw_item_in_world():
+	if validate_placement_in_world() == true and validate_throw_range() == true:
+		item_being_dragged.enable_collision()
+		item_being_dragged.position = get_global_mouse_position()
+		item_being_dragged.reparent(%Item_Controller)
+		
+		item_being_dragged = null
+	else:
+		return_item_to_inventory()
+
+func return_item_to_inventory() -> void:
+	_add_item_to_list(item_being_dragged)
+	item_being_dragged.visible = false
 	item_being_dragged = null
 	
-func begin_dragging_item(item: StaticBody2D) -> void:
-	item_dragged = true
-	item_being_dragged = item
-	item_being_dragged.visible = true
-	#print_debug(item_being_dragged.get_collision_layer_value(20))
-	var index = inventory_list.get_item_at_position(get_global_mouse_position())
-	inventory_list.remove_item(index)
-	%Inspection_Panel.visible = false
-	%Extended_Inventory_Panel.visible = false
-
-	
-func throw_item_in_world() -> void:
-	if validate_throw_range() == true and validate_placement_in_world() == true:
-		item_being_dragged.position = get_global_mouse_position()
-		#item_being_dragged.collision_layer = 2
-		item_being_dragged.enable_collision()
-		item_being_dragged.reparent(%Item_Controller)
-		item_dragged = false
-		
-	else:
-		return_dragged_item_to_inventory()
-	
-	
-func validate_throw_range() -> bool:
-	if item_being_dragged.position.distance_to(get_tree().get_first_node_in_group('Player').position) <= 160.00:	
-			item_being_dragged.modulate = Color(1.0, 1.0, 1.0)
-			return true
-	
-	else:
-		item_being_dragged.modulate = Color.RED
-		return false
-		
 func validate_placement_in_world() -> bool:
 	var item_placement = item_being_dragged.position
 	var space_rid = get_world_2d().direct_space_state
@@ -152,3 +123,13 @@ func validate_placement_in_world() -> bool:
 		return true
 	else:
 		return false
+
+func validate_throw_range() -> bool:
+	if item_being_dragged.position.distance_to(get_tree().get_first_node_in_group('Player').position) <= 160.00:	
+			item_being_dragged.modulate = Color(1.0, 1.0, 1.0)
+			return true
+	
+	else:
+		item_being_dragged.modulate = Color.RED
+		return false
+		
