@@ -1,4 +1,5 @@
 extends Control
+class_name inventory_gui
 @export var inventory_list : ItemList
 
 var item_being_dragged: StaticBody2D 

@@ -17,7 +17,8 @@ var primary_enemy: Node2D
 
 var forward_combat_direction : bool = true # true means front, false means rear
 
-signal combat_complete
+signal combat_complete(victory: bool)
+# true if won, false if fled
 
 func custom_initialize(enemy: Node2D):
 	primary_enemy = enemy
@@ -168,7 +169,7 @@ func end_combat():
 		child.free()
 		
 	await prompt_combat_description("Yay!")
-	combat_complete.emit()
+	combat_complete.emit(true)
 	queue_free()
 
 func start_combat_round():
@@ -209,6 +210,13 @@ func _on_flank_pressed() -> void:
 
 
 func _on_flee_pressed() -> void:
-	combat_complete.emit()
+	combat_complete.emit(false)
 	queue_free()
 	# TODO - expand on the different functions for the damn thing. 
+
+
+func _on_inventory_pressed() -> void:
+	var player_inventory = preload("uid://qhv78cbt13cn").instantiate() #inventory_gui
+	add_child(player_inventory)
+	player_inventory.visible = true
+	

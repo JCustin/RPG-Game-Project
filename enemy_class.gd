@@ -1,33 +1,40 @@
-class_name overworld_enemy_class
+extends Node
+class_name overworld_enemy_patrol
 
-var overworld_enemy: CharacterBody2D
-var recorded_velocity: Vector2
-var patrol_direction: Vector2 
+var recorded_velocity : Vector2
+var patrol_direction: Vector2
 var patrol_timer: int
+var possible_directions: Array = [Vector2.LEFT, Vector2.UP, Vector2.DOWN, Vector2.RIGHT]
+var current_direction : Vector2 = Vector2.ZERO
 
-var fighting_flag = false
-
-var possible_random_directions =  [Vector2.LEFT, Vector2.UP, Vector2.DOWN, Vector2.RIGHT]
-
-func _init(enemy_node: CharacterBody2D) -> void:
-	overworld_enemy = enemy_node
-	overworld_enemy.add_to_group('Enemy')
-
-func patrol():
-	if overworld_enemy.patrol == false and fighting_flag == false:
+func patrol(enemy: CharacterBody2D) -> Vector2:
+	if patrol_timer <= 40:
+		if current_direction == Vector2.ZERO:
+			current_direction = possible_directions.pick_random()
+			return Vector2.ZERO
+		else:
+			recorded_velocity = current_direction * enemy.movement_speed
+			patrol_timer += 1
+			return recorded_velocity 
+	else:
 		patrol_timer = 0
-		recorded_velocity = possible_random_directions.pick_random() * 40
-		overworld_enemy.patrol = true
+		current_direction = Vector2.ZERO
+		recorded_velocity = Vector2.ZERO
+		return recorded_velocity
 		
-	if overworld_enemy.patrol == true:
-		patrol_timer += 1
-		#print_debug(overworld_enemy.patrol_time_limit)
-		
-		if patrol_timer >= overworld_enemy.patrol_time_limit: 
-			overworld_enemy.patrol = false
-			
-	return recorded_velocity
 
-func initiate_combat():
-	overworld_enemy.patrol = false
-	fighting_flag = true
+func initiate_combat(enemy: CharacterBody2D) -> void:
+	enemy.patrol = false
+	for child in enemy.get_children():
+		if child.is_class('CollisionShape2D'):
+			child.disabled = true
+
+func end_fled_combat(enemy: CharacterBody2D):
+	enemy.patrol = true
+	#var tween = enemy.create_tween()
+	#tween.set_loops(2)
+	#tween.tween_property(enemy, "visible", 0, 1.0)
+	#tween.tween_property(enemy, "visible", 1.0, 1.0)
+	for child in enemy.get_children():
+		if child.is_class('CollisionShape2D'):
+			child.disabled = false

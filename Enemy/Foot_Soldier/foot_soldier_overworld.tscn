@@ -11,6 +11,7 @@ collision_layer = 4
 collision_mask = 11
 safe_margin = 0.001
 script = ExtResource("1_vlanb")
+movement_speed = 39
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1490009832]
 scale = Vector2(0.5, 0.5)

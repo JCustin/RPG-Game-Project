@@ -11,24 +11,24 @@ func initiate_combat(enemy_node: Node2D):
 	%Player.initiate_combat()
 	acting_enemy = enemy_node
 	acting_enemy.add_to_group('Combat_Enemies')
-	acting_enemy.overworld_behavior.initiate_combat()
+
+	acting_enemy.overworld_behavior.initiate_combat(acting_enemy)
 	
 	var combat_scene = preload("uid://buylh0rmqi1ll").instantiate()
 	combat_scene.custom_initialize(acting_enemy)
 	add_child(combat_scene)
-	combat_scene.combat_complete.connect(resume_overworld)
-	
-	#combat_scene.end_combat.connect(resume_overworld)
-	#if len(get_children()) < 2:
-		#add_child(combat_scene)
-	#combat_scene.end_combat.connect(resume_overworld)
+	combat_scene.combat_complete.connect(end_combat)
 	
 	%Overworld.visible = false
 	%Camera.enabled = false	
 
-func resume_overworld():
+func end_combat(victory: bool):
 	%Overworld.visible = true
 	%Camera.enabled = true
-	# TODO create a function for the enemy to handle their deletion. 
-	#acting_enemy.free()
 	%Player.end_combat()
+	
+	if victory == true:
+		acting_enemy.free()
+	else:
+		await get_tree().create_timer(1.0).timeout
+		acting_enemy.overworld_behavior.end_fled_combat(acting_enemy)
