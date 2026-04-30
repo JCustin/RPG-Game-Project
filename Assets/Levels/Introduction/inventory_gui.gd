@@ -4,6 +4,8 @@ extends Control
 var item_being_dragged: StaticBody2D 
 var inspected_item_index: int
 
+var item_modifier = item_base.new()
+
 var mouse_inside_inventory: bool = false
 
 var obstacle_tilemaplayer : TileMapLayer
@@ -34,7 +36,15 @@ func _on_inventory_list_mouse_exited() -> void:
 # TODO - implement the inspect window better.
 # see what stats we need for items and whatnot.
 func _on_inspect_pressed() -> void:
-	pass
+	%Inspection_Panel.visible = true
+	var item = inventory_list.get_item_metadata(inspected_item_index)
+	var item_information = {
+		"name" : item.item_name,
+		"attack" : item.ATK,
+		"description" : item.item_description
+	}
+	
+	%Inspection_Description.text = "Strength: {attack} \n\n {description}".format(item_information)
 
 func _on_throw_pressed() -> void:
 	_start_dragging_item(inspected_item_index)
@@ -86,14 +96,13 @@ func _physics_process(delta: float) -> void:
 func _start_dragging_item(item_index: int) -> void:
 	%Extended_Inventory_Panel.visible = false
 	item_being_dragged = inventory_list.get_item_metadata(item_index)
-	item_being_dragged.disable_collision()
+	item_modifier.disable_collision(item_being_dragged)
 	item_being_dragged.visible = true
-	remove_item_from_list(item_index)
-	
+	remove_item_from_list(item_index)	
 	
 func throw_item_in_world():
 	if validate_placement_in_world() == true and validate_throw_range() == true:
-		item_being_dragged.enable_collision()
+		item_modifier.enable_collision(item_being_dragged)
 		item_being_dragged.position = get_global_mouse_position()
 		item_being_dragged.reparent(%Item_Controller)
 		
