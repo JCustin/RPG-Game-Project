@@ -17,8 +17,10 @@ var obstacle_tilemaplayer : TileMapLayer
 # then maintain a global array that adds the sum of the items
 # which is then updated when items are added or removed
 
-
 func _ready() -> void:
+	for item in Player_Data.inventory:
+		_add_item_to_list(item)
+	
 	for player in get_tree().get_nodes_in_group('Player'):
 		player.picked_up_item.connect(_add_item_to_list)
 		player.open_inventory.connect(open_inventory)
@@ -67,6 +69,7 @@ func _add_item_to_list(item: StaticBody2D) -> void:
 
 func remove_item_from_list(item_index: int) -> void:
 	inventory_list.remove_item(item_index)
+	Player_Data.inventory.erase(inventory_list.get_item_metadata(item_index))
 	
 ##code to handle clicking input for items on the list. 
 func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:

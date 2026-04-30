@@ -78,6 +78,7 @@ func pick_up_item(object: StaticBody2D) -> void:
 		object.disable_collision()
 		object.position = Vector2(1000, 1000)
 		print_debug(object)
+		Player_Data.inventory += [object]
 
 func interact_with_terrain(object: TileMapLayer) -> void:
 	return

@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-CombatLoaderDictionary="*res://Global Scripts/combat_loader_dictionary.gd"
+Player_Data="*uid://g15npji6gwk7"
 
 [display]
 
