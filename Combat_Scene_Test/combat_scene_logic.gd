@@ -216,6 +216,9 @@ func _on_flee_pressed() -> void:
 
 
 func _on_inventory_pressed() -> void:
-	var combat_inventory = preload("uid://d4jjvjlphvygk").instantiate() #inventory_gui
-	add_child(combat_inventory)
+	if get_tree().get_nodes_in_group('Inventory').size() == 0:
+		var combat_inventory = preload("uid://d4jjvjlphvygk").instantiate() #inventory_gui
+		add_child(combat_inventory)
+	else:
+		pass
 	

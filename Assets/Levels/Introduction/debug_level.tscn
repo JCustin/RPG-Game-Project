@@ -30,7 +30,7 @@ speed = 200
 unique_name_in_owner = true
 z_index = -2
 
-[node name="Item_Controller" type="Node" parent="Overworld/Introduction_level_scene1" unique_id=1797822058]
+[node name="Item_Controller" type="Node" parent="Overworld/Introduction_level_scene1" unique_id=1797822058 groups=["Item_Controller"]]
 unique_name_in_owner = true
 script = ExtResource("6_35con")
 

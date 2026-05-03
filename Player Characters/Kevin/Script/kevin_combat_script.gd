@@ -1,9 +1,20 @@
 extends Node2D
-var HP: int = 100
-var ATK: int = 10
-var DEF : int = 3
-var SPD : int = 1
-var STAM: int = 100
+
+var stat_block = witchunter_stats.new()
+
+
+
+#var HP: int:
+	#get:
+		#return HP
+	#set():
+		#print_debug(HP)
+		#set(new_value):
+			#print_debug(new_value)
+var ATK: int 
+var DEF : int 
+var SPD : int 
+var STAM: int 
 	#set(value):
 		#stamina_changed.emit(value)
 var partial_stamina_recovery_value: int = 10
@@ -18,6 +29,11 @@ signal attack(attack_value: int, attack_description: String)
 
 func _ready() -> void:
 	add_to_group('Fighting_Player')
+	HP = stat_block.HP
+	ATK = stat_block.ATK
+	DEF = stat_block.DEF
+	SPD = stat_block.SPD
+	STAM = stat_block.STAM
 	
 func basic_attack(target_enemy):
 	attack.emit(target_enemy, ATK + 10, "Witch Hunter thrusts forward with a strong jab.")
@@ -44,3 +60,4 @@ func validate_stamina_cost(stamina_cost: int) -> bool:
 
 func validate_basic_attack_stamina_cost() -> bool:
 	return validate_stamina_cost(30)
+	

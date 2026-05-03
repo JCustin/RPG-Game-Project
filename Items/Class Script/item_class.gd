@@ -11,3 +11,10 @@ func disable_collision(item: StaticBody2D):
 	for child in item.get_children():
 		if child.is_class('CollisionShape2D'):
 			child.disabled = true
+
+func player_pick_up_item(item: StaticBody2D, player_inventory: Node):
+	disable_collision(item)
+	item.visible = false
+	item.reparent(player_inventory)
+	
+	

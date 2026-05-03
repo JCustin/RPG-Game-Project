@@ -56,7 +56,7 @@ text = "Inspect"
 [node name="Use" type="Button" parent="Extended_Inventory_Panel/Extended_Inventory_Panel_Container" unique_id=1201633191]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Throw"
+text = "Use"
 
 [node name="Equip" type="Button" parent="Extended_Inventory_Panel/Extended_Inventory_Panel_Container" unique_id=1674941275]
 unique_name_in_owner = true
@@ -88,3 +88,6 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 14
 autowrap_mode = 3
 metadata/_edit_lock_ = true
+
+[connection signal="item_clicked" from="Inventory_Panel/Inventory_List" to="." method="_on_inventory_list_item_clicked"]
+[connection signal="pressed" from="Extended_Inventory_Panel/Extended_Inventory_Panel_Container/Inspect" to="." method="_on_inspect_pressed"]

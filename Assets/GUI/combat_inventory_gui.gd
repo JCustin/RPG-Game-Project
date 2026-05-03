@@ -57,3 +57,13 @@ func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_but
 		%Extended_Inventory_Panel.pivot_offset = Vector2(30, 10)
 		%Extended_Inventory_Panel.visible = true
 		inspected_item_index = inventory_list.get_item_at_position(at_position)
+		
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("Exit_GUI"):
+		if %Inspection_Panel.visible == true:
+			%Inspection_Panel.visible = false
+		elif %Extended_Inventory_Panel.visible == true:
+			%Extended_Inventory_Panel.visible = false
+			return
+		else:
+			free()

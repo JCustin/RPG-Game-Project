@@ -60,6 +60,8 @@ func _on_throw_pressed() -> void:
 func open_inventory():
 	visible = true
 	
+# TODO - refactor the close_inventory function signaled from game logic
+# combat_start to just be the free_inventory func
 func close_inventory(enemy_contacted: CharacterBody2D):
 	# if item is being dragged, then return it to the list
 	if item_being_dragged != null:
@@ -67,7 +69,17 @@ func close_inventory(enemy_contacted: CharacterBody2D):
 		
 	item_being_dragged = null
 	visible = false
+	free()
 
+func free_inventory():
+	if item_being_dragged != null:
+		await return_item_to_inventory()
+		
+	item_being_dragged = null
+	visible = false
+	queue_free()
+	
+	
 func _add_item_to_list(item: StaticBody2D) -> void:
 	var new_item_index = inventory_list.add_item(item.item_name)
 	inventory_list.set_item_metadata(new_item_index, item)
@@ -99,11 +111,6 @@ func _input(event: InputEvent) -> void:
 			return_item_to_inventory()
 		if mouse_inside_inventory == false:
 			throw_item_in_world()
-			
-	if Input.is_action_just_pressed("Exit_GUI") or Input.is_action_just_pressed("Inventory"):
-		if item_being_dragged != null:
-			return_item_to_inventory()
-		free()
 
 func _physics_process(delta: float) -> void:
 	if item_being_dragged != null:

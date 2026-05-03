@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-@export var speed = 10
+@export var movement_speed = 100
+
+var stat_block = witchunter_stats.new()
 
 signal contacted_enemy(enemy: CharacterBody2D)
 signal prompt_overworld_event_description(description: String)
@@ -22,7 +24,7 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if active == true:
 		var direction = Input.get_vector("Movement_Left", "Movement_Right", "Movement_Up", "Movement_Down")
-		velocity = direction * speed
+		velocity = direction * movement_speed
 		
 		if Input.is_action_just_pressed("Movement_Left"):
 			%Object_Raycast_Detection.rotation_degrees = 90
@@ -45,7 +47,12 @@ func _input(event: InputEvent) -> void:
 					pass
 					
 		if Input.is_action_just_pressed("Inventory"):
-			open_inventory.emit()
+			if get_tree().get_nodes_in_group('Inventory').size() == 0 :
+				open_inventory.emit()
+			else:
+				for node in get_tree().get_nodes_in_group('Inventory'):
+					node.free_inventory()
+				
 
 func initiate_combat():
 	active = false
@@ -71,13 +78,10 @@ func send_collision_data():
 func pick_up_item(object: StaticBody2D) -> void:
 	if object.collision_layer == 2: # item on the ground
 		var object_name : String = object.item_name
+		var item_interaction = item_base.new()
 		prompt_overworld_event_description.emit("You have picked up " + object_name)
-		object.reparent(%Player_Inventory)
-		picked_up_item.emit(object)
-		object.visible = false
-		object.disable_collision()
-		object.position = Vector2(1000, 1000)
-		print_debug(object)
+		item_interaction.player_pick_up_item(object, %Player_Inventory)
+		picked_up_item.emit()
 		Player_Data.inventory += [object]
 
 func interact_with_terrain(object: TileMapLayer) -> void:

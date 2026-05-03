@@ -13,7 +13,10 @@ func initiate_combat(enemy_node: Node2D):
 	%Player.initiate_combat()
 	acting_enemy = enemy_node
 	acting_enemy.add_to_group('Combat_Enemies')
-
+	
+	for node in get_tree().get_nodes_in_group('Inventory'):
+		node.free()
+	
 	acting_enemy.overworld_behavior.initiate_combat(acting_enemy)
 	
 	var combat_scene = preload("uid://buylh0rmqi1ll").instantiate()
