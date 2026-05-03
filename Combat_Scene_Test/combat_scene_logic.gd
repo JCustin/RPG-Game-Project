@@ -216,7 +216,6 @@ func _on_flee_pressed() -> void:
 
 
 func _on_inventory_pressed() -> void:
-	var player_inventory = preload("uid://qhv78cbt13cn").instantiate() #inventory_gui
-	add_child(player_inventory)
-	player_inventory.visible = true
+	var combat_inventory = preload("uid://d4jjvjlphvygk").instantiate() #inventory_gui
+	add_child(combat_inventory)
 	

@@ -3,9 +3,11 @@ var acting_enemy: Node2D
 
 func _ready() -> void:
 	%Player.contacted_enemy.connect(initiate_combat)
+	%Player.open_inventory.connect(spawn_inventory_GUI)
 
 func _physics_process(delta: float) -> void:
 	%Camera.position = %Player.position
+	
 	
 func initiate_combat(enemy_node: Node2D):
 	%Player.initiate_combat()
@@ -32,3 +34,15 @@ func end_combat(victory: bool):
 	else:
 		await get_tree().create_timer(1.0).timeout
 		acting_enemy.overworld_behavior.end_fled_combat(acting_enemy)
+
+func spawn_inventory_GUI():
+	if get_tree().get_nodes_in_group('Inventory').size() == 0:
+		var inventory_GUI = preload("uid://qhv78cbt13cn").instantiate()
+		var camera_child_nodes = %Camera.get_children()
+		if inventory_GUI.is_inside_tree():
+			pass
+		else:
+			%Camera.add_child(inventory_GUI)
+			inventory_GUI.visible = true
+	else:
+		pass

@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://okon6v6a4v6u" path="res://Assets/Levels/Introduction/item_controller_logic.gd" id="6_35con"]
 [ext_resource type="PackedScene" uid="uid://1dh71oabjed3" path="res://Items/Rapiers/Rusted Rapier/rusted_rapier.tscn" id="6_qtbh1"]
 [ext_resource type="Script" uid="uid://b5dsmqvwaiq3e" path="res://Assets/Levels/Introduction/Overworld_Event_Description_Logic.gd" id="7_yal86"]
-[ext_resource type="PackedScene" uid="uid://qhv78cbt13cn" path="res://Assets/Levels/Introduction/inventory_gui.tscn" id="9_ppatb"]
 
 [node name="Game" type="Node2D" unique_id=115325983]
 script = ExtResource("1_a5wmo")
@@ -80,9 +79,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Inventory GUI" parent="Camera" unique_id=1928950353 instance=ExtResource("9_ppatb")]
-offset_left = -34.0
-offset_top = 1.0
-offset_right = 6.0
-offset_bottom = 41.0

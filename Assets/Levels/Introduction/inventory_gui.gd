@@ -10,6 +10,9 @@ var item_modifier = item_base.new()
 var mouse_inside_inventory: bool = false
 
 var obstacle_tilemaplayer : TileMapLayer
+var item_controller : Node
+
+var engaged_in_combat_flag: bool
 
 # TODO
 # maybe implement a weight system? 
@@ -18,6 +21,8 @@ var obstacle_tilemaplayer : TileMapLayer
 # which is then updated when items are added or removed
 
 func _ready() -> void:
+	item_controller = get_tree().get_first_node_in_group('Item_Controller')
+	add_to_group('Inventory')
 	for item in Player_Data.inventory:
 		_add_item_to_list(item)
 	
@@ -66,10 +71,14 @@ func close_inventory(enemy_contacted: CharacterBody2D):
 func _add_item_to_list(item: StaticBody2D) -> void:
 	var new_item_index = inventory_list.add_item(item.item_name)
 	inventory_list.set_item_metadata(new_item_index, item)
+	
 
 func remove_item_from_list(item_index: int) -> void:
+	var inventory_value = inventory_list.get_item_metadata(item_index)
 	inventory_list.remove_item(item_index)
-	Player_Data.inventory.erase(inventory_list.get_item_metadata(item_index))
+	
+	Player_Data.inventory.erase(inventory_value)
+	print_debug(Player_Data.inventory)
 	
 ##code to handle clicking input for items on the list. 
 func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
@@ -91,6 +100,10 @@ func _input(event: InputEvent) -> void:
 		if mouse_inside_inventory == false:
 			throw_item_in_world()
 			
+	if Input.is_action_just_pressed("Exit_GUI") or Input.is_action_just_pressed("Inventory"):
+		if item_being_dragged != null:
+			return_item_to_inventory()
+		free()
 
 func _physics_process(delta: float) -> void:
 	if item_being_dragged != null:
@@ -108,7 +121,7 @@ func throw_item_in_world():
 	if validate_placement_in_world() == true and validate_throw_range() == true:
 		item_modifier.enable_collision(item_being_dragged)
 		item_being_dragged.position = get_global_mouse_position()
-		item_being_dragged.reparent(%Item_Controller)
+		item_being_dragged.reparent(item_controller)
 		
 		item_being_dragged = null
 	else:
@@ -116,6 +129,7 @@ func throw_item_in_world():
 
 func return_item_to_inventory() -> void:
 	_add_item_to_list(item_being_dragged)
+	Player_Data.inventory += [item_being_dragged]
 	item_being_dragged.visible = false
 	item_being_dragged = null
 	
