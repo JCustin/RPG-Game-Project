@@ -6,5 +6,5 @@ var HP: int = 100
 var max_STAM : int = 100
 var STAM: int = 100
 var ATK: int = 10
-var DEF: int = 3
+var DEF: int = 5
 var SPD: int = 1

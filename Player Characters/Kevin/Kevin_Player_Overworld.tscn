@@ -18,7 +18,6 @@ size = Vector2(13, 21)
 [node name="Player" type="CharacterBody2D" unique_id=1175498703]
 collision_mask = 14
 script = ExtResource("1_xl0in")
-speed = 300
 
 [node name="AnimationPlayer [GAP]" type="AnimationPlayer" parent="." unique_id=1882057001]
 

@@ -1,16 +1,13 @@
 extends Node2D
 
-var stat_block = witchunter_stats.new()
+var unit_name : String = "Witch Hunter"
+var overworld_counterpart: CharacterBody2D
 
-
-
-#var HP: int:
-	#get:
-		#return HP
-	#set():
-		#print_debug(HP)
-		#set(new_value):
-			#print_debug(new_value)
+var HP: int:
+	set(value):
+		HP = value
+		overworld_counterpart.HP = HP
+		
 var ATK: int 
 var DEF : int 
 var SPD : int 
@@ -26,18 +23,22 @@ var facing_forward: bool = true
 signal stamina_changed(stamina_change_value: int)
 signal attack(attack_value: int, attack_description: String)
 
-
 func _ready() -> void:
 	add_to_group('Fighting_Player')
-	HP = stat_block.HP
-	ATK = stat_block.ATK
-	DEF = stat_block.DEF
-	SPD = stat_block.SPD
-	STAM = stat_block.STAM
+	for player in get_tree().get_nodes_in_group('Player'):
+		if player.unit_name == unit_name:
+			overworld_counterpart = player
+		else:
+			pass
+	HP = overworld_counterpart.HP
+	DEF = 1
+	SPD = 1
+	STAM = 100
+	ATK = 10
 	
 func basic_attack(target_enemy):
 	attack.emit(target_enemy, ATK + 10, "Witch Hunter thrusts forward with a strong jab.")
-	expend_stamina(30)
+	expend_stamina(10)
 
 func flank():
 	expend_stamina(30)

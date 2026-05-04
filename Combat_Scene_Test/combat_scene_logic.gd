@@ -33,7 +33,7 @@ func _ready() -> void:
 		player_combat_scene.attack.connect(execute_attack)
 		player.add_to_group('Combat_Player')
 		active_players_in_combat += [player_combat_scene]
-	
+		
 	%Player_Stamina.connect_to_players(active_players_in_combat)
 	
 	primary_enemy = primary_enemy.combat_scene.instantiate()
@@ -48,7 +48,15 @@ func _ready() -> void:
 	#active_players_in_combat = turn_queue
 	
 	acting_player = turn_queue[0]
+	
+	if acting_player != primary_enemy:
+		%Player_HP_Bar.value = acting_player.HP
+	else:
+		%Player_HP_Bar.value = turn_queue[1].HP
+		
+		
 	spawn_and_position_actors()
+	
 	start_combat_round()
 	
 func spawn_and_position_actors():

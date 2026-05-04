@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
+var unit_name = "Witch Hunter"
 @export var movement_speed = 100
 
 var stat_block = witchunter_stats.new()
+var HP: int
 
 signal contacted_enemy(enemy: CharacterBody2D)
 signal prompt_overworld_event_description(description: String)
@@ -15,6 +17,7 @@ var combat_scene = preload("res://Player Characters/Kevin/Kevin_Player_Fighting.
 
 func _ready() -> void:
 	add_to_group('Player')
+	HP = stat_block.HP
 
 func _physics_process(delta: float) -> void:	
 		move_and_slide()
@@ -59,9 +62,11 @@ func initiate_combat():
 	%CollisionShape2D.disabled = true
 	%Overworld_Sprite.visible = false
 	%Combat_Sprite.visible = true
+	velocity = Vector2.ZERO
 	combat_started.emit()
 	
 func end_combat():
+	print_debug(stat_block.HP)
 	active = true
 	%Overworld_Sprite.visible = true
 	%Combat_Sprite.visible = false
