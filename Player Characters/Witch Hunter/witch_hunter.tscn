@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dru8467dcjn7j"]
+
+[ext_resource type="Texture2D" uid="uid://0oio532puorb" path="res://addons/project-time-tracker/icon.svg" id="1_8x8a6"]
+[ext_resource type="Script" uid="uid://udglnt1saqww" path="res://Player Characters/Witch Hunter/witch_hunter.gd" id="1_fggl1"]
+[ext_resource type="PackedScene" uid="uid://swpo4h0r67v0" path="res://Player Characters/Components/player_movement_controller.tscn" id="3_fggl1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44o0l"]
+size = Vector2(94, 92)
+
+[node name="Witch_Hunter" type="CharacterBody2D" unique_id=448452775 node_paths=PackedStringArray("movement_controller")]
+scale = Vector2(0.52, 0.52)
+script = ExtResource("1_fggl1")
+movement_controller = NodePath("")
+movement_speed = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=931493520]
+texture = ExtResource("1_8x8a6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1652117801]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_44o0l")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=158573424]
+
+[node name="player_movement_controller" parent="." unique_id=853565106 node_paths=PackedStringArray("object_raycast_detector") instance=ExtResource("3_fggl1")]
+object_raycast_detector = NodePath("../RayCast2D")

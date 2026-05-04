@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://jghg7ku7r1jg" path="res://Items/Potions/Health Potion/health_potion.gd" id="1_d4j64"]
 [ext_resource type="Texture2D" uid="uid://doomqssisciog" path="res://WIP_Pixel_Art/Potion.png" id="1_q7h4h"]
+[ext_resource type="Script" uid="uid://8nd0sx6xbfjo" path="res://Items/Potions/potion_component.gd" id="3_qg4t7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qg4t7"]
 radius = 16.0
 height = 44.0
 
-[node name="Health_Potion" type="StaticBody2D" unique_id=1560185872]
+[node name="Health_Potion" type="StaticBody2D" unique_id=1560185872 node_paths=PackedStringArray("potion_component")]
 collision_layer = 2
 script = ExtResource("1_d4j64")
+potion_component = NodePath("Potion_Component")
 
 [node name="Potion_Sprite" type="Sprite2D" parent="." unique_id=541756513]
 texture = ExtResource("1_q7h4h")
@@ -17,3 +19,6 @@ texture = ExtResource("1_q7h4h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1969822068]
 position = Vector2(-3, -3)
 shape = SubResource("CapsuleShape2D_qg4t7")
+
+[node name="Potion_Component" type="Node" parent="." unique_id=665207045]
+script = ExtResource("3_qg4t7")

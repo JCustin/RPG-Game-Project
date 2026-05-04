@@ -31,6 +31,7 @@ func _ready() -> void:
 		var player_combat_scene = player.combat_scene.instantiate()
 		%Player_Actors.add_child(player_combat_scene)
 		player_combat_scene.attack.connect(execute_attack)
+		player_combat_scene.HP_changed.connect(update_HP_bar)
 		player.add_to_group('Combat_Player')
 		active_players_in_combat += [player_combat_scene]
 		
@@ -50,10 +51,9 @@ func _ready() -> void:
 	acting_player = turn_queue[0]
 	
 	if acting_player != primary_enemy:
-		%Player_HP_Bar.value = acting_player.HP
+		update_HP_bar(acting_player.HP)
 	else:
-		%Player_HP_Bar.value = turn_queue[1].HP
-		
+		update_HP_bar(turn_queue[1].HP)
 		
 	spawn_and_position_actors()
 	
@@ -230,3 +230,5 @@ func _on_inventory_pressed() -> void:
 	else:
 		pass
 	
+func update_HP_bar(HP: int) -> void:
+	%Player_HP_Bar.value = HP

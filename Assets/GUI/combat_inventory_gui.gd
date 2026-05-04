@@ -67,3 +67,18 @@ func _input(event: InputEvent) -> void:
 			return
 		else:
 			free()
+
+
+func _on_use_pressed() -> void:
+	var item: StaticBody2D = Player_Data.inventory[inspected_item_index]
+	var combat_scene: Node = get_parent()
+	if item.item_type == "Potion":
+		combat_scene.acting_player.HP = item.drink_potion(combat_scene.acting_player.HP)
+	if item.item_type == "Weapon":
+		pass
+	else:
+		pass
+	
+	remove_item_from_list(inspected_item_index)
+	%Inspection_Panel.visible = false
+	%Extended_Inventory_Panel.visible = false

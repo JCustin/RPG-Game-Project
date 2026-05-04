@@ -91,3 +91,4 @@ metadata/_edit_lock_ = true
 
 [connection signal="item_clicked" from="Inventory_Panel/Inventory_List" to="." method="_on_inventory_list_item_clicked"]
 [connection signal="pressed" from="Extended_Inventory_Panel/Extended_Inventory_Panel_Container/Inspect" to="." method="_on_inspect_pressed"]
+[connection signal="pressed" from="Extended_Inventory_Panel/Extended_Inventory_Panel_Container/Use" to="." method="_on_use_pressed"]

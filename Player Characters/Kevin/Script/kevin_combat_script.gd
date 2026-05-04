@@ -3,10 +3,13 @@ extends Node2D
 var unit_name : String = "Witch Hunter"
 var overworld_counterpart: CharacterBody2D
 
+signal HP_changed(HP)
+
 var HP: int:
 	set(value):
 		HP = value
 		overworld_counterpart.HP = HP
+		HP_changed.emit(HP)
 		
 var ATK: int 
 var DEF : int 
