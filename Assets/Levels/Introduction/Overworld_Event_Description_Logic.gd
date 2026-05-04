@@ -5,8 +5,8 @@ var overworld_event_describer : Label
 func _ready() -> void:
 	overworld_event_describer = get_child(0)
 	var player = get_tree().get_first_node_in_group('Player')
-	player.prompt_overworld_event_description.connect(display_overworld_event_description)
-	player.combat_started.connect(remove_description)
+	#player.prompt_overworld_event_description.connect(display_overworld_event_description)
+	#player.combat_started.connect(remove_description)
 	
 func display_overworld_event_description(description: String):
 	visible = true

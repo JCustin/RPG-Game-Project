@@ -1,4 +1,4 @@
-extends Node
+class_name item_controller extends Node
 
 #func _ready() -> void:
 	#for player in get_tree().get_nodes_in_group('Player'):

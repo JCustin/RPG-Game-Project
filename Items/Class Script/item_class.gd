@@ -17,4 +17,9 @@ func player_pick_up_item(item: StaticBody2D, player_inventory: Node):
 	item.visible = false
 	item.reparent(player_inventory)
 	
+func player_throws_item(item: StaticBody2D, item_controller_parent: item_controller, thrown_position: Vector2):
+	item.reparent(item_controller_parent)
+	enable_collision(item)
+	item.visible = true
+	item.position = thrown_position
 	
