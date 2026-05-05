@@ -10,6 +10,7 @@ var item_modifier = item_base.new()
 var mouse_inside_inventory: bool = false
 
 var obstacle_tilemaplayer : TileMapLayer
+@warning_ignore("shadowed_global_identifier")
 var item_controller : Node
 
 var engaged_in_combat_flag: bool
@@ -61,9 +62,11 @@ func _on_throw_pressed() -> void:
 
 # TODO - refactor the close_inventory function signaled from game logic
 # combat_start to just be the free_inventory func
+@warning_ignore("unused_parameter")
 func close_inventory(enemy_contacted: CharacterBody2D):
 	# if item is being dragged, then return it to the list
 	if item_being_dragged != null:
+		@warning_ignore("redundant_await")
 		await return_item_to_inventory()
 		
 	item_being_dragged = null
@@ -72,6 +75,7 @@ func close_inventory(enemy_contacted: CharacterBody2D):
 
 func free_inventory():
 	if item_being_dragged != null:
+		@warning_ignore("redundant_await")
 		await return_item_to_inventory()
 		
 	item_being_dragged = null
@@ -91,7 +95,7 @@ func remove_item_from_list(item_index: int) -> void:
 	player.inventory_component.inventory.erase(inventory_value)
 	
 ##code to handle clicking input for items on the list. 
-func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+func _on_inventory_list_item_clicked(_index: int, at_position: Vector2, mouse_button_index: int) -> void:
 		if mouse_button_index == 1 and item_being_dragged == null: #left-click
 			_start_dragging_item(inventory_list.get_item_at_position(at_position))
 		
@@ -103,14 +107,14 @@ func _on_inventory_list_item_clicked(index: int, at_position: Vector2, mouse_but
 			inspected_item_index = inventory_list.get_item_at_position(at_position)
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("Inventory_Click") and item_being_dragged != null:
 		if mouse_inside_inventory == true:
 			return_item_to_inventory()
 		if mouse_inside_inventory == false:
 			throw_item_in_world()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if item_being_dragged != null:
 		item_being_dragged.position = get_global_mouse_position()
 		validate_throw_range()

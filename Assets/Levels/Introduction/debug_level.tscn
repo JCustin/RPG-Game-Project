@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ch488n2mdridh" path="res://Assets/Levels/Introduction/introduction_level_scene1.tscn" id="1_ngams"]
 [ext_resource type="Script" uid="uid://ovtkhcrhwh4b" path="res://Managers/actor_controller.gd" id="1_nhxuj"]
 [ext_resource type="PackedScene" uid="uid://dru8467dcjn7j" path="res://Player Characters/Witch Hunter/witch_hunter.tscn" id="3_35con"]
+[ext_resource type="PackedScene" uid="uid://dp71d6jlfp0l8" path="res://Enemy/Hexen_Experimental/hexen_overworld.tscn" id="4_ppatb"]
 [ext_resource type="Script" uid="uid://okon6v6a4v6u" path="res://Assets/Levels/Introduction/item_controller_logic.gd" id="6_35con"]
 [ext_resource type="PackedScene" uid="uid://1dh71oabjed3" path="res://Items/Rapiers/Rusted Rapier/rusted_rapier.tscn" id="6_qtbh1"]
 [ext_resource type="Script" uid="uid://b5dsmqvwaiq3e" path="res://Assets/Levels/Introduction/Overworld_Event_Description_Logic.gd" id="7_yal86"]
@@ -19,6 +20,9 @@ unique_name_in_owner = true
 script = ExtResource("1_nhxuj")
 
 [node name="Witch_Hunter" parent="Overworld/Actor Controller" unique_id=448452775 instance=ExtResource("3_35con")]
+
+[node name="Hexen" parent="Overworld/Actor Controller" unique_id=753715856 instance=ExtResource("4_ppatb")]
+position = Vector2(162, -52)
 
 [node name="Introduction_level_scene1" parent="Overworld" unique_id=1443023022 instance=ExtResource("1_ngams")]
 unique_name_in_owner = true

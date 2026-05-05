@@ -12,6 +12,7 @@ func add_item_to_inventory(item: StaticBody2D):
 	item_base.new().player_pick_up_item(item, self)
 	_refresh_inventory()
 
+@warning_ignore("shadowed_global_identifier")
 func remove_item_from_inventory(item: StaticBody2D, item_controller: Node):
 	item.reparent(item_controller)
 	_refresh_inventory()
@@ -24,6 +25,7 @@ func get_inventory() -> Array:
 	print_debug(inventory)
 	return inventory
 	
+@warning_ignore("unused_parameter")
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Inventory"):
 		inventory_button_pressed.emit()

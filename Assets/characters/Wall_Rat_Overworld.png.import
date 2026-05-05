@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d11rr3xlc85mu"
-path="res://.godot/imported/Wall_Rat_Overworld.png-93662dc83ba96d23604630c9eb124468.ctex"
+path="res://.godot/imported/Wall_Rat_Overworld.png-0e66281b0e19755a963bcc4fc7eacd3e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backgrounds/Wall_Rat_Overworld.png"
-dest_files=["res://.godot/imported/Wall_Rat_Overworld.png-93662dc83ba96d23604630c9eb124468.ctex"]
+source_file="res://Assets/characters/Wall_Rat_Overworld.png"
+dest_files=["res://.godot/imported/Wall_Rat_Overworld.png-0e66281b0e19755a963bcc4fc7eacd3e.ctex"]
 
 [params]
 

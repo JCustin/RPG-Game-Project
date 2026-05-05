@@ -1,0 +1,1 @@
+class_name hexen_class extends enemy_character_class

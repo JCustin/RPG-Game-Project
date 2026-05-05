@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://byku7qpo6gyy2"]
+
+[ext_resource type="Script" uid="uid://cvoobh2n57fqr" path="res://Enemy/Components/ai_movement_controller.gd" id="1_kibt2"]
+
+[node name="AI_Movement_Controller" type="Node" unique_id=756319719]
+script = ExtResource("1_kibt2")

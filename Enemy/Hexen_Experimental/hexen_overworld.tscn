@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dp71d6jlfp0l8"]
+
+[ext_resource type="Script" uid="uid://cd7qgj76ddu8m" path="res://Enemy/Hexen_Experimental/hexen_overworld.gd" id="1_ug2rc"]
+[ext_resource type="Texture2D" uid="uid://d11rr3xlc85mu" path="res://Assets/characters/Wall_Rat_Overworld.png" id="2_ug2rc"]
+[ext_resource type="PackedScene" uid="uid://byku7qpo6gyy2" path="res://Enemy/Components/ai_movement_controller.tscn" id="3_nw65c"]
+[ext_resource type="PackedScene" uid="uid://c0lja3bodylif" path="res://Enemy/Components/AI Behaviors/ai_behavior_wandering.tscn" id="4_nw65c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8gc6"]
+
+[node name="Hexen" type="CharacterBody2D" unique_id=753715856 node_paths=PackedStringArray("movement_controller")]
+scale = Vector2(2, 2)
+script = ExtResource("1_ug2rc")
+movement_controller = NodePath("AI_Movement_Controller")
+metadata/_custom_type_script = "uid://bo7qbhar3x74x"
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1840001718]
+texture = ExtResource("2_ug2rc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=541388352]
+shape = SubResource("RectangleShape2D_i8gc6")
+
+[node name="AI_Movement_Controller" parent="." unique_id=756319719 node_paths=PackedStringArray("enemy") instance=ExtResource("3_nw65c")]
+enemy = NodePath("..")
+
+[node name="AI_Behavior_wandering" parent="AI_Movement_Controller" unique_id=1211828696 instance=ExtResource("4_nw65c")]

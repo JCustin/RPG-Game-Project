@@ -3,7 +3,7 @@ class_name player_interaction_component extends Node
 
 signal player_picked_up_item(item: StaticBody2D)
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		if raycast_detector.is_colliding():
 			var item : Variant = raycast_detector.get_collider()

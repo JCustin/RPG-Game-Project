@@ -4,14 +4,17 @@ var player : player_character
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group('Player')
+	
+
+
+func _signal_connection() -> void:
 	player.player_inventory_opened.connect(spawn_inventory_GUI)
-
-
+	Player_Data.combat_initiated.connect(initiate_combat)
 #func _ready() -> void:
 	#player.contacted_enemy.connect(initiate_combat)
 	#player.open_inventory.connect(spawn_inventory_GUI)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	%Camera.position = player.position
 	
 	#
@@ -39,15 +42,19 @@ func _physics_process(delta: float) -> void:
 	#player.end_combat()
 	#
 	#if victory == true:
-		#acting_enemy.free()
+		#acting_enemy.free() 
 	#else:
 		#await get_tree().create_timer(1.0).timeout
 		#acting_enemy.overworld_behavior.end_fled_combat(acting_enemy)
 #
-func spawn_inventory_GUI(player: CharacterBody2D):
+@warning_ignore("unused_parameter")
+func initiate_combat(player_initiating_combat: player_character, enemy_initiating_combat: CharacterBody2D):
+	print_debug("It just got serious bro.")
+
+func spawn_inventory_GUI(player_requesting_inventory: CharacterBody2D):
 	if get_tree().get_nodes_in_group('Inventory').size() == 0:
 		var inventory_GUI : inventory_gui = preload("uid://qhv78cbt13cn").instantiate()
-		inventory_GUI.cust_init(player, %Item_Controller)
+		inventory_GUI.cust_init(player_requesting_inventory, %Item_Controller)
 		%Camera.add_child(inventory_GUI)
 		
 		inventory_GUI.visible = true

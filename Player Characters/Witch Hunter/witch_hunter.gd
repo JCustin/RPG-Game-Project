@@ -10,14 +10,17 @@ signal player_inventory_opened(player: CharacterBody2D)
 
 func _ready() -> void:
 	#add_to_group('Player')
-	movement_controller.movement_direction.connect(calculate_velocity)
-	interaction_component.player_picked_up_item.connect(move_item_to_inventory)
-	inventory_component.inventory_button_pressed.connect(func(): player_inventory_opened.emit(self))
+	connect_signals()
 	
 	stat_block = witch_hunter_stats.new().duplicate()
 	print(stat_block.HP)
 
-func _physics_process(delta: float) -> void:
+func connect_signals():
+	movement_controller.movement_direction.connect(calculate_velocity)
+	interaction_component.player_picked_up_item.connect(move_item_to_inventory)
+	inventory_component.inventory_button_pressed.connect(func(): player_inventory_opened.emit(self))
+
+func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func calculate_velocity(direction: Vector2):
