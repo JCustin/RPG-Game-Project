@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://b006rehojke71"]
+
+[ext_resource type="Script" uid="uid://cqvte1takp1su" path="res://Assets/Levels/Introduction/Scripts/debug_level.gd" id="1_a5wmo"]
+[ext_resource type="PackedScene" uid="uid://ch488n2mdridh" path="res://Assets/Levels/Introduction/introduction_level_scene1.tscn" id="1_ngams"]
+[ext_resource type="Script" uid="uid://ovtkhcrhwh4b" path="res://Managers/actor_controller.gd" id="1_nhxuj"]
+[ext_resource type="PackedScene" uid="uid://dru8467dcjn7j" path="res://Player Characters/Witch Hunter/witch_hunter.tscn" id="3_35con"]
+[ext_resource type="PackedScene" uid="uid://dp71d6jlfp0l8" path="res://Enemy/Hexen_Experimental/hexen_overworld.tscn" id="4_ppatb"]
+[ext_resource type="Script" uid="uid://okon6v6a4v6u" path="res://Assets/Levels/Introduction/item_controller_logic.gd" id="6_35con"]
+[ext_resource type="PackedScene" uid="uid://1dh71oabjed3" path="res://Items/Rapiers/Rusted Rapier/rusted_rapier.tscn" id="6_qtbh1"]
+[ext_resource type="Script" uid="uid://b5dsmqvwaiq3e" path="res://Assets/Levels/Introduction/Overworld_Event_Description_Logic.gd" id="7_yal86"]
+[ext_resource type="PackedScene" uid="uid://bhcocn3uuys8p" path="res://Items/Potions/Health Potion/health_potion.tscn" id="8_ppatb"]
+
+[node name="Game" type="Node2D" unique_id=115325983]
+script = ExtResource("1_a5wmo")
+
+[node name="Overworld" type="Node2D" parent="." unique_id=1845968887]
+unique_name_in_owner = true
+
+[node name="Actor Controller" type="Node2D" parent="Overworld" unique_id=968486888]
+script = ExtResource("1_nhxuj")
+
+[node name="Witch_Hunter" parent="Overworld/Actor Controller" unique_id=448452775 instance=ExtResource("3_35con")]
+
+[node name="Hexen" parent="Overworld/Actor Controller" unique_id=753715856 instance=ExtResource("4_ppatb")]
+position = Vector2(162, -52)
+
+[node name="Introduction_level_scene1" parent="Overworld" unique_id=1443023022 instance=ExtResource("1_ngams")]
+unique_name_in_owner = true
+z_index = -2
+
+[node name="Item_Controller" type="Node" parent="Overworld/Introduction_level_scene1" unique_id=1797822058 groups=["Item_Controller"]]
+unique_name_in_owner = true
+script = ExtResource("6_35con")
+
+[node name="Rusted_Rapier" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=846039171 instance=ExtResource("6_qtbh1")]
+position = Vector2(297, 135)
+scale = Vector2(0.015, 0.015)
+
+[node name="Rusted_Rapier2" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1794653080 instance=ExtResource("6_qtbh1")]
+position = Vector2(186.00003, 196.00002)
+scale = Vector2(0.015, 0.015)
+
+[node name="Rusted_Rapier3" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1556203520 instance=ExtResource("6_qtbh1")]
+position = Vector2(376.00003, 39.000023)
+scale = Vector2(0.015, 0.015)
+
+[node name="Health_Potion" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1560185872 instance=ExtResource("8_ppatb")]
+position = Vector2(296, 72)
+scale = Vector2(0.6, 0.52)
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1898397555]
+unique_name_in_owner = true
+offset = Vector2(20, 25)
+zoom = Vector2(2, 2)
+
+[node name="Event_GUI" type="Control" parent="Camera" unique_id=1795744800]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -216.0
+offset_top = -176.0
+offset_right = -176.0
+offset_bottom = -136.0
+
+[node name="Event_Description_Panel" type="Panel" parent="Camera/Event_GUI" unique_id=1888676100]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.0
+offset_right = 300.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_yal86")
+
+[node name="Event_Description" type="Label" parent="Camera/Event_GUI/Event_Description_Panel" unique_id=168082312]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

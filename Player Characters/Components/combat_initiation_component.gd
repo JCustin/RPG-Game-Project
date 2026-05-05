@@ -1,7 +1,7 @@
 class_name combat_initation_component extends Node
 
 #@export var hurtbox : CollisionShape2D
-@export var player : CharacterBody2D
+@export var player : player_character
 
 signal contacted_enemy(enemy: CharacterBody2D)
 signal contacted_trap(trap: StaticBody2D) # later, change this to be the trap_item datatype. 
@@ -18,6 +18,6 @@ func identify_collider(collision :  KinematicCollision2D) -> void:
 	#print_debug(collidier_type)
 	if collidier_type == "StaticBody2D":
 		pass
-	if collidier_type == "CharacterBody2D":
+	if collider is enemy_character:
 		Player_Data.combat_initiated.emit(player, collider)
 	

@@ -1,0 +1,1 @@
+class_name combat_enemy_turn_component extends Node

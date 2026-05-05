@@ -4,6 +4,7 @@ var player : player_character
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group('Player')
+	_signal_connection()
 	
 
 
@@ -28,7 +29,7 @@ func _physics_process(_delta: float) -> void:
 	#
 	#acting_enemy.overworld_behavior.initiate_combat(acting_enemy)
 	#
-	#var combat_scene = preload("uid://buylh0rmqi1ll").instantiate()
+	var combat_scene = preload("uid://buylh0rmqi1ll").instantiate()
 	#combat_scene.custom_initialize(acting_enemy)
 	#add_child(combat_scene)
 	#combat_scene.combat_complete.connect(end_combat)
@@ -46,10 +47,28 @@ func _physics_process(_delta: float) -> void:
 	#else:
 		#await get_tree().create_timer(1.0).timeout
 		#acting_enemy.overworld_behavior.end_fled_combat(acting_enemy)
-#
-@warning_ignore("unused_parameter")
+
 func initiate_combat(player_initiating_combat: player_character, enemy_initiating_combat: CharacterBody2D):
-	print_debug("It just got serious bro.")
+	print_debug('Does this shih work')
+	var combat_scene : combat_scene_class = preload("uid://buylh0rmqi1ll").instantiate()
+	add_child(combat_scene)
+	combat_scene.cust_init(player_initiating_combat, enemy_initiating_combat)
+	# the above code may need to change when implementing multiple player_characters. 
+	
+	# the code below is blocked out. Maybe combat_scene can help set up parameters
+	# for how the combat ends, then just validate this through a single signal. 
+	
+	#combat_scene.combat_won.connect(end_combat_win)
+	#combat_scene.combat_fled.connect(end_combat_fled)
+	#combat_scene.combat_fled.connect(player_defeated)
+	
+	for inventory_node : inventory_gui in get_tree().get_nodes_in_group('Inventory'):
+		inventory_node.free_inventory()
+	
+	%Overworld.visible = false
+	for item in %Item_Controller.get_children():
+		item.visible = false
+	
 
 func spawn_inventory_GUI(player_requesting_inventory: CharacterBody2D):
 	if get_tree().get_nodes_in_group('Inventory').size() == 0:

@@ -1,4 +1,4 @@
-extends Node
+class_name combat_timeline_system extends Node
 
 var round_count : int = 0
 var static_timeline: bool = false
@@ -10,13 +10,20 @@ var static_timeline: bool = false
 
 @export var maximum_timeline_value : int = 100
 
-func assign_turn_queue(active_players_in_combat: Array):
+func assign_turn_queue(active_actors_in_combat: Array) -> Array:
 	var static_timeline = true
 	var final_turn_queue : Array
 	var actor_speed_turn_queue : Array
 	
-	for player in active_players_in_combat:
-		actor_speed_turn_queue.append([player, (100 - player.SPD)])
+	for actor in active_actors_in_combat:
+		if actor is player_character:
+			var player_char : player_character = actor
+			actor_speed_turn_queue.append([actor, (100 - player_char.stat_block.SPD)])
+		if actor is enemy_character:
+			var enemy_char : enemy_character = actor
+			actor_speed_turn_queue.append([actor, (100 - enemy_char.stat_block.SPD)])
+			
+		
 			
 	actor_speed_turn_queue.sort_custom(sort_by_speed)
 	

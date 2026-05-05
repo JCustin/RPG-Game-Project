@@ -12,13 +12,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44o0l"]
 size = Vector2(94, 92)
 
-[node name="Witch_Hunter" type="CharacterBody2D" unique_id=448452775 node_paths=PackedStringArray("movement_controller", "interaction_component", "inventory_component")]
+[node name="Witch_Hunter" type="CharacterBody2D" unique_id=448452775 node_paths=PackedStringArray("movement_controller", "interaction_component", "inventory_component", "collision_box")]
 scale = Vector2(0.27999997, 0.27999997)
 collision_mask = 14
 script = ExtResource("1_fggl1")
 movement_controller = NodePath("player_movement_controller")
 interaction_component = NodePath("player_interaction_component")
 inventory_component = NodePath("player_inventory_component")
+collision_box = NodePath("CollisionShape2D")
 movement_speed = 400
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=931493520]

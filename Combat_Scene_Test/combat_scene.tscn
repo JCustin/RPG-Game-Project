@@ -3,12 +3,17 @@
 [ext_resource type="Script" uid="uid://fj1b5pj5r2n7" path="res://Combat_Scene_Test/combat_scene_logic.gd" id="1_ll8bp"]
 [ext_resource type="Script" uid="uid://bg5je5jkc3nj6" path="res://Combat_Scene_Test/timeline_system_logic.gd" id="2_0hnhl"]
 [ext_resource type="Script" uid="uid://bf6g3ycwbjnag" path="res://Combat_Scene_Test/player_stamina.gd" id="3_xe5l4"]
+[ext_resource type="Script" uid="uid://bto38psht1px7" path="res://Combat_Scene_Test/player_turn_component.gd" id="4_8uq53"]
+[ext_resource type="Script" uid="uid://bf38kqhmfwfpu" path="res://Combat_Scene_Test/enemy_turn_component.gd" id="5_fy6n8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hnhl"]
 bg_color = Color(5.2943824e-07, 0.72285295, 0.2737877, 1)
 
-[node name="Combat_Scene" type="Node2D" unique_id=391493345]
+[node name="Combat_Scene" type="Node2D" unique_id=391493345 node_paths=PackedStringArray("player_turn_component", "enemy_turn_component", "timeline")]
 script = ExtResource("1_ll8bp")
+player_turn_component = NodePath("Player_Turn_Component")
+enemy_turn_component = NodePath("Enemy_Turn_Component")
+timeline = NodePath("Timeline_System")
 
 [node name="GUI" type="Control" parent="." unique_id=1718813478]
 unique_name_in_owner = true
@@ -139,6 +144,12 @@ theme_override_styles/background = SubResource("StyleBoxFlat_0hnhl")
 value = 100.0
 rounded = true
 script = ExtResource("3_xe5l4")
+
+[node name="Player_Turn_Component" type="Node" parent="." unique_id=1012057173]
+script = ExtResource("4_8uq53")
+
+[node name="Enemy_Turn_Component" type="Node" parent="." unique_id=1199896745]
+script = ExtResource("5_fy6n8")
 
 [connection signal="pressed" from="GUI/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="GUI/Flank" to="." method="_on_flank_pressed"]
