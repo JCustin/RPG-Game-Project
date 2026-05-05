@@ -1,11 +1,14 @@
 extends player_character 
+
 @export var movement_controller: player_movement_controller
 @export var interaction_component: player_interaction_component
 @export var inventory_component : player_inventory_component
+@export var combat_init_component : combat_initation_component
 @export var collision_box : CollisionShape2D
 @export var movement_speed: int 
 
-var stat_block : witch_hunter_stats
+@export var stat_block = witch_hunter_stats.new().duplicate()
+
 
 signal player_inventory_opened(player: CharacterBody2D)
 var in_combat : bool = false
@@ -14,9 +17,7 @@ func _ready() -> void:
 	#add_to_group('Player')
 	connect_signals()
 	combat_counterpart = preload("uid://cwj3drr7ohmnm").instantiate()
-		
-	stat_block = witch_hunter_stats.new().duplicate()
-	print(stat_block.HP)
+	#print(player_stat_block_resource.HP)
 
 func connect_signals():
 	movement_controller.movement_direction.connect(calculate_velocity)
@@ -25,11 +26,8 @@ func connect_signals():
 	Player_Data.combat_initiated.connect(initiate_combat)
 
 func _physics_process(_delta: float) -> void:
-	
-	
 	if in_combat == false:
 		move_and_slide()
-		print_debug(position)
 
 func calculate_velocity(direction: Vector2):
 	velocity = direction * movement_speed
@@ -39,7 +37,7 @@ func move_item_to_inventory(item: StaticBody2D):
 
 func initiate_combat(_player_initiating_combat, _enemy_initiating_combat) -> void:
 	in_combat = true
-	collision_box.disabled = true
+	combat_init_component.active = false
 	
 func end_combat():
 	var components = [inventory_component, interaction_component, movement_controller]

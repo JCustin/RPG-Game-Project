@@ -5,6 +5,8 @@ var stat_block : hexen_stats
 
 func _ready() -> void:
 	stat_block = hexen_stats.new().duplicate()
+	combat_counterpart = preload("uid://de80k8iqnbkkn").instantiate()
+	
 
 
 func connect_signals():

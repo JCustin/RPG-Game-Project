@@ -6,8 +6,10 @@ class_name combat_initation_component extends Node
 signal contacted_enemy(enemy: CharacterBody2D)
 signal contacted_trap(trap: StaticBody2D) # later, change this to be the trap_item datatype. 
 
+var active : bool = true
+
 func _physics_process(_delta: float) -> void:
-	if player.get_last_slide_collision() != null:
+	if player.get_last_slide_collision() != null and active == true:
 		identify_collider(player.get_last_slide_collision())
 
 func identify_collider(collision :  KinematicCollision2D) -> void:

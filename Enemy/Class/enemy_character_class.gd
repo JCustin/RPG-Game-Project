@@ -1,6 +1,6 @@
 class_name enemy_character extends CharacterBody2D
 
-var combat_counterpart : PackedScene
+var combat_counterpart : combat_enemy_character
 var unit_name : String
 var unit_description : String
 

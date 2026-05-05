@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bhvu0o5khwtnv"]
+
+[node name="GUI" type="Control" unique_id=1930863631]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Attack" type="Button" parent="." unique_id=1841890116]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -368.0
+offset_top = 133.0
+offset_right = -345.6316
+offset_bottom = 147.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(4.56, 4.3199997)
+theme_override_font_sizes/font_size = 4
+text = "Attack"
+
+[node name="Flank" type="Button" parent="." unique_id=1178117892]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = 132.0
+offset_right = -233.63158
+offset_bottom = 146.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(4.56, 4.3199997)
+theme_override_font_sizes/font_size = 4
+text = "Flank"
+
+[node name="Flee" type="Button" parent="." unique_id=229189611]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = 132.00002
+offset_right = -120.63158
+offset_bottom = 146.00002
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(4.56, 4.3199997)
+theme_override_font_sizes/font_size = 4
+text = "Flee
+"
+
+[node name="Inventory" type="Button" parent="." unique_id=424173762]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -24.000008
+offset_top = 132.0
+offset_right = -1.6315842
+offset_bottom = 146.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(4.56, 4.3199997)
+theme_override_font_sizes/font_size = 4
+text = "Inventory"

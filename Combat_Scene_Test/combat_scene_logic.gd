@@ -3,6 +3,7 @@ class_name combat_scene_class extends Node2D
 @export var player_turn_component : combat_player_turn_component
 @export var enemy_turn_component : combat_enemy_turn_component
 @export var timeline : combat_timeline_system
+@export var actor_placer : actor_placer_component
 
 var enemy : enemy_character
 var active_actor : Variant
@@ -14,14 +15,19 @@ signal combat_lost
 
 func cust_init(player_initiating_combat: player_character, enemy_initiating_combat: enemy_character):
 	var all_actors : Array
-	all_actors.append(player_initiating_combat)
-	all_actors.append(enemy_initiating_combat)
+	var player = player_initiating_combat.combat_counterpart
+	var enemy = enemy_initiating_combat.combat_counterpart
+	%Player_Actors.add_child(player)
+	%Enemy_Actors.add_child(enemy)
+	
+	
+	
+	all_actors.append(player)
+	all_actors.append(enemy)
 	turn_queue = timeline.assign_turn_queue(all_actors)
-	print_debug(turn_queue)
-
-
-
-#extends Node2D
+	
+	
+	actor_placer.prepare_actors(player, enemy)
 #
 #var enemy_logic = enemy_turn_logic.new(self)
 #var player_logic = player_turn_logic.new(self)
