@@ -53,7 +53,7 @@ func spawn_inventory_GUI(player_requesting_inventory: CharacterBody2D):
 	if get_tree().get_nodes_in_group('Inventory').size() == 0:
 		var inventory_GUI : inventory_gui = preload("uid://qhv78cbt13cn").instantiate()
 		inventory_GUI.cust_init(player_requesting_inventory, %Item_Controller)
-		%Camera.add_child(inventory_GUI)
+		add_child(inventory_GUI)
 		
 		inventory_GUI.visible = true
 	else:

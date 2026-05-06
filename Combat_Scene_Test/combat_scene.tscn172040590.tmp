@@ -2,12 +2,22 @@
 
 [ext_resource type="Script" uid="uid://fj1b5pj5r2n7" path="res://Combat_Scene_Test/combat_scene_logic.gd" id="1_ll8bp"]
 [ext_resource type="Script" uid="uid://bf6g3ycwbjnag" path="res://Combat_Scene_Test/player_stamina.gd" id="3_xe5l4"]
+[ext_resource type="PackedScene" uid="uid://cr8injhajasmb" path="res://Combat_Scene_Test/combat_turn_handler_component.tscn" id="5_8uq53"]
+[ext_resource type="Script" uid="uid://bu4d7krl6ca4x" path="res://Combat_Scene_Test/actor_placer_component_logic.gd" id="6_fy6n8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hnhl"]
 bg_color = Color(5.2943824e-07, 0.72285295, 0.2737877, 1)
 
-[node name="Combat_Scene" type="Node2D" unique_id=391493345]
+[node name="Combat_Scene" type="Node2D" unique_id=391493345 node_paths=PackedStringArray("combat_turn_handler", "actor_placer")]
 script = ExtResource("1_ll8bp")
+combat_turn_handler = NodePath("Combat_Turn_Handler_Component")
+actor_placer = NodePath("Actor_Placer_Component")
+
+[node name="Player_Actors" type="Node" parent="." unique_id=1754292711]
+unique_name_in_owner = true
+
+[node name="Enemy_Actors" type="Node" parent="." unique_id=1372713895]
+unique_name_in_owner = true
 
 [node name="Combat_Camera" type="Camera2D" parent="." unique_id=1907014766]
 zoom = Vector2(1.2, 1.2)
@@ -32,3 +42,10 @@ theme_override_styles/background = SubResource("StyleBoxFlat_0hnhl")
 value = 100.0
 rounded = true
 script = ExtResource("3_xe5l4")
+
+[node name="Actor_Placer_Component" type="Node" parent="." unique_id=1530755573]
+script = ExtResource("6_fy6n8")
+
+[node name="Combat_Turn_Handler_Component" parent="." unique_id=1255402206 node_paths=PackedStringArray("enemy_actor_manager", "player_actor_manager") instance=ExtResource("5_8uq53")]
+enemy_actor_manager = NodePath("../Enemy_Actors")
+player_actor_manager = NodePath("../Player_Actors")

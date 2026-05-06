@@ -7,3 +7,4 @@ func _ready() -> void:
 	unit_description = "Sample text"
 	var body_parts = body_part_handler.return_body_parts()
 	print_debug(body_parts)
+	stat_block = witch_hunter_stats.new()

@@ -1,34 +1,47 @@
 class_name combat_scene_class extends Node2D
+var combat_turn_handler : combat_turn_handler_component = combat_turn_handler_component.new()
+var timeline : combat_timeline_system = combat_timeline_system.new()
 
-@export var player_turn_component : combat_player_turn_component
-@export var enemy_turn_component : combat_enemy_turn_component
-@export var timeline : combat_timeline_system
-@export var actor_placer : actor_placer_component
-
-var enemy : enemy_character
 var active_actor : Variant
-var turn_queue : Array
+var player_actors : Array
+var enemy_actors : Array
 
-signal combat_won
-signal combat_fled
-signal combat_lost
+
+#signal combat_won
+#signal combat_fled
+#signal combat_lost
 
 func cust_init(player_initiating_combat: player_character, enemy_initiating_combat: enemy_character):
 	var all_actors : Array
+	
 	var player = player_initiating_combat.combat_counterpart
 	var enemy = enemy_initiating_combat.combat_counterpart
-	%Player_Actors.add_child(player)
-	%Enemy_Actors.add_child(enemy)
-	
+	player_actors.append(player)
+	enemy_actors.append(enemy)
 	
 	
 	all_actors.append(player)
 	all_actors.append(enemy)
-	turn_queue = timeline.assign_turn_queue(all_actors)
 	
+	for actor in all_actors:
+		add_child(actor)
 	
-	actor_placer.prepare_actors(player, enemy)
-#
+	_prepare_actors(player, enemy)
+	combat_turn_handler.get_turn_queue(timeline.assign_turn_queue(all_actors))
+	start_combat()
+
+func _prompt_combat_message(message: String) -> void:
+	pass
+
+func _prepare_actors(player: combat_player_character, enemy: combat_enemy_character) -> void:
+	player.position = Vector2(250,20)
+	enemy.position = Vector2(0,0)
+	enemy.scale = Vector2(1.5, 1.5)
+	
+func start_combat():
+	combat_turn_handler.start_turn()
+		
+
 #var enemy_logic = enemy_turn_logic.new(self)
 #var player_logic = player_turn_logic.new(self)
 #
