@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvltb6mpadygh"
-path="res://.godot/imported/FootSoldier_0002.png-a4f2c985b87a3fdd8dab7ee8f7202fba.ctex"
+uid="uid://30knqq8e422d"
+path="res://.godot/imported/FootSoldier_Front_Shield.png-96f30864c692534dd55a5f3a8c4e1275.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_0002.png"
-dest_files=["res://.godot/imported/FootSoldier_0002.png-a4f2c985b87a3fdd8dab7ee8f7202fba.ctex"]
+source_file="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Front_Shield.png"
+dest_files=["res://.godot/imported/FootSoldier_Front_Shield.png-96f30864c692534dd55a5f3a8c4e1275.ctex"]
 
 [params]
 

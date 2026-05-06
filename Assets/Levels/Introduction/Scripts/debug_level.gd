@@ -6,6 +6,10 @@ var camera : game_camera
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group('Player')
 	_signal_connection()
+	_initialize_camera()
+	
+	
+func _initialize_camera() -> void:
 	camera = game_camera.new()
 	camera.pass_player(player)
 	add_child(camera)

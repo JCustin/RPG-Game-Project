@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bht10fb1cx40u"]
+
+[ext_resource type="Script" uid="uid://4y1e6ppsj13o" path="res://Enemy/Foot_Soldier/combat_foot_soldier_logic.gd" id="1_xe14k"]
+[ext_resource type="PackedScene" uid="uid://c75chxrwjg7j3" path="res://Enemy/Components/body_part_handlers_component.tscn" id="2_81yxp"]
+[ext_resource type="Script" uid="uid://cds3mrvnk3v87" path="res://Enemy/Components/body_part_handlers_component.gd" id="3_bwxqg"]
+[ext_resource type="Texture2D" uid="uid://d2vwuf13jspq4" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Front_Sword.png" id="4_bwxqg"]
+[ext_resource type="Texture2D" uid="uid://30knqq8e422d" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Front_Shield.png" id="5_xu52a"]
+[ext_resource type="Texture2D" uid="uid://n0xt01mbpa8c" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Front_Body.png" id="6_6en6m"]
+[ext_resource type="Texture2D" uid="uid://xwmfqupnr3ea" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Rear_Body.png" id="7_ygikf"]
+[ext_resource type="Texture2D" uid="uid://bo4qs2m3d2fw3" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Rear_Shield.png" id="8_n3kc3"]
+
+[node name="Combat_Foot_Soldier" type="Node2D" unique_id=69078373 node_paths=PackedStringArray("body_part_handler")]
+script = ExtResource("1_xe14k")
+body_part_handler = NodePath("Body_Part_Handlers")
+metadata/_custom_type_script = "uid://bwj8ud0ln8tnh"
+
+[node name="Body_Part_Handlers" parent="." unique_id=2038319685 instance=ExtResource("2_81yxp")]
+script = ExtResource("3_bwxqg")
+
+[node name="Front_Body_Parts" type="Node2D" parent="Body_Part_Handlers" unique_id=496485783]
+
+[node name="Sword" type="Sprite2D" parent="Body_Part_Handlers/Front_Body_Parts" unique_id=2021587199]
+texture = ExtResource("4_bwxqg")
+metadata/Body_Part_Name = "Sword"
+
+[node name="Shield" type="Sprite2D" parent="Body_Part_Handlers/Front_Body_Parts" unique_id=2053919988]
+texture = ExtResource("5_xu52a")
+metadata/Body_Part_Name = "Shield"
+
+[node name="Body" type="Sprite2D" parent="Body_Part_Handlers/Front_Body_Parts" unique_id=1702817913]
+texture = ExtResource("6_6en6m")
+metadata/Body_Part_Name = "Body"
+
+[node name="Rear_Body_Parts" type="Node2D" parent="Body_Part_Handlers" unique_id=729322864]
+visible = false
+
+[node name="Body" type="Sprite2D" parent="Body_Part_Handlers/Rear_Body_Parts" unique_id=308673765]
+texture = ExtResource("7_ygikf")
+metadata/Body_Part_Name = "Shield"
+
+[node name="Shield" type="Sprite2D" parent="Body_Part_Handlers/Rear_Body_Parts" unique_id=2013811114]
+texture = ExtResource("8_n3kc3")
+metadata/Body_Part_Name = "Shield"
