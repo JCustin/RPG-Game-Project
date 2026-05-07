@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://buylh0rmqi1ll"]
 
 [ext_resource type="Script" uid="uid://b56soy1ca10po" path="res://Enemy/Enemy Attack Stats/combat_scene_logic.gd" id="1_0hnhl"]
-[ext_resource type="Script" uid="uid://bqjr5jh77i1w0" path="res://Combat_Scene_Test/combat_description_text_logic.gd" id="2_xe5l4"]
 [ext_resource type="Script" uid="uid://bf6g3ycwbjnag" path="res://Combat_Scene_Test/player_stamina.gd" id="3_xe5l4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hnhl"]
@@ -34,7 +33,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Combat_Description_Text" type="Label" parent="Combat_HUD/Combat_Description_Control/Combat_Description_Panel" unique_id=1658706866 node_paths=PackedStringArray("parent_panel")]
+[node name="Combat_Description_Text" type="Label" parent="Combat_HUD/Combat_Description_Control/Combat_Description_Panel" unique_id=1658706866]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -43,8 +42,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Sample"
-script = ExtResource("2_xe5l4")
-parent_panel = NodePath("..")
 
 [node name="Combat_Player_Actions_Control" type="Control" parent="Combat_HUD" unique_id=1195915139]
 custom_minimum_size = Vector2(1200, 125)

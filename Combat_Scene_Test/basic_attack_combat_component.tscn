@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cike883hxeovy"]
+
+[ext_resource type="Script" uid="uid://cexndknuxy2vs" path="res://Scene/Combat_Scene/Scripts/basic_attack_logic.gd" id="1_fh2rf"]
+
+[node name="basic_attack_combat_logic" type="Node" unique_id=1674326588]
+script = ExtResource("1_fh2rf")
+metadata/_custom_type_script = "uid://cexndknuxy2vs"

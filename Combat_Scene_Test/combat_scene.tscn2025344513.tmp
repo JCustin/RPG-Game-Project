@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://buylh0rmqi1ll"]
+
+[ext_resource type="Script" uid="uid://b56soy1ca10po" path="res://Enemy/Enemy Attack Stats/combat_scene_logic.gd" id="1_0hnhl"]
+[ext_resource type="Script" uid="uid://bf6g3ycwbjnag" path="res://Combat_Scene_Test/player_stamina.gd" id="3_xe5l4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hnhl"]
+bg_color = Color(5.2943824e-07, 0.72285295, 0.2737877, 1)
+
+[node name="Combat_Scene" type="Node2D" unique_id=391493345]
+script = ExtResource("1_0hnhl")
+
+[node name="Combat_Camera" type="Camera2D" parent="." unique_id=1907014766]
+anchor_mode = 0
+
+[node name="Player_HP_Bar" type="ProgressBar" parent="." unique_id=361637098]
+unique_name_in_owner = true
+offset_left = -441.0
+offset_top = -247.0
+offset_right = -140.0
+offset_bottom = -220.0
+theme_override_styles/background = SubResource("StyleBoxFlat_0hnhl")
+value = 100.0
+rounded = true
+
+[node name="Player_Stamina" type="ProgressBar" parent="." unique_id=628497605]
+unique_name_in_owner = true
+offset_left = -72.0
+offset_top = -248.0
+offset_right = 229.0
+offset_bottom = -221.0
+theme_override_styles/background = SubResource("StyleBoxFlat_0hnhl")
+value = 100.0
+rounded = true
+script = ExtResource("3_xe5l4")
+
+[node name="Combat_HUD" type="CanvasLayer" parent="." unique_id=1986057926]
+follow_viewport_enabled = true
+
+[node name="Combat_Description_Control" type="Control" parent="Combat_HUD" unique_id=1310538461]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Combat_Description_Panel" type="Panel" parent="Combat_HUD/Combat_Description_Control" unique_id=370573702]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Combat_Description_Text" type="Label" parent="Combat_HUD/Combat_Description_Control/Combat_Description_Panel" unique_id=1658706866]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sample"

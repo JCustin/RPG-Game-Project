@@ -1,2 +1,1 @@
 class_name combat_foot_soldier extends combat_enemy_character
-@export var body_part_handler : body_part_handler_component

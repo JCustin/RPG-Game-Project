@@ -1,10 +1,4 @@
 extends combat_player_character
-
-
-
-func _init() -> void:
-	stat_block = witch_hunter_stats.new().duplicate()
-	
 	
 
 #

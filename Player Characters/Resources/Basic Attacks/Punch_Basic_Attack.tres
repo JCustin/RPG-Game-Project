@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="basic_attack_stat_block" format=3 uid="uid://d18l4dymrc73t"]
+
+[ext_resource type="Script" uid="uid://cfvk74m6bhv4v" path="res://Player Characters/Resources/basic_attack_stat_block.gd" id="1_tasnq"]
+
+[resource]
+script = ExtResource("1_tasnq")
+attack_damage = 10
+attack_name = "Punch"
+attack_description = "You hurl your fist forward!"
+attack_type = &"Blunt"
+metadata/_custom_type_script = "uid://cfvk74m6bhv4v"

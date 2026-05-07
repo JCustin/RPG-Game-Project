@@ -28,6 +28,8 @@ Player_Data="*uid://g15npji6gwk7"
 
 window/size/viewport_width=1200
 window/size/viewport_height=800
+window/size/mode=2
+window/size/initial_position_type=0
 window/stretch/scale_mode="integer"
 
 [gui]

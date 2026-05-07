@@ -7,6 +7,8 @@ var overworld_counterpart : enemy_character
 
 @export var attack_pool : Array[base_enemy_attack_structure]
 @export var limbs : Array[Sprite2D]
+@export var body_part_handler : body_part_handler_component
+
 
 signal executed_attack(target: combat_player_character, attack_damage: int, attack_type: StringName, combat_description: String)
 

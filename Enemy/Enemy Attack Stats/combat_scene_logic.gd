@@ -2,12 +2,18 @@ class_name combat_scene_class extends Node2D
 var combat_turn_handler : combat_turn_handler_component = combat_turn_handler_component.new()
 var timeline : combat_timeline_system = combat_timeline_system.new()
 
+#var basic_combat_logic : basic_attack_combat_component
+
 var active_actor : Variant
 var player_actors : Array
 var enemy_actors : Array
 
 var player_turn : bool = false
 var turn_queue : Array
+
+var player_choosing_target : bool 
+
+enum state {player_turn, interim, enemy_turn}
 
 #signal combat_won
 #signal combat_fled
@@ -27,32 +33,42 @@ func cust_init(player_initiating_combat: player_character, enemy_initiating_comb
 	for actor in all_actors:
 		add_child(actor)
 	
-	await _prepare_actors(player, enemy)
 	_connect_signals()
-	#turn_queue = timeline.assign_turn_queue(all_actors)
-	#active_actor = turn_queue[0]
-	#_facilitate_turn()
+	turn_queue = timeline.assign_turn_queue(all_actors)
+	active_actor = turn_queue[0]
+	
+	_prepare_actors(player, enemy)
+	%Combat_Description_Text.prompt_combat_description(str("You stumble upon ", enemy_actors[0].unit_name, "!"))
 	
 
 func _connect_signals() -> void:
 	var enemy : combat_enemy_character = enemy_actors[0]
 	enemy.executed_attack.connect(handle_attack)
+	%Combat_Description_Text.combat_description_closed.connect(_facilitate_turn)
+	%Attack.pressed.connect(initiate_basic_attack)
+	%Special.pressed.connect(open_special_attack_pool)
+	%Flank.pressed.connect(attempt_to_flank)
+	%Item.pressed.connect(open_inventory)
+	%Talk.pressed.connect(initiate_conversation)
+	%Flee.pressed.connect(attempt_to_flee)
 
-func _prompt_combat_message(message: String) -> void:
-	pass
-	
-	
 
 func _prepare_actors(player: combat_player_character, enemy: combat_enemy_character) -> void:
 	player.position = Vector2(950,500)
-	enemy.global_position = Vector2(700, 500)
-	
+	enemy.position = Vector2(500, 300)
+	enemy.scale = Vector2(2.0, 2.0)
 	
 func _facilitate_turn():
+	await get_tree().create_timer(0.5).timeout
+	
 	if active_actor is combat_enemy_character:
+		
+	
+	if active_actor is combat_enemy_character:
+		toggle_player_GUI()
 		_execute_enemy_turn()
 	else:
-		pass
+		toggle_player_GUI()
 
 func _execute_enemy_turn():
 	var enemy : combat_enemy_character = active_actor
@@ -60,7 +76,7 @@ func _execute_enemy_turn():
 	
 func handle_attack(target, attack_damage: int, attack_type: String, attack_description: String):
 	target.stat_block.HP - attack_damage
-	_prompt_combat_message(attack_description)
+	%Combat_Description_Text.prompt_combat_description(attack_description)
 	continue_or_end_turn()
 	
 func continue_or_end_turn():
@@ -71,236 +87,47 @@ func continue_or_end_turn():
 		active_actor = turn_queue[next_turn_queue_index]
 	else:
 		active_actor = turn_queue[0]
+		
+	_facilitate_turn()
 	
-#var enemy_logic = enemy_turn_logic.new(self)
-#var player_logic = player_turn_logic.new(self)
-#
-#var acting_player: Node2D
-#var turn_queue : Array
-#var player_choosing_target : bool = false
-#
-#var active_players_in_combat : Array
-#
-#var potential_enemy_targets : Array
-#var potential_enemy_target_index: int = 0
-#var target_enemy : Node2D
-#
-#var primary_enemy: Node2D
-#
-#var forward_combat_direction : bool = true # true means front, false means rear
-#
-#signal combat_complete(victory: bool)
-## true if won, false if fled
-#
-#func custom_initialize(enemy: Node2D):
-	#primary_enemy = enemy
-	##TODO this function needs to pass through the background
-	## and then apply from the parent level node.
-#
-#func _ready() -> void:
-	#
-	#for player in get_tree().get_nodes_in_group('Player'):
-		#var player_combat_scene = player.combat_scene.instantiate()
-		#%Player_Actors.add_child(player_combat_scene)
-		#player_combat_scene.attack.connect(execute_attack)
-		#player_combat_scene.HP_changed.connect(update_HP_bar)
-		#player.add_to_group('Combat_Player')
-		#active_players_in_combat += [player_combat_scene]
-		#
-	#%Player_Stamina.connect_to_players(active_players_in_combat)
-	#
-	#primary_enemy = primary_enemy.combat_scene.instantiate()
-	#%Enemy_Actors.add_child(primary_enemy)
-	#primary_enemy.attack.connect(execute_attack)
-	#primary_enemy.defeated.connect(end_combat)
-	#active_players_in_combat += [primary_enemy]
-	#
-	##print_debug(active_players_in_combat)
-	#
-	#turn_queue = %Timeline_System.assign_turn_queue(active_players_in_combat)
-	##active_players_in_combat = turn_queue
-	#
-	#acting_player = turn_queue[0]
-	#
-	#if acting_player != primary_enemy:
-		#update_HP_bar(acting_player.HP)
-	#else:
-		#update_HP_bar(turn_queue[1].HP)
-		#
-	#spawn_and_position_actors()
-	#
-	#start_combat_round()
-	#
-#func spawn_and_position_actors():
-	#var first_player_actor: Node2D
-	#if acting_player == primary_enemy:
-		#first_player_actor = turn_queue[1]
-	#else:
-		#first_player_actor = acting_player
-		#
-	#first_player_actor.position = Vector2(200, -50)
-	#primary_enemy.scale = Vector2(2,2)
-	#primary_enemy.position = Vector2(-75, 0)
-	#pass
-	#
-#func _on_attack_pressed() -> void:
-	#if acting_player.validate_basic_attack_stamina_cost() == true:
-		#potential_enemy_targets = enemy_logic.return_active_enemy_parts(forward_combat_direction, primary_enemy)
-		#target_enemy = potential_enemy_targets[0]
-		#player_logic.highlight_enemy(target_enemy)
-		#potential_enemy_target_index = 0
-		#
-		#for button in %GUI.get_children():
-			#button.disabled = true
-			#button.visible = false
-	#
-		#player_choosing_target = true
-	#else:
-		#prompt_combat_description("Insufficient stamina!")
-	#
-#func _input(event: InputEvent) -> void:
-	#if player_choosing_target == true:
-		#if Input.is_action_just_pressed("ui_left"):
-			#if (potential_enemy_target_index - 1) < 0:
-				#player_logic.unhighlight_enemy(target_enemy)
-				#potential_enemy_target_index = (potential_enemy_targets.size() - 1)
-				#target_enemy = potential_enemy_targets[potential_enemy_target_index]
-				#player_logic.highlight_enemy(target_enemy)
-				#
-			#elif (potential_enemy_target_index - 1) >= 0:
-				#player_logic.unhighlight_enemy(target_enemy)
-				#potential_enemy_target_index -= 1
-				#target_enemy = potential_enemy_targets[potential_enemy_target_index]
-				#player_logic.highlight_enemy(target_enemy)
-				#
-		#if Input.is_action_just_pressed("ui_right"):
-			#if potential_enemy_targets.size() > (potential_enemy_target_index + 1):
-				#player_logic.unhighlight_enemy(target_enemy)
-				#potential_enemy_target_index += 1
-				#target_enemy = potential_enemy_targets[potential_enemy_target_index]
-				#player_logic.highlight_enemy(target_enemy)
-				#
-			#elif potential_enemy_targets.size() <= (potential_enemy_target_index + 1):
-				#player_logic.unhighlight_enemy(target_enemy)
-				#potential_enemy_target_index = 0
-				#target_enemy = potential_enemy_targets[potential_enemy_target_index]
-				#player_logic.highlight_enemy(target_enemy)
-				#
-		#if Input.is_action_just_pressed("ui_accept"):
-			#player_choosing_target = false
-			#player_logic.unhighlight_enemy(target_enemy)
-			#acting_player.basic_attack(target_enemy)
-			#
-		#if Input.is_key_pressed(KEY_ESCAPE):
-			#player_choosing_target = false
-			#player_logic.unhighlight_enemy(target_enemy)
-			#for button in %GUI.get_children():
-				#button.disabled = false
-				#button.visible = true
-			#
-			#
-#
-#func execute_attack(target: Node2D, attack_value: int, attack_description: String):
-	#await prompt_combat_description(attack_description)
-	#
-	##print_debug("I am: ", acting_player, " and I am attacking: ", target)
-	#
-	#var modified_attack_value : int = (attack_value - target.DEF)
-	#target.HP -= modified_attack_value
-	#
-	#if acting_player == primary_enemy:
-		#%Player_HP_Bar.value = target.HP
-	#else:
-		#if target.HP <= 0:
-			#primary_enemy.remove_body_part(target)
-	##if target.HP <= 0 and target == primary_enemy:
-		#
-		##print_debug(target, target.HP)
-	#proceed_with_turn_queue()
-#
-#
-#func prompt_combat_description(attack_description: String) -> void:
-	#var combat_label = Label.new()
-	#%Combat_Description_Panel.add_child(combat_label)
-	#combat_label.anchor_left
-	#combat_label.text = attack_description
-	#
-	#%Combat_Description_Master.visible = true
-	#
-	#await get_tree().create_timer(1.5).timeout
-	#combat_label.free()
-	#%Combat_Description_Master.visible = false
-	#return
-#
-#func start_enemy_turn():
-	#enemy_logic.execute_enemy_turn(primary_enemy, turn_queue)
-	#for button in %GUI.get_children():
-		#button.disabled = true
-		#button.visible = false
-	#
-#func start_player_turn():
-	#acting_player.restore_partial_stamina()
-	#for button in %GUI.get_children():
-		#button.disabled = false
-		#button.visible = true
-#
-#func end_combat():
-	#for child in %Combat_Description_Panel.get_children():
-		#child.free()
-		#
-	#await prompt_combat_description("Yay!")
-	#combat_complete.emit(true)
-	#queue_free()
-#
-#func start_combat_round():
-	#if acting_player == primary_enemy:
-		#start_enemy_turn()
-	#else:
-		#start_player_turn()
-#
-#
-#func proceed_with_turn_queue():
-	#var current_turn_queue_index = turn_queue.find(acting_player)
-	#var next_turn_queue_index: int = (current_turn_queue_index + 1)
-	#
-	#if turn_queue.size() <= (next_turn_queue_index):
-		#turn_queue = %Timeline_System.refresh_turn_queue(active_players_in_combat)
-		##print_debug("turn queue is: ", turn_queue, " active_players_in_combat is: ", active_players_in_combat)
-		#acting_player = turn_queue[0]
-		#start_combat_round()
-	#else:
-		#acting_player = turn_queue[next_turn_queue_index]
-		#check_if_actor_alive(acting_player)
-		#
-#
-#func check_if_actor_alive(actor): 
-	#if actor.alive == true:
-		#start_combat_round()
-	#else:
-		#proceed_with_turn_queue()
-		##print_debug("The actor is dead")
-#
-#
-#func _on_flank_pressed() -> void:
-	#if player_choosing_target == false:
-		#forward_combat_direction = not forward_combat_direction
-		#acting_player.facing_forward = not acting_player.facing_forward
-		#potential_enemy_targets = enemy_logic.return_active_enemy_parts(forward_combat_direction, primary_enemy)
-		#potential_enemy_target_index = 0
-#
-#
-#func _on_flee_pressed() -> void:
-	#combat_complete.emit(false)
-	#queue_free()
-	## TODO - expand on the different functions for the damn thing. 
-#
-#
-#func _on_inventory_pressed() -> void:
-	#if get_tree().get_nodes_in_group('Inventory').size() == 0:
-		#var combat_inventory = preload("uid://d4jjvjlphvygk").instantiate() #inventory_gui
-		#add_child(combat_inventory)
-	#else:
-		#pass
-	#
-#func update_HP_bar(HP: int) -> void:
-	#%Player_HP_Bar.value = HP
+
+func open_special_attack_pool():
+	pass
+	
+func attempt_to_flank():
+	pass
+	
+func open_inventory():
+	pass
+	
+# following section of code is dedicated to when player is initiating a basic attack
+func initiate_basic_attack():
+	%Attack.disabled = true
+	var basic_attack_component = basic_attack_combat_component.new()
+	add_child(basic_attack_component)
+	var enemy : combat_enemy_character = enemy_actors[0]
+	basic_attack_component.init_possible_targets(enemy.limbs)
+	
+	basic_attack_component.basic_attack_aborted.connect(
+		func(): %Attack.disabled = false
+		)
+		
+	basic_attack_component.basic_attack_performed.connect(
+		func(target): 
+		%Attack.set_focus_mode(Control.FOCUS_NONE)
+		%Attack.disabled = false
+		var player_actor : combat_player_character = active_actor
+		pass
+		)
+	
+	
+	
+func initiate_conversation():
+	pass
+	
+func attempt_to_flee():
+	pass
+
+func toggle_player_GUI():
+	for child in %Combat_Player_Actions_Container.get_children():
+		child.disabled = !child.disabled
