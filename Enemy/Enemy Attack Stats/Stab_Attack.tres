@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="base_enemy_attack_structure" format=3 uid="uid://ckhd2jtwljbg4"]
+
+[ext_resource type="Script" uid="uid://c58a245wghwrh" path="res://Enemy/Components/base_enemy_attack_structure.gd" id="1_tvl71"]
+
+[resource]
+script = ExtResource("1_tvl71")
+attack_name = "Stab"
+attack_description = "thrusts their weapon into your arm. The blade stabs deep. "
+attack_damage = 30
+attack_type = &"Piercing"
+metadata/_custom_type_script = "uid://c58a245wghwrh"

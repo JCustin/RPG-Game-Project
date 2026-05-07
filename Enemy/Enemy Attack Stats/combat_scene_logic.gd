@@ -6,6 +6,8 @@ var active_actor : Variant
 var player_actors : Array
 var enemy_actors : Array
 
+var player_turn : bool = false
+var turn_queue : Array
 
 #signal combat_won
 #signal combat_fled
@@ -19,29 +21,57 @@ func cust_init(player_initiating_combat: player_character, enemy_initiating_comb
 	player_actors.append(player)
 	enemy_actors.append(enemy)
 	
-	
 	all_actors.append(player)
 	all_actors.append(enemy)
 	
 	for actor in all_actors:
 		add_child(actor)
 	
-	_prepare_actors(player, enemy)
-	combat_turn_handler.get_turn_queue(timeline.assign_turn_queue(all_actors))
-	start_combat()
+	await _prepare_actors(player, enemy)
+	_connect_signals()
+	#turn_queue = timeline.assign_turn_queue(all_actors)
+	#active_actor = turn_queue[0]
+	#_facilitate_turn()
+	
+
+func _connect_signals() -> void:
+	var enemy : combat_enemy_character = enemy_actors[0]
+	enemy.executed_attack.connect(handle_attack)
 
 func _prompt_combat_message(message: String) -> void:
 	pass
+	
+	
 
 func _prepare_actors(player: combat_player_character, enemy: combat_enemy_character) -> void:
-	player.position = Vector2(250,20)
-	enemy.position = Vector2(0,0)
-	enemy.scale = Vector2(1.5, 1.5)
+	player.position = Vector2(950,500)
+	enemy.global_position = Vector2(700, 500)
 	
-func start_combat():
-	combat_turn_handler.start_turn()
-		
+	
+func _facilitate_turn():
+	if active_actor is combat_enemy_character:
+		_execute_enemy_turn()
+	else:
+		pass
 
+func _execute_enemy_turn():
+	var enemy : combat_enemy_character = active_actor
+	enemy.execute_turn(player_actors)
+	
+func handle_attack(target, attack_damage: int, attack_type: String, attack_description: String):
+	target.stat_block.HP - attack_damage
+	_prompt_combat_message(attack_description)
+	continue_or_end_turn()
+	
+func continue_or_end_turn():
+	var current_turn_queue_index: int = turn_queue.find(active_actor)
+	var next_turn_queue_index: int = current_turn_queue_index + 1
+	
+	if turn_queue.size() >= next_turn_queue_index:
+		active_actor = turn_queue[next_turn_queue_index]
+	else:
+		active_actor = turn_queue[0]
+	
 #var enemy_logic = enemy_turn_logic.new(self)
 #var player_logic = player_turn_logic.new(self)
 #

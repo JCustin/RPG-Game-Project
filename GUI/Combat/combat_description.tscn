@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d6apvwurba4b"]
+
+[ext_resource type="Script" uid="uid://ddeupvmohmeub" path="res://GUI/Combat/combat_description_logic.gd" id="1_a15ay"]
+
+[node name="Combat_Description" type="Control" unique_id=1889776216 groups=["Combat_Description"]]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -520.0
+offset_top = -384.0
+offset_right = -520.0
+offset_bottom = -309.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_a15ay")
+
+[node name="Panel" type="Panel" parent="." unique_id=1452831879]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel" unique_id=1239280521]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Sample text"

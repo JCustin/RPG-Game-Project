@@ -15,10 +15,7 @@ func assign_turn_queue(active_actors_in_combat: Array) -> Array:
 	var final_turn_queue : Array
 	var actor_speed_turn_queue : Array
 	
-	print_debug(active_actors_in_combat)	
-	
 	for actor in active_actors_in_combat:
-		print_debug(actor)
 		actor_speed_turn_queue.append([actor, (100 - actor.stat_block.SPD)])
 		
 			
