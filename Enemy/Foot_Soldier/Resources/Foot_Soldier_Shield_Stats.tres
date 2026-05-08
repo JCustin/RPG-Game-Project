@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="enemy_limb_stats_base" format=3 uid="uid://g3tcvbp4gvnv"]
+
+[ext_resource type="Texture2D" uid="uid://30knqq8e422d" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Front_Shield.png" id="1_5iafq"]
+[ext_resource type="Texture2D" uid="uid://bo4qs2m3d2fw3" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Rear_Shield.png" id="2_15126"]
+[ext_resource type="Script" uid="uid://t3kfosodtxyq" path="res://Enemy/Enemy Resource/enemy_limb_stats_base.gd" id="3_hy75i"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("3_hy75i")
+limb_name = "Shield"
+limb_type = 2
+limb_HP = 30
+front_texture = ExtResource("1_5iafq")
+rear_texture = ExtResource("2_15126")
+limb_direction = 2
+metadata/_custom_type_script = "uid://t3kfosodtxyq"

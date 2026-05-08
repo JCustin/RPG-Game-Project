@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Player_Data="*uid://g15npji6gwk7"
+Global_Enums="*uid://bkusuw20hbgcf"
 
 [display]
 

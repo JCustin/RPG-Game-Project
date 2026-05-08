@@ -1,16 +1,32 @@
 class_name combat_enemy_character extends Node2D
 
-var overworld_counterpart : enemy_character 
 @export var unit_name : String
 @export var unit_description : String
 @export var stat_block : enemy_stat_block_resource
 
 @export var attack_pool : Array[base_enemy_attack_structure]
-@export var limbs : Array[Sprite2D]
-@export var body_part_handler : body_part_handler_component
+
+@export var limbs : Array[enemy_limb_class]
 
 
 signal executed_attack(target: combat_player_character, attack_damage: int, attack_type: StringName, combat_description: String)
+
+func connect_signal():
+	for limb: enemy_limb_class in limbs:
+		limb.limb_lost.connect(
+			func():
+				limbs.erase(limb)
+				limbs.filter(
+					func(limb_pool_array):
+					var filtered_list : Array[enemy_limb_class]
+					for limb_item : enemy_limb_class in limb_pool_array:
+							if is_instance_valid(limb_item) == true:
+								filtered_list.append(limb_item)
+						
+					return filtered_list)
+		)
+		
+
 
 func _choose_target(player_pool : Array) -> combat_player_character:
 	var weakest_player : combat_player_character = player_pool[0]
