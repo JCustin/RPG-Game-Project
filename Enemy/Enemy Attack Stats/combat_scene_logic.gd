@@ -10,7 +10,8 @@ var enemy_actors : Array
 var player_turn : bool = false
 var turn_queue : Array
 
-var player_choosing_target : bool 
+var possible_combat_direction = global_enums.combat_direction
+var current_combat_direction : int
 
 enum combat_states {player_turn, interim, enemy_turn}
 var current_combat_state : int
@@ -22,6 +23,7 @@ var current_combat_state : int
 
 func cust_init(player_initiating_combat: player_character, enemy_initiating_combat: enemy_character):
 	var all_actors : Array
+	current_combat_direction = possible_combat_direction.forward
 	
 	var player = player_initiating_combat.combat_counterpart
 	var enemy = enemy_initiating_combat.combat_counterpart
@@ -92,14 +94,11 @@ func _execute_enemy_turn():
 	enemy.execute_turn(player_actors)
 	
 func handle_attack(target, attack_damage: int, attack_type: String, attack_description: String):
-	print_debug(attack_damage)
 	
 	if active_actor is combat_player_character:
 		var enemy_target : enemy_limb_class = target
-		enemy_target.stat_block.limb_HP -= attack_damage
+		enemy_target.receive_limb_damage(attack_damage)
 		
-		if enemy_target.stat_block.limb_HP <= 0:
-			enemy_target.kill_limb()
 	else:
 		var player_target : combat_player_character = target
 		player_target.stat_block.HP -= attack_damage
@@ -121,6 +120,20 @@ func open_special_attack_pool():
 	pass
 	
 func attempt_to_flank():
+	# for now, this will be a 100% chance.
+	var enemy : combat_enemy_character = enemy_actors[0]
+	match current_combat_direction:
+		
+		possible_combat_direction.forward:
+			current_combat_direction = possible_combat_direction.rear
+			
+		
+		possible_combat_direction.rear:
+			current_combat_direction = possible_combat_direction.forward
+			
+	enemy.switch_direction(current_combat_direction)
+	
+	
 	pass
 	
 func open_inventory():
@@ -133,9 +146,10 @@ func initiate_basic_attack():
 	var basic_attack_component = basic_attack_combat_component.new()
 	add_child(basic_attack_component)
 	var enemy : combat_enemy_character = enemy_actors[0]
+	var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
 	
-	basic_attack_component.init_possible_targets(enemy.limbs)
-	print_debug(enemy.limbs)
+	
+	basic_attack_component.init_possible_targets(enemy_limbs)
 	
 	basic_attack_component.basic_attack_aborted.connect(
 		func(): %Attack.disabled = false

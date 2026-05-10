@@ -20,29 +20,8 @@ func _ready() -> void:
 	#print(player_stat_block_resource.HP)
 
 func connect_signals():
-	movement_controller.movement_direction.connect(calculate_velocity)
 	interaction_component.player_picked_up_item.connect(move_item_to_inventory)
 	inventory_component.inventory_button_pressed.connect(func(): player_inventory_opened.emit(self))
-	Player_Data.combat_initiated.connect(initiate_combat)
-
-func _physics_process(_delta: float) -> void:
-	if in_combat == false:
-		move_and_slide()
-
-func calculate_velocity(direction: Vector2):
-	velocity = direction * movement_speed
 
 func move_item_to_inventory(item: StaticBody2D):
 	inventory_component.add_item_to_inventory(item)
-
-func initiate_combat(_player_initiating_combat, _enemy_initiating_combat) -> void:
-	in_combat = true
-	combat_init_component.active = false
-	
-func end_combat():
-	var components = [inventory_component, interaction_component, movement_controller]
-	for node in components:
-		node.set_process(Node.PROCESS_MODE_INHERIT)
-	collision_box.enabled = true
-	
-	

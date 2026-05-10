@@ -35,8 +35,8 @@ scale = Vector2(5, 1)
 target_position = Vector2(0, 100)
 collision_mask = 14
 
-[node name="player_movement_controller" parent="." unique_id=853565106 node_paths=PackedStringArray("object_raycast_detector") instance=ExtResource("3_fggl1")]
-object_raycast_detector = NodePath("../RayCast2D")
+[node name="player_movement_controller" parent="." unique_id=853565106 instance=ExtResource("3_fggl1")]
+movement_speed = 200
 
 [node name="player_interaction_component" parent="." unique_id=174318272 node_paths=PackedStringArray("raycast_detector") instance=ExtResource("4_mdan5")]
 script = ExtResource("5_h352e")

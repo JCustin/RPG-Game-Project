@@ -2,7 +2,7 @@ class_name enemy_limb_class extends Node2D
 
 @export var stat_block : enemy_limb_stats_base
 
-signal limb_lost 
+signal limb_lost(limb : enemy_limb_class)
 
 func _ready() -> void:
 	stat_block = stat_block.duplicate()
@@ -22,6 +22,7 @@ func switch_direction(direction: global_enums.combat_direction) -> void:
 					texture.texture = stat_block.front_texture
 				
 				global_enums.limb_direction.rear_only:
+					texture.texture = null
 					pass
 					
 				global_enums.limb_direction.both:
@@ -32,7 +33,7 @@ func switch_direction(direction: global_enums.combat_direction) -> void:
 			match limb_direction:
 				
 				global_enums.limb_direction.forward_only:
-					pass
+					texture.texture = null
 					
 				global_enums.limb_direction.rear_only:
 					texture.texture = stat_block.rear_texture
@@ -41,5 +42,17 @@ func switch_direction(direction: global_enums.combat_direction) -> void:
 					texture.texture = stat_block.rear_texture
 			
 func kill_limb():
-	queue_free()
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(self, "modulate", Color.RED, 1.0)
+	tween.tween_property(self, "scale", Vector2(0.1, 0.1), 1.0)
+	tween.tween_callback(func(): queue_free())
+	
+func receive_limb_damage(damage_amount):
+	stat_block.limb_HP -= damage_amount
+	print_debug(stat_block.limb_HP)
+	
+	if stat_block.limb_HP <= 0:
+		limb_lost.emit(self)
+	
 	
