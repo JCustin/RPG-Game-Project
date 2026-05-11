@@ -7,8 +7,6 @@ extends player_character
 @export var collision_box : CollisionShape2D
 @export var movement_speed: int 
 
-@export var stat_block = witch_hunter_stats.new().duplicate()
-
 
 signal player_inventory_opened(player: CharacterBody2D)
 var in_combat : bool = false

@@ -17,3 +17,6 @@ func deal_basic_attack(target):
 	player_basic_attack_stats.attack_damage, 
 	player_basic_attack_stats.attack_type, 
 	player_basic_attack_stats.attack_description,)
+
+func talk_to_enemy(enemy: combat_enemy_character) -> void:
+	pass	

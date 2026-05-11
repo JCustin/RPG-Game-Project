@@ -37,14 +37,14 @@ unit_name = "Foot Soldier"
 unit_description = "A soldier of the hexen. "
 stat_block = SubResource("Resource_2ymr3")
 attack_pool = Array[ExtResource("5_5t55j")]([ExtResource("2_2ymr3"), ExtResource("4_psb8x")])
-limbs = [NodePath("Sword"), NodePath("Shield"), NodePath("Body")]
+limbs = [NodePath("Node2D"), NodePath("Shield"), NodePath("Body")]
 
-[node name="Sword" type="Node2D" parent="." unique_id=1539631256]
+[node name="Node2D" type="Node2D" parent="." unique_id=1539631256]
 script = ExtResource("6_xu52a")
 stat_block = ExtResource("7_psb8x")
 metadata/_custom_type_script = "uid://bg173wcex5c85"
 
-[node name="Sword_Sprite" type="Sprite2D" parent="Sword" unique_id=1408386799]
+[node name="Sword_Sprite" type="Sprite2D" parent="Node2D" unique_id=1408386799]
 texture = ExtResource("7_n3kc3")
 
 [node name="Shield" type="Node2D" parent="." unique_id=1396448622]
