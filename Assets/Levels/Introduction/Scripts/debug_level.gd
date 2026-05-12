@@ -1,18 +1,11 @@
 extends Node2D
 var acting_enemy: Node2D
 var player : player_character
-var camera : game_camera
+@export var camera : game_camera
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group('Player')
 	_signal_connection()
-	_initialize_camera()
-	
-	
-func _initialize_camera() -> void:
-	camera = game_camera.new()
-	camera.pass_player(player)
-	add_child(camera)
 
 func _signal_connection() -> void:
 	player.player_inventory_opened.connect(spawn_inventory_GUI)
@@ -28,6 +21,7 @@ func initiate_combat(player_initiating_combat: player_character, enemy_initiatin
 	add_child(combat_scene)
 	combat_scene.cust_init(player_initiating_combat, enemy_initiating_combat)
 	camera.enabled = false
+	
 
 	
 	# the above code may need to change when implementing multiple player_characters. 

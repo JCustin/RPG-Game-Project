@@ -6,7 +6,7 @@ var object_raycast_detector : RayCast2D
 signal movement_direction(direction: Vector2)
 
 var player: player_character
-var in_combat : bool = false
+var active : bool = true
 
 func _ready() -> void:
 	player = get_parent()
@@ -17,8 +17,10 @@ func _ready() -> void:
 		else:
 			pass
 			
-	Player_Data.combat_initiated.connect(func(_player, _enemy): in_combat = true)
-	Player_Data.combat_ended.connect(func(): in_combat = false)
+	Player_Data.combat_initiated.connect(func(_player, _enemy): active = false)
+	Player_Data.combat_ended.connect(func(): active = true)
+	Dialogic.timeline_started.connect(func(): active = false)
+	Dialogic.timeline_ended.connect(func(): active = true)
 
 func _input(_event: InputEvent):
 	var direction = Input.get_vector("Movement_Left", "Movement_Right", "Movement_Up", "Movement_Down")
@@ -35,5 +37,5 @@ func _input(_event: InputEvent):
 			object_raycast_detector.rotation_degrees = 0
 
 func _physics_process(delta: float) -> void:
-	if in_combat == false:
+	if active == true:
 		player.move_and_slide()
