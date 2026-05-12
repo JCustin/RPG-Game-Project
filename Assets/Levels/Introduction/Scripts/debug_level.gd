@@ -19,11 +19,16 @@ func _signal_connection() -> void:
 	Player_Data.combat_initiated.connect(initiate_combat)
 
 func initiate_combat(player_initiating_combat: player_character, enemy_initiating_combat: CharacterBody2D):
-	print_debug(camera)
+	print_debug("INSTANCE")
 	var combat_scene : combat_scene_class = preload("uid://buylh0rmqi1ll").instantiate()
+	if combat_scene.is_visible_in_tree():
+		return
+	
+	
 	add_child(combat_scene)
 	combat_scene.cust_init(player_initiating_combat, enemy_initiating_combat)
-	camera.free()
+	camera.enabled = false
+
 	
 	# the above code may need to change when implementing multiple player_characters. 
 	

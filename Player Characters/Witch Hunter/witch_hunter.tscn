@@ -12,16 +12,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44o0l"]
 size = Vector2(94, 92)
 
-[node name="Witch_Hunter" type="CharacterBody2D" unique_id=448452775 node_paths=PackedStringArray("movement_controller", "interaction_component", "inventory_component", "combat_init_component", "collision_box")]
+[node name="Witch_Hunter" type="CharacterBody2D" unique_id=448452775 node_paths=PackedStringArray("interaction_component", "inventory_component")]
 scale = Vector2(0.27999997, 0.27999997)
-collision_mask = 14
+collision_mask = 30
 script = ExtResource("1_fggl1")
-movement_controller = NodePath("player_movement_controller")
 interaction_component = NodePath("player_interaction_component")
 inventory_component = NodePath("player_inventory_component")
-combat_init_component = NodePath("combat_initiation_component")
-collision_box = NodePath("CollisionShape2D")
-movement_speed = 400
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=931493520]
 texture = ExtResource("1_8x8a6")
@@ -33,7 +29,7 @@ shape = SubResource("RectangleShape2D_44o0l")
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=158573424]
 scale = Vector2(5, 1)
 target_position = Vector2(0, 100)
-collision_mask = 14
+collision_mask = 30
 
 [node name="player_movement_controller" parent="." unique_id=853565106 instance=ExtResource("3_fggl1")]
 movement_speed = 200

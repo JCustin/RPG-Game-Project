@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cqorucsafla6w" path="res://Enemy/Enemy Resource/enemy_stat_block_resource.gd" id="2_n3kc3"]
 [ext_resource type="Resource" uid="uid://cjbn7fv3veuoc" path="res://Enemy/Enemy Attack Stats/ShieldBash_Attack.tres" id="4_psb8x"]
 [ext_resource type="Script" uid="uid://c58a245wghwrh" path="res://Enemy/Components/base_enemy_attack_structure.gd" id="5_5t55j"]
+[ext_resource type="Resource" uid="uid://cpj5453wvo1b2" path="res://Dialogue Resources/Timeline/Combat Timelines/Foot_Soldier_Dialogue.dtl" id="6_qb4la"]
 [ext_resource type="Script" uid="uid://bg173wcex5c85" path="res://Enemy/Class/enemy_limb_class.gd" id="6_xu52a"]
 [ext_resource type="Texture2D" uid="uid://d2vwuf13jspq4" path="res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Front_Sword.png" id="7_n3kc3"]
 [ext_resource type="Resource" uid="uid://d3yij0n3gm5d1" path="res://Enemy/Foot_Soldier/Resources/Foot_Soldier_Sword_Stats.tres" id="7_psb8x"]
@@ -31,20 +32,22 @@ rear_texture = ExtResource("12_iyor6")
 limb_direction = 2
 metadata/_custom_type_script = "uid://t3kfosodtxyq"
 
-[node name="Combat_Foot_Soldier" type="Node2D" unique_id=780737724 node_paths=PackedStringArray("limbs")]
+[node name="Combat_Foot_Soldier" type="Node2D" unique_id=780737724 node_paths=PackedStringArray("limbs", "primary_limb")]
 script = ExtResource("1_xe14k")
 unit_name = "Foot Soldier"
 unit_description = "A soldier of the hexen. "
 stat_block = SubResource("Resource_2ymr3")
 attack_pool = Array[ExtResource("5_5t55j")]([ExtResource("2_2ymr3"), ExtResource("4_psb8x")])
-limbs = [NodePath("Node2D"), NodePath("Shield"), NodePath("Body")]
+combat_dialogue_options = ExtResource("6_qb4la")
+limbs = [NodePath("Shield"), NodePath("Body"), NodePath("Sword")]
+primary_limb = NodePath("Body")
 
-[node name="Node2D" type="Node2D" parent="." unique_id=1539631256]
+[node name="Sword" type="Node2D" parent="." unique_id=1539631256]
 script = ExtResource("6_xu52a")
 stat_block = ExtResource("7_psb8x")
 metadata/_custom_type_script = "uid://bg173wcex5c85"
 
-[node name="Sword_Sprite" type="Sprite2D" parent="Node2D" unique_id=1408386799]
+[node name="Sword_Sprite" type="Sprite2D" parent="Sword" unique_id=1408386799]
 texture = ExtResource("7_n3kc3")
 
 [node name="Shield" type="Node2D" parent="." unique_id=1396448622]

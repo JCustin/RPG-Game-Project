@@ -1,0 +1,4 @@
+join WitchHunter center
+WitchHunter: A dark column of smoke creeps over the hill and you don't think to send a scout to investigate?
+join Gravedigger center [animation="Fade In" wait="true"]
+Gravedigger: You haven't lived in these woods like us.

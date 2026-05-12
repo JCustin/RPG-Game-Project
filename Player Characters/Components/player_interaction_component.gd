@@ -7,8 +7,13 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		if raycast_detector.is_colliding():
 			var item : Variant = raycast_detector.get_collider()
+			
 			if item.is_class('StaticBody2D'):
 				pick_up_item(item)
+				
+			if item is npc_character_class:
+				Player_Data.dialogue_started.emit(item)
+				
 			else:
 				pass
 		else:

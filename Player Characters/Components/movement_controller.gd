@@ -17,7 +17,7 @@ func _ready() -> void:
 		else:
 			pass
 			
-	Player_Data.combat_initiated.connect(func(): in_combat = true)
+	Player_Data.combat_initiated.connect(func(_player, _enemy): in_combat = true)
 	Player_Data.combat_ended.connect(func(): in_combat = false)
 
 func _input(_event: InputEvent):

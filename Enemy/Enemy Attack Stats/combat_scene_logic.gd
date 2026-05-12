@@ -23,7 +23,7 @@ var current_combat_state : int
 
 func cust_init(player_initiating_combat: player_character, enemy_initiating_combat: enemy_character):
 	var all_actors : Array
-	current_combat_direction = possible_combat_direction.forward
+	print_debug(player_initiating_combat, enemy_initiating_combat)
 	
 	var player = player_initiating_combat.combat_counterpart
 	var enemy = enemy_initiating_combat.combat_counterpart
@@ -166,7 +166,14 @@ func initiate_basic_attack():
 	
 	
 func initiate_conversation():
-	pass
+	var dialogue : DialogicAnimation
+	var enemy : combat_enemy_character = enemy_actors[0]
+	var enemy_dialogue : DialogicTimeline = enemy.combat_dialogue_options
+	if Dialogic.current_timeline != null:
+		return
+	else:
+		Dialogic.start(enemy_dialogue)
+	
 	
 func attempt_to_flee():
 	pass

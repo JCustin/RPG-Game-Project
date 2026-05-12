@@ -11,6 +11,7 @@ var target_index : int = 0
 var target_pool : Array
 
 func init_possible_targets(target_list: Array):
+	print_debug(target_list)
 	target_pool = target_list
 	set_target(target_pool[target_index])
 
