@@ -39,7 +39,7 @@ func execute_turn(player_pool: Array) -> void:
 	var attack_stats : base_enemy_attack_structure = _choose_attack(target)
 	var attack_damage : int = attack_stats.attack_damage + stat_block.ATK
 	var attack_description : String = attack_stats.attack_description
-	var attack_type : StringName = attack_stats.attack_type
+	var attack_type : global_enums.damage_type = attack_stats.damage_type
 	
 	executed_attack.emit(target, attack_damage, attack_type, attack_description)
 
@@ -78,7 +78,6 @@ func get_limbs_based_on_combat_direction(direction: global_enums.combat_directio
 
 func _lose_limb(limb	 : enemy_limb_class) -> void:
 	limbs.erase(limb)
-	limb.kill_limb()
 	
 	if limb == primary_limb:
 		enemy_defeated.emit()

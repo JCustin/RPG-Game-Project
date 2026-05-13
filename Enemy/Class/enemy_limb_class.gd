@@ -6,6 +6,7 @@ signal limb_lost(limb : enemy_limb_class)
 
 func _ready() -> void:
 	stat_block = stat_block.duplicate()
+	stat_block.limb_lost.connect(kill_limb)
 
 
 func switch_direction(direction: global_enums.combat_direction) -> void:
@@ -42,17 +43,10 @@ func switch_direction(direction: global_enums.combat_direction) -> void:
 					texture.texture = stat_block.rear_texture
 			
 func kill_limb():
+	limb_lost.emit(self)
 	var tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(self, "modulate", Color.RED, 1.0)
 	tween.tween_property(self, "scale", Vector2(0.1, 0.1), 1.0)
 	tween.tween_callback(func(): queue_free())
-	
-func receive_limb_damage(damage_amount):
-	stat_block.limb_HP -= damage_amount
-	print_debug(stat_block.limb_HP)
-	
-	if stat_block.limb_HP <= 0:
-		limb_lost.emit(self)
-	
 	

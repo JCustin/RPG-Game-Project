@@ -10,12 +10,9 @@ signal target_selection_aborted
 
 func _init(targets: Array) -> void:
 	target_pool = targets
-	print_debug(target_pool)
 	set_target(targets[0])
 	
 func _input(event: InputEvent) -> void:
-	print_debug(event)
-	
 	if event.is_action_pressed("Movement_Left"):
 		if (target_index - 1) < 0:
 			set_target(target_pool[-1])

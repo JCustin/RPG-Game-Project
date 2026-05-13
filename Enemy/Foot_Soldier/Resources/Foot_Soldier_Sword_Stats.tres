@@ -7,6 +7,7 @@
 resource_local_to_scene = true
 script = ExtResource("2_q8mbq")
 limb_name = "Sword"
-limb_HP = 20
+HP = 20
+damage_type_weakness = 1
 front_texture = ExtResource("1_knrck")
 metadata/_custom_type_script = "uid://t3kfosodtxyq"

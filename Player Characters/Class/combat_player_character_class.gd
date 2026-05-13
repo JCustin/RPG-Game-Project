@@ -15,7 +15,7 @@ func deal_basic_attack(target):
 	executed_attack.emit(
 	target,
 	player_basic_attack_stats.attack_damage, 
-	player_basic_attack_stats.attack_type, 
+	player_basic_attack_stats.damage_type, 
 	player_basic_attack_stats.attack_description,)
 
 #func deal_special_attack(special_attack, target)

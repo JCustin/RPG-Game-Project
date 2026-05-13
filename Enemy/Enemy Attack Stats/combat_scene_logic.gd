@@ -1,14 +1,16 @@
 class_name combat_scene_class extends Node2D
 var combat_turn_handler : combat_turn_handler_component = combat_turn_handler_component.new()
 var timeline : combat_timeline_system = combat_timeline_system.new()
-#var basic_combat_logic : basic_attack_combat_component
+var attack_calculation = attack_damage_handler_component.new()
+var basic_attack = basic_attack_combat_component.new()
+
+
 
 var active_actor : Variant
 var player_actors : Array
 var enemy_actors : Array
-
-var player_turn : bool = false
 var turn_queue : Array
+var actors_played : Array
 
 var possible_combat_direction = global_enums.combat_direction
 var current_combat_direction : int
@@ -41,7 +43,10 @@ func cust_init(player_initiating_combat: player_character, enemy_initiating_comb
 	active_actor = turn_queue[0]
 	
 	_match_combat_state_based_on_active_actor()
-	_prepare_actors(player, enemy)
+	player.position = Vector2(950,500)
+	enemy.position = Vector2(500, 300)
+	enemy.scale = Vector2(2.0, 2.0)
+	_toggle_player_GUI(false)
 	%Combat_Description_Text.prompt_combat_description(str("You stumble upon ", enemy_actors[0].unit_name, "!"))
 	
 
@@ -60,56 +65,47 @@ func _connect_signals() -> void:
 	for player : combat_player_character in player_actors:
 		player.executed_attack.connect(handle_attack)
 		
-	Dialogic.timeline_ended.connect(continue_or_end_turn)
-		
+	Dialogic.timeline_ended.connect(_facilitate_turn)
 
-func _prepare_actors(player: combat_player_character, enemy: combat_enemy_character) -> void:
-	player.position = Vector2(950,500)
-	enemy.position = Vector2(500, 300)
-	enemy.scale = Vector2(2.0, 2.0)
-	_toggle_player_GUI(false)
-	
-func continue_or_end_turn():
-	var current_turn_queue_index: int = turn_queue.find(active_actor)
-	var next_turn_queue_index: int = (current_turn_queue_index + 1)
-	if turn_queue.size() > next_turn_queue_index:
-		active_actor = turn_queue[next_turn_queue_index]
-	else:
-		active_actor = turn_queue[0]
+#func continue_or_end_turn():
+	#var current_turn_queue_index: int = turn_queue.find(active_actor)
+	#var next_turn_queue_index: int = (current_turn_queue_index + 1)
+	#if turn_queue.size() > next_turn_queue_index:
+		#active_actor = turn_queue[next_turn_queue_index]
+	#else:
+		#active_actor = turn_queue[0]
+#
+	#_facilitate_turn()
 
-	_facilitate_turn()
-
-func _facilitate_turn():
+func _facilitate_turn() -> void:
 	await get_tree().create_timer(1.0).timeout
+	
+	if actors_played.has(active_actor):
+		var current_turn_queue_index: int = turn_queue.find(active_actor)
+		var next_turn_queue_index: int = (current_turn_queue_index + 1)
+		if turn_queue.size() > next_turn_queue_index:
+			active_actor = turn_queue[next_turn_queue_index]
+		else:
+			active_actor = turn_queue[0]
+			actors_played.clear()
+
 	_match_combat_state_based_on_active_actor()
-	match	 current_combat_state:
+	match current_combat_state:
 		
 		combat_states.player_turn:
 			_toggle_player_GUI(true)
 			
 		combat_states.enemy_turn:
 			_toggle_player_GUI(false)
-			_execute_enemy_turn()
+			var enemy : combat_enemy_character = active_actor
+			enemy.execute_turn(player_actors)
+			actors_played.append(active_actor)
 
-func _execute_enemy_turn():
-	var enemy : combat_enemy_character = active_actor
-	enemy.execute_turn(player_actors)
-	
-func handle_attack(target, attack_damage: int, attack_type: String, attack_description: String):
-	
-	if active_actor is combat_player_character:
-		var enemy_target : enemy_limb_class = target
-		enemy_target.receive_limb_damage(attack_damage)
-		
-	else:
-		var player_target : combat_player_character = target
-		player_target.stat_block.HP -= attack_damage
-		
-		#if player_target.stat_block.HP <= 0:
-			
-	
+
+func handle_attack(target, attack_damage: int, attack_type: global_enums.damage_type, attack_description: String):
+	target.stat_block.HP = attack_calculation.calculate_attack(active_actor, target, attack_damage, attack_type)
 	%Combat_Description_Text.prompt_combat_description(attack_description)
-	continue_or_end_turn()
+	_facilitate_turn()
 	
 func _match_combat_state_based_on_active_actor():
 	if active_actor is combat_player_character:
@@ -143,23 +139,38 @@ func initiate_basic_attack():
 	_remove_focus()
 	_toggle_player_GUI(false)
 	
-	var basic_attack_component = basic_attack_combat_component.new()
-	add_child(basic_attack_component)
+	add_child(basic_attack)
 	var enemy : combat_enemy_character = enemy_actors[0]
 	var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
 	
-	basic_attack_component.init_possible_targets(enemy_limbs)
+	basic_attack.init_possible_targets(enemy_limbs)
 	
-	basic_attack_component.basic_attack_aborted.connect(
-		func(): %Attack.disabled = false
-		)
-		
-	basic_attack_component.basic_attack_performed.connect(
-		func(target): 
-		_toggle_player_GUI(true)
-		var player_actor : combat_player_character = active_actor
-		player_actor.deal_basic_attack(target)
-		)
+	basic_attack.basic_attack_performed.connect(
+		func():
+			pass
+	)
+	
+	basic_attack.basic_attack_aborted.connect()
+	
+	#var basic_attack_component = basic_attack_combat_component.new()
+	#add_child(basic_attack_component)
+	#var enemy : combat_enemy_character = enemy_actors[0]
+	#var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
+	#
+	#basic_attack_component.init_possible_targets(enemy_limbs)
+	#
+	#basic_attack_component.basic_attack_aborted.connect(
+		#func(): %Attack.disabled = false
+		#)
+		#
+	#basic_attack_component.basic_attack_performed.connect(
+		#func(target): 
+		#_toggle_player_GUI(true)
+#
+#
+		#var player_actor : combat_player_character = active_actor
+		#player_actor.deal_basic_attack(target)
+		#)
 	
 func initiate_special_attack_pool():
 	_remove_focus()
