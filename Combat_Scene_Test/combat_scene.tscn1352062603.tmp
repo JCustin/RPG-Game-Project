@@ -3,9 +3,40 @@
 [ext_resource type="Script" uid="uid://b56soy1ca10po" path="res://Enemy/Enemy Attack Stats/combat_scene_logic.gd" id="1_0hnhl"]
 [ext_resource type="Script" uid="uid://bqjr5jh77i1w0" path="res://Combat_Scene_Test/combat_description_text_logic.gd" id="2_xe5l4"]
 [ext_resource type="Script" uid="uid://bf6g3ycwbjnag" path="res://Combat_Scene_Test/player_stamina.gd" id="3_xe5l4"]
-[ext_resource type="Script" uid="uid://cbek2mab1rn06" path="res://Combat_Scene_Test/special_attack_list_logic.gd" id="4_hhihl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hnhl"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_xe5l4"]
+device = -1
+keycode = 65
+unicode = 97
+
+[sub_resource type="Shortcut" id="Shortcut_hhihl"]
+events = [SubResource("InputEventKey_xe5l4")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_8uq53"]
+device = -1
+keycode = 83
+unicode = 115
+
+[sub_resource type="Shortcut" id="Shortcut_fy6n8"]
+events = [SubResource("InputEventKey_8uq53")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_kdpud"]
+device = -1
+keycode = 70
+unicode = 102
+
+[sub_resource type="Shortcut" id="Shortcut_ps7yf"]
+events = [SubResource("InputEventKey_kdpud")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_p8ind"]
+device = -1
+keycode = 73
+unicode = 105
+
+[sub_resource type="Shortcut" id="Shortcut_3ria8"]
+events = [SubResource("InputEventKey_p8ind")]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hnhl"]
 bg_color = Color(5.2943824e-07, 0.72285295, 0.2737877, 1)
@@ -84,6 +115,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_vertical = 4
+shortcut = SubResource("Shortcut_hhihl")
 text = "Attack"
 
 [node name="Special" type="Button" parent="Combat_HUD/Combat_Player_Actions_Control/Combat_Player_Actions_Panel/Combat_Player_Actions_Container" unique_id=1447134013]
@@ -91,6 +123,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_vertical = 4
+shortcut = SubResource("Shortcut_fy6n8")
 text = "Special"
 
 [node name="Flank" type="Button" parent="Combat_HUD/Combat_Player_Actions_Control/Combat_Player_Actions_Panel/Combat_Player_Actions_Container" unique_id=159433950]
@@ -98,6 +131,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_vertical = 4
+shortcut = SubResource("Shortcut_ps7yf")
 text = "Flank"
 
 [node name="Item" type="Button" parent="Combat_HUD/Combat_Player_Actions_Control/Combat_Player_Actions_Panel/Combat_Player_Actions_Container" unique_id=429518298]
@@ -113,6 +147,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_vertical = 4
+shortcut = SubResource("Shortcut_3ria8")
 text = "Talk"
 
 [node name="Flee" type="Button" parent="Combat_HUD/Combat_Player_Actions_Control/Combat_Player_Actions_Panel/Combat_Player_Actions_Container" unique_id=143719223]
@@ -143,35 +178,3 @@ offset_bottom = -220.0
 theme_override_styles/background = SubResource("StyleBoxFlat_0hnhl")
 value = 100.0
 rounded = true
-
-[node name="Special_Attack_Menu" type="Control" parent="Combat_HUD" unique_id=1353938027]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 3
-anchor_left = 0.83300006
-anchor_top = 0.28
-anchor_right = 1.0
-anchor_bottom = 0.74
-offset_left = 0.39990234
-offset_top = -8.0
-offset_bottom = 8.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Special_Attack_Panel" type="Panel" parent="Combat_HUD/Special_Attack_Menu" unique_id=25788180]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Special_Attack_List" type="ItemList" parent="Combat_HUD/Special_Attack_Menu/Special_Attack_Panel" unique_id=672052649]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("4_hhihl")

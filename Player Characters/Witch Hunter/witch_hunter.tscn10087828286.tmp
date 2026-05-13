@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dru8467dcjn7j"]
+
+[ext_resource type="Texture2D" uid="uid://0oio532puorb" path="res://addons/project-time-tracker/icon.svg" id="1_8x8a6"]
+[ext_resource type="Script" uid="uid://udglnt1saqww" path="res://Player Characters/Witch Hunter/witch_hunter.gd" id="1_fggl1"]
+[ext_resource type="Resource" uid="uid://bu6tj6xn6c7gi" path="res://Player Characters/Resources/Initial_Player_Stats/Witch_Hunter_Stats.tres" id="2_5fns2"]
+[ext_resource type="PackedScene" uid="uid://swpo4h0r67v0" path="res://Player Characters/Components/player_movement_controller.tscn" id="3_fggl1"]
+[ext_resource type="PackedScene" uid="uid://bnj7ltak5dkuw" path="res://Player Characters/Components/player_interaction_component.tscn" id="4_mdan5"]
+[ext_resource type="Script" uid="uid://cr35rxx6qpe1p" path="res://Player Characters/Components/player_interaction_component.gd" id="5_h352e"]
+[ext_resource type="PackedScene" uid="uid://cq4pqv5g2qptk" path="res://Player Characters/Components/player_inventory_component.tscn" id="6_h352e"]
+[ext_resource type="PackedScene" uid="uid://b7ahxx6ip570v" path="res://Player Characters/Components/combat_initiation_component.tscn" id="7_bevw5"]
+[ext_resource type="Script" uid="uid://bek07ye1w2ovh" path="res://Player Characters/Components/combat_initiation_component.gd" id="8_5fns2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44o0l"]
+size = Vector2(94, 92)
+
+[node name="Witch_Hunter" type="CharacterBody2D" unique_id=448452775 node_paths=PackedStringArray("interaction_component", "inventory_component")]
+scale = Vector2(0.27999997, 0.27999997)
+collision_mask = 30
+script = ExtResource("1_fggl1")
+interaction_component = NodePath("player_interaction_component")
+inventory_component = NodePath("player_inventory_component")
+stat_block = ExtResource("2_5fns2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=931493520]
+texture = ExtResource("1_8x8a6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1652117801]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_44o0l")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=158573424]
+scale = Vector2(5, 1)
+target_position = Vector2(0, 100)
+collision_mask = 30
+
+[node name="player_movement_controller" parent="." unique_id=853565106 instance=ExtResource("3_fggl1")]
+movement_speed = 200
+
+[node name="player_interaction_component" parent="." unique_id=174318272 node_paths=PackedStringArray("raycast_detector") instance=ExtResource("4_mdan5")]
+script = ExtResource("5_h352e")
+raycast_detector = NodePath("../RayCast2D")
+
+[node name="player_inventory_component" parent="." unique_id=1307210468 instance=ExtResource("6_h352e")]
+
+[node name="combat_initiation_component" parent="." unique_id=963280570 node_paths=PackedStringArray("player") instance=ExtResource("7_bevw5")]
+script = ExtResource("8_5fns2")
+player = NodePath("..")

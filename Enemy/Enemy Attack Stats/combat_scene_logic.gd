@@ -51,7 +51,7 @@ func _connect_signals() -> void:
 	%Combat_Description_Text.combat_description_closed.connect(_facilitate_turn)
 	%Attack.pressed.connect(initiate_basic_attack)
 	
-	%Special.pressed.connect(open_special_attack_pool)
+	%Special.pressed.connect(initiate_special_attack_pool)
 	%Flank.pressed.connect(attempt_to_flank)
 	%Item.pressed.connect(open_inventory)
 	%Talk.pressed.connect(initiate_conversation)
@@ -59,6 +59,8 @@ func _connect_signals() -> void:
 	
 	for player : combat_player_character in player_actors:
 		player.executed_attack.connect(handle_attack)
+		
+	Dialogic.timeline_ended.connect(continue_or_end_turn)
 		
 
 func _prepare_actors(player: combat_player_character, enemy: combat_enemy_character) -> void:
@@ -116,9 +118,6 @@ func _match_combat_state_based_on_active_actor():
 		current_combat_state = combat_states.enemy_turn
 
 
-func open_special_attack_pool():
-	pass
-	
 func attempt_to_flank():
 	# for now, this will be a 100% chance.
 	var enemy : combat_enemy_character = enemy_actors[0]
@@ -141,13 +140,13 @@ func open_inventory():
 	
 # following section of code is dedicated to when player is initiating a basic attack
 func initiate_basic_attack():
-	%Attack.disabled = true
+	_remove_focus()
+	_toggle_player_GUI(false)
 	
 	var basic_attack_component = basic_attack_combat_component.new()
 	add_child(basic_attack_component)
 	var enemy : combat_enemy_character = enemy_actors[0]
 	var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
-	
 	
 	basic_attack_component.init_possible_targets(enemy_limbs)
 	
@@ -157,13 +156,55 @@ func initiate_basic_attack():
 		
 	basic_attack_component.basic_attack_performed.connect(
 		func(target): 
-		%Attack.set_focus_mode(Control.FOCUS_NONE)
-		%Attack.disabled = false
+		_toggle_player_GUI(true)
 		var player_actor : combat_player_character = active_actor
 		player_actor.deal_basic_attack(target)
 		)
 	
+func initiate_special_attack_pool():
+	_remove_focus()
+	_toggle_player_GUI(false)
 	
+	var special_attack_list : special_attack_list_component = %Special_Attack_List
+	%Special_Attack_Panel.visible = true
+	special_attack_list.retrieve_special_attacks(active_actor)
+	
+	special_attack_list.item_selected.connect(
+		func(_index): 
+		%Special_Attack_Panel.visible = false
+		var enemy : combat_enemy_character = enemy_actors[0]
+		var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
+		var special_attack_component: combat_special_attack_component = combat_special_attack_component.new(active_actor, enemy_limbs)
+		add_child(special_attack_component)
+		
+		special_attack_component.special_attack_aborted.connect(
+			func():
+				_toggle_player_GUI(true)
+		)
+		
+		special_attack_component.special_attack_executed.connect(
+			func(target: enemy_limb_class, special_attack: special_attack_stat_block):
+			var player_actor : combat_player_character = active_actor
+			handle_attack(target, special_attack.attack_damage, special_attack.attack_type, special_attack.attack_description)
+			))
+	
+	#var current_player_actor : combat_player_character = active_actor
+	#
+	#var enemy : combat_enemy_character = enemy_actors[0]
+	#var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
+	#
+	#var special_attack_component : combat_special_attack_component = combat_special_attack_component.new(active_actor, enemy_limbs)
+	#add_child(special_attack_component)
+	#
+	#special_attack_component.special_attack_executed.connect(
+		#func(target): 
+		#%Special.set_focus_mode(Control.FOCUS_NONE)
+		#_toggle_player_GUI(true)
+		#var player_actor : combat_player_character = active_actor
+		#player_actor.deal_basic_attack(target)
+		#)
+		
+	#special_attack_component.special_attack_aborted.connect()
 	
 func initiate_conversation():
 	var dialogue : DialogicAnimation
@@ -173,8 +214,7 @@ func initiate_conversation():
 		return
 	else:
 		Dialogic.start(enemy_dialogue)
-	
-	
+
 func attempt_to_flee():
 	pass
 
@@ -185,3 +225,7 @@ func _toggle_player_GUI(toggle : bool) -> void:
 	else:
 		for child in %Combat_Player_Actions_Container.get_children():
 			child.disabled = true
+
+func _remove_focus() -> void:
+	for child: Button in %Combat_Player_Actions_Container.get_children():
+		child.FOCUS_NONE

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://57e2h4udg3jp"]
+
+[ext_resource type="Script" uid="uid://d3wyd4lkbklsx" path="res://Scene/Combat_Scene/Scripts/target_selection_logic.gd" id="1_v308d"]
+
+[node name="combat_target_selection_logic" type="Node" unique_id=1188098505]
+script = ExtResource("1_v308d")
+metadata/_custom_type_script = "uid://d3wyd4lkbklsx"
