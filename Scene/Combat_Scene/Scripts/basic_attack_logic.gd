@@ -1,6 +1,6 @@
 class_name basic_attack_combat_component extends Node
 
-signal basic_attack_performed(basic_attack_target)
+signal basic_attack_performed(target)
 signal basic_attack_aborted 
 
 var target_selector : combat_target_selection_logic

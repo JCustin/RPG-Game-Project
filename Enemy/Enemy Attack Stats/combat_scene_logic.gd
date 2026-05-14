@@ -2,7 +2,8 @@ class_name combat_scene_class extends Node2D
 var combat_turn_handler : combat_turn_handler_component = combat_turn_handler_component.new()
 var timeline : combat_timeline_system = combat_timeline_system.new()
 var attack_calculation = attack_damage_handler_component.new()
-var basic_attack = basic_attack_combat_component.new()
+var basic_attack_component : basic_attack_combat_component
+var special_attack_component : special_attack_combat_component
 
 
 
@@ -78,7 +79,7 @@ func _connect_signals() -> void:
 	#_facilitate_turn()
 
 func _facilitate_turn() -> void:
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	
 	if actors_played.has(active_actor):
 		var current_turn_queue_index: int = turn_queue.find(active_actor)
@@ -105,6 +106,7 @@ func _facilitate_turn() -> void:
 func handle_attack(target, attack_damage: int, attack_type: global_enums.damage_type, attack_description: String):
 	target.stat_block.HP = attack_calculation.calculate_attack(active_actor, target, attack_damage, attack_type)
 	%Combat_Description_Text.prompt_combat_description(attack_description)
+	actors_played.append(active_actor)
 	_facilitate_turn()
 	
 func _match_combat_state_based_on_active_actor():
@@ -138,67 +140,59 @@ func open_inventory():
 func initiate_basic_attack():
 	_remove_focus()
 	_toggle_player_GUI(false)
+	basic_attack_component = basic_attack_combat_component.new()
 	
-	add_child(basic_attack)
+	add_child(basic_attack_component)
 	var enemy : combat_enemy_character = enemy_actors[0]
 	var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
+	basic_attack_component.init_possible_targets(enemy_limbs)
 	
-	basic_attack.init_possible_targets(enemy_limbs)
+	basic_attack_component.basic_attack_performed.connect(
+		func(target):
+		var player_actor : combat_player_character = active_actor
+		var basic_attack = player_actor.player_basic_attack_stats
+		handle_attack(target, basic_attack.attack_damage, basic_attack.damage_type, basic_attack.attack_description)
+		basic_attack_component.queue_free())
 	
-	basic_attack.basic_attack_performed.connect(
-		func():
-			pass
-	)
-	
-	basic_attack.basic_attack_aborted.connect()
-	
-	#var basic_attack_component = basic_attack_combat_component.new()
-	#add_child(basic_attack_component)
-	#var enemy : combat_enemy_character = enemy_actors[0]
-	#var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
-	#
-	#basic_attack_component.init_possible_targets(enemy_limbs)
-	#
-	#basic_attack_component.basic_attack_aborted.connect(
-		#func(): %Attack.disabled = false
-		#)
-		#
-	#basic_attack_component.basic_attack_performed.connect(
-		#func(target): 
-		#_toggle_player_GUI(true)
-#
-#
-		#var player_actor : combat_player_character = active_actor
-		#player_actor.deal_basic_attack(target)
-		#)
+	basic_attack_component.basic_attack_aborted.connect(func():
+		basic_attack_component.queue_free())
 	
 func initiate_special_attack_pool():
 	_remove_focus()
 	_toggle_player_GUI(false)
 	
-	var special_attack_list : special_attack_list_component = %Special_Attack_List
-	%Special_Attack_Panel.visible = true
-	special_attack_list.retrieve_special_attacks(active_actor)
+	var enemy : combat_enemy_character = enemy_actors[0]
+	var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
+	print_debug(enemy_limbs)
 	
-	special_attack_list.item_selected.connect(
-		func(_index): 
-		%Special_Attack_Panel.visible = false
-		var enemy : combat_enemy_character = enemy_actors[0]
-		var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
-		var special_attack_component: combat_special_attack_component = combat_special_attack_component.new(active_actor, enemy_limbs)
-		add_child(special_attack_component)
-		
-		special_attack_component.special_attack_aborted.connect(
-			func():
-				_toggle_player_GUI(true)
-		)
-		
-		special_attack_component.special_attack_executed.connect(
-			func(target: enemy_limb_class, special_attack: special_attack_stat_block):
-			var player_actor : combat_player_character = active_actor
-			handle_attack(target, special_attack.attack_damage, special_attack.attack_type, special_attack.attack_description)
-			))
+	special_attack_component = special_attack_combat_component.new(active_actor, %Special_Attack_List, enemy_limbs)
+	add_child(special_attack_component)
 	
+	
+	
+	#var special_attack_list : special_attack_list_component = %Special_Attack_List
+	#%Special_Attack_Panel.visible = true
+	#special_attack_list.retrieve_special_attacks(active_actor)
+	#
+	#special_attack_list.item_selected.connect(
+		#func(_index): 
+		#%Special_Attack_Panel.visible = false
+		#var enemy : combat_enemy_character = enemy_actors[0]
+		#var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
+		#var special_attack_component: combat_special_attack_component = combat_special_attack_component.new(active_actor, enemy_limbs)
+		#add_child(special_attack_component)
+		#
+		#special_attack_component.special_attack_aborted.connect(
+			#func():
+				#_toggle_player_GUI(true)
+		#)
+		#
+		#special_attack_component.special_attack_executed.connect(
+			#func(target: enemy_limb_class, special_attack: special_attack_stat_block):
+			#var player_actor : combat_player_character = active_actor
+			#handle_attack(target, special_attack.attack_damage, special_attack.attack_type, special_attack.attack_description)
+			#))
+	#
 	#var current_player_actor : combat_player_character = active_actor
 	#
 	#var enemy : combat_enemy_character = enemy_actors[0]

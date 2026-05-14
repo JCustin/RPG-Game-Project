@@ -13,7 +13,6 @@ script = ExtResource("3_w70ny")
 attack_damage = 20
 attack_name = "Eye Poke"
 attack_description = "You take a daft step forward and plunge the ivory-thirsted tip of your rapier into the foe's eye!"
-attack_type = &"Piercing"
 STAM_cost = 25
 applicable_weapon_types = Array[ExtResource("1_v0axb")]([SubResource("Resource_uo2f6")])
 metadata/_custom_type_script = "uid://brmoxf5dac84i"

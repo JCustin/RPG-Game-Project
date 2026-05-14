@@ -30,7 +30,7 @@ func _input(event: InputEvent) -> void:
 		target_selection_aborted.emit()
 		
 		
-	if event.is_action("ui_accept"):
+	if event.is_action_pressed("ui_accept"):
 		unhighlight_enemy(target)
 		target_selected.emit(target)
 			

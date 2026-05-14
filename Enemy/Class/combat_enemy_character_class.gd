@@ -76,8 +76,9 @@ func get_limbs_based_on_combat_direction(direction: global_enums.combat_directio
 					
 	return limbs_pool
 
-func _lose_limb(limb	 : enemy_limb_class) -> void:
+func _lose_limb(limb: enemy_limb_class) -> void:
 	limbs.erase(limb)
+	limb.kill_limb()
 	
 	if limb == primary_limb:
 		enemy_defeated.emit()
