@@ -57,7 +57,7 @@ func _connect_signals() -> void:
 	%Combat_Description_Text.combat_description_closed.connect(_facilitate_turn)
 	%Attack.pressed.connect(initiate_basic_attack)
 	
-	%Special.pressed.connect(initiate_special_attack_pool)
+	%Special.pressed.connect(initiate_special_attack)
 	%Flank.pressed.connect(attempt_to_flank)
 	%Item.pressed.connect(open_inventory)
 	%Talk.pressed.connect(initiate_conversation)
@@ -67,16 +67,6 @@ func _connect_signals() -> void:
 		player.executed_attack.connect(handle_attack)
 		
 	Dialogic.timeline_ended.connect(_facilitate_turn)
-
-#func continue_or_end_turn():
-	#var current_turn_queue_index: int = turn_queue.find(active_actor)
-	#var next_turn_queue_index: int = (current_turn_queue_index + 1)
-	#if turn_queue.size() > next_turn_queue_index:
-		#active_actor = turn_queue[next_turn_queue_index]
-	#else:
-		#active_actor = turn_queue[0]
-#
-	#_facilitate_turn()
 
 func _facilitate_turn() -> void:
 	await get_tree().create_timer(0.5).timeout
@@ -157,7 +147,7 @@ func initiate_basic_attack():
 	basic_attack_component.basic_attack_aborted.connect(func():
 		basic_attack_component.queue_free())
 	
-func initiate_special_attack_pool():
+func initiate_special_attack():
 	_remove_focus()
 	_toggle_player_GUI(false)
 	
@@ -168,48 +158,11 @@ func initiate_special_attack_pool():
 	special_attack_component = special_attack_combat_component.new(active_actor, %Special_Attack_List, enemy_limbs)
 	add_child(special_attack_component)
 	
-	
-	
-	#var special_attack_list : special_attack_list_component = %Special_Attack_List
-	#%Special_Attack_Panel.visible = true
-	#special_attack_list.retrieve_special_attacks(active_actor)
-	#
-	#special_attack_list.item_selected.connect(
-		#func(_index): 
-		#%Special_Attack_Panel.visible = false
-		#var enemy : combat_enemy_character = enemy_actors[0]
-		#var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
-		#var special_attack_component: combat_special_attack_component = combat_special_attack_component.new(active_actor, enemy_limbs)
-		#add_child(special_attack_component)
-		#
-		#special_attack_component.special_attack_aborted.connect(
-			#func():
-				#_toggle_player_GUI(true)
-		#)
-		#
-		#special_attack_component.special_attack_executed.connect(
-			#func(target: enemy_limb_class, special_attack: special_attack_stat_block):
-			#var player_actor : combat_player_character = active_actor
-			#handle_attack(target, special_attack.attack_damage, special_attack.attack_type, special_attack.attack_description)
-			#))
-	#
-	#var current_player_actor : combat_player_character = active_actor
-	#
-	#var enemy : combat_enemy_character = enemy_actors[0]
-	#var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
-	#
-	#var special_attack_component : combat_special_attack_component = combat_special_attack_component.new(active_actor, enemy_limbs)
-	#add_child(special_attack_component)
-	#
-	#special_attack_component.special_attack_executed.connect(
-		#func(target): 
-		#%Special.set_focus_mode(Control.FOCUS_NONE)
-		#_toggle_player_GUI(true)
-		#var player_actor : combat_player_character = active_actor
-		#player_actor.deal_basic_attack(target)
-		#)
-		
-	#special_attack_component.special_attack_aborted.connect()
+	special_attack_component.execute_special_attack.connect(
+		func(target, attack_damage, damage_type, attack_description):
+		handle_attack(target, attack_damage, damage_type, attack_description)
+		special_attack_component.queue_free()
+	)
 	
 func initiate_conversation():
 	var dialogue : DialogicAnimation
