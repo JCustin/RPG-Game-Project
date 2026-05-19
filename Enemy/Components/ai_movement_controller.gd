@@ -6,19 +6,20 @@ class_name ai_movement_controller extends Node
 var behaviors : Array
 var active_behavior : Node
 
-#func _physics_process(delta: float) -> void:
-	#enemy.velocity = get_velocity()
-	#enemy.move_and_slide()
+var active : bool = true
+
+func _physics_process(delta: float) -> void:
+	var direction = _find_direction()
+	enemy.velocity = direction * 100
+	enemy.move_and_slide()
 
 func _ready() -> void:
 	behaviors = get_children()
 	
-#func get_velocity() -> Vector2:
-	#return active_behavior.handle_movement()
-	#
-func switch_behavior() -> void:
-	var amount_of_behaviors = behaviors.size()
-	if amount_of_behaviors > 1:
-		active_behavior = behaviors[1]
-	else:
-		pass
+func _find_direction() -> Vector2:
+	var possible_directions: Array = [Vector2.LEFT, Vector2.RIGHT, Vector2.DOWN, Vector2.UP]
+	var chosen_direction = possible_directions.pick_random()
+	return chosen_direction
+	
+	
+	

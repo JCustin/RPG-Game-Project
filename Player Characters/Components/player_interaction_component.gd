@@ -2,9 +2,10 @@ class_name player_interaction_component extends Node
 @export var raycast_detector: RayCast2D
 
 signal player_picked_up_item(item: StaticBody2D)
+var active : bool = true
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and active == true:
 		if raycast_detector.is_colliding():
 			var item : Variant = raycast_detector.get_collider()
 			
@@ -13,9 +14,6 @@ func _input(_event: InputEvent) -> void:
 				
 			if item is npc_character_class:
 				Player_Data.dialogue_started.emit(item)
-				
-			else:
-				pass
 		else:
 			pass
 

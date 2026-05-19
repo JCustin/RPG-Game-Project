@@ -19,9 +19,9 @@ var current_combat_direction : int
 enum combat_states {player_turn, interim, enemy_turn}
 var current_combat_state : int
 
-#signal combat_won
-#signal combat_fled
-#signal combat_lost
+signal combat_won
+signal combat_fled
+signal combat_lost
 
 
 func cust_init(player_initiating_combat: player_character, enemy_initiating_combat: enemy_character):
@@ -177,7 +177,7 @@ func initiate_conversation():
 		Dialogic.start(enemy_dialogue)
 
 func attempt_to_flee():
-	pass
+	combat_fled.emit()
 
 func _toggle_player_GUI(toggle : bool) -> void:
 	if toggle == true:

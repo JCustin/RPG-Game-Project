@@ -8,14 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://b7roybve1t5i7" path="res://NPC/Scenes/Test/gravedigger.tscn" id="5_ppatb"]
 [ext_resource type="Script" uid="uid://okon6v6a4v6u" path="res://Assets/Levels/Introduction/item_controller_logic.gd" id="6_35con"]
 [ext_resource type="PackedScene" uid="uid://bhcocn3uuys8p" path="res://Items/Potions/Health Potion/health_potion.tscn" id="8_ppatb"]
-[ext_resource type="Script" uid="uid://ci7tsuvbhhn86" path="res://Assets/Levels/Introduction/combat_manager.gd" id="9_cypmi"]
 [ext_resource type="Script" uid="uid://uqlmisbdythv" path="res://Assets/Camera/camera_logic.gd" id="10_cypmi"]
 
-[node name="Game" type="Node2D" unique_id=115325983 node_paths=PackedStringArray("combat_manager", "camera")]
+[node name="Game" type="Node2D" unique_id=115325983 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_a5wmo")
-combat_manager = NodePath("Combat_Manager")
 camera = NodePath("game_camera")
-metadata/_edit_lock_ = true
 
 [node name="Overworld" type="Node2D" parent="." unique_id=1845968887]
 unique_name_in_owner = true
@@ -42,8 +39,8 @@ script = ExtResource("6_35con")
 [node name="Health_Potion" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1560185872 instance=ExtResource("8_ppatb")]
 position = Vector2(128, 64)
 
-[node name="Combat_Manager" type="Node" parent="." unique_id=1621919967]
-script = ExtResource("9_cypmi")
+[node name="Health_Potion2" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1915518426 instance=ExtResource("8_ppatb")]
+position = Vector2(128, 64)
 
 [node name="game_camera" type="Camera2D" parent="." unique_id=684981412]
 zoom = Vector2(2, 2)
