@@ -8,7 +8,7 @@ func _input(_event: InputEvent) -> void:
 		if raycast_detector.is_colliding():
 			var item : Variant = raycast_detector.get_collider()
 			
-			if item.is_class('StaticBody2D'):
+			if item is item_class:
 				pick_up_item(item)
 				
 			if item is npc_character_class:
@@ -21,6 +21,7 @@ func _input(_event: InputEvent) -> void:
 
 func pick_up_item(item: StaticBody2D):
 	player_picked_up_item.emit(item)
+	
 	
 #TODO - expand code for player interacting with objects in the scene
 # maybe code to look at a metadata to determine the type of object? 

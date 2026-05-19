@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://d25avsulx1mgi" path="res://Enemy/Foot_Soldier/Scenes/foot_soldier_overworld.tscn" id="4_35con"]
 [ext_resource type="PackedScene" uid="uid://b7roybve1t5i7" path="res://NPC/Scenes/Test/gravedigger.tscn" id="5_ppatb"]
 [ext_resource type="Script" uid="uid://okon6v6a4v6u" path="res://Assets/Levels/Introduction/item_controller_logic.gd" id="6_35con"]
-[ext_resource type="PackedScene" uid="uid://1dh71oabjed3" path="res://Items/Rapiers/Rusted Rapier/rusted_rapier.tscn" id="6_qtbh1"]
 [ext_resource type="PackedScene" uid="uid://bhcocn3uuys8p" path="res://Items/Potions/Health Potion/health_potion.tscn" id="8_ppatb"]
 [ext_resource type="Script" uid="uid://uqlmisbdythv" path="res://Assets/Camera/camera_logic.gd" id="10_cypmi"]
 
@@ -37,21 +36,11 @@ z_index = -2
 unique_name_in_owner = true
 script = ExtResource("6_35con")
 
-[node name="Rusted_Rapier" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=846039171 instance=ExtResource("6_qtbh1")]
-position = Vector2(297, 135)
-scale = Vector2(0.015, 0.015)
-
-[node name="Rusted_Rapier2" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1794653080 instance=ExtResource("6_qtbh1")]
-position = Vector2(186.00003, 196.00002)
-scale = Vector2(0.015, 0.015)
-
-[node name="Rusted_Rapier3" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1556203520 instance=ExtResource("6_qtbh1")]
-position = Vector2(376.00003, 39.000023)
-scale = Vector2(0.015, 0.015)
-
 [node name="Health_Potion" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1560185872 instance=ExtResource("8_ppatb")]
-position = Vector2(296, 72)
-scale = Vector2(0.6, 0.52)
+position = Vector2(128, 64)
+
+[node name="Health_Potion2" parent="Overworld/Introduction_level_scene1/Item_Controller" unique_id=1915518426 instance=ExtResource("8_ppatb")]
+position = Vector2(128, 64)
 
 [node name="game_camera" type="Camera2D" parent="." unique_id=684981412]
 zoom = Vector2(2, 2)

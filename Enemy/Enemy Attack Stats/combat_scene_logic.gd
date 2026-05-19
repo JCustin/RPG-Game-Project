@@ -124,7 +124,10 @@ func attempt_to_flank():
 	pass
 	
 func open_inventory():
-	pass
+	var player_inventory : inventory_resource = inventory_resource.new()
+	for item in player_inventory.inventory:
+		print_debug(item)
+	# TODO re-implement player_inventory
 	
 # following section of code is dedicated to when player is initiating a basic attack
 func initiate_basic_attack():

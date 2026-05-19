@@ -1,33 +1,25 @@
 class_name player_inventory_component extends Node
 
-var inventory : Array
+var inventory_house : inventory_resource = inventory_resource.new()
+
 signal inventory_button_pressed
-# player_inventory_component is expected to handle child nodes
-# not sure if that will last to final implementation, but
-# it will be fine enough, I think.
-# however, we can also keep a list of inventory here to help 
-# understand the logic for the inventory. 
+signal inventory_opened(inventory_house : inventory_resource)
+signal inventory_closed
 
-func add_item_to_inventory(item: StaticBody2D):
-	item_base.new().player_pick_up_item(item, self)
-	_refresh_inventory()
+func add_item_to_inventory(item: item_class):
+	inventory_house.inventory.append(item.scene_file_path)
+	item.queue_free()
 
-@warning_ignore("shadowed_global_identifier")
-func remove_item_from_inventory(item: StaticBody2D, item_controller: Node):
-	item.reparent(item_controller)
-	_refresh_inventory()
+func remove_item_from_inventory(item: StaticBody2D, item_manager: item_controller):
+	pass
 
-func _refresh_inventory() -> void:
-	inventory = get_children()
-	
-func get_inventory() -> Array:
-	_refresh_inventory()
-	print_debug(inventory)
-	return inventory
-	
+
 @warning_ignore("unused_parameter")
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Inventory"):
-		inventory_button_pressed.emit()
+		inventory_opened.emit(inventory_house)
+	
+	if Input.is_action_just_pressed("Exit_GUI"):
+		print_debug(inventory_resource.new().inventory)
 
 # TODO, maybe consider stacking items? Maybe inventory can handle that? IDK

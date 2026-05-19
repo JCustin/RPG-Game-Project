@@ -48,10 +48,10 @@ func end_combat(combat_scene: combat_scene_class):
 	for item in %Item_Controller.get_children():
 		item.visible = true
 
-func spawn_inventory_GUI(player_requesting_inventory: CharacterBody2D):
+func spawn_inventory_GUI(player_inventory: inventory_resource):
 	if get_tree().get_nodes_in_group('Inventory').size() == 0:
 		var inventory_GUI : inventory_gui = preload("uid://qhv78cbt13cn").instantiate()
-		inventory_GUI.cust_init(player_requesting_inventory, %Item_Controller)
+		inventory_GUI.cust_init(player_inventory, %Item_Controller)
 		add_child(inventory_GUI)
 		
 		inventory_GUI.visible = true

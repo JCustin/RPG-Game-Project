@@ -35,15 +35,6 @@ func _open_special_attack_menu() -> void:
 	for special_attack in special_attack_pool:
 		var special_attack_name = special_attack.attack_name
 		
-		#var special_attack_data = {
-			#"attack_damage": special_attack.attack_damage,
-			#"damage_type": special_attack.damage_type,
-			#"attack_description": special_attack.attack_description,
-			#"applicable_weapon_types": special_attack.applicable_weapon_types,
-			#"attack_name" : special_attack.attack_name,
-			#"STAM_cost" : special_attack.STAM_cost
-		#}
-		
 		var list_index = special_attack_menu.add_item(special_attack_name)
 		special_attack_menu.set_item_metadata(list_index, special_attack)
 		print_debug(special_attack_menu.get_item_metadata(list_index))

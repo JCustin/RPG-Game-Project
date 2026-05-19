@@ -5,7 +5,7 @@ class_name inventory_gui
 var item_being_dragged: StaticBody2D 
 var inspected_item_index: int
 
-var item_modifier = item_base.new()
+var item_mod = item_modifier.new()
 
 var mouse_inside_inventory: bool = false
 
@@ -26,15 +26,17 @@ var item_control_parent: item_controller
 # which is then updated when items are added or removed
 
 
-func cust_init(player_node: player_character, item_control_parent_node: item_controller) -> void:
+func cust_init(inventory_house : inventory_resource, item_control_parent_node: item_controller) -> void:
 	add_to_group('Inventory')
-	player = player_node
-	player_inventory = player.inventory_component.get_inventory()
-	item_control_parent = item_control_parent_node
-	for item in player_inventory:
-		_add_item_to_list(item)
+	var item_types = global_enums.item_types
+	player_inventory = player_inventory
+	print_debug(inventory_house.inventory)
 	
-	player.interaction_component.player_picked_up_item.connect(_add_item_to_list)
+	for item_file_path in inventory_house.inventory:
+		var packed_item : PackedScene = load(item_file_path)
+		var item: item_class = packed_item.instantiate()
+		_add_item_to_list(item)
+		item.queue_free()
 	
 func _on_inventory_list_mouse_entered() -> void:
 	mouse_inside_inventory = true
@@ -83,16 +85,16 @@ func free_inventory():
 	queue_free()
 	
 	
-func _add_item_to_list(item: StaticBody2D) -> void:
+func _add_item_to_list(item: item_class) -> void:
 	var new_item_index = inventory_list.add_item(item.item_name)
-	inventory_list.set_item_metadata(new_item_index, item)
+	inventory_list.set_item_metadata(new_item_index, item.scene_file_path)
 	
 
 func remove_item_from_list(item_index: int) -> void:
 	var inventory_value = inventory_list.get_item_metadata(item_index)
 	print_debug(inventory_value)
 	inventory_list.remove_item(item_index)
-	player.inventory_component.inventory.erase(inventory_value)
+	player_inventory.erase(inventory_value)
 	
 ##code to handle clicking input for items on the list. 
 func _on_inventory_list_item_clicked(_index: int, at_position: Vector2, mouse_button_index: int) -> void:
@@ -121,14 +123,13 @@ func _physics_process(_delta: float) -> void:
 
 func _start_dragging_item(item_index: int) -> void:
 	%Extended_Inventory_Panel.visible = false
-	item_being_dragged = inventory_list.get_item_metadata(item_index)
-	item_modifier.disable_collision(item_being_dragged)
-	item_being_dragged.visible = true
+	item_being_dragged = load(inventory_list.get_item_metadata(item_index)).instantiate()
+	get_parent().add_child(item_being_dragged)
 	remove_item_from_list(item_index)	
 	
 func throw_item_in_world():
 	if validate_placement_in_world() == true and validate_throw_range() == true:
-		item_modifier.enable_collision(item_being_dragged)
+		item_mod.enable_collision(item_being_dragged)
 		item_being_dragged.position = get_global_mouse_position()
 		item_being_dragged.reparent(item_control_parent)
 		
@@ -138,7 +139,6 @@ func throw_item_in_world():
 
 func return_item_to_inventory() -> void:
 	_add_item_to_list(item_being_dragged)
-	item_being_dragged.visible = false
 	item_being_dragged = null
 	
 func validate_placement_in_world() -> bool:
