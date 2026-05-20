@@ -9,9 +9,10 @@ var active_behavior : Node
 var active : bool = true
 
 func _physics_process(delta: float) -> void:
-	var direction = _find_direction()
-	enemy.velocity = direction * 100
-	enemy.move_and_slide()
+	if active == true:
+		var direction = _find_direction()
+		enemy.velocity = direction * 100
+		enemy.move_and_slide()
 
 func _ready() -> void:
 	behaviors = get_children()

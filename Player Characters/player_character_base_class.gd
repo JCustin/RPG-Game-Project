@@ -1,7 +1,7 @@
 extends CharacterBody2D 
 class_name player_character
 
-var combat_counterpart : Node
+var combat_counterpart : combat_player_character
 @export var stat_block : player_stat_block_resource
 
 

@@ -11,13 +11,12 @@ func _ready() -> void:
 func _signal_connection() -> void:
 	player.player_inventory_opened.connect(spawn_inventory_GUI)
 	Player_Data.combat_initiated.connect(_start_combat)
+	Player_Data.combat_ended.connect(_end_combat)
 	
 
 func _start_combat(player_initiating_combat: player_character, enemy_initiating_combat: enemy_character) -> void:
 	camera.enabled = false
 	combat_manager.initiate_combat(player_initiating_combat, enemy_initiating_combat)
-	
-	combat_manager.combat_over.connect(_end_combat)
 	
 func _end_combat():
 	camera.enabled = true

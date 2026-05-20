@@ -5,7 +5,7 @@ var attack_calculation = attack_damage_handler_component.new()
 var basic_attack_component : basic_attack_combat_component
 var special_attack_component : special_attack_combat_component
 
-
+var round_counter : int = 1
 
 var active_actor : Variant
 var player_actors : Array
@@ -30,6 +30,8 @@ func cust_init(player_initiating_combat: player_character, enemy_initiating_comb
 	
 	var player = player_initiating_combat.combat_counterpart
 	var enemy = enemy_initiating_combat.combat_counterpart
+	
+	
 	player_actors.append(player)
 	enemy_actors.append(enemy)
 	
@@ -52,8 +54,10 @@ func cust_init(player_initiating_combat: player_character, enemy_initiating_comb
 	
 
 func _connect_signals() -> void:
+	print_debug(enemy_actors)
 	var enemy : combat_enemy_character = enemy_actors[0]
 	enemy.executed_attack.connect(handle_attack)
+	enemy.enemy_defeated.connect(_win_combat)
 	%Combat_Description_Text.combat_description_closed.connect(_facilitate_turn)
 	%Attack.pressed.connect(initiate_basic_attack)
 	
@@ -78,6 +82,7 @@ func _facilitate_turn() -> void:
 			active_actor = turn_queue[next_turn_queue_index]
 		else:
 			active_actor = turn_queue[0]
+			round_counter += 1
 			actors_played.clear()
 
 	_match_combat_state_based_on_active_actor()
@@ -97,7 +102,7 @@ func handle_attack(target, attack_damage: int, attack_type: global_enums.damage_
 	target.stat_block.HP = attack_calculation.calculate_attack(active_actor, target, attack_damage, attack_type)
 	%Combat_Description_Text.prompt_combat_description(attack_description)
 	actors_played.append(active_actor)
-	_facilitate_turn()
+	#_facilitate_turn()
 	
 func _match_combat_state_based_on_active_actor():
 	if active_actor is combat_player_character:
@@ -177,8 +182,20 @@ func initiate_conversation():
 		Dialogic.start(enemy_dialogue)
 
 func attempt_to_flee():
+	for player in player_actors:
+		remove_child(player)
+	for enemy in enemy_actors:
+		remove_child(enemy)
+	
 	combat_fled.emit()
 
+func _win_combat() -> void:
+	enemy_actors[0].queue_free()
+	remove_child(player_actors[0])
+	combat_won.emit()
+
+
+# MISC FUNCS
 func _toggle_player_GUI(toggle : bool) -> void:
 	if toggle == true:
 		for child in %Combat_Player_Actions_Container.get_children():

@@ -13,7 +13,7 @@ func initiate_combat(player_initiating_combat: player_character, enemy_initiatin
 	overworld_enemy = enemy_initiating_combat
 	overworld_player = player_initiating_combat
 	
-	combat_scene = preload("uid://buylh0rmqi1ll").instantiate()
+	combat_scene = load("uid://buylh0rmqi1ll").instantiate()
 	if combat_scene.is_visible_in_tree():
 		return
 	add_child(combat_scene)
@@ -30,11 +30,11 @@ func initiate_combat(player_initiating_combat: player_character, enemy_initiatin
 	
 func end_combat_win():
 	overworld_enemy.free()
-	combat_over.emit()
+	Player_Data.combat_ended.emit()
 	combat_scene.queue_free()
 	
 func end_combat_fled():
-	combat_over.emit()
+	Player_Data.combat_ended.emit()
 	combat_scene.queue_free()
 	overworld_enemy.stun_after_combat()
 	
