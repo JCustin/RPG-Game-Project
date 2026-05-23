@@ -14,6 +14,7 @@ class_name combat_enemy_character extends Node2D
 
 signal executed_attack(target: combat_player_character, attack_damage: int, attack_type: StringName, combat_description: String)
 signal enemy_defeated
+signal enemy_wounded
 
 
 func _ready() -> void:
@@ -82,6 +83,9 @@ func _lose_limb(limb: enemy_limb_class) -> void:
 	
 	if limb == primary_limb:
 		enemy_defeated.emit()
+		
+	else:
+		enemy_wounded.emit()
 		
 func switch_direction(direction: global_enums.combat_direction) -> void:
 	var combat_direction = global_enums.combat_direction

@@ -4,6 +4,9 @@ var combat_counterpart : combat_enemy_character
 var unit_name : String
 var unit_description : String
 
+enum behavior_states {patrol, chase, wounded}
+var behavior = behavior_states.patrol
+
 @export var collision_box : CollisionShape2D
 @export var AI_movement_controller : ai_movement_controller
 
@@ -13,6 +16,8 @@ func _init() -> void:
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(2, true)
 	set_collision_mask_value(4, true)
+	await ready
+	combat_counterpart.enemy_wounded.connect(_flee)
 	z_index = 10
 
 func stun_after_combat():
@@ -24,3 +29,11 @@ func stun_after_combat():
 	collision_box.disabled = false
 	AI_movement_controller.active = true
 	
+func _flee() -> void:
+	behavior = behavior_states.wounded
+
+func _chase_player() -> void:
+	behavior = behavior_states.chase
+	
+func _patrol() -> void:
+	behavior = behavior_states.patrol
