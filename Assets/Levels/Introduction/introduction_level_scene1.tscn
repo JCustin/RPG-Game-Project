@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c82apivj8l805" path="res://Assets/Levels/Introduction/Scripts/introduction_level_scene_1.gd" id="1_0ws2k"]
 [ext_resource type="Texture2D" uid="uid://dgyssf3xtqgxp" path="res://WIP_Pixel_Art/Forest_Props.png" id="3_0ws2k"]
+[ext_resource type="PackedScene" uid="uid://clbl752r1ismm" path="res://Assets/objects/Trees/tree.tscn" id="4_4yk47"]
 [ext_resource type="Texture2D" uid="uid://bi38rbuu02jx8" path="res://WIP_Pixel_Art/TEST_Grass_Spriet.png" id="4_eywac"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ykh66"]
@@ -46,3 +47,6 @@ tile_map_data = PackedByteArray("AAABAP//AAACAAAAAAACAAgAAAACAAAAAAACAP7/AAAAAAA
 tile_set = SubResource("TileSet_4yk47")
 
 [node name="Obstructions" type="TileMapLayer" parent="." unique_id=1868720169]
+
+[node name="Tree" parent="Obstructions" unique_id=926762912 instance=ExtResource("4_4yk47")]
+position = Vector2(48, 21)

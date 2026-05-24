@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://clbl752r1ismm"]
+
+[ext_resource type="Texture2D" uid="uid://bxun2pwih07rt" path="res://WIP_Pixel_Art/Spruce_Tree.png" id="1_d2pw7"]
+
+[sub_resource type="ConcavePolygonShape2D" id="ConcavePolygonShape2D_d2pw7"]
+
+[node name="Tree" type="StaticBody2D" unique_id=926762912]
+z_index = 100
+scale = Vector2(1.5, 1.5)
+collision_layer = 8
+collision_mask = 7
+
+[node name="Tree Sprite" type="Sprite2D" parent="." unique_id=631485999]
+texture = ExtResource("1_d2pw7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=690745206]
+shape = SubResource("ConcavePolygonShape2D_d2pw7")
