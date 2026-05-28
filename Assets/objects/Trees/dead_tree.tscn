@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://clbl752r1ismm"]
+[gd_scene format=3 uid="uid://bfri2ic7v3hra"]
 
-[ext_resource type="Texture2D" uid="uid://bxun2pwih07rt" path="res://WIP_Pixel_Art/Spruce_Tree.png" id="1_d2pw7"]
-[ext_resource type="Script" uid="uid://dxvox3iwqnim7" path="res://Assets/objects/Trees/Test_Tree_Script.gd" id="1_t2qgk"]
-[ext_resource type="Texture2D" uid="uid://cubvc5aevs0ov" path="res://WIP_Pixel_Art/Spruce_Tree_Shadow.png" id="2_hb5bv"]
+[ext_resource type="Script" uid="uid://dxvox3iwqnim7" path="res://Assets/objects/Trees/Test_Tree_Script.gd" id="1_kvrby"]
+[ext_resource type="Texture2D" uid="uid://chh27mxrs6gio" path="res://WIP_Pixel_Art/Dead_Tree.png" id="1_tgqku"]
+[ext_resource type="Texture2D" uid="uid://du5rc54ywqln6" path="res://WIP_Pixel_Art/Dead_Tree_Shadow.png" id="2_kvrby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2pw7"]
 size = Vector2(41.333336, 24.666666)
@@ -12,12 +12,12 @@ z_index = 100
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 7
-script = ExtResource("1_t2qgk")
+script = ExtResource("1_kvrby")
 shadow_sprite_pivot = NodePath("Node2D")
 shadow_sprite = NodePath("Node2D/Shadow Sprite")
 
 [node name="Tree Sprite" type="Sprite2D" parent="." unique_id=631485999]
-texture = ExtResource("1_d2pw7")
+texture = ExtResource("1_tgqku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=690745206]
 visible = false
@@ -30,7 +30,7 @@ position = Vector2(-1.3333333, 6.666667)
 [node name="Shadow Sprite" type="Sprite2D" parent="Node2D" unique_id=444390814]
 modulate = Color(1, 1, 1, 0.4862745)
 z_index = -1
-position = Vector2(19.98105, 27.05479)
+position = Vector2(32.666664, 40.66667)
 rotation = 2.2444935
-scale = Vector2(0.5910844, 1.0272942)
-texture = ExtResource("2_hb5bv")
+scale = Vector2(0.5779133, 1.9227418)
+texture = ExtResource("2_kvrby")

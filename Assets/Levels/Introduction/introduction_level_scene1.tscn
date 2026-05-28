@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dgyssf3xtqgxp" path="res://WIP_Pixel_Art/Forest_Props.png" id="3_0ws2k"]
 [ext_resource type="PackedScene" uid="uid://clbl752r1ismm" path="res://Assets/objects/Trees/tree.tscn" id="4_4yk47"]
 [ext_resource type="Texture2D" uid="uid://bi38rbuu02jx8" path="res://WIP_Pixel_Art/TEST_Grass_Spriet.png" id="4_eywac"]
+[ext_resource type="PackedScene" uid="uid://bfri2ic7v3hra" path="res://Assets/objects/Trees/dead_tree.tscn" id="5_4yk47"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ykh66"]
 texture = ExtResource("4_eywac")
@@ -50,3 +51,14 @@ tile_set = SubResource("TileSet_4yk47")
 
 [node name="Tree" parent="Obstructions" unique_id=926762912 instance=ExtResource("4_4yk47")]
 position = Vector2(48, 21)
+
+[node name="Dead_Tree" parent="Obstructions" unique_id=725368928 instance=ExtResource("5_4yk47")]
+position = Vector2(56, 139)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1496450423]
+position = Vector2(35, -190)
+color = Color(1, 0.7372549, 0, 1)
+energy = 0.56
+blend_mode = 2
+height = 0.43
+max_distance = 3642.0
