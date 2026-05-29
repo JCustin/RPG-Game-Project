@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d25avsulx1mgi" path="res://Enemy/Foot_Soldier/Scenes/foot_soldier_overworld.tscn" id="4_35con"]
 [ext_resource type="PackedScene" uid="uid://b7roybve1t5i7" path="res://NPC/Scenes/Test/gravedigger.tscn" id="5_ppatb"]
 [ext_resource type="Script" uid="uid://okon6v6a4v6u" path="res://Assets/Levels/Introduction/item_controller_logic.gd" id="6_35con"]
+[ext_resource type="Script" uid="uid://bawvgeno285sc" path="res://Managers/DayNightCycle/day_night_cycle_script.gd" id="8_cypmi"]
 [ext_resource type="Script" uid="uid://ci7tsuvbhhn86" path="res://Assets/Levels/Introduction/combat_manager.gd" id="9_cypmi"]
 [ext_resource type="Script" uid="uid://uqlmisbdythv" path="res://Assets/Camera/camera_logic.gd" id="10_cypmi"]
 
@@ -37,6 +38,26 @@ z_index = -2
 [node name="Item_Controller" type="Node" parent="Overworld/Introduction_level_scene1" unique_id=1797822058 groups=["Item_Controller"]]
 unique_name_in_owner = true
 script = ExtResource("6_35con")
+
+[node name="Day Night System" type="Node" parent="Overworld" unique_id=1598732156 node_paths=PackedStringArray("light_source")]
+script = ExtResource("8_cypmi")
+light_source = NodePath("DirectionalLight2D")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Overworld/Day Night System" unique_id=1069278521]
+position = Vector2(35, -190)
+color = Color(1.0826756, 1.224127, 0, 1)
+energy = 0.56
+blend_mode = 2
+height = 0.43
+max_distance = 3642.0
+
+[node name="DirectionalLight2D2" type="DirectionalLight2D" parent="Overworld/Day Night System" unique_id=1918844646]
+position = Vector2(35, -190)
+color = Color(1, 0.7372549, 0, 1)
+energy = 0.56
+blend_mode = 2
+height = 0.43
+max_distance = 3642.0
 
 [node name="Combat_Manager" type="Node" parent="." unique_id=1621919967]
 script = ExtResource("9_cypmi")
