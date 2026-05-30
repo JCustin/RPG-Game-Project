@@ -36,8 +36,11 @@ texture = ExtResource("3_0ws2k")
 [sub_resource type="TileSet" id="TileSet_4yk47"]
 sources/0 = SubResource("TileSetAtlasSource_eywac")
 
-[node name="Introduction_level_scene1" type="Node2D" unique_id=948018200 groups=["Map"]]
+[node name="Introduction_level_scene1" type="Node2D" unique_id=948018200 node_paths=PackedStringArray("obstructions", "walkable_ground", "boundaries") groups=["Map"]]
 script = ExtResource("1_0ws2k")
+obstructions = NodePath("Obstructions")
+walkable_ground = NodePath("Ground")
+boundaries = NodePath("Props")
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=734152218]
 tile_map_data = PackedByteArray("AAD//wQAAAACAAAAAAD//wgAAAADAAAAAAD//wwAAAACAAAAAAD//wAAAAAAAAAAAAD///z/AAAEAAAAAAADAPz/AAADAAAAAGADAAAAAAAGAAAAAAADAAQAAAAGAAAAAAADAAgAAAAGAAAAAAAHAPz/AAAEAAAAADAHAAAAAAAAAAAAAAAHAAQAAAADAAAAAAAHAAgAAAACAAAAAAADAAwAAAAGAAAAAAA=")

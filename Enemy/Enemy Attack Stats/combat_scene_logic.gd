@@ -173,7 +173,6 @@ func initiate_special_attack():
 	)
 	
 func initiate_conversation():
-	var dialogue : DialogicAnimation
 	var enemy : combat_enemy_character = enemy_actors[0]
 	var enemy_dialogue : DialogicTimeline = enemy.combat_dialogue_options
 	if Dialogic.current_timeline != null:

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cqvte1takp1su" path="res://Assets/Levels/Introduction/Scripts/debug_level.gd" id="1_a5wmo"]
 [ext_resource type="PackedScene" uid="uid://ch488n2mdridh" path="res://Assets/Levels/Introduction/introduction_level_scene1.tscn" id="1_ngams"]
 [ext_resource type="Script" uid="uid://ovtkhcrhwh4b" path="res://Managers/actor_controller.gd" id="1_nhxuj"]
+[ext_resource type="Script" uid="uid://bj3nt5g8t2sxn" path="res://Assets/Levels/Overworld/Overworld_Script.gd" id="2_lq1e7"]
 [ext_resource type="PackedScene" uid="uid://dru8467dcjn7j" path="res://Player Characters/Witch Hunter/witch_hunter.tscn" id="3_35con"]
 [ext_resource type="PackedScene" uid="uid://d25avsulx1mgi" path="res://Enemy/Foot_Soldier/Scenes/foot_soldier_overworld.tscn" id="4_35con"]
 [ext_resource type="PackedScene" uid="uid://b7roybve1t5i7" path="res://NPC/Scenes/Test/gravedigger.tscn" id="5_ppatb"]
@@ -17,8 +18,12 @@ combat_manager = NodePath("Combat_Manager")
 camera = NodePath("game_camera")
 metadata/_edit_lock_ = true
 
-[node name="Overworld" type="Node2D" parent="." unique_id=1845968887]
+[node name="Overworld" type="Node2D" parent="." unique_id=1845968887 node_paths=PackedStringArray("region", "day_night_system", "actor_manager")]
 unique_name_in_owner = true
+script = ExtResource("2_lq1e7")
+region = NodePath("Introduction_level_scene1")
+day_night_system = NodePath("Day Night System")
+actor_manager = NodePath("Actor Controller")
 
 [node name="Actor Controller" type="Node2D" parent="Overworld" unique_id=968486888]
 script = ExtResource("1_nhxuj")
@@ -46,14 +51,6 @@ light_source = NodePath("DirectionalLight2D")
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Overworld/Day Night System" unique_id=1069278521]
 position = Vector2(35, -190)
 color = Color(1.0826756, 1.224127, 0, 1)
-energy = 0.56
-blend_mode = 2
-height = 0.43
-max_distance = 3642.0
-
-[node name="DirectionalLight2D2" type="DirectionalLight2D" parent="Overworld/Day Night System" unique_id=1918844646]
-position = Vector2(35, -190)
-color = Color(1, 0.7372549, 0, 1)
 energy = 0.56
 blend_mode = 2
 height = 0.43

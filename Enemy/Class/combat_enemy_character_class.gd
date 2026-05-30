@@ -31,7 +31,7 @@ func _choose_target(player_pool : Array) -> combat_player_character:
 			weakest_player = player
 	return weakest_player
 	
-func _choose_attack(target: combat_player_character) -> base_enemy_attack_structure:
+func _choose_attack(_target: combat_player_character) -> base_enemy_attack_structure:
 	var selected_attack : base_enemy_attack_structure = attack_pool.pick_random()
 	return selected_attack
 	

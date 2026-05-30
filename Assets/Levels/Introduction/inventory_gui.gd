@@ -147,7 +147,7 @@ func return_item_to_inventory() -> void:
 	print_debug(dragged_item_container)
 	item_being_dragged.free()
 	item_being_dragged = null
-	await _add_item_to_list(dragged_item_container)
+	_add_item_to_list(dragged_item_container)
 	dragged_item_container = {}
 	
 func validate_placement_in_world() -> bool:
