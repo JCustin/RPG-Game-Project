@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://clbl752r1ismm"]
 
 [ext_resource type="Script" uid="uid://dxvox3iwqnim7" path="res://Assets/objects/Trees/Test_Tree_Script.gd" id="1_t2qgk"]
-[ext_resource type="Texture2D" uid="uid://c4ov70kik2prw" path="res://WIP_Pixel_Art/Spruce_Tree_Trunk1.png" id="2_buo0d"]
 [ext_resource type="Texture2D" uid="uid://cubvc5aevs0ov" path="res://WIP_Pixel_Art/Spruce_Tree_Shadow.png" id="2_hb5bv"]
-[ext_resource type="Texture2D" uid="uid://g63t12kaub6n" path="res://WIP_Pixel_Art/Spruce_Tree_Bush2.png" id="3_nucph"]
+[ext_resource type="Texture2D" uid="uid://qfdrgnccja8r" path="res://WIP_Pixel_Art/fuckasstree.png" id="2_t2qgk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_buo0d"]
 radius = 3.666667
@@ -11,7 +10,6 @@ height = 14.000002
 
 [node name="Tree" type="StaticBody2D" unique_id=926762912 node_paths=PackedStringArray("shadow_sprite_pivot", "shadow_sprite")]
 z_index = 1
-scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_t2qgk")
@@ -19,17 +17,18 @@ shadow_sprite_pivot = NodePath("Node2D")
 shadow_sprite = NodePath("Node2D/Shadow Sprite")
 
 [node name="Tree Trunk" type="Sprite2D" parent="." unique_id=644647061]
-texture = ExtResource("2_buo0d")
+texture = ExtResource("2_t2qgk")
 
 [node name="Tree Bush" type="Sprite2D" parent="." unique_id=631485999]
 z_index = 2
-texture = ExtResource("3_nucph")
+position = Vector2(1, -13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=690745206]
 position = Vector2(0.6666667, 10.666667)
 shape = SubResource("CapsuleShape2D_buo0d")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1506145614]
+visible = false
 position = Vector2(0.66666675, 8)
 
 [node name="Shadow Sprite" type="Sprite2D" parent="Node2D" unique_id=444390814]
