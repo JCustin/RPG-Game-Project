@@ -30,16 +30,7 @@ script = ExtResource("1_nhxuj")
 
 [node name="Day Night System" type="Node" parent="Overworld" unique_id=1598732156 node_paths=PackedStringArray("light_source")]
 script = ExtResource("8_cypmi")
-light_source = NodePath("DirectionalLight2D")
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Overworld/Day Night System" unique_id=1069278521]
-position = Vector2(2, -99)
-blend_mode = 2
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.3137255)
-shadow_filter = 1
-shadow_filter_smooth = 4.9
-max_distance = 100000.0
+light_source = NodePath("../DirectionalLight2D")
 
 [node name="Map Region Manager" type="Node" parent="Overworld" unique_id=815382107]
 script = ExtResource("8_la3gg")
@@ -52,8 +43,14 @@ z_index = -2
 unique_name_in_owner = true
 script = ExtResource("6_35con")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="Overworld/Map Region Manager" unique_id=887143431]
-color = Color(0, 0, 0, 1)
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Overworld" unique_id=1069278521]
+position = Vector2(136, -56)
+blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.54901963)
+shadow_filter = 1
+shadow_filter_smooth = 4.9
+max_distance = 100000.0
 
 [node name="Combat_Manager" type="Node" parent="." unique_id=1621919967]
 script = ExtResource("9_cypmi")
