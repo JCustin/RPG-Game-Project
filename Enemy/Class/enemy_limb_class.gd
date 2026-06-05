@@ -8,7 +8,6 @@ func _ready() -> void:
 	stat_block = stat_block.duplicate()
 	stat_block.limb_lost.connect(func(): limb_lost.emit(self))
 
-
 func switch_direction(direction: global_enums.combat_direction) -> void:
 	var possible_combat_directions = global_enums.combat_direction
 	var limb_direction = stat_block.limb_direction

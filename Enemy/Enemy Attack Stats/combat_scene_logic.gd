@@ -47,7 +47,7 @@ func cust_init(player_initiating_combat: player_character, enemy_initiating_comb
 	
 	_match_combat_state_based_on_active_actor()
 	player.position = Vector2(950,500)
-	enemy.position = Vector2(500, 300)
+	enemy.position = Vector2(500, 400)
 	#enemy.scale = Vector2(0.7, 0.7)
 	_toggle_player_GUI(false)
 	%Combat_Description_Text.prompt_combat_description(str("You stumble upon ", enemy_actors[0].unit_name, "!"))
