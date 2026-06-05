@@ -1,30 +1,42 @@
 [gd_scene format=3 uid="uid://clbl752r1ismm"]
 
 [ext_resource type="Script" uid="uid://dxvox3iwqnim7" path="res://Assets/objects/Trees/Test_Tree_Script.gd" id="1_t2qgk"]
+[ext_resource type="Texture2D" uid="uid://d3ee885k8dp3g" path="res://WIP_Pixel_Art/fuckasstree_shadedtop.png" id="2_buo0d"]
 [ext_resource type="Texture2D" uid="uid://qfdrgnccja8r" path="res://WIP_Pixel_Art/fuckasstree.png" id="2_t2qgk"]
+[ext_resource type="Texture2D" uid="uid://drd4mdpktdan" path="res://WIP_Pixel_Art/fuckasstree_top.png" id="3_nucph"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_buo0d"]
 radius = 3.666667
 height = 14.000002
 
-[node name="Tree" type="StaticBody2D" unique_id=926762912 node_paths=PackedStringArray("shadow_sprite_pivot", "shadow_sprite")]
+[node name="Tree" type="StaticBody2D" unique_id=926762912 node_paths=PackedStringArray("shadow_sprite_pivot")]
 z_index = 1
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_t2qgk")
-shadow_sprite_pivot = NodePath("Node2D")
-shadow_sprite = NodePath("")
+shadow_sprite_pivot = NodePath("Shadow Pivot")
 
 [node name="Tree Trunk" type="Sprite2D" parent="." unique_id=644647061]
-texture = ExtResource("2_t2qgk")
+z_index = 2
+texture = ExtResource("2_buo0d")
 
 [node name="Tree Bush" type="Sprite2D" parent="." unique_id=631485999]
 z_index = 2
-position = Vector2(1, -13)
+position = Vector2(-1, -59)
+texture = ExtResource("3_nucph")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=690745206]
 position = Vector2(0.6666667, 10.666667)
 shape = SubResource("CapsuleShape2D_buo0d")
 
-[node name="Node2D" type="Node2D" parent="." unique_id=1506145614]
+[node name="Shadow Pivot" type="Node2D" parent="." unique_id=1506145614]
 position = Vector2(0.66666675, 8)
+
+[node name="Tree Trunk Shadow" type="Sprite2D" parent="Shadow Pivot" unique_id=2032270063]
+modulate = Color(0, 0, 0, 0.56078434)
+z_index = 1
+position = Vector2(29.697393, 40.469414)
+rotation = 2.7482047
+scale = Vector2(0.6936691, 1.7034197)
+texture = ExtResource("2_t2qgk")
+offset = Vector2(30, 0)
