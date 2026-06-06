@@ -10,7 +10,11 @@ var round_counter : int = 1
 var active_actor : Variant
 var player_actors : Array
 var enemy_actors : Array
+
+
 var turn_queue : Array
+var queued_enemy_actions : Array[Dictionary]
+
 var actors_played : Array
 
 var possible_combat_direction = global_enums.combat_direction
@@ -52,7 +56,7 @@ func cust_init(player_initiating_combat: player_character, enemy_initiating_comb
 	#enemy.scale = Vector2(0.7, 0.7)
 	_toggle_player_GUI(false)
 	%Combat_Description_Text.prompt_combat_description(str("You stumble upon ", enemy_actors[0].unit_name, "!"))
-	
+
 
 func _connect_signals() -> void:
 	print_debug(enemy_actors)
@@ -72,6 +76,19 @@ func _connect_signals() -> void:
 		player.executed_attack.connect(handle_attack)
 		
 	Dialogic.timeline_ended.connect(_facilitate_turn)
+
+func _start_round() -> void:
+	var enemy : combat_enemy_character = enemy_actors[0]
+	for turns_alloted in turn_queue.count(enemy):
+		var queued_action = enemy.prepare_action(player_actors)
+		queued_enemy_actions.append(queued_action)
+
+func _end_actor_turn() -> void:
+	turn_queue.pop_front()
+	
+func start_next_actor_turn() -> void:
+	
+
 
 func _facilitate_turn() -> void:
 	await get_tree().create_timer(0.5).timeout

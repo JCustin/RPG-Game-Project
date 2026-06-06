@@ -37,20 +37,15 @@ func _choose_attack(_target: combat_player_character) -> base_enemy_attack_struc
 	var selected_attack : base_enemy_attack_structure = attack_pool.pick_random()
 	return selected_attack
 
-func prepare_actions_for_turn(player_pool : Array) -> void:
-	queued_actions.clear()
-	var actions_per_turn = ceili(stat_block.SPD / 20)
+func prepare_action(player_pool : Array) -> Dictionary:
+	var attack_data : Dictionary = {}
+	var target = _choose_target(player_pool)
+	attack_data["target"] = target
+	attack_data["attack"] = _choose_attack(target)
 	
-	for action in range(actions_per_turn):
-		var attack_data : Dictionary = {}
-		var target = _choose_target(player_pool)
-		attack_data["target"] = target
-		attack_data["attack"] = _choose_attack(target)
-		queued_actions.append(attack_data)
-	
+	return attack_data
 	 
 func execute_turn(player_pool: Array) -> void:
-	prepare_actions_for_turn(player_pool)
 	
 	var target = _choose_target(player_pool)
 	var attack_stats : base_enemy_attack_structure = _choose_attack(target)

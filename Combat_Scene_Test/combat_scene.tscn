@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bqjr5jh77i1w0" path="res://Combat_Scene_Test/combat_description_text_logic.gd" id="2_xe5l4"]
 [ext_resource type="Script" uid="uid://bf6g3ycwbjnag" path="res://Combat_Scene_Test/player_stamina.gd" id="3_xe5l4"]
 [ext_resource type="Script" uid="uid://cbek2mab1rn06" path="res://Combat_Scene_Test/special_attack_list_logic.gd" id="4_hhihl"]
+[ext_resource type="Texture2D" uid="uid://bytk7kfb1sxjn" path="res://WIP_Pixel_Art/Thumbnail Art/FootSoldier_Thumb2.png" id="5_8uq53"]
+[ext_resource type="Texture2D" uid="uid://b4w2ren4dbx16" path="res://WIP_Pixel_Art/Thumbnail Art/Witchhunter_Thumbnail.png" id="6_fy6n8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hnhl"]
 
@@ -176,3 +178,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_hhihl")
+
+[node name="Sprite2D" type="Sprite2D" parent="Combat_HUD" unique_id=1180839774]
+position = Vector2(920, 112)
+texture = ExtResource("5_8uq53")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Combat_HUD" unique_id=1019260469]
+position = Vector2(1024, 112)
+texture = ExtResource("6_fy6n8")
