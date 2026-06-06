@@ -43,6 +43,7 @@ func cust_init(player_initiating_combat: player_character, enemy_initiating_comb
 	
 	_connect_signals()
 	turn_queue = timeline.assign_turn_queue(all_actors)
+	print_debug("Turn queue ", turn_queue)
 	active_actor = turn_queue[0]
 	
 	_match_combat_state_based_on_active_actor()

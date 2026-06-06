@@ -12,6 +12,8 @@ class_name combat_enemy_character extends Node2D
 # if a primary_limb is destroyed, then the whole damn thing is done for. 
 @export var primary_limb: enemy_limb_class
 
+var queued_actions : Array = []
+
 signal executed_attack(target: combat_player_character, attack_damage: int, attack_type: StringName, combat_description: String)
 signal enemy_defeated
 signal enemy_wounded
@@ -34,8 +36,22 @@ func _choose_target(player_pool : Array) -> combat_player_character:
 func _choose_attack(_target: combat_player_character) -> base_enemy_attack_structure:
 	var selected_attack : base_enemy_attack_structure = attack_pool.pick_random()
 	return selected_attack
+
+func prepare_actions_for_turn(player_pool : Array) -> void:
+	queued_actions.clear()
+	var actions_per_turn = ceili(stat_block.SPD / 20)
 	
+	for action in range(actions_per_turn):
+		var attack_data : Dictionary = {}
+		var target = _choose_target(player_pool)
+		attack_data["target"] = target
+		attack_data["attack"] = _choose_attack(target)
+		queued_actions.append(attack_data)
+	
+	 
 func execute_turn(player_pool: Array) -> void:
+	prepare_actions_for_turn(player_pool)
+	
 	var target = _choose_target(player_pool)
 	var attack_stats : base_enemy_attack_structure = _choose_attack(target)
 	var attack_damage : int = attack_stats.attack_damage + stat_block.ATK

@@ -11,22 +11,46 @@ var static_timeline: bool = false
 @export var maximum_timeline_value : int = 100
 
 func assign_turn_queue(active_actors_in_combat: Array) -> Array:
-	var static_timeline = true
-	var final_turn_queue : Array
-	var actor_speed_turn_queue : Array
+	var speed_order : Array 
+	var turn_queue : Array 
 	
 	for actor in active_actors_in_combat:
-		actor_speed_turn_queue.append([actor, (100 - actor.stat_block.SPD)])
+		#print_debug("Actor: ", actor)
+		var actor_speed = actor.stat_block.SPD
+		var number_of_turns = ceili(actor_speed / 25)
+		print_debug(actor, " No of turns: ", number_of_turns)
+		if number_of_turns == 0:
+			number_of_turns = 1
+		
+		for action in range(number_of_turns):
+			var speed_differentiation = 50 * action
+			speed_order.append([actor, (actor_speed + speed_differentiation)])
+			
+	print_debug("Speed Order: ", speed_order)
+	speed_order.sort_custom(sort_by_speed)
+	
+		
+	for index in range(speed_order.size()):
+		var actor = speed_order[index][0]
+		turn_queue.append(actor)
+
+	print_debug(turn_queue)
+	return turn_queue
+			
+			
+			
 		
 			
-	actor_speed_turn_queue.sort_custom(sort_by_speed)
-	
-	for index in range(actor_speed_turn_queue.size()):
-		var actor = actor_speed_turn_queue[index][0]
-		final_turn_queue.append(actor)
-	
-	static_timeline = false
-	return final_turn_queue
+	#var static_timeline = true
+	#var final_turn_queue : Array
+	#var actor_speed_turn_queue : Array
+	#
+	#for actor in active_actors_in_combat:
+		#actor_speed_turn_queue.append([actor, (100 - actor.stat_block.SPD)])
+		#
+			#
+	#actor_speed_turn_queue.sort_custom(sort_by_speed)
+	#
 
 func sort_by_speed(a, b):
 	if a[1] < b[1]:

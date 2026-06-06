@@ -14,9 +14,8 @@ script = ExtResource("5_3gup7")
 movement_speed = 20
 metadata/_custom_type_script = "uid://b5yi0bwhmydx1"
 
-[node name="Foot_Soldier_Overworld" type="CharacterBody2D" unique_id=1840999848 node_paths=PackedStringArray("ai_movement_controller_component", "collision_box", "AI_movement_controller")]
+[node name="Foot_Soldier_Overworld" type="CharacterBody2D" unique_id=1840999848 node_paths=PackedStringArray("collision_box", "AI_movement_controller")]
 script = ExtResource("1_jl07l")
-ai_movement_controller_component = NodePath("AI_Movement_Controller")
 collision_box = NodePath("Collision_Box")
 AI_movement_controller = NodePath("AI_Movement_Controller")
 metadata/_custom_type_script = "uid://bo7qbhar3x74x"

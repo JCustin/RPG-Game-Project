@@ -22,7 +22,7 @@
 [sub_resource type="Resource" id="Resource_2ymr3"]
 script = ExtResource("2_n3kc3")
 DEF = 10
-SPD = 23
+SPD = 100
 ATK = 10
 metadata/_custom_type_script = "uid://cqorucsafla6w"
 
