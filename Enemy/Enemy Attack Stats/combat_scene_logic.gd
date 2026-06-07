@@ -5,17 +5,15 @@ var attack_calculation = attack_damage_handler_component.new()
 var basic_attack_component : basic_attack_combat_component
 var special_attack_component : special_attack_combat_component
 
-var round_counter : int = 1
-
 var active_actor : Variant
 var player_actors : Array
 var enemy_actors : Array
 
 
 var turn_queue : Array
-var queued_enemy_actions : Array[Dictionary]
+var turn_queue_action_data : Array[Dictionary]
 
-var actors_played : Array
+var queued_enemy_actions : Array[Dictionary]
 
 var possible_combat_direction = global_enums.combat_direction
 var current_combat_direction : int
@@ -72,6 +70,14 @@ func _connect_signals() -> void:
 
 # handling turns and rounds 
 func _start_round() -> void:
+	_refresh_turn_queue()
+	start_next_actor_turn()
+
+func _refresh_turn_queue() -> void:
+	%Turn_Queue_Display.clear_hud()
+	turn_queue.clear()
+	turn_queue_action_data.clear()
+	
 	var enemy : combat_enemy_character = enemy_actors[0]
 	
 	var all_actors : Array = player_actors.duplicate()
@@ -82,16 +88,30 @@ func _start_round() -> void:
 	else:
 		turn_queue = timeline.refresh_turn_queue(all_actors)
 	
-	for actor in turn_queue:
-		print_debug(actor)
-		%Turn_Queue_Container.add_thumbnail(actor.thumbnail_image)
+	#print_debug("turn_queue: ", turn_queue)
 	
-	for turns_alloted in turn_queue.count(enemy):
-		var queued_action = enemy.prepare_action(player_actors)
-		queued_enemy_actions.append(queued_action)
+	for turn in turn_queue.size():
+		var actor = turn_queue[turn]
+		var queued_action 
 		
+		# may be the wrong order, figure out later - specifically, may be in reverse order
+		if actor is combat_enemy_character:
+			queued_action = enemy.prepare_action(player_actors)
+		else:
+			queued_action = ''
+		
+		turn_queue_action_data.append(
+			{
+				"actor" : actor,
+				"queued_action" : queued_action,
+				"turn_count" : turn
+			}
+		)
 	
-	start_next_actor_turn()
+		#print_debug("turn_queue_action_data: ", turn_queue_action_data)
+	for turn_data in turn_queue_action_data:
+		#print_debug("turn: ", turn)
+		%Turn_Queue_Display.add_thumbnail(turn_data)
 
 func _end_round() -> void:
 	var all_actors = player_actors.duplicate()
@@ -101,6 +121,8 @@ func _end_round() -> void:
 func _end_actor_turn() -> void:
 	turn_queue.pop_front()
 	
+	# cut down the turn queue HUD
+	%Turn_Queue_Display.remove_latest_thumbnail()
 	# way to check if turn_queue is empty
 	if turn_queue.size() == 0:
 		_end_round()
@@ -109,10 +131,6 @@ func _end_actor_turn() -> void:
 	
 func start_next_actor_turn() -> void:
 	active_actor = turn_queue[0]
-	
-	%Turn_Queue_Container.clear_hud()
-	for actor in turn_queue:
-		%Turn_Queue_Container.add_thumbnail(actor.thumbnail_image)
 	
 	_facilitate_turn()
 
@@ -128,33 +146,18 @@ func _facilitate_turn() -> void:
 			_toggle_player_GUI(false)
 			var enemy : combat_enemy_character = active_actor
 			enemy.execute_turn(player_actors)
-			actors_played.append(active_actor)
 	
-	#if actors_played.has(active_actor):
-		#var current_turn_queue_index: int = turn_queue.find(active_actor)
-		#var next_turn_queue_index: int = (current_turn_queue_index + 1)
-		#if turn_queue.size() > next_turn_queue_index:
-			#active_actor = turn_queue[next_turn_queue_index]
-		#else:
-			#active_actor = turn_queue[0]
-			#round_counter += 1
-			#actors_played.clear()
-#
-	#_match_combat_state_based_on_active_actor()
 
 func _refresh_turn_queue_display() -> void:
-	
 	for actor in turn_queue:
 		var thumbnail_image = actor.combat_thumbnail
-		%Turn_Queue_Container.add_child(thumbnail_image)
+		%Turn_Queue_Display.add_child(thumbnail_image)
 
 
 func handle_attack(target, attack_damage: int, attack_type: global_enums.damage_type, attack_description: String):
 	target.stat_block.HP = attack_calculation.calculate_attack(active_actor, target, attack_damage, attack_type)
 	%Combat_Description_Text.prompt_combat_description(attack_description)
-	actors_played.append(active_actor)
 	_end_actor_turn()
-	#_facilitate_turn()
 	
 func _match_combat_state_based_on_active_actor():
 	if active_actor is combat_player_character:

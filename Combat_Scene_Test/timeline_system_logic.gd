@@ -34,23 +34,7 @@ func assign_turn_queue(active_actors_in_combat: Array) -> Array:
 		var actor = speed_order[index][0]
 		turn_queue.append(actor)
 
-	print_debug(turn_queue)
 	return turn_queue
-			
-			
-			
-		
-			
-	#var static_timeline = true
-	#var final_turn_queue : Array
-	#var actor_speed_turn_queue : Array
-	#
-	#for actor in active_actors_in_combat:
-		#actor_speed_turn_queue.append([actor, (100 - actor.stat_block.SPD)])
-		#
-			#
-	#actor_speed_turn_queue.sort_custom(sort_by_speed)
-	#
 
 func sort_by_speed(a, b):
 	if a[1] < b[1]:
