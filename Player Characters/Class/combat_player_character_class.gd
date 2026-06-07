@@ -10,6 +10,7 @@ combat_description: String)
 @export var player_basic_attack_stats : basic_attack_stat_block
 @export var player_special_attacks_pool : Array[special_attack_stat_block]
 @export var stat_block : player_stat_block_resource
+@export var thumbnail_image: CompressedTexture2D
 
 func deal_basic_attack(target):
 	executed_attack.emit(

@@ -4,8 +4,7 @@
 [ext_resource type="Script" uid="uid://bqjr5jh77i1w0" path="res://Combat_Scene_Test/combat_description_text_logic.gd" id="2_xe5l4"]
 [ext_resource type="Script" uid="uid://bf6g3ycwbjnag" path="res://Combat_Scene_Test/player_stamina.gd" id="3_xe5l4"]
 [ext_resource type="Script" uid="uid://cbek2mab1rn06" path="res://Combat_Scene_Test/special_attack_list_logic.gd" id="4_hhihl"]
-[ext_resource type="Texture2D" uid="uid://bytk7kfb1sxjn" path="res://WIP_Pixel_Art/Thumbnail Art/FootSoldier_Thumb2.png" id="5_8uq53"]
-[ext_resource type="Texture2D" uid="uid://b4w2ren4dbx16" path="res://WIP_Pixel_Art/Thumbnail Art/Witchhunter_Thumbnail.png" id="6_fy6n8"]
+[ext_resource type="Script" uid="uid://baesj1mr7e43" path="res://Combat_Scene_Test/turn_queue_HUD_script.gd" id="5_8uq53"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hnhl"]
 
@@ -179,10 +178,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_hhihl")
 
-[node name="Sprite2D" type="Sprite2D" parent="Combat_HUD" unique_id=1180839774]
-position = Vector2(920, 112)
-texture = ExtResource("5_8uq53")
+[node name="Turn_Queue_Display" type="Control" parent="Combat_HUD" unique_id=1951774754]
+layout_mode = 3
+anchor_left = 0.62
+anchor_top = 0.11000001
+anchor_right = 0.99300003
+anchor_bottom = 0.27
+offset_left = 16.0
+offset_top = -8.000008
+offset_right = 0.39990234
+offset_bottom = -8.000015
 
-[node name="Sprite2D2" type="Sprite2D" parent="Combat_HUD" unique_id=1019260469]
-position = Vector2(1024, 112)
-texture = ExtResource("6_fy6n8")
+[node name="Turn_Queue_Container" type="HBoxContainer" parent="Combat_HUD/Turn_Queue_Display" unique_id=602443128]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_8uq53")

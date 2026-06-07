@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://c40fi1836h5yt" path="res://Player Characters/Resources/Special Attacks/Rapier Special Attacks/Eye_Poke.tres" id="4_cawlu"]
 [ext_resource type="Texture2D" uid="uid://dtpfv8wffe4vx" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0004.png" id="5_3xkcm"]
 [ext_resource type="Resource" uid="uid://bu6tj6xn6c7gi" path="res://Player Characters/Resources/Initial_Player_Stats/Witch_Hunter_Stats.tres" id="5_25oma"]
+[ext_resource type="Texture2D" uid="uid://b4w2ren4dbx16" path="res://WIP_Pixel_Art/Thumbnail Art/Witchhunter_Thumbnail.png" id="6_cawlu"]
 [ext_resource type="Texture2D" uid="uid://cq1rwxlhxba2m" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0005.png" id="6_gwspi"]
 [ext_resource type="Texture2D" uid="uid://ojtn8sx6t0ac" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0006.png" id="7_cawlu"]
 [ext_resource type="Texture2D" uid="uid://cw7jqtbplonol" path="res://Assets/characters/Witch Hunter Animation Experimental/WitchHunter_Combat_Profile_Experimental_0007.png" id="8_25oma"]
@@ -48,6 +49,7 @@ script = ExtResource("1_ji7kt")
 player_basic_attack_stats = ExtResource("2_kwlfo")
 player_special_attacks_pool = Array[ExtResource("3_gwspi")]([ExtResource("4_cawlu")])
 stat_block = ExtResource("5_25oma")
+thumbnail_image = ExtResource("6_cawlu")
 
 [node name="Combat_Sprite" type="AnimatedSprite2D" parent="." unique_id=1531112781]
 unique_name_in_owner = true

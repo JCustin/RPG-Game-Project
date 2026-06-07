@@ -3,6 +3,7 @@ class_name combat_enemy_character extends Node2D
 @export var unit_name : String
 @export var unit_description : String
 @export var stat_block : enemy_stat_block_resource
+@export var thumbnail_image : CompressedTexture2D
 
 @export var attack_pool : Array[base_enemy_attack_structure]
 @export var combat_dialogue_options : DialogicTimeline

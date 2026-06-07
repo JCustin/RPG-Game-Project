@@ -15,7 +15,7 @@ func assign_turn_queue(active_actors_in_combat: Array) -> Array:
 	var turn_queue : Array 
 	
 	for actor in active_actors_in_combat:
-		#print_debug("Actor: ", actor)
+		print_debug("Actor: ", actor)
 		var actor_speed = actor.stat_block.SPD
 		var number_of_turns = ceili(actor_speed / 25)
 		print_debug(actor, " No of turns: ", number_of_turns)
