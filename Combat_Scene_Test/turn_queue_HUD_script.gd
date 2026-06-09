@@ -22,14 +22,35 @@ func remove_latest_thumbnail() -> void:
 
 func display_turn_information(thumbnail : combat_thumbnail_image) -> void:
 	var turn_data = thumbnail.get_meta('turn_data')
-	#print_debug(thumbnail.get_meta('turn_data'))
-	turn_data_panel.visible = true
-	turn_data_panel.position = get_global_mouse_position()
-	turn_data_panel.position.y += 30
-	var turn_data_text : Label = turn_data_panel.get_child(0)
-	turn_data_text.text = 'help'
+	var queued_action = turn_data["queued_action"]
 	
+	var turn_data_text_variables = {}
 	
+	if queued_action["target"] != null:
+		var acting_enemy : combat_enemy_character = turn_data["actor"]
+		turn_data_text_variables["actor"] = acting_enemy.unit_name
+		
+		
+		var queued_attack : base_enemy_attack_structure = queued_action["attack"]
+		var queued_attack_target : combat_player_character = queued_action["target"]
+		
+		var turn_count : int = turn_data["turn_count"]
+		
+		turn_data_text_variables["attack"] = queued_attack.attack_name
+		turn_data_text_variables["target"] = queued_attack_target.name
+		turn_data_text_variables["turn_count"] = turn_count
+		
+		turn_data_panel.visible = true
+		turn_data_panel.position = get_local_mouse_position()
+		turn_data_panel.position.y += 30
+		
+		turn_data_text.text = str(
+			'actor: {actor},
+			turn count: {turn_count},
+			attack: {attack},
+			target: {target}'
+		).format(turn_data_text_variables)
+
 	
 func hide_turn_information(thumbnail : combat_thumbnail_image) -> void:
 	turn_data_panel.visible = false

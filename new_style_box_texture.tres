@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://bfjajhr8v74do"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vv00e"]
+
+[resource]
+texture = SubResource("CompressedTexture2D_vv00e")

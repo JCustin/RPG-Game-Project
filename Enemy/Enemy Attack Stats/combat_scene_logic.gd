@@ -28,7 +28,6 @@ signal combat_lost
 
 func cust_init(player_initiating_combat: player_character, enemy_initiating_combat: enemy_character):
 	var all_actors : Array
-	print_debug(player_initiating_combat, enemy_initiating_combat)
 	
 	var player = player_initiating_combat.combat_counterpart
 	var enemy = enemy_initiating_combat.combat_counterpart
@@ -98,7 +97,10 @@ func _refresh_turn_queue() -> void:
 		if actor is combat_enemy_character:
 			queued_action = enemy.prepare_action(player_actors)
 		else:
-			queued_action = ''
+			queued_action = {
+				"target": null,
+				"attack": null
+				}
 		
 		turn_queue_action_data.append(
 			{
@@ -186,7 +188,7 @@ func attempt_to_flank():
 func open_inventory():
 	var player_inventory : inventory_resource = inventory_resource.new()
 	for item in player_inventory.inventory:
-		print_debug(item)
+		pass
 	# TODO re-implement player_inventory
 	
 # following section of code is dedicated to when player is initiating a basic attack
@@ -216,7 +218,6 @@ func initiate_special_attack():
 	
 	var enemy : combat_enemy_character = enemy_actors[0]
 	var enemy_limbs = enemy.get_limbs_based_on_combat_direction(current_combat_direction)
-	print_debug(enemy_limbs)
 	
 	special_attack_component = special_attack_combat_component.new(active_actor, %Special_Attack_List, enemy_limbs)
 	add_child(special_attack_component)
