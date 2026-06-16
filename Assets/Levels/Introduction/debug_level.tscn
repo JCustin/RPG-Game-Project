@@ -24,8 +24,9 @@ script = ExtResource("2_lq1e7")
 region = NodePath("Map Region Manager/Introduction_level_scene1")
 day_night_system = NodePath("Day Night System")
 
-[node name="Actor Controller" type="Node" parent="Overworld" unique_id=1449969595]
+[node name="Actor Controller" type="Node" parent="Overworld" unique_id=1449969595 node_paths=PackedStringArray("map_manager")]
 script = ExtResource("1_nhxuj")
+map_manager = NodePath("../Map Region Manager")
 
 [node name="Witch_Hunter" parent="Overworld/Actor Controller" unique_id=448452775 instance=ExtResource("3_35con")]
 
@@ -37,16 +38,13 @@ collision_mask = 27
 script = ExtResource("8_cypmi")
 light_source = NodePath("../DirectionalLight2D")
 
-[node name="Map Region Manager" type="Node" parent="Overworld" unique_id=815382107]
+[node name="Map Region Manager" type="Node" parent="Overworld" unique_id=815382107 node_paths=PackedStringArray("item_manager")]
 script = ExtResource("8_la3gg")
+item_manager = NodePath("../Item_Controller")
 
 [node name="Introduction_level_scene1" parent="Overworld/Map Region Manager" unique_id=1443023022 instance=ExtResource("1_ngams")]
 unique_name_in_owner = true
 z_index = -2
-
-[node name="Item_Controller" type="Node" parent="Overworld/Map Region Manager" unique_id=1797822058 groups=["Item_Controller"]]
-unique_name_in_owner = true
-script = ExtResource("6_35con")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Overworld" unique_id=1069278521]
 position = Vector2(136, -56)
@@ -56,6 +54,10 @@ shadow_color = Color(0, 0, 0, 0.54901963)
 shadow_filter = 1
 shadow_filter_smooth = 4.9
 max_distance = 100000.0
+
+[node name="Item_Controller" type="Node" parent="Overworld" unique_id=1797822058 groups=["Item_Controller"]]
+unique_name_in_owner = true
+script = ExtResource("6_35con")
 
 [node name="Combat_Manager" type="Node" parent="." unique_id=1621919967]
 script = ExtResource("9_cypmi")

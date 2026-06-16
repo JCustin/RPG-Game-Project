@@ -20,5 +20,6 @@ texture = ExtResource("2_r102e")
 [node name="Collision_Box" type="CollisionShape2D" parent="." unique_id=2046627207]
 shape = SubResource("RectangleShape2D_jl07l")
 
-[node name="AI_Movement_Controller" parent="." unique_id=756319719 node_paths=PackedStringArray("enemy") instance=ExtResource("3_jfab5")]
+[node name="AI_Movement_Controller" parent="." unique_id=756319719 node_paths=PackedStringArray("enemy", "collision_box") instance=ExtResource("3_jfab5")]
 enemy = NodePath("..")
+collision_box = NodePath("../Collision_Box")
