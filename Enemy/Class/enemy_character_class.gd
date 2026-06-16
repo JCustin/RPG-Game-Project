@@ -4,9 +4,6 @@ var combat_counterpart : combat_enemy_character
 var unit_name : String
 var unit_description : String
 
-enum behavior_states {patrol, chase, wounded}
-var behavior = behavior_states.patrol
-
 @export var collision_box : CollisionShape2D
 @export var AI_movement_controller : ai_movement_controller
 
@@ -28,12 +25,6 @@ func stun_after_combat():
 	
 	collision_box.disabled = false
 	AI_movement_controller.active = true
-	
-func _flee() -> void:
-	behavior = behavior_states.wounded
 
-func _chase_player() -> void:
-	behavior = behavior_states.chase
-	
-func _patrol() -> void:
-	behavior = behavior_states.patrol
+func _flee():
+	pass

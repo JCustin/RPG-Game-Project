@@ -3,16 +3,9 @@
 [ext_resource type="Script" uid="uid://ehvni8dqy7hw" path="res://Enemy/Foot_Soldier/Scenes/foot_soldier_overworld_logic.gd" id="1_jl07l"]
 [ext_resource type="Texture2D" uid="uid://d11rr3xlc85mu" path="res://Assets/characters/Wall_Rat_Overworld.png" id="2_r102e"]
 [ext_resource type="PackedScene" uid="uid://byku7qpo6gyy2" path="res://Enemy/Components/ai_movement_controller.tscn" id="3_jfab5"]
-[ext_resource type="Script" uid="uid://10ql608f5vxn" path="res://Enemy/Enemy Resource/AI Movement Behavior/movement_behavior_resource_base.gd" id="4_jfab5"]
-[ext_resource type="Script" uid="uid://b5yi0bwhmydx1" path="res://Enemy/Enemy Resource/AI Movement Behavior/patrol_movement_behavior.gd" id="5_3gup7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl07l"]
 size = Vector2(28, 28)
-
-[sub_resource type="Resource" id="Resource_to4rv"]
-script = ExtResource("5_3gup7")
-movement_speed = 20
-metadata/_custom_type_script = "uid://b5yi0bwhmydx1"
 
 [node name="Foot_Soldier_Overworld" type="CharacterBody2D" unique_id=1840999848 node_paths=PackedStringArray("collision_box", "AI_movement_controller")]
 script = ExtResource("1_jl07l")
@@ -29,4 +22,3 @@ shape = SubResource("RectangleShape2D_jl07l")
 
 [node name="AI_Movement_Controller" parent="." unique_id=756319719 node_paths=PackedStringArray("enemy") instance=ExtResource("3_jfab5")]
 enemy = NodePath("..")
-movement_behaviors = Array[ExtResource("4_jfab5")]([SubResource("Resource_to4rv")])
