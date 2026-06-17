@@ -1,4 +1,4 @@
-class_name ai_movement_controller extends Node
+class_name ai_movement_controller_ARCHIVE extends Node
 
 @export var enemy : enemy_character
 @export var collision_box : CollisionShape2D
@@ -22,7 +22,8 @@ func _ready() -> void:
 	moving_towards_target_position_flag = false
 
 func _physics_process(_delta: float) -> void:
-	_handle_movement()
+	if movement_active_flag == true:
+		_handle_movement()
 	
 func _handle_movement() -> void:
 	if moving_towards_target_position_flag == false:

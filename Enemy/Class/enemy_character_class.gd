@@ -5,7 +5,6 @@ var unit_name : String
 var unit_description : String
 
 @export var collision_box : CollisionShape2D
-@export var AI_movement_controller : ai_movement_controller
 
 
 func _init() -> void:
@@ -19,12 +18,12 @@ func _init() -> void:
 
 func stun_after_combat():
 	collision_box.disabled = true
-	AI_movement_controller.active = false
+	#AI_movement_controller.active = false
 	
 	await get_tree().create_timer(1.0).timeout
 	
 	collision_box.disabled = false
-	AI_movement_controller.active = true
+	#AI_movement_controller.active = true
 
 func _flee():
 	pass

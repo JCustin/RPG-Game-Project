@@ -35,11 +35,18 @@ texture = ExtResource("3_0ws2k")
 [sub_resource type="TileSet" id="TileSet_4yk47"]
 sources/0 = SubResource("TileSetAtlasSource_eywac")
 
-[node name="Introduction_level_scene1" type="Node2D" unique_id=948018200 node_paths=PackedStringArray("obstructions", "walkable_ground", "boundaries") groups=["Map"]]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_eywac"]
+vertices = PackedVector2Array(134.25781, -70, 141.74219, 214.40625, 77.5625, 31.65625, 73.671875, 17.226563, 73.671875, 46.109375, 63.109375, 56.671875, -30, 221.57031, 48.65625, 60.5625, 34.226563, 56.671875, 63.109375, 6.671875, -30, -70, 48.65625, 2.78125, 34.226563, 6.671875, 23.671875, 17.226563, 23.671875, 46.109375, 19.78125, 31.65625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1, 6), PackedInt32Array(7, 5, 6), PackedInt32Array(8, 7, 6), PackedInt32Array(0, 3, 9), PackedInt32Array(10, 0, 9, 11), PackedInt32Array(10, 11, 12), PackedInt32Array(10, 12, 13), PackedInt32Array(14, 8, 6), PackedInt32Array(14, 6, 10, 15), PackedInt32Array(15, 10, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-40, -80, 144, -80, 152, 224, -40, 232)])
+source_geometry_mode = 2
+
+[node name="Introduction_level_scene1" type="Node2D" unique_id=948018200 node_paths=PackedStringArray("obstructions", "walkable_ground", "boundaries", "pathfinding_region") groups=["Map"]]
 script = ExtResource("1_0ws2k")
 obstructions = NodePath("Obstructions")
 walkable_ground = NodePath("Ground")
 boundaries = NodePath("Props")
+pathfinding_region = NodePath("NavigationRegion2D")
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=734152218]
 tile_map_data = PackedByteArray("AAD//wQAAAACAAAAAAD//wgAAAADAAAAAAD//wwAAAACAAAAAAD//wAAAAAAAAAAAAD///z/AAAEAAAAAAADAPz/AAADAAAAAGADAAAAAAAGAAAAAAADAAQAAAAGAAAAAAADAAgAAAAGAAAAAAAHAPz/AAAEAAAAADAHAAAAAAAAAAAAAAAHAAQAAAADAAAAAAAHAAgAAAACAAAAAAADAAwAAAAGAAAAAAA=")
@@ -53,3 +60,6 @@ tile_set = SubResource("TileSet_4yk47")
 
 [node name="Tree" parent="Obstructions" unique_id=926762912 instance=ExtResource("4_4yk47")]
 position = Vector2(48, 21)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=2132534734]
+navigation_polygon = SubResource("NavigationPolygon_eywac")
