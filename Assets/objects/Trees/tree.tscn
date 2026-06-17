@@ -30,7 +30,7 @@ texture = ExtResource("2_buo0d")
 
 [node name="Tree Bush" type="Sprite2D" parent="." unique_id=631485999]
 clip_children = 2
-z_index = 1
+z_index = 2
 position = Vector2(-1, -59)
 texture = ExtResource("3_nucph")
 

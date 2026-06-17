@@ -8,10 +8,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl07l"]
 size = Vector2(28, 28)
 
-[node name="Foot_Soldier_Overworld" type="CharacterBody2D" unique_id=1840999848 node_paths=PackedStringArray("collision_box", "AI_movement_controller")]
+[node name="Foot_Soldier_Overworld" type="CharacterBody2D" unique_id=1840999848 node_paths=PackedStringArray("collision_box")]
 script = ExtResource("1_jl07l")
 collision_box = NodePath("Collision_Box")
-AI_movement_controller = NodePath("AI_Movement_Controller")
 metadata/_custom_type_script = "uid://bo7qbhar3x74x"
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1031340439]
