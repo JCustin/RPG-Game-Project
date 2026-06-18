@@ -24,20 +24,6 @@ script = ExtResource("2_lq1e7")
 region = NodePath("Map Region Manager/Introduction_level_scene1")
 day_night_system = NodePath("Day Night System")
 
-[node name="Actor Controller" type="Node" parent="Overworld" unique_id=1449969595 node_paths=PackedStringArray("map_manager")]
-script = ExtResource("1_nhxuj")
-map_manager = NodePath("../Map Region Manager")
-
-[node name="Witch_Hunter" parent="Overworld/Actor Controller" unique_id=448452775 instance=ExtResource("3_35con")]
-
-[node name="Foot_Soldier_Overworld" parent="Overworld/Actor Controller" unique_id=1840999848 instance=ExtResource("5_lq1e7")]
-position = Vector2(0, -48)
-collision_mask = 27
-
-[node name="Day Night System" type="Node" parent="Overworld" unique_id=1598732156 node_paths=PackedStringArray("light_source")]
-script = ExtResource("8_cypmi")
-light_source = NodePath("../DirectionalLight2D")
-
 [node name="Map Region Manager" type="Node" parent="Overworld" unique_id=815382107 node_paths=PackedStringArray("item_manager")]
 script = ExtResource("8_la3gg")
 item_manager = NodePath("../Item_Controller")
@@ -45,6 +31,20 @@ item_manager = NodePath("../Item_Controller")
 [node name="Introduction_level_scene1" parent="Overworld/Map Region Manager" unique_id=1443023022 instance=ExtResource("1_ngams")]
 unique_name_in_owner = true
 z_index = -2
+
+[node name="Actor Controller" type="Node" parent="Overworld" unique_id=1449969595 node_paths=PackedStringArray("map_manager")]
+script = ExtResource("1_nhxuj")
+map_manager = NodePath("../Map Region Manager")
+
+[node name="Witch_Hunter" parent="Overworld/Actor Controller" unique_id=448452775 instance=ExtResource("3_35con")]
+
+[node name="Foot_Soldier_Overworld" parent="Overworld/Actor Controller" unique_id=1840999848 instance=ExtResource("5_lq1e7")]
+position = Vector2(112, -48)
+collision_mask = 27
+
+[node name="Day Night System" type="Node" parent="Overworld" unique_id=1598732156 node_paths=PackedStringArray("light_source")]
+script = ExtResource("8_cypmi")
+light_source = NodePath("../DirectionalLight2D")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Overworld" unique_id=1069278521]
 position = Vector2(136, -56)

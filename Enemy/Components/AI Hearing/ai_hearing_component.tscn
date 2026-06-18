@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dnr4n5u0b75o6"]
+
+[ext_resource type="Script" uid="uid://clt14w0wgjwqd" path="res://Enemy/Components/AI Hearing/ai_hearing_range_logic.gd" id="1_furv3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f8x4r"]
+
+[node name="AI_Hearing_Component" type="Node2D" unique_id=644677379 node_paths=PackedStringArray("sound_receiver", "sound_receiver_shape")]
+script = ExtResource("1_furv3")
+sound_receiver = NodePath("Sound_Receiver_Area")
+sound_receiver_shape = NodePath("Sound_Receiver_Area/Hearing_Range_Shape")
+sound_receiver_radius = 100
+
+[node name="Sound_Receiver_Area" type="Area2D" parent="." unique_id=1800945457]
+
+[node name="Hearing_Range_Shape" type="CollisionShape2D" parent="Sound_Receiver_Area" unique_id=1112188184]
+shape = SubResource("CircleShape2D_f8x4r")

@@ -4,6 +4,7 @@ var combat_counterpart : combat_enemy_character
 var unit_name : String
 var unit_description : String
 
+@export var ai_movement_controller : ai_movement_controller
 @export var collision_box : CollisionShape2D
 
 

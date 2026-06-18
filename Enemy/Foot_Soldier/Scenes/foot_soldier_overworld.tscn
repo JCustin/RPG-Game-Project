@@ -4,12 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://d11rr3xlc85mu" path="res://Assets/characters/Wall_Rat_Overworld.png" id="2_r102e"]
 [ext_resource type="PackedScene" uid="uid://byku7qpo6gyy2" path="res://Enemy/Components/ai_movement_controller.tscn" id="3_jfab5"]
 [ext_resource type="Script" uid="uid://cx6prduynwltc" path="res://Enemy/Foot_Soldier/Scenes/ai_pathfinder.gd" id="4_jl07l"]
+[ext_resource type="PackedScene" uid="uid://d3gsmwvm2xf1q" path="res://Enemy/Components/AI Sight/ai_sight_component.tscn" id="5_jfab5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl07l"]
 size = Vector2(28, 28)
 
-[node name="Foot_Soldier_Overworld" type="CharacterBody2D" unique_id=1840999848 node_paths=PackedStringArray("collision_box")]
+[node name="Foot_Soldier_Overworld" type="CharacterBody2D" unique_id=1840999848 node_paths=PackedStringArray("ai_movement_controller", "collision_box")]
 script = ExtResource("1_jl07l")
+ai_movement_controller = NodePath("AI_Pathfinder/AI_Movement_Controller")
 collision_box = NodePath("Collision_Box")
 metadata/_custom_type_script = "uid://bo7qbhar3x74x"
 
@@ -20,11 +22,17 @@ texture = ExtResource("2_r102e")
 [node name="Collision_Box" type="CollisionShape2D" parent="." unique_id=2046627207]
 shape = SubResource("RectangleShape2D_jl07l")
 
-[node name="AI_Movement_Controller" parent="." unique_id=756319719 node_paths=PackedStringArray("enemy", "collision_box") instance=ExtResource("3_jfab5")]
-enemy = NodePath("..")
-collision_box = NodePath("../Collision_Box")
+[node name="AI_Sight_Component" parent="." unique_id=1580146899 instance=ExtResource("5_jfab5")]
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1965274918 node_paths=PackedStringArray("actor_owner")]
+[node name="AI_Pathfinder" type="NavigationAgent2D" parent="." unique_id=1965274918 node_paths=PackedStringArray("actor_owner", "ai_movement_behavior_controller")]
 debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_line_width = 0.6
 script = ExtResource("4_jl07l")
 actor_owner = NodePath("..")
+ai_movement_behavior_controller = NodePath("AI_Movement_Controller")
+
+[node name="AI_Movement_Controller" parent="AI_Pathfinder" unique_id=756319719 node_paths=PackedStringArray("enemy", "collision_box") instance=ExtResource("3_jfab5")]
+enemy = NodePath("../..")
+collision_box = NodePath("../../Collision_Box")
