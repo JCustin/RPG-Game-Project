@@ -9,5 +9,5 @@ func _ready() -> void:
 		if actor is enemy_character:
 			var enemy_actor : enemy_character = actor
 			var enemy_actor_ai_movement_controller = enemy_actor.ai_movement_controller
-			enemy_actor_ai_movement_controller.walkable_map = map_walkable_ground
+			#enemy_actor_ai_movement_controller.walkable_map = map_walkable_ground
 			

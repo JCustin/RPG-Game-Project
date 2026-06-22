@@ -1,12 +1,12 @@
 class_name ai_sight_component extends Node2D
 
 var player : player_character
-@export var sight_raycast : RayCast2D
-@export var sight_range : int 
 
 signal player_spotted(player_last_seen: Vector2)
 
+var sight_raycast : sight_raycaster
 var spotted_player_flag : bool 
+var sight_range : int
 
 func _ready() -> void:
 	_find_player()

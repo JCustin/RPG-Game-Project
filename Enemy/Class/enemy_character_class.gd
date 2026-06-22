@@ -7,7 +7,6 @@ var unit_description : String
 @export var ai_movement_controller : ai_movement_controller
 @export var collision_box : CollisionShape2D
 
-
 func _init() -> void:
 	set_collision_layer_value(3, true)
 	set_collision_layer_value(1, false)
@@ -28,3 +27,8 @@ func stun_after_combat():
 
 func _flee():
 	pass
+
+func _physics_process(_delta: float) -> void:
+	var direction = ai_movement_controller.find_direction()
+	velocity = direction * 100
+	move_and_slide()

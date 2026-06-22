@@ -1,43 +1,22 @@
-class_name ai_movement_controller extends Node
+class_name ai_movement_controller extends Node2D
 
-@export var enemy : enemy_character
-@export var collision_box : CollisionShape2D
+@export var pathfinder : NavigationAgent2D
+@export var hearing : ai_hearing_range
+@export var sight : ai_sight_component
+
+@export var hearing_radius : int
+@export var sight_range : int
 
 var movement_active_flag : bool = false
-
 enum movement_behavior_states {IDLE, PATROL, INVESTIGATE, CHASE, RETREAT}
 var movement_behavior : movement_behavior_states = movement_behavior_states.PATROL
-
 var walkable_map : TileMapLayer
 
-signal found_target_position(position: Vector2)
-
 func _ready() -> void:
-	var map : map_region = get_tree().get_first_node_in_group('Map')
-	walkable_map = map.walkable_ground
-	_find_target_position()
-
-func _find_target_position() -> Vector2:
-	var position : Vector2
-	match movement_behavior:
-		
-		movement_behavior_states.IDLE:
-			position = enemy.global_position
-		
-		movement_behavior_states.PATROL:
-			position = walkable_map.get_used_cells().pick_random()
-
-			
-			#position = walkable_map.get_used_cells().pick_random()
-			#print_debug('Patrol position',  position, ' current position: ', enemy.global_position)
-			
-		movement_behavior_states.INVESTIGATE:
-			pass
-			
-		movement_behavior_states.CHASE:
-			pass
-			
-		movement_behavior_states.RETREAT:
-			pass
+	sight.sight_range = sight_range
+	hearing.get_child(0).radius = hearing_radius
 	
-	return position
+
+func return_direction() -> Vector2:
+	var direction = global_position.direction_to(pathfinder.target_position)
+	return direction
