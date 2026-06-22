@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="enemy_limb_stats_base" format=3 uid="uid://d3yij0n3gm5d1"]
+
+[ext_resource type="Texture2D" uid="uid://d2vwuf13jspq4" path="res://Assets/Actors/Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Front_Sword.png" id="1_knrck"]
+[ext_resource type="Script" path="res://Actors/Enemy/Enemy Resource/enemy_limb_stats_base.gd" id="2_q8mbq"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_q8mbq")
+limb_name = "Sword"
+HP = 20
+damage_type_weakness = 1
+front_texture = ExtResource("1_knrck")
+metadata/_custom_type_script = "uid://t3kfosodtxyq"

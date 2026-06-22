@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cbh2xjilia4pb"]
+
+[ext_resource type="Script" uid="uid://d4m6emtp4f6pt" path="res://Game States/Combat/special_attack_logic.gd" id="1_urwbk"]
+
+
+[node name="combat_special_attack_component" type="Node" unique_id=1448838854]
+script = ExtResource("1_urwbk")
+metadata/_custom_type_script = "uid://d4m6emtp4f6pt"

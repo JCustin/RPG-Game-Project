@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="special_attack_stat_block" format=3 uid="uid://c40fi1836h5yt"]
+
+[ext_resource type="Script" uid="uid://bi8ni8ykqhtwn" path="res://Assets/Items/Weapons/Resources/weapon_type_base_resourcegd.gd" id="1_v0axb"]
+[ext_resource type="Script" uid="uid://dm4c7nyc435s1" path="res://Assets/Items/Weapons/Resources/rapier_weapon_type_resource.gd" id="2_y6uy1"]
+[ext_resource type="Script" uid="uid://brmoxf5dac84i" path="res://Assets/Actors/Player Characters/Resources/special_attack_stat_block.gd" id="3_w70ny"]
+
+[sub_resource type="Resource" id="Resource_uo2f6"]
+script = ExtResource("2_y6uy1")
+metadata/_custom_type_script = "uid://dm4c7nyc435s1"
+
+[resource]
+script = ExtResource("3_w70ny")
+attack_damage = 20
+attack_name = "Eye Poke"
+attack_description = "You take a daft step forward and plunge the ivory-thirsted tip of your rapier into the foe's eye!"
+STAM_cost = 25
+applicable_weapon_types = Array[ExtResource("1_v0axb")]([SubResource("Resource_uo2f6")])
+metadata/_custom_type_script = "uid://brmoxf5dac84i"

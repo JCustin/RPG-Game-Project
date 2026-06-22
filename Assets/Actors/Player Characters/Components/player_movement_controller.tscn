@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://swpo4h0r67v0"]
+
+[ext_resource type="Script" uid="uid://ccvnqafy772rd" path="res://Assets/Actors/Player Characters/Components/movement_controller.gd" id="1_6t7ys"]
+
+
+[node name="player_movement_controller" type="Node" unique_id=853565106 node_paths=PackedStringArray("object_raycast_detector")]
+script = ExtResource("1_6t7ys")
+object_raycast_detector = NodePath("")
+metadata/_custom_type_script = "uid://ccvnqafy772rd"

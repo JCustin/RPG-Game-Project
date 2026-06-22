@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://b7bb50lm6r0ny"]
-
-[ext_resource type="Script" uid="uid://h0gmj50f1jh2" path="res://Player Characters/Components/dialogue_component.gd" id="1_gkxsq"]
-
-[node name="Dialogue_Component" type="Node" unique_id=1366422344]
-script = ExtResource("1_gkxsq")

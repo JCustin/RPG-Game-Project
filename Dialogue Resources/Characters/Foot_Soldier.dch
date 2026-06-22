@@ -19,7 +19,7 @@
 &"portraits": {
 "Idle": {
 "export_overrides": {
-"image": "\"res://Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Front_Body.png\""
+"image": "\"res://Assets/Actors/Enemy/Foot_Soldier/FootSoldier_Images/FootSoldier_Front_Body.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),

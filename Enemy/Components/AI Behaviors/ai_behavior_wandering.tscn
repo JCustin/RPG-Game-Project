@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://c0lja3bodylif"]
-
-[ext_resource type="Script" uid="uid://di81idos4giai" path="res://Enemy/Components/AI Behaviors/ai_behavior_wandering.gd" id="1_g8uct"]
-
-[node name="AI_Behavior_wandering" type="Node" unique_id=1211828696]
-script = ExtResource("1_g8uct")

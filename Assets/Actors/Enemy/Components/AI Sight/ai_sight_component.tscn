@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d3gsmwvm2xf1q"]
+
+[ext_resource type="Script" uid="uid://bicsnvvkxhh6u" path="res://Assets/Actors/Enemy/Components/AI Sight/ai_sight_component.gd" id="1_hsds1"]
+[ext_resource type="Script" uid="uid://bga20ik8p5adh" path="res://Assets/Actors/Enemy/Components/AI Sight/sight_raycast.gd" id="2_87xla"]
+
+
+[node name="AI_Sight_Component" type="Node2D" unique_id=1580146899 node_paths=PackedStringArray("sight_raycast")]
+script = ExtResource("1_hsds1")
+sight_raycast = NodePath("Sight_Raycast")
+sight_range = 80
+
+[node name="Sight_Raycast" type="RayCast2D" parent="." unique_id=762321684]
+collision_mask = 15
+script = ExtResource("2_87xla")

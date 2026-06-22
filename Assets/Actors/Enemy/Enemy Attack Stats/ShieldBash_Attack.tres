@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="base_enemy_attack_structure" format=3 uid="uid://cjbn7fv3veuoc"]
+
+[ext_resource type="Script" uid="uid://c58a245wghwrh" path="res://Assets/Actors/Enemy/Components/base_enemy_attack_structure.gd" id="1_cv87j"]
+
+
+[resource]
+script = ExtResource("1_cv87j")
+attack_name = "Shield_Base"
+attack_description = "hurls the weight of their shield against your face. "
+attack_damage = 10
+attack_type = &"Blunt"
+metadata/_custom_type_script = "uid://c58a245wghwrh"

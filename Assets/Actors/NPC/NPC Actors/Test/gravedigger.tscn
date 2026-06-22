@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b7roybve1t5i7"]
+
+[ext_resource type="Script" uid="uid://c8qhqsaxajbuj" path="res://Assets/Actors/NPC/Class/npc_character_class.gd" id="1_gd8oy"]
+[ext_resource type="Script" uid="uid://bdrtd8eryviav" path="res://Assets/Actors/NPC/Resources/npc_statblock_resource.gd" id="2_0qalo"]
+[ext_resource type="Texture2D" path="res://Assets/characters/Overworld_Wild_Mummo.png" id="3_gswnn"]
+[ext_resource type="PackedScene" uid="uid://b7bb50lm6r0ny" path="res://Assets/Actors/Player Characters/Components/dialogue_component.tscn" id="4_wswuo"]
+[ext_resource type="Resource" uid="uid://dfkl13hp28xje" path="res://Dialogue Resources/Timeline/NPC Timeline/Gravedigger_TEST/Gravedigger_Dialogue_Test_Day01.dtl" id="6_u0jrm"]
+
+[sub_resource type="Resource" id="Resource_wswuo"]
+script = ExtResource("2_0qalo")
+unit_name = "Gravedigger"
+unit_description = "Gravedigger from Fenix. "
+max_HP = 100
+HP = 50
+DEF = 10
+SPD = 10
+faction_alliance = 1
+metadata/_custom_type_script = "uid://bdrtd8eryviav"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7btv7"]
+size = Vector2(14.615386, 12.3076935)
+
+[node name="Gravedigger" type="CharacterBody2D" unique_id=1648350281]
+scale = Vector2(1.3, 1.3)
+script = ExtResource("1_gd8oy")
+stat_block = SubResource("Resource_wswuo")
+metadata/_custom_type_script = "uid://c8qhqsaxajbuj"
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=264624106]
+texture = ExtResource("3_gswnn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=492334853]
+position = Vector2(1.1538465, -1.8339892e-07)
+shape = SubResource("RectangleShape2D_7btv7")
+
+[node name="Dialogue_Component" parent="." unique_id=1366422344 instance=ExtResource("4_wswuo")]
+dialogue = ExtResource("6_u0jrm")

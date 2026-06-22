@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://qhv78cbt13cn"]
+
+[ext_resource type="Script" uid="uid://dd7fcpo132ov6" path="res://GUI/Inventory/inventory_gui.gd" id="1_gthcq"]
+
+[node name="Inventory GUI" type="Control" unique_id=1928950353 node_paths=PackedStringArray("inventory_list")]
+visible = false
+z_index = 1000
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gthcq")
+inventory_list = NodePath("Inventory_Panel/Inventory_List")
+
+[node name="Inventory_Panel" type="Panel" parent="." unique_id=735472407]
+layout_mode = 0
+offset_left = 198.0
+offset_top = -65.0
+offset_right = 320.0
+offset_bottom = 118.0
+
+[node name="Inventory_List" type="ItemList" parent="Inventory_Panel" unique_id=1739028567]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+allow_rmb_select = true
+allow_search = false
+
+[node name="Extended_Inventory_Panel" type="Panel" parent="." unique_id=675212579]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 103.0
+offset_top = -92.0
+offset_right = 181.0
+offset_bottom = 8.0
+
+[node name="Extended_Inventory_Panel_Container" type="VBoxContainer" parent="Extended_Inventory_Panel" unique_id=362034562]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Inspect" type="Button" parent="Extended_Inventory_Panel/Extended_Inventory_Panel_Container" unique_id=1792028187]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Inspect"
+
+[node name="Throw" type="Button" parent="Extended_Inventory_Panel/Extended_Inventory_Panel_Container" unique_id=1784079684]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Throw"
+
+[node name="Equip" type="Button" parent="Extended_Inventory_Panel/Extended_Inventory_Panel_Container" unique_id=1998479003]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Equip"
+
+[node name="Inspection_Panel" type="Panel" parent="." unique_id=173440375]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -143.0
+offset_top = -152.0
+offset_right = 150.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Inspection_Description" type="Label" parent="Inspection_Panel" unique_id=1454008317]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 3
+metadata/_edit_lock_ = true
+
+[connection signal="item_clicked" from="Inventory_Panel/Inventory_List" to="." method="_on_inventory_list_item_clicked"]
+[connection signal="item_selected" from="Inventory_Panel/Inventory_List" to="." method="_on_inventory_list_item_selected"]
+[connection signal="mouse_entered" from="Inventory_Panel/Inventory_List" to="." method="_on_inventory_list_mouse_entered"]
+[connection signal="mouse_exited" from="Inventory_Panel/Inventory_List" to="." method="_on_inventory_list_mouse_exited"]
+[connection signal="pressed" from="Extended_Inventory_Panel/Extended_Inventory_Panel_Container/Inspect" to="." method="_on_inspect_pressed"]
+[connection signal="pressed" from="Extended_Inventory_Panel/Extended_Inventory_Panel_Container/Throw" to="." method="_on_throw_pressed"]
