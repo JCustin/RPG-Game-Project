@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://clt14w0wgjwqd" path="res://Assets/Actors/Enemy/Components/AI Hearing/ai_hearing_range_logic.gd" id="3_qu066"]
 [ext_resource type="Script" uid="uid://cx6prduynwltc" path="res://Assets/Actors/Enemy/Foot_Soldier/Scenes/ai_pathfinder.gd" id="4_c775a"]
 
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_c775a"]
 
 [node name="ai_movement_controller" type="Node2D" unique_id=530952966 node_paths=PackedStringArray("pathfinder", "hearing", "sight")]
@@ -21,9 +20,9 @@ metadata/_custom_type_script = "uid://bicsnvvkxhh6u"
 
 [node name="RayCast2D" type="RayCast2D" parent="ai_sight_component" unique_id=1460809138]
 
-[node name="ai_hearing_component" type="Node2D" parent="." unique_id=576248431]
+[node name="ai_hearing_component" type="Node2D" parent="." unique_id=576248431 node_paths=PackedStringArray("sound_receiver")]
 script = ExtResource("3_qu066")
-sound_receiver_radius = null
+sound_receiver = NodePath("Area2D")
 metadata/_custom_type_script = "uid://clt14w0wgjwqd"
 
 [node name="Area2D" type="Area2D" parent="ai_hearing_component" unique_id=352388332]

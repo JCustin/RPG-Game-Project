@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dru8467dcjn7j"]
 
 [ext_resource type="Texture2D" uid="uid://0oio532puorb" path="res://addons/project-time-tracker/icon.svg" id="1_8x8a6"]
-[ext_resource type="Script" path="res://Actors/Player Characters/Witch Hunter/witch_hunter.gd" id="1_fggl1"]
+[ext_resource type="Script" uid="uid://udglnt1saqww" path="res://Assets/Actors/Player Characters/Player Actors/Witch Hunter/witch_hunter.gd" id="1_fggl1"]
 [ext_resource type="PackedScene" uid="uid://swpo4h0r67v0" path="res://Assets/Actors/Player Characters/Components/player_movement_controller.tscn" id="3_fggl1"]
 [ext_resource type="PackedScene" uid="uid://bnj7ltak5dkuw" path="res://Assets/Actors/Player Characters/Components/player_interaction_component.tscn" id="4_mdan5"]
 [ext_resource type="Script" uid="uid://cr35rxx6qpe1p" path="res://Assets/Actors/Player Characters/Components/player_interaction_component.gd" id="5_h352e"]

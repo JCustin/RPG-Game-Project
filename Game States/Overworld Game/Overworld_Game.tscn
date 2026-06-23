@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://xuioa58842rw"]
+
+[ext_resource type="Script" uid="uid://cqvte1takp1su" path="res://Game States/Overworld Game/Game.gd" id="1_oamfl"]
+[ext_resource type="Script" uid="uid://ceu2a87t8jmm" path="res://Managers/Map Region Manager/map_region_manager_script.gd" id="2_rllxq"]
+[ext_resource type="Script" uid="uid://ovtkhcrhwh4b" path="res://Managers/actor_controller.gd" id="3_m2trj"]
+[ext_resource type="Script" uid="uid://okon6v6a4v6u" path="res://Managers/item_controller_logic.gd" id="4_0fel4"]
+[ext_resource type="PackedScene" uid="uid://dru8467dcjn7j" path="res://Assets/Actors/Player Characters/Player Actors/Witch Hunter/Overworld/witch_hunter.tscn" id="4_ttivg"]
+[ext_resource type="Script" uid="uid://ci7tsuvbhhn86" path="res://Assets/Levels/Introduction/combat_manager.gd" id="5_38rys"]
+[ext_resource type="Script" uid="uid://uqlmisbdythv" path="res://Assets/Camera/camera_logic.gd" id="6_pumw3"]
+[ext_resource type="Script" uid="uid://bawvgeno285sc" path="res://Managers/DayNightCycle/day_night_cycle_script.gd" id="8_6a3pi"]
+
+[node name="Game" type="Node" unique_id=1662028845 node_paths=PackedStringArray("combat_manager", "map_manager", "actor_manager", "item_manager", "camera")]
+script = ExtResource("1_oamfl")
+combat_manager = NodePath("Combat Manager")
+map_manager = NodePath("Map Manager")
+actor_manager = NodePath("Actor Controller")
+item_manager = NodePath("Item Manager")
+camera = NodePath("game_camera")
+
+[node name="Map Manager" type="Node" parent="." unique_id=1430057969]
+script = ExtResource("2_rllxq")
+metadata/_custom_type_script = "uid://ceu2a87t8jmm"
+
+[node name="Day Manager" type="Node" parent="." unique_id=1744080871]
+script = ExtResource("8_6a3pi")
+metadata/_custom_type_script = "uid://bawvgeno285sc"
+
+[node name="Actor Controller" type="Node" parent="." unique_id=1155972274]
+script = ExtResource("3_m2trj")
+metadata/_custom_type_script = "uid://ovtkhcrhwh4b"
+
+[node name="Witch_Hunter" parent="Actor Controller" unique_id=448452775 instance=ExtResource("4_ttivg")]
+
+[node name="Item Manager" type="Node" parent="." unique_id=1708734910]
+script = ExtResource("4_0fel4")
+metadata/_custom_type_script = "uid://okon6v6a4v6u"
+
+[node name="Combat Manager" type="Node" parent="." unique_id=2134432994]
+script = ExtResource("5_38rys")
+metadata/_custom_type_script = "uid://ci7tsuvbhhn86"
+
+[node name="game_camera" type="Camera2D" parent="." unique_id=1727461363]
+script = ExtResource("6_pumw3")
+metadata/_custom_type_script = "uid://uqlmisbdythv"

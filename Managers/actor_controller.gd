@@ -1,13 +1,22 @@
 class_name actor_controller extends Node
-@export var map_manager : map_region_manager 
 
-func _ready() -> void:
-	var map : map_region = map_manager.map
-	var map_walkable_ground : TileMapLayer = map.walkable_ground
+var player_list : Array[player_character]
+var enemy_list : Array[enemy_character]
+var npc_list : Array[npc_character_class]
+
+func add_actor(actor: CharacterBody2D) -> void:
+	if actor is player_character:
+		player_list.append(actor)
+		
+	if actor is enemy_character:
+		enemy_list.append(actor)
+		
+	if actor is npc_character_class:
+		npc_list.append(actor)
+		
+	if get_children().has(actor) == false:
+		add_child(actor)
 	
-	for actor in get_children():
-		if actor is enemy_character:
-			var enemy_actor : enemy_character = actor
-			var enemy_actor_ai_movement_controller = enemy_actor.ai_movement_controller
-			#enemy_actor_ai_movement_controller.walkable_map = map_walkable_ground
-			
+func add_actor_array(actor_list : Array[CharacterBody2D]) -> void:
+	for actor in actor_list:
+		add_actor(actor)

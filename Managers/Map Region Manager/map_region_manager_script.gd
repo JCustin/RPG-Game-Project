@@ -1,6 +1,6 @@
 class_name map_region_manager extends Node
 
-@export var item_manager : item_controller
+var item_manager : item_controller
 var map : map_region
 
 #signal new_map_loaded(tile_map, pathfinder_grid : AStarGrid2D)

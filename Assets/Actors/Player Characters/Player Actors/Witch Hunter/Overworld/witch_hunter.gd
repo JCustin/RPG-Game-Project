@@ -10,7 +10,7 @@ var in_combat : bool = false
 func _ready() -> void:
 	add_to_group('Player')
 	connect_signals()
-	combat_counterpart = load("uid://cwj3drr7ohmnm").instantiate()
+	#combat_counterpart = load("uid://cwj3drr7ohmnm").instantiate()
 
 func connect_signals():
 	interaction_component.player_picked_up_item.connect(move_item_to_inventory)
