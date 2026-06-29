@@ -25,8 +25,9 @@ metadata/_custom_type_script = "uid://ceu2a87t8jmm"
 script = ExtResource("8_6a3pi")
 metadata/_custom_type_script = "uid://bawvgeno285sc"
 
-[node name="Actor Controller" type="Node" parent="." unique_id=1155972274]
+[node name="Actor Controller" type="Node" parent="." unique_id=1155972274 node_paths=PackedStringArray("map_manager")]
 script = ExtResource("3_m2trj")
+map_manager = NodePath("../Map Manager")
 metadata/_custom_type_script = "uid://ovtkhcrhwh4b"
 
 [node name="Witch_Hunter" parent="Actor Controller" unique_id=448452775 instance=ExtResource("4_ttivg")]

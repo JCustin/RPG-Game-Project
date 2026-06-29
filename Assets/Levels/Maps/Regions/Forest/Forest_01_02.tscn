@@ -1,0 +1,65 @@
+[gd_scene format=4 uid="uid://8ys4jrj3ut7x"]
+
+[ext_resource type="Script" uid="uid://c82apivj8l805" path="res://Assets/Levels/Introduction/Scripts/introduction_level_scene_1.gd" id="1_8rn1k"]
+[ext_resource type="Texture2D" uid="uid://bi38rbuu02jx8" path="res://WIP_Pixel_Art/TEST_Grass_Spriet.png" id="2_4kcso"]
+[ext_resource type="Script" uid="uid://c2k38brdk2xch" path="res://Assets/Levels/Maps/Components/map_transition_stage_area.gd" id="3_4kcso"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oeigf"]
+texture = ExtResource("2_4kcso")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_uewjb"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_oeigf")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dev8r"]
+vertices = PackedVector2Array(245.21094, -178.14844, 251.75781, 122.61719, -58.898438, 111.359375, -56.09375, -182.84375)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-66, -193, 255, -188, 262, 133, -69, 121)])
+parsed_geometry_type = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dev8r"]
+size = Vector2(71.5, 20)
+
+[node name="map_region" type="Node2D" unique_id=754735889 node_paths=PackedStringArray("obstructions", "walkable_ground", "boundaries", "pathfinding_region", "south_transition")]
+script = ExtResource("1_8rn1k")
+obstructions = NodePath("Obstacles")
+walkable_ground = NodePath("Floor")
+boundaries = NodePath("Boundaries")
+pathfinding_region = NodePath("NavigationRegion2D")
+south_transition = NodePath("Exit Areas/Southern Exit")
+metadata/_custom_type_script = "uid://c82apivj8l805"
+
+[node name="Floor" type="TileMapLayer" parent="." unique_id=1852737057]
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD/////AAAAAAAAAAD///7/AAAAAAAAAAAAAAAAAAAHAAAAAAAAAP//AAAHAAAAAAAAAP7/AAAHAAAAAAA=")
+tile_set = SubResource("TileSet_uewjb")
+
+[node name="Obstacles" type="TileMapLayer" parent="." unique_id=1198485736]
+
+[node name="Boundaries" type="TileMapLayer" parent="." unique_id=1042150314]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=907435088]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_dev8r")
+
+[node name="Exit Areas" type="Node" parent="." unique_id=2108898587]
+
+[node name="Southern Exit" type="Area2D" parent="Exit Areas" unique_id=2038746353 node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("3_4kcso")
+spawn_point = NodePath("Spawn Point")
+
+[node name="Southern Exit Region" type="CollisionShape2D" parent="Exit Areas/Southern Exit" unique_id=979525276]
+position = Vector2(-27, 52)
+shape = SubResource("RectangleShape2D_dev8r")
+
+[node name="Spawn Point" type="Node2D" parent="Exit Areas/Southern Exit" unique_id=1941992808]
+position = Vector2(-34, 29)
