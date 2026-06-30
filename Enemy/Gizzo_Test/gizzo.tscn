@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dwg6w8adw3bmv"]
+
+[ext_resource type="Texture2D" uid="uid://bq13asn7ditfp" path="res://WIP_Pixel_Art/Gizzo_WIP.png" id="2_0bw0q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4t8h"]
+size = Vector2(248, 226)
+
+[node name="Gizzo" type="CharacterBody2D" unique_id=297031863]
+
+[node name="Gizzo_Sprite" type="Sprite2D" parent="." unique_id=435963914]
+z_index = 2
+scale = Vector2(0.218, 0.25)
+texture = ExtResource("2_0bw0q")
+
+[node name="Shadow" type="Sprite2D" parent="Gizzo_Sprite" unique_id=638003474]
+modulate = Color(0, 0, 0, 0.58431375)
+z_as_relative = false
+position = Vector2(165.13763, 752)
+rotation = -2.2914662
+scale = Vector2(1, 2.016664)
+texture = ExtResource("2_0bw0q")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=791305882]
+position = Vector2(67, -22)
+shape = SubResource("RectangleShape2D_l4t8h")

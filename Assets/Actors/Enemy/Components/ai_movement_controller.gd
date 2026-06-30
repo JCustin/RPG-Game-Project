@@ -14,7 +14,7 @@ var walkable_map : TileMapLayer
 
 func _ready() -> void:
 	sight.sight_range = sight_range
-	hearing.get_child(0).radius = hearing_radius
+	#hearing.get_child(0).radius = hearing_radius
 	
 
 func return_direction() -> Vector2:

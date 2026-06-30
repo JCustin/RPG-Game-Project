@@ -17,9 +17,13 @@ actor_manager = NodePath("Actor Controller")
 item_manager = NodePath("Item Manager")
 camera = NodePath("game_camera")
 
-[node name="Map Manager" type="Node" parent="." unique_id=1430057969]
+[node name="Map Manager" type="Node" parent="." unique_id=1430057969 node_paths=PackedStringArray("item_manager", "fadeout_screen")]
 script = ExtResource("2_rllxq")
+item_manager = NodePath("../Item Manager")
+fadeout_screen = NodePath("Fadeout_Screen")
 metadata/_custom_type_script = "uid://ceu2a87t8jmm"
+
+[node name="Fadeout_Screen" type="CanvasModulate" parent="Map Manager" unique_id=1496073138]
 
 [node name="Day Manager" type="Node" parent="." unique_id=1744080871]
 script = ExtResource("8_6a3pi")

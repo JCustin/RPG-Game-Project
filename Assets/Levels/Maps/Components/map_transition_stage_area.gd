@@ -14,7 +14,3 @@ func _validate_player_entered_stage(body) -> void:
 		
 	else:
 		pass
-
-#func _validate_player_exited_stage(body) -> void:
-	#if body is player_character and player_in_transition_stage == true:
-		#player_in_transition_stage = false

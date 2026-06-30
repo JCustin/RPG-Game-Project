@@ -12,10 +12,6 @@ var player : player_character
 func _ready() -> void:
 	actor_manager.add_actor(actor_manager.get_child(0))
 	camera.reparent(actor_manager.player_list[0])
-
-	
-	
-	
 	_signal_connection()
 
 func _signal_connection() -> void:

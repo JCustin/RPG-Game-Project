@@ -13,7 +13,7 @@ func _init() -> void:
 	set_collision_mask_value(2, true)
 	set_collision_mask_value(4, true)
 	await ready
-	combat_counterpart.enemy_wounded.connect(_flee)
+	#combat_counterpart.enemy_wounded.connect(_flee)
 	z_index = 10
 
 func stun_after_combat():
