@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c82apivj8l805" path="res://Assets/Levels/Introduction/Scripts/introduction_level_scene_1.gd" id="1_txf7t"]
 [ext_resource type="Texture2D" uid="uid://bi38rbuu02jx8" path="res://WIP_Pixel_Art/TEST_Grass_Spriet.png" id="2_ovfhc"]
 [ext_resource type="Script" uid="uid://c2k38brdk2xch" path="res://Assets/Levels/Maps/Components/map_transition_stage_area.gd" id="3_ia141"]
+[ext_resource type="PackedScene" uid="uid://dn7fi2civeqg5" path="res://Assets/Actors/Enemy/Deathslug.tscn" id="4_ovfhc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oeigf"]
 texture = ExtResource("2_ovfhc")
@@ -64,3 +65,7 @@ shape = SubResource("RectangleShape2D_dev8r")
 
 [node name="Spawn Point" type="Node2D" parent="Exit Areas/Northern Exit" unique_id=1338180023]
 position = Vector2(-34, -157)
+
+[node name="enemy_character" parent="." unique_id=289647605 instance=ExtResource("4_ovfhc")]
+position = Vector2(150, -77)
+scale = Vector2(0.26, 0.26)

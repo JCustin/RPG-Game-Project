@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8ydpiyults3q"
-path.s3tc="res://.godot/imported/Heart,krita.jpg-9eb34a3541048b3d8459bf12b8bc74ed.s3tc.ctex"
+uid="uid://c2firo76pwveb"
+path.s3tc="res://.godot/imported/DeathSlug.png-c30eade091f3490bd390c3f528f84baa.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://WIP_Pixel_Art/UI Art/Health WIP/Heart,krita.jpg"
-dest_files=["res://.godot/imported/Heart,krita.jpg-9eb34a3541048b3d8459bf12b8bc74ed.s3tc.ctex"]
+source_file="res://WIP_Pixel_Art/DeathSlug.png"
+dest_files=["res://.godot/imported/DeathSlug.png-c30eade091f3490bd390c3f528f84baa.s3tc.ctex"]
 
 [params]
 
