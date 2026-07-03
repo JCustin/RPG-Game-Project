@@ -1,0 +1,1 @@
+class_name player_actor_class extends base_actor_class

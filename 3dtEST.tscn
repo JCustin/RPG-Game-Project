@@ -9,7 +9,7 @@ transform = Transform3D(-0.09784342, 0, -0.9952018, 0, 1, 0, 0.9952018, 0, -0.09
 current = true
 
 [node name="House2" parent="." unique_id=1731633252 instance=ExtResource("1_tr0y7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.324202, 0.7372463, 0.17933202)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6131352, 0.75201464, -0.021592617)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1733172244]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6482988, 0.507588, 0.17707068)
