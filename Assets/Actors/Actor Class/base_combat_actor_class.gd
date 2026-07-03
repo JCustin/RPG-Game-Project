@@ -1,0 +1,1 @@
+class_name base_combat_actor_class extends StaticBody3D

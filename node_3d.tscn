@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ecxxwe45cis8"]
 
 [ext_resource type="Script" uid="uid://bug4l8ghu1xe0" path="res://camera_3d.gd" id="1_a0tk4"]
-[ext_resource type="PackedScene" uid="uid://gr75yt40wfm7" path="res://WIP_Pixel_Art/Building.blend" id="3_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://ctxhiy8bb6eux" path="res://WIP_Pixel_Art/Building.glb" id="3_a0tk4"]
 [ext_resource type="Texture2D" uid="uid://c2firo76pwveb" path="res://WIP_Pixel_Art/DeathSlug.png" id="3_r3fl7"]
 
 [node name="Deathslug" type="Node3D" unique_id=774953581]
@@ -20,11 +20,11 @@ transform = Transform3D(0.33329684, -0.11555432, 0.9357139, 1.4901161e-08, 0.992
 light_energy = 0.5
 shadow_enabled = true
 
-[node name="Building" parent="." unique_id=237558351 instance=ExtResource("3_a0tk4")]
-transform = Transform3D(-0.07239247, 5.862746e-08, -0.74649805, 6.556708e-08, -0.75, -6.5260934e-08, -0.74649805, -7.156014e-08, 0.07239247, -17.454256, 7.305622, -7.9919925)
-
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=887107312]
 transform = Transform3D(0.42546347, 0, 0.9049756, 0, 1, 0, -0.9049756, 0, 0.42546347, -6.6161857, 1.8338026, -3.6753113)
 shaded = true
 alpha_cut = 1
 texture = ExtResource("3_r3fl7")
+
+[node name="Building2" parent="." unique_id=902335933 instance=ExtResource("3_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.565289, 10.706266, -4.6371145)

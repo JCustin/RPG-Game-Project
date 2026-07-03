@@ -20,7 +20,7 @@ movement_component = NodePath("player_movement_controller")
 interaction_component = NodePath("player_interaction_component")
 inventory_component = NodePath("player_inventory_component")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=931493520]
+[node name="Sprite2D" type="Sprite3D" parent="." unique_id=1944763347]
 texture = ExtResource("2_8uix0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1652117801]

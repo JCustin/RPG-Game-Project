@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0oio532puorb"
-path.s3tc="res://.godot/imported/icon.svg-a35c2f881bcf1cfb310ad8c3bcb19825.s3tc.ctex"
+uid="uid://bxpvg4qkw0qde"
+path.s3tc="res://.godot/imported/Building_fuckasstree.png-e373c0f1d2c7b2bba1740dd176683dd5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "d6293e6d9943db9f90bcdd253c959919"
+}
 
 [deps]
 
-source_file="res://addons/project-time-tracker/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-a35c2f881bcf1cfb310ad8c3bcb19825.s3tc.ctex"]
+source_file="res://WIP_Pixel_Art/Building_fuckasstree.png"
+dest_files=["res://.godot/imported/Building_fuckasstree.png-e373c0f1d2c7b2bba1740dd176683dd5.s3tc.ctex"]
 
 [params]
 
@@ -39,6 +42,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

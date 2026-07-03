@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cyunfbuqy3png"]
+
+[ext_resource type="Script" uid="uid://dwc3qqj4e83pr" path="res://Assets/Actors/Actor Class/base_actor_class.gd" id="1_b8f2h"]
+[ext_resource type="Texture2D" uid="uid://bcpeacppd42eq" path="res://WIP_Pixel_Art/Combat Artwork/Witch Hunter/WitchHunter_Idle.png" id="2_cvyoy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b8f2h"]
+size = Vector3(1, 1, 1.3719482)
+
+[node name="Witch Hunter" type="CharacterBody3D" unique_id=1569116865]
+script = ExtResource("1_b8f2h")
+metadata/_custom_type_script = "uid://dwc3qqj4e83pr"
+
+[node name="Sprite" type="Sprite3D" parent="." unique_id=475138487]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+texture = ExtResource("2_cvyoy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1988718017]
+transform = Transform3D(0.00891674, 0, -0.24984093, 0, 0.25, 0, 0.24984093, 0, 0.00891674, 0.1761162, 0, 0.010686785)
+shape = SubResource("BoxShape3D_b8f2h")
+debug_color = Color(0.96779925, 6.738305e-07, 0.47500032, 0.41960785)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1860258524]
+transform = Transform3D(1, 0, 0, 0, 0.78207546, 0.6231837, 0, -0.6231837, 0.78207546, -0.263381, 2.4040723, 5.0228167)
