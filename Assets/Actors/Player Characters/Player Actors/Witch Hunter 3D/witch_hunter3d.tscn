@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cyunfbuqy3png"]
+
+[ext_resource type="Script" uid="uid://nxgej8v03bni" path="res://Assets/Actors/Actor Class/player_actor_class.gd" id="1_b8f2h"]
+[ext_resource type="Resource" uid="uid://t2pgfie12cc8" path="res://Assets/Actors/Player Characters/Player Actors/Witch Hunter 3D/witch_hunter_stat_block.tres" id="2_55mbi"]
+[ext_resource type="Texture2D" uid="uid://c4ye8yrs83ly0" path="res://WIP_Pixel_Art/Base_Model2.png" id="3_r6g8o"]
+[ext_resource type="Script" uid="uid://dtk7tpuwhdgg0" path="res://Assets/Actors/Player Characters/Components/player_3d_movement_component.gd" id="4_55mbi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b8f2h"]
+size = Vector3(0.3852539, 0.6279602, 0.4394455)
+
+[node name="Witch Hunter" type="CharacterBody3D" unique_id=279316978]
+script = ExtResource("1_b8f2h")
+stat_block = ExtResource("2_55mbi")
+metadata/_custom_type_script = "uid://nxgej8v03bni"
+
+[node name="Sprite" type="Sprite3D" parent="." unique_id=475138487]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.14889215, 0)
+modulate = Color(0, 0, 0, 1)
+alpha_cut = 1
+texture = ExtResource("3_r6g8o")
+hframes = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1988718017]
+transform = Transform3D(0.00891674, 0, -0.24984093, 0, 0.25, 0, 0.24984093, 0, 0.00891674, 0.0007092529, -0.14522159, -0.0016112847)
+shape = SubResource("BoxShape3D_b8f2h")
+debug_color = Color(0.96779925, 6.738305e-07, 0.47500032, 0.41960785)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1860258524]
+transform = Transform3D(1, 0, 0, 0, 0.78207546, 0.6231837, 0, -0.6231837, 0.78207546, -0.08400497, 1.5181261, 2.5403206)
+current = true
+
+[node name="player_3d_movement_controller" type="Node" parent="." unique_id=1743549306 node_paths=PackedStringArray("player")]
+script = ExtResource("4_55mbi")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://dtk7tpuwhdgg0"

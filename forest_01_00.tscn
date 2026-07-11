@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://q2t6yr1sxagg"]
+
+[ext_resource type="PackedScene" uid="uid://c7mnhmv6lx7hl" path="res://forest_01_00_mesh.tscn" id="1_owawt"]
+
+[node name="Forest_Demo" type="Node3D" unique_id=1129651168]
+
+[node name="Forest_01_00" parent="." unique_id=965279152 instance=ExtResource("1_owawt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)

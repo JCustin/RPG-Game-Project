@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="actor_stat_block_resource" format=3 uid="uid://t2pgfie12cc8"]
+
+[ext_resource type="PackedScene" uid="uid://djvqssy2d8add" path="res://Assets/Actors/Player Characters/Player Actors/Witch Hunter 3D/Combat/witch_hunter_combat.tscn" id="1_3ooji"]
+[ext_resource type="Script" uid="uid://bpw4kiwpb8usu" path="res://Assets/Actors/Actor Class/actor_stat_block_resource.gd" id="2_70opj"]
+
+[resource]
+script = ExtResource("2_70opj")
+max_HP = 100
+max_STAM = 100
+HP = 100
+STAM = 100
+ATK = 20
+DEF = 10
+SPD = 50
+combat_counterpart = ExtResource("1_3ooji")
+movement_speed = 100
+metadata/_custom_type_script = "uid://bpw4kiwpb8usu"
