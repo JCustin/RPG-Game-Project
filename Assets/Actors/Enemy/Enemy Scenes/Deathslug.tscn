@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://davqlxfefq5ws"]
+
+[ext_resource type="Script" uid="uid://b63k5g8n66n4p" path="res://Assets/Actors/Actor Class/enemy_actor_class.gd" id="1_jwrg0"]
+[ext_resource type="Texture2D" uid="uid://bq13asn7ditfp" path="res://WIP_Pixel_Art/Gizzo_WIP.png" id="2_jwrg0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sryy0"]
+size = Vector3(10, 20, 0.25)
+
+[node name="Deathslug" type="CharacterBody3D" unique_id=2125277795]
+script = ExtResource("1_jwrg0")
+metadata/_custom_type_script = "uid://b63k5g8n66n4p"
+
+[node name="Pixel" type="Sprite3D" parent="." unique_id=729732567]
+shaded = true
+alpha_cut = 2
+texture = ExtResource("2_jwrg0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1213623289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8155088, 0, 0)
+shape = SubResource("BoxShape3D_sryy0")

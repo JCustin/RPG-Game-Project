@@ -7,7 +7,8 @@
 [ext_resource type="Script" uid="uid://cr35rxx6qpe1p" path="res://Assets/Actors/Player Characters/Components/player_interaction_component.gd" id="5_3bhhj"]
 [ext_resource type="PackedScene" uid="uid://cq4pqv5g2qptk" path="res://Assets/Actors/Player Characters/Components/player_inventory_component.tscn" id="6_ir25p"]
 [ext_resource type="PackedScene" uid="uid://b7ahxx6ip570v" path="res://Assets/Actors/Player Characters/Components/combat_initiation_component.tscn" id="7_swwm8"]
-[ext_resource type="Script" uid="uid://bek07ye1w2ovh" path="res://Assets/Actors/Player Characters/Components/combat_initiation_component.gd" id="8_wnowa"]
+[ext_resource type="Script" uid="uid://bek07ye1w2ovh" path="res://Assets/Actors/Player Characters/Components/player_combat_initiator.gd" id="8_wnowa"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44o0l"]
 size = Vector2(94, 92)

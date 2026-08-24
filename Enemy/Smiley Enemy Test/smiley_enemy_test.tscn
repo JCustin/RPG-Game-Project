@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bfxlqf3ywhc2n"]
+
+[ext_resource type="Texture2D" uid="uid://bv5g16vigmxg2" path="res://WIP_Pixel_Art/SmileyEnemy.png" id="1_chste"]
+[ext_resource type="Script" uid="uid://b63k5g8n66n4p" path="res://Assets/Actors/Actor Class/enemy_actor_class.gd" id="1_ryydo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ryydo"]
+size = Vector3(3, 3, 0.3)
+
+[node name="SmileyEnemyTest" type="CharacterBody3D" unique_id=320571480]
+collision_layer = 2
+script = ExtResource("1_ryydo")
+metadata/_custom_type_script = "uid://b63k5g8n66n4p"
+
+[node name="Pixel Art" type="Sprite3D" parent="." unique_id=354180766]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("1_chste")
+region_enabled = true
+region_rect = Rect2(652.99994, 203.81248, 617.6248, 617.6249)
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=953673567]
+shape = SubResource("BoxShape3D_ryydo")

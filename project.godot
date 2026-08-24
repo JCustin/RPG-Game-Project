@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Zombie RPG Game"
-run/main_scene="uid://xuioa58842rw"
+run/main_scene="uid://pxpanctltfb7"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -151,8 +151,11 @@ dialogic_default_action={
 
 3d_render/layer_1="Floor"
 2d_physics/layer_1="Player_Mask"
+3d_physics/layer_1="Player"
 2d_physics/layer_2="Item"
+3d_physics/layer_2="Enemy"
 2d_physics/layer_3="Enemy"
+3d_physics/layer_3="Environment"
 2d_physics/layer_4="Map_Obstacles"
 2d_physics/layer_5="NPC"
 

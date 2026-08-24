@@ -13,5 +13,5 @@ ATK = 20
 DEF = 10
 SPD = 50
 combat_counterpart = ExtResource("1_3ooji")
-movement_speed = 100
+movement_speed = 4
 metadata/_custom_type_script = "uid://bpw4kiwpb8usu"
