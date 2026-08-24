@@ -80,7 +80,6 @@ transform = Transform3D(0.14858684, 0.020541482, 0, -0.020541482, 0.14858684, 0,
 stat_block = SubResource("Resource_k8j12")
 
 [node name="Area Pull Radius" type="Area3D" parent="Overworld/Actor Manager" unique_id=1272089091]
-collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Overworld/Actor Manager/Area Pull Radius" unique_id=194331691]
 shape = SubResource("SphereShape3D_4xvpm")

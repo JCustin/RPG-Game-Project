@@ -9,6 +9,6 @@ func _init() -> void:
 	add_to_group('Player')
 	
 
-func talk_to_npc(NPC) -> void:
+func talk_to_npc(_NPC) -> void:
 	pass
 	

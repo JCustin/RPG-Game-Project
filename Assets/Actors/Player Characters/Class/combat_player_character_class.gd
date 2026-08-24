@@ -21,5 +21,5 @@ func deal_basic_attack(target):
 
 #func deal_special_attack(special_attack, target)
 
-func talk_to_enemy(enemy: combat_enemy_character) -> void:
+func talk_to_enemy(_enemy: combat_enemy_character) -> void:
 	pass	

@@ -11,7 +11,7 @@ var sight_range : int
 func _ready() -> void:
 	_find_player()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var direction = global_position.direction_to(player.global_position)
 	sight_raycast.target_position = direction * sight_range	
 	

@@ -14,11 +14,11 @@ func init_combat(players : Array[player_actor_class], enemies: Array[enemy_actor
 		else:
 			pass
 	
-	for player in players:
-		combat_players.append(player.stat_block.combat_counterpart)
-	for enemy in enemies:
-		combat_enemies.append(enemy.stat_block.combat_counterpart)
+	#for player in players:
+		#combat_players.append(player.stat_block.combat_counterpart)
+	#for enemy in enemies:
+		#combat_enemies.append(enemy.stat_block.combat_counterpart)
 		
-	location_manager.define_position_map()
+	#location_manager.define_position_map()
 		
 # TODO FINISH THE REST OF THE COMBAT LOGIC

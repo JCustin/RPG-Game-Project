@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-# COLLISION DETECTION
+# COLLISION DETECTION / COMBAT INITIATION
 	if get_last_slide_collision() != null and collision_detector == true:
 		
 		#print_debug(player.get_last_slide_collision().get_collision_count())
