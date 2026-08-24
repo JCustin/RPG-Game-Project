@@ -14,7 +14,6 @@ func init_combat(players : Array[player_actor_class], enemies: Array[enemy_actor
 		else:
 			pass
 	
-	
 	for player in players:
 		combat_players.append(player.stat_block.combat_counterpart)
 	for enemy in enemies:
