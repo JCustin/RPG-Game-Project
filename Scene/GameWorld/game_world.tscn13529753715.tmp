@@ -92,6 +92,7 @@ shadow_blur = 0.381
 
 [node name="Combat World" type="Node" parent="." unique_id=849399167]
 
-[node name="Combat Manager" type="Node" parent="Combat World" unique_id=1818505461]
+[node name="Combat Manager" type="Node" parent="Combat World" unique_id=1818505461 node_paths=PackedStringArray("combat_pull_radius")]
 script = ExtResource("2_o2hml")
+combat_pull_radius = NodePath("../../Overworld/Actor Manager/player party/Witch Hunter/Area Pull Radius")
 metadata/_custom_type_script = "uid://ci7tsuvbhhn86"

@@ -1,8 +1,5 @@
 class_name combat_manager_component extends Node
 
-@export var player_actor_manager : actor_manager
-@export var combat_pull_radius : Area3D
-
 var combat_scene : base_combat_scene
 signal combat_won
 signal combat_lost
