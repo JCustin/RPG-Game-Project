@@ -1,20 +1,49 @@
 [gd_scene format=3 uid="uid://davqlxfefq5ws"]
 
 [ext_resource type="Script" uid="uid://b63k5g8n66n4p" path="res://Assets/Actors/Actor Class/enemy_actor_class.gd" id="1_jwrg0"]
-[ext_resource type="Texture2D" uid="uid://bq13asn7ditfp" path="res://WIP_Pixel_Art/Gizzo_WIP.png" id="2_jwrg0"]
+[ext_resource type="Texture2D" uid="uid://dj0ccxgp2ufil" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0000.png" id="2_s4rtj"]
+[ext_resource type="Texture2D" uid="uid://boci2yv1koxuq" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0001.png" id="3_rxoq1"]
+[ext_resource type="Texture2D" uid="uid://djcdjdaty3f16" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0002.png" id="4_b23d7"]
+[ext_resource type="Texture2D" uid="uid://bmtp4ws8o3jt0" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0003.png" id="5_o3pgt"]
+[ext_resource type="Texture2D" uid="uid://cxjcygpp068dp" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0004.png" id="6_u6c2e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sryy0"]
 size = Vector3(10, 20, 0.25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rqs7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s4rtj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rxoq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_b23d7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_o3pgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u6c2e")
+}],
+"loop": true,
+"name": &"Heart_Throb",
+"speed": 3.0
+}]
 
 [node name="Deathslug" type="CharacterBody3D" unique_id=2125277795]
 script = ExtResource("1_jwrg0")
 metadata/_custom_type_script = "uid://b63k5g8n66n4p"
 
-[node name="Pixel" type="Sprite3D" parent="." unique_id=729732567]
-shaded = true
-alpha_cut = 2
-texture = ExtResource("2_jwrg0")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1213623289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8155088, 0, 0)
 shape = SubResource("BoxShape3D_sryy0")
+
+[node name="LongRat_Sprite" type="AnimatedSprite3D" parent="." unique_id=1442383003]
+alpha_cut = 1
+sprite_frames = SubResource("SpriteFrames_rqs7s")
+animation = &"Heart_Throb"
+autoplay = "Heart_Throb"
+frame_progress = 0.44559208

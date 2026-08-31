@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dfsip1svakwyj"]
+
+[ext_resource type="Script" uid="uid://c2exb0li55kqf" path="res://Assets/Actors/Actor Class/player_combat_actor_class.gd" id="1_q0st2"]
+[ext_resource type="Texture2D" uid="uid://cneg6netrka7o" path="res://WIP_Pixel_Art/Thumbnail Art/Pyro_Beta_Fight_Stance/Pyromancer_Idle.png" id="2_eyl87"]
+
+[node name="player_combat_actor_class" type="StaticBody3D" unique_id=947034395]
+script = ExtResource("1_q0st2")
+metadata/_custom_type_script = "uid://c2exb0li55kqf"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=584860528]
+texture = ExtResource("2_eyl87")

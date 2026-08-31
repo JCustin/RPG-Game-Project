@@ -84,7 +84,7 @@ transform = Transform3D(0.14858684, 0.020541482, 0, -0.020541482, 0.14858684, 0,
 stat_block = SubResource("Resource_k8j12")
 
 [node name="Sun" type="DirectionalLight3D" parent="Overworld" unique_id=1513780280]
-transform = Transform3D(0.4555309, 0.662282, 0.5948733, -0.8540801, 0.5136022, 0.08221977, -0.25107557, -0.545523, 0.7996035, 0, 2.3143806, 0)
+transform = Transform3D(0.010118514, 0.808015, -0.5890751, -0.768836, 0.38295957, 0.51208717, 0.63936603, 0.44772056, 0.6251058, 0, 2.3143806, 0)
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_transmittance_bias = -4.239

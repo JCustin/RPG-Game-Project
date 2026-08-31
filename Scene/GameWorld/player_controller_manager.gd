@@ -47,6 +47,6 @@ func send_combat_signal(inciting_enemy : enemy_actor_class) -> void:
 		var combat_counterpart : player_combat_actor_class = player.stat_block.combat_counterpart.instantiate()
 		combat_players.append(combat_counterpart)
 		
-	var combat_enemies : Array[enemy_combat_actor_class]
-	for enemy : enemy_actor_class in local_enemies:
-		var combat_counterpart : 
+	#var combat_enemies : Array[enemy_combat_actor_class]
+	#for enemy : enemy_actor_class in local_enemies:
+		#var combat_counterpart : 

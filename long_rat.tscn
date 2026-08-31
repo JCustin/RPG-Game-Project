@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dxlsu3tfq77jn"]
+
+[ext_resource type="Script" uid="uid://b63k5g8n66n4p" path="res://Assets/Actors/Actor Class/enemy_actor_class.gd" id="1_16kf4"]
+[ext_resource type="Script" uid="uid://bpw4kiwpb8usu" path="res://Assets/Actors/Actor Class/actor_stat_block_resource.gd" id="2_mjn2p"]
+[ext_resource type="Texture2D" uid="uid://dj0ccxgp2ufil" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0000.png" id="3_0nqqw"]
+[ext_resource type="Texture2D" uid="uid://boci2yv1koxuq" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0001.png" id="4_wmywq"]
+[ext_resource type="Texture2D" uid="uid://djcdjdaty3f16" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0002.png" id="5_tqs6j"]
+[ext_resource type="Texture2D" uid="uid://bmtp4ws8o3jt0" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0003.png" id="6_7ovl2"]
+[ext_resource type="Texture2D" uid="uid://cxjcygpp068dp" path="res://WIP_Pixel_Art/Thumbnail Art/LongRat/HeartThrob_Animation/HeartThrob_Animation_Transparent0004.png" id="7_efpxc"]
+
+[sub_resource type="Resource" id="Resource_h8yly"]
+script = ExtResource("2_mjn2p")
+max_HP = 100
+max_STAM = 100
+HP = 100
+STAM = 100
+ATK = 20
+DEF = 10
+SPD = 10
+movement_speed = 100
+metadata/_custom_type_script = "uid://bpw4kiwpb8usu"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rwmp7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0nqqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wmywq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tqs6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7ovl2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_efpxc")
+}],
+"loop": true,
+"name": &"Heart_Throb",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LongRat" type="CharacterBody3D" unique_id=708350402]
+script = ExtResource("1_16kf4")
+stat_block = SubResource("Resource_h8yly")
+metadata/_custom_type_script = "uid://b63k5g8n66n4p"
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=442002477]
+gi_mode = 2
+shaded = true
+alpha_cut = 1
+alpha_antialiasing_mode = 1
+sprite_frames = SubResource("SpriteFrames_rwmp7")
+animation = &"Heart_Throb"
+frame_progress = 0.114923984
