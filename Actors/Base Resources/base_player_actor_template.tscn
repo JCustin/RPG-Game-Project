@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dybrwybg4025j" path="res://Actors/Player/Base Player Scripts/base_player_actor.gd" id="1_8da2k"]
 [ext_resource type="Texture2D" uid="uid://bcg1nrlmb8gmk" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_Overworld-Sheet.png" id="2_r1euu"]
+[ext_resource type="Script" uid="uid://bpicu8gr5qyvc" path="res://Actors/Base Resources/base_actor_texture_component.gd" id="3_r1euu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_grhob"]
 atlas = ExtResource("2_r1euu")
@@ -86,6 +87,26 @@ animations = [{
 "loop": true,
 "name": &"Idle",
 "speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Walk East",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Walk North",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Walk South",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Walk West",
+"speed": 5.0
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nr8bl"]
@@ -104,6 +125,7 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_2bvb3")
 animation = &"Idle"
 autoplay = "Idle"
+script = ExtResource("3_r1euu")
 
 [node name="Collision Box" type="CollisionShape3D" parent="." unique_id=2095459847]
 shape = SubResource("BoxShape3D_nr8bl")

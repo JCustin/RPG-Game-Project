@@ -21,7 +21,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9275062, 0)
 stat_block = SubResource("Resource_qgrb7")
 
 [node name="Camera3D" type="Camera3D" parent="base_player_actor" unique_id=1626745574]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036073685, 0, 0.9145074)
+transform = Transform3D(1, 0, 0, 0, 0.64637715, 0.76301813, 0, -0.76301813, 0.64637715, -0.036073685, 1.0079732, 1.2522826)
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1922478658]
 mesh = SubResource("BoxMesh_hbceh")
@@ -31,3 +31,7 @@ collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=2140732732]
 shape = SubResource("ConcavePolygonShape3D_hbceh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=308548267]
+transform = Transform3D(0.500309, -0.82004505, 0.27787974, 0.6201046, 0.5633424, 0.54599965, -0.6042857, -0.10085398, 0.79035896, 0, 2.1588569, 3.762148)
+shadow_enabled = true
