@@ -1,9 +1,16 @@
 class_name combat_manager_component extends Node
 
+@export var actor_manager_component : actor_manager
+
 var combat_scene : base_combat_scene
 signal combat_won
 signal combat_lost
 
+func _ready() -> void:
+	actor_manager_component.combat_initiated.connect(start_combat)
+	
+func start_combat(players: Array[player_combat_actor_class], enemies : Array[enemy_combat_actor_class]):
+	pass
 	
 #func start_combat(inciting_enemy : enemy_actor_class):
 	#var enemies : Array[enemy_actor_class] = [inciting_enemy]

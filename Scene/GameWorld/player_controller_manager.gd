@@ -1,9 +1,12 @@
 class_name actor_manager extends Node
 
+signal combat_initiated(combat_player : Array[player_combat_actor_class], combat_enemies: Array[enemy_actor_class])
+
 @export var player_party : Node
 @export var enemy_party : Node
 @export var map_manager : map_region_manager
 @export var area_pull_radius : Area3D
+@export var combat_manager : combat_manager_component
 var local_enemies : Array
 var detected_body_counter : int = 0
 
@@ -29,11 +32,10 @@ func remove_local_enemy(detected_body) -> void:
 
 # refer to function below when anyone is added to the party. 
 func connect_player_combat_initiation() -> void:
-	for player in player_party.get_children():
-		if player is player_actor_class:
-			var player_actor : player_actor_class = player 
-			player_actor.enemy_contacted.connect(send_combat_signal)
-			
+	var player : player_actor_class = player_party.get_child(0)
+	player.enemy_contacted.connect(send_combat_signal)
+	
+# signal is sent to combat_manager
 func send_combat_signal(inciting_enemy : enemy_actor_class) -> void:
 	var all_players : Array[player_actor_class]
 	
@@ -47,6 +49,4 @@ func send_combat_signal(inciting_enemy : enemy_actor_class) -> void:
 		var combat_counterpart : player_combat_actor_class = player.stat_block.combat_counterpart.instantiate()
 		combat_players.append(combat_counterpart)
 		
-	#var combat_enemies : Array[enemy_combat_actor_class]
-	#for enemy : enemy_actor_class in local_enemies:
-		#var combat_counterpart : 
+		

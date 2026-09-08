@@ -9,7 +9,7 @@ script = ExtResource("1_ob5fn")
 [node name="Location Manager" type="Node" parent="." unique_id=104387842 node_paths=PackedStringArray("front_player_positions", "rear_player_positions", "enemy_central_positions")]
 script = ExtResource("2_4hg6w")
 front_player_positions = NodePath("Front Player Positions")
-rear_player_positions = NodePath("Rear Player Positions")
+rear_player_positions = NodePath("")
 enemy_central_positions = NodePath("Central Enemy Positions")
 
 [node name="Front Player Positions" type="Node" parent="Location Manager" unique_id=291687948]
@@ -22,17 +22,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2884463, 0, 1.4122155)
 
 [node name="Front Spot 3" type="Node3D" parent="Location Manager/Front Player Positions" unique_id=2137136868]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4495464, 0, 1.4122155)
-
-[node name="Rear Player Positions" type="Node" parent="Location Manager" unique_id=324769372]
-
-[node name="Rear Spot 1" type="Node3D" parent="Location Manager/Rear Player Positions" unique_id=713963767]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2688168, 0, -0.48454928)
-
-[node name="Rear Spot 2" type="Node3D" parent="Location Manager/Rear Player Positions" unique_id=1049421793]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2884463, 0, -0.48454928)
-
-[node name="Rear Spot 3" type="Node3D" parent="Location Manager/Rear Player Positions" unique_id=666641498]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4495464, 0, -0.48454928)
 
 [node name="Central Enemy Positions" type="Node" parent="Location Manager" unique_id=566287263]
 
