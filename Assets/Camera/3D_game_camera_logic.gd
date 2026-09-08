@@ -1,1 +1,0 @@
-class_name gamecamera extends Camera3D

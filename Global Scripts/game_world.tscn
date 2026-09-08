@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cpu2i88rllucx"]
+
+[ext_resource type="PackedScene" uid="uid://dddhrctywk26y" path="res://Actors/Base Resources/base_player_actor_template.tscn" id="1_s8l0k"]
+[ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="2_hbceh"]
+
+[sub_resource type="Resource" id="Resource_qgrb7"]
+script = ExtResource("2_hbceh")
+movement_speed = 10
+metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
+
+[sub_resource type="BoxMesh" id="BoxMesh_hbceh"]
+size = Vector3(20, 1, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hbceh"]
+data = PackedVector3Array(-10, 0.5, 5, 10, 0.5, 5, -10, -0.5, 5, 10, 0.5, 5, 10, -0.5, 5, -10, -0.5, 5, 10, 0.5, -5, -10, 0.5, -5, 10, -0.5, -5, -10, 0.5, -5, -10, -0.5, -5, 10, -0.5, -5, 10, 0.5, 5, 10, 0.5, -5, 10, -0.5, 5, 10, 0.5, -5, 10, -0.5, -5, 10, -0.5, 5, -10, 0.5, -5, -10, 0.5, 5, -10, -0.5, -5, -10, 0.5, 5, -10, -0.5, 5, -10, -0.5, -5, 10, 0.5, 5, -10, 0.5, 5, 10, 0.5, -5, -10, 0.5, 5, -10, 0.5, -5, 10, 0.5, -5, -10, -0.5, 5, 10, -0.5, 5, -10, -0.5, -5, 10, -0.5, 5, 10, -0.5, -5, -10, -0.5, -5)
+
+[node name="Game World" type="Node3D" unique_id=1626318213]
+
+[node name="base_player_actor" parent="." unique_id=623377371 instance=ExtResource("1_s8l0k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9275062, 0)
+stat_block = SubResource("Resource_qgrb7")
+
+[node name="Camera3D" type="Camera3D" parent="base_player_actor" unique_id=1626745574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036073685, 0, 0.9145074)
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1922478658]
+mesh = SubResource("BoxMesh_hbceh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1664951594]
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=2140732732]
+shape = SubResource("ConcavePolygonShape3D_hbceh")

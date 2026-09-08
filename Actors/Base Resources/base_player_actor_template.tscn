@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://dddhrctywk26y"]
+
+[ext_resource type="Script" uid="uid://dybrwybg4025j" path="res://Actors/Player/Base Player Scripts/base_player_actor.gd" id="1_8da2k"]
+[ext_resource type="Texture2D" uid="uid://bcg1nrlmb8gmk" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_Overworld-Sheet.png" id="2_r1euu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grhob"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwh4a"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rycg"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8iki8"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqrxf"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrwfk"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5jqf"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bto6r"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14cxi"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjgby"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1te2c"]
+atlas = ExtResource("2_r1euu")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2bvb3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grhob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwh4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rycg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8iki8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqrxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrwfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5jqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bto6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14cxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjgby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1te2c")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nr8bl"]
+size = Vector3(0.2, 0.35, 0.2)
+
+[node name="base_player_actor" type="CharacterBody3D" unique_id=623377371]
+collision_mask = 6
+script = ExtResource("1_8da2k")
+metadata/_custom_type_script = "uid://dybrwybg4025j"
+
+[node name="Texture" type="AnimatedSprite3D" parent="." unique_id=101695831]
+editor_description = "Sprites should be 32x32. "
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_2bvb3")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="Collision Box" type="CollisionShape3D" parent="." unique_id=2095459847]
+shape = SubResource("BoxShape3D_nr8bl")

@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Zombie RPG Game"
-run/main_scene="uid://pxpanctltfb7"
+run/main_scene="uid://cpu2i88rllucx"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -27,21 +27,9 @@ Dialogic="*uid://ds2q0uclmolvu"
 
 [dialogic]
 
-directories/dch_directory={
-"Foot_Soldier": "res://Dialogue Resources/Characters/Foot_Soldier.dch",
-"Gravedigger": "res://Dialogue Resources/Characters/Gravedigger.dch",
-"Wild_Mummo": "res://Dialogue Resources/Characters/Wild_Mummo.dch",
-"WitchHunter": "res://Dialogue Resources/Characters/WitchHunter.dch"
-}
-directories/dtl_directory={
-"Foot_Soldier_Dialogue": "res://Dialogue Resources/Timeline/Combat Timelines/Foot_Soldier_Dialogue.dtl",
-"Gravedigger_Dialogue_Test_Day01": "res://Dialogue Resources/Timeline/NPC Timeline/Gravedigger_TEST/Gravedigger_Dialogue_Test_Day01.dtl",
-"timeline_example": "res://Dialogue Resources/timeline_example.dtl"
-}
-layout/style_directory={
-"": "res://Dialogue Resources/test_style.tres",
-"test_style": "res://Dialogue Resources/test_style.tres"
-}
+directories/dch_directory={}
+directories/dtl_directory={}
+layout/style_directory={}
 glossary/default_case_sensitive=true
 extensions_folder="res://addons/dialogic_additions"
 text/letter_speed=0.01

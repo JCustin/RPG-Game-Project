@@ -1,1 +1,0 @@
-class_name enemy_combat_actor_class extends base_combat_actor_class

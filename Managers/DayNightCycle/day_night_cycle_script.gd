@@ -1,1 +1,0 @@
-class_name day_night_cycle extends Node

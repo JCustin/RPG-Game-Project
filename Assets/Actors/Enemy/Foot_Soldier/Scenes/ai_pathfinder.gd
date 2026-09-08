@@ -1,1 +1,0 @@
-class_name ai_pathfinder extends NavigationAgent2D

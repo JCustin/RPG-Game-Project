@@ -1,1 +1,0 @@
-class_name rapier_weapon_type extends weapon_type_base

@@ -1,1 +1,0 @@
-extends potion_class

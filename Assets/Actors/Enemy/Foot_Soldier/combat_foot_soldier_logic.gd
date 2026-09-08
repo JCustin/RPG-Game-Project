@@ -1,1 +1,0 @@
-class_name combat_foot_soldier extends combat_enemy_character
