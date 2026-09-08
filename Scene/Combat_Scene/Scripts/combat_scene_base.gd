@@ -1,24 +1,16 @@
 class_name base_combat_scene extends Node3D
 
 @export var background_image : CompressedTexture2D
-var combat_players : Array[combat_player_character]
-var combat_enemies : Array[combat_enemy_character]
+var combat_players : Array[player_combat_actor_class]
+var combat_enemies : Array[enemy_combat_actor_class]
 @export var camera : Camera3D
 
 var location_manager : combat_location_manager
 
-func init_combat(players : Array[player_actor_class], enemies: Array[enemy_actor_class]):
-	for child in get_children():
-		if child is combat_location_manager:
-			location_manager = child
-		else:
-			pass
-	
-	#for player in players:
-		#combat_players.append(player.stat_block.combat_counterpart)
-	#for enemy in enemies:
-		#combat_enemies.append(enemy.stat_block.combat_counterpart)
-		
-	#location_manager.define_position_map()
-		
-# TODO FINISH THE REST OF THE COMBAT LOGIC
+func initiate_combat(
+loaded_combat_players : Array[player_combat_actor_class], 
+loaded_combat_enemeies : Array[enemy_combat_actor_class], 
+background_scene : CompressedTexture2D
+):
+	combat_players = loaded_combat_players
+	combat_enemies = loaded_combat_enemeies

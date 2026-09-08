@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 WorldStatus="*uid://bxt5nvrek5t46"
+Dialogic="*uid://ds2q0uclmolvu"
 
 [dialogic]
 

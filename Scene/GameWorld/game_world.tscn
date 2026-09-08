@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://blw8iwekg3jes" path="res://Assets/Camera/3D_game_camera_logic.gd" id="6_stfem"]
 [ext_resource type="PackedScene" uid="uid://bfxlqf3ywhc2n" path="res://Enemy/Smiley Enemy Test/smiley_enemy_test.tscn" id="7_cbypg"]
 [ext_resource type="PackedScene" uid="uid://davqlxfefq5ws" path="res://Assets/Actors/Enemy/Enemy Scenes/Deathslug.tscn" id="8_yif21"]
+[ext_resource type="Script" uid="uid://vrlvgasm7wcq" path="res://Scene/Combat_Scene/Scripts/combat_scene_base.gd" id="9_a77i0"]
+[ext_resource type="Script" uid="uid://dwof50r6eu6dc" path="res://Scene/Combat_Scene/combat_location_manager.gd" id="10_ey5da"]
 [ext_resource type="Script" uid="uid://bpw4kiwpb8usu" path="res://Assets/Actors/Actor Class/actor_stat_block_resource.gd" id="11_6fq8k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i6p81"]
@@ -77,10 +79,6 @@ shape = SubResource("SphereShape3D_4xvpm")
 
 [node name="enemy party" type="Node" parent="Overworld/Actor Manager" unique_id=67968182]
 
-[node name="Deathslug" parent="Overworld/Actor Manager/enemy party" unique_id=2125277795 instance=ExtResource("8_yif21")]
-transform = Transform3D(0.14858684, 0.020541482, 0, -0.020541482, 0.14858684, 0, 0, 0, 0.15, -3.9486895, 1.6188152, -3.4931502)
-stat_block = SubResource("Resource_k8j12")
-
 [node name="Deathslug2" parent="Overworld/Actor Manager/enemy party" unique_id=1492926421 instance=ExtResource("8_yif21")]
 transform = Transform3D(0.14858684, 0.020541482, 0, -0.020541482, 0.14858684, 0, 0, 0, 0.15, -3.9486895, 1.6188152, -5.332084)
 stat_block = SubResource("Resource_k8j12")
@@ -102,6 +100,39 @@ omni_range = 2.783
 
 [node name="Combat World" type="Node" parent="." unique_id=849399167]
 
-[node name="Combat Manager" type="Node" parent="Combat World" unique_id=1818505461]
+[node name="Combat Manager" type="Node" parent="Combat World" unique_id=1818505461 node_paths=PackedStringArray("actor_manager_component", "combat_scene", "map_manager")]
 script = ExtResource("2_o2hml")
+actor_manager_component = NodePath("../../Overworld/Actor Manager")
+combat_scene = NodePath("Combat Scene")
+map_manager = NodePath("../../Overworld/Map Region Manager")
 metadata/_custom_type_script = "uid://ci7tsuvbhhn86"
+
+[node name="Combat Scene" type="Node3D" parent="Combat World/Combat Manager" unique_id=1322490350]
+script = ExtResource("9_a77i0")
+
+[node name="Location Manager" type="Node" parent="Combat World/Combat Manager/Combat Scene" unique_id=104387842 node_paths=PackedStringArray("front_player_positions", "enemy_central_positions")]
+script = ExtResource("10_ey5da")
+front_player_positions = NodePath("Front Player Positions")
+enemy_central_positions = NodePath("Central Enemy Positions")
+
+[node name="Front Player Positions" type="Node" parent="Combat World/Combat Manager/Combat Scene/Location Manager" unique_id=291687948]
+
+[node name="Front Spot 2" type="Node3D" parent="Combat World/Combat Manager/Combat Scene/Location Manager/Front Player Positions" unique_id=61583245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2884463, 0, 1.4122155)
+
+[node name="Front Spot 4" type="Node3D" parent="Combat World/Combat Manager/Combat Scene/Location Manager/Front Player Positions" unique_id=26064416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2688168, 0, 1.4122155)
+
+[node name="Front Spot 3" type="Node3D" parent="Combat World/Combat Manager/Combat Scene/Location Manager/Front Player Positions" unique_id=2137136868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4495464, 0, 1.4122155)
+
+[node name="Central Enemy Positions" type="Node" parent="Combat World/Combat Manager/Combat Scene/Location Manager" unique_id=566287263]
+
+[node name="Enemy Position 2" type="Node3D" parent="Combat World/Combat Manager/Combat Scene/Location Manager/Central Enemy Positions" unique_id=1058479821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37635064, 0, 0.35988653)
+
+[node name="Enemy Position 4" type="Node3D" parent="Combat World/Combat Manager/Combat Scene/Location Manager/Central Enemy Positions" unique_id=1197875222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4490441, 0, 0.35988653)
+
+[node name="Enemy Position 3" type="Node3D" parent="Combat World/Combat Manager/Combat Scene/Location Manager/Central Enemy Positions" unique_id=1022110155]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43931603, 0, 0.35988653)
