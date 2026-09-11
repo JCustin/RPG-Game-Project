@@ -1,93 +1,95 @@
-[gd_scene format=3 uid="uid://dddhrctywk26y"]
+[gd_scene format=3 uid="uid://dmrarh2bkmlqj"]
 
-[ext_resource type="Script" uid="uid://dybrwybg4025j" path="res://Actors/Player/Base Player Scripts/base_player_actor.gd" id="1_8da2k"]
-[ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="2_7rycg"]
-[ext_resource type="Texture2D" uid="uid://bcg1nrlmb8gmk" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_Overworld-Sheet.png" id="2_r1euu"]
-[ext_resource type="Texture2D" uid="uid://bqg5xh5toa52p" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_MoveNorth-Sheet.png" id="3_qwh4a"]
-[ext_resource type="Script" uid="uid://bpicu8gr5qyvc" path="res://Actors/Base Resources/base_actor_texture_component.gd" id="3_r1euu"]
-[ext_resource type="Texture2D" uid="uid://qk234ixsmuhb" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_MoveSouth-Sheet.png" id="4_7rycg"]
+[ext_resource type="Script" uid="uid://dybrwybg4025j" path="res://Actors/Player/Base Player Scripts/base_player_actor.gd" id="1_qluhb"]
+[ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="2_4n3nh"]
+[ext_resource type="PackedScene" uid="uid://t1ar604p2w2t" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_COMBATANT.tscn" id="2_856ek"]
+[ext_resource type="Texture2D" uid="uid://bcg1nrlmb8gmk" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_Overworld-Sheet.png" id="3_856ek"]
+[ext_resource type="Texture2D" uid="uid://bqg5xh5toa52p" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_MoveNorth-Sheet.png" id="4_qql0f"]
+[ext_resource type="Texture2D" uid="uid://qk234ixsmuhb" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_MoveSouth-Sheet.png" id="5_kcjm6"]
+[ext_resource type="Script" uid="uid://bpicu8gr5qyvc" path="res://Actors/Base Resources/base_actor_texture_component.gd" id="6_1roxc"]
 
 [sub_resource type="Resource" id="Resource_8iki8"]
-script = ExtResource("2_7rycg")
+script = ExtResource("2_4n3nh")
 HP = 3
+combat_unit = ExtResource("2_856ek")
 wrath_generation = 1
 movement_speed = 10
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_grhob"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwh4a"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rycg"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8iki8"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pqrxf"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrwfk"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5jqf"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bto6r"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(224, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_14cxi"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(256, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xjgby"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(288, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1te2c"]
-atlas = ExtResource("2_r1euu")
+atlas = ExtResource("3_856ek")
 region = Rect2(320, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2bvb3"]
-atlas = ExtResource("3_qwh4a")
+atlas = ExtResource("4_qql0f")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nr8bl"]
-atlas = ExtResource("3_qwh4a")
+atlas = ExtResource("4_qql0f")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bm2li"]
-atlas = ExtResource("3_qwh4a")
+atlas = ExtResource("4_qql0f")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gqnfd"]
-atlas = ExtResource("3_qwh4a")
+atlas = ExtResource("4_qql0f")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mscrb"]
-atlas = ExtResource("4_7rycg")
+atlas = ExtResource("5_kcjm6")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0oxnl"]
-atlas = ExtResource("4_7rycg")
+atlas = ExtResource("5_kcjm6")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ddt7n"]
-atlas = ExtResource("4_7rycg")
+atlas = ExtResource("5_kcjm6")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_logsl"]
-atlas = ExtResource("4_7rycg")
+atlas = ExtResource("5_kcjm6")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2bvb3"]
@@ -178,9 +180,9 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_nr8bl"]
 size = Vector3(0.2, 0.35, 0.2)
 
-[node name="base player actor" type="CharacterBody3D" unique_id=623377371]
+[node name="base_player_actor" type="CharacterBody3D" unique_id=623377371]
 collision_mask = 6
-script = ExtResource("1_8da2k")
+script = ExtResource("1_qluhb")
 stat_block = SubResource("Resource_8iki8")
 metadata/_custom_type_script = "uid://dybrwybg4025j"
 
@@ -192,7 +194,7 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_2bvb3")
 animation = &"Walk West"
 autoplay = "Idle"
-script = ExtResource("3_r1euu")
+script = ExtResource("6_1roxc")
 
 [node name="Collision Box" type="CollisionShape3D" parent="." unique_id=2095459847]
 shape = SubResource("BoxShape3D_nr8bl")

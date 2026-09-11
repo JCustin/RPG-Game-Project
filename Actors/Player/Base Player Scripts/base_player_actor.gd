@@ -17,4 +17,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, stat_block.movement_speed)
 		velocity.z = move_toward(velocity.z, 0, stat_block.movement_speed)
 
+	if Input.is_key_pressed(KEY_SPACE):
+		pass
+		
 	move_and_slide()

@@ -12,3 +12,7 @@ func _physics_process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("Movement_Right"):
 		play("Walk East")
+	
+	if Input.is_action_just_released("Movement_Up") or Input.is_action_just_released("Movement_Down") or Input.is_action_just_pressed("Movement_Left") or Input.is_action_just_pressed("Movement_Right"):
+		play("Idle")
+	

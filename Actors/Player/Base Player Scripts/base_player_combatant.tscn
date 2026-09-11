@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://daj3g8ixhn4yw"]
+
+[ext_resource type="Script" uid="uid://b4423pjoe0lv2" path="res://Actors/Player/Base Player Scripts/base_player_combatant.gd" id="1_e5nok"]
+
+[node name="base_player_combatant" type="StaticBody3D" unique_id=1048619396]
+script = ExtResource("1_e5nok")
+
+[node name="Texture" type="AnimatedSprite3D" parent="." unique_id=1609261358]

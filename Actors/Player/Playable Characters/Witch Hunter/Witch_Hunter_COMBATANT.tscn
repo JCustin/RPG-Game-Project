@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://t1ar604p2w2t"]
+
+[ext_resource type="Script" uid="uid://b4423pjoe0lv2" path="res://Actors/Player/Base Player Scripts/base_player_combatant.gd" id="1_rwrpi"]
+[ext_resource type="Texture2D" uid="uid://bhh0eljy21qx" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_Combat_Idle.png" id="2_f5eyb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h0xgp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f5eyb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="base_player_combatant" type="StaticBody3D" unique_id=1048619396]
+script = ExtResource("1_rwrpi")
+
+[node name="Texture" type="AnimatedSprite3D" parent="." unique_id=1609261358]
+sprite_frames = SubResource("SpriteFrames_h0xgp")

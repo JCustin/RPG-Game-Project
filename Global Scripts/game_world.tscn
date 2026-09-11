@@ -5,7 +5,9 @@
 
 [sub_resource type="Resource" id="Resource_qgrb7"]
 script = ExtResource("2_hbceh")
-movement_speed = 10
+HP = 3
+wrath_generation = 1
+movement_speed = 4
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 
 [sub_resource type="BoxMesh" id="BoxMesh_hbceh"]
