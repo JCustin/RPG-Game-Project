@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dpx0prdy4rscj"]
+
+[ext_resource type="Script" uid="uid://csp3p32jygtn6" path="res://Actors/Enemy/base_enemy_actor.gd" id="1_xf3mb"]
+[ext_resource type="Texture2D" uid="uid://c6cblm4gsecaj" path="res://Actors/Enemy/Haven Enemies/Brute Hex/Art/TALL_BruteHex_OVERWORLD_Sheet.png" id="2_xf3mb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlvfv"]
+atlas = ExtResource("2_xf3mb")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm4qt"]
+atlas = ExtResource("2_xf3mb")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hu40n"]
+atlas = ExtResource("2_xf3mb")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf3mb"]
+atlas = ExtResource("2_xf3mb")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tr0us"]
+atlas = ExtResource("2_xf3mb")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i08r6"]
+atlas = ExtResource("2_xf3mb")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmiaq"]
+atlas = ExtResource("2_xf3mb")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1etml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlvfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm4qt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hu40n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf3mb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tr0us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i08r6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmiaq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 4.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6e3dl"]
+size = Vector3(0.2, 0.35, 0.2)
+
+[node name="Brute Hex" type="CharacterBody3D" unique_id=196334002]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_xf3mb")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=1141939493]
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_1etml")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.108705066
+
+[node name="Collision Box" type="CollisionShape3D" parent="." unique_id=68739890]
+shape = SubResource("BoxShape3D_6e3dl")

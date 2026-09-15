@@ -180,9 +180,10 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_nr8bl"]
 size = Vector3(0.2, 0.35, 0.2)
 
-[node name="base_player_actor" type="CharacterBody3D" unique_id=623377371]
+[node name="base_player_actor" type="CharacterBody3D" unique_id=623377371 node_paths=PackedStringArray("texture")]
 collision_mask = 6
 script = ExtResource("1_qluhb")
+texture = NodePath("Texture")
 stat_block = SubResource("Resource_8iki8")
 metadata/_custom_type_script = "uid://dybrwybg4025j"
 
@@ -192,7 +193,7 @@ shaded = true
 alpha_cut = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_2bvb3")
-animation = &"Walk West"
+animation = &"Idle"
 autoplay = "Idle"
 script = ExtResource("6_1roxc")
 
