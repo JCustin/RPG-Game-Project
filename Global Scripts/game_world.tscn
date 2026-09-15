@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cpu2i88rllucx"]
 
+[ext_resource type="Script" uid="uid://b7iaihieifj6j" path="res://Manager Componenets/actor_manager.gd" id="1_gon4g"]
 [ext_resource type="PackedScene" uid="uid://dmrarh2bkmlqj" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_OVERWORLD.tscn" id="1_s8l0k"]
 [ext_resource type="PackedScene" uid="uid://dpx0prdy4rscj" path="res://Actors/Enemy/Haven Enemies/Brute Hex/OVERWORLD_Brute_Hex.tscn" id="2_hbceh"]
 [ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="3_qgrb7"]
@@ -40,17 +41,26 @@ collision_layer = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D" unique_id=662872903]
 shape = SubResource("ConcavePolygonShape3D_hbceh")
 
-[node name="base_player_actor" parent="." unique_id=623377371 instance=ExtResource("1_s8l0k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7913642, 1.436738)
-
-[node name="Camera3D" type="Camera3D" parent="base_player_actor" unique_id=1977171488]
-transform = Transform3D(1, 0, 0, 0, 0.70348155, 0.7107135, 0, -0.7107135, 0.70348155, 0, 0.9818195, 1.2873015)
-
-[node name="Brute Hex" parent="." unique_id=196334002 instance=ExtResource("2_hbceh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8071289, 1.0486755)
-stat_block = SubResource("Resource_gon4g")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1873276562]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4577026, 2.9727783)
 shadow_enabled = true
 omni_range = 22.082
+
+[node name="Actor Manager" type="Node" parent="." unique_id=1218480918 node_paths=PackedStringArray("player_actors", "enemy_actors")]
+script = ExtResource("1_gon4g")
+player_actors = NodePath("Player Actors")
+enemy_actors = NodePath("Enemy Actors")
+
+[node name="Player Actors" type="Node" parent="Actor Manager" unique_id=1455372440]
+
+[node name="Witch Hunter" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("1_s8l0k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7913642, 1.436738)
+
+[node name="Camera3D" type="Camera3D" parent="Actor Manager/Player Actors/Witch Hunter" unique_id=1977171488]
+transform = Transform3D(1, 0, 0, 0, 0.70348155, 0.7107135, 0, -0.7107135, 0.70348155, 0, 0.9818195, 1.2873015)
+
+[node name="Enemy Actors" type="Node" parent="Actor Manager" unique_id=1597088867]
+
+[node name="Brute Hex" parent="Actor Manager/Enemy Actors" unique_id=196334002 instance=ExtResource("2_hbceh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8071289, 1.0486755)
+stat_block = SubResource("Resource_gon4g")

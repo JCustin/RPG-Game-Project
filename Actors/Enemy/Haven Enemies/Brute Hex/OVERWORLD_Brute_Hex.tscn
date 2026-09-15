@@ -57,7 +57,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 4.0
+"speed": 2.0
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6e3dl"]

@@ -1,0 +1,1 @@
+class_name base_enemy_combatant extends StaticBody3D

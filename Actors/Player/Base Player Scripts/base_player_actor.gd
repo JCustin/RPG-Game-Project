@@ -1,6 +1,15 @@
 class_name base_player_actor extends base_actor_class
 @export var texture : base_actor_texture_component
 
+signal contacted_enemy(enemy: base_enemy_actor)
+
+var local_enemies : Array[base_enemy_actor]
+
+func _ready() -> void:
+	%Combat_Initiation_Range.body_entered.connect(validate_combat_initiation)
+	%"Local Enemy Detector".body_entered.connect(add_to_local_enemies)
+	%"Local Enemy Detector".body_exited.connect(remove_from_local_enemies)
+
 # handle_movement
 func _physics_process(delta: float) -> void:
 # MOVEMENT
@@ -32,3 +41,16 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, stat_block.movement_speed)
 
 	move_and_slide()
+	
+# checks if body entered is an enemy_actor, and if so, combat shall start
+func validate_combat_initiation(body):
+	if body is base_enemy_actor:
+		contacted_enemy.emit(body)
+		
+func add_to_local_enemies(body) -> void:
+	if body is base_enemy_actor:
+		local_enemies.append(body)
+	
+func remove_from_local_enemies(body) -> void:
+	if body is base_enemy_actor:
+		local_enemies.erase(body)
