@@ -1,7 +1,8 @@
 class_name base_player_actor extends base_actor_class
 @export var texture : base_actor_texture_component
 
-signal contacted_enemy(enemy: base_enemy_actor)
+# signal is sent to Actor Manager
+signal contacted_enemy(surrounding_enemies : Array[base_enemy_actor])
 
 var local_enemies : Array[base_enemy_actor]
 
@@ -45,11 +46,12 @@ func _physics_process(delta: float) -> void:
 # checks if body entered is an enemy_actor, and if so, combat shall start
 func validate_combat_initiation(body):
 	if body is base_enemy_actor:
-		contacted_enemy.emit(body)
+		contacted_enemy.emit(local_enemies) # since local_enemies tracks all enemies around the player, we send this information out to Actor Manager
 		
 func add_to_local_enemies(body) -> void:
 	if body is base_enemy_actor:
 		local_enemies.append(body)
+		
 	
 func remove_from_local_enemies(body) -> void:
 	if body is base_enemy_actor:

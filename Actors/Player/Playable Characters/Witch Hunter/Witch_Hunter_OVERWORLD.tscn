@@ -220,6 +220,7 @@ debug_color = Color(0.95075256, 4.6205523e-06, 0.5694639, 0.41960785)
 
 [node name="Local Enemy Detector" type="Area3D" parent="." unique_id=2039563514]
 unique_name_in_owner = true
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Local Enemy Detector" unique_id=1103955842]
 shape = SubResource("CylinderShape3D_4n3nh")

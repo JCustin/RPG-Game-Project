@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://br3e7elbsyp5e"]
+
+[ext_resource type="Script" uid="uid://r0cm2j3sat8p" path="res://Actors/Enemy/Base Enemy Scripts/base_enemy_combatant.gd" id="1_rn2dh"]
+[ext_resource type="Texture2D" uid="uid://fa12psoiv34y" path="res://WIP ART/Combat Art/Brute Hex/BETA_HexBrute_1000_1000_pt2.png" id="2_cg3mo"]
+
+[node name="base_enemy_combatant" type="StaticBody3D" unique_id=750748769]
+script = ExtResource("1_rn2dh")
+
+[node name="Texture" type="Sprite3D" parent="." unique_id=1323483986]
+texture = ExtResource("2_cg3mo")

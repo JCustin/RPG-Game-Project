@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://dmrarh2bkmlqj" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_OVERWORLD.tscn" id="1_s8l0k"]
 [ext_resource type="PackedScene" uid="uid://dpx0prdy4rscj" path="res://Actors/Enemy/Haven Enemies/Brute Hex/OVERWORLD_Brute_Hex.tscn" id="2_hbceh"]
 [ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="3_qgrb7"]
+[ext_resource type="PackedScene" uid="uid://br3e7elbsyp5e" path="res://Actors/Enemy/Haven Enemies/Brute Hex/COMBAT_Brute_Hex.tscn" id="4_54ngu"]
+[ext_resource type="Texture2D" uid="uid://c6cblm4gsecaj" path="res://Actors/Enemy/Haven Enemies/Brute Hex/Art/TALL_BruteHex_OVERWORLD_Sheet.png" id="5_xa0cn"]
+[ext_resource type="Script" uid="uid://cp4jmhj1w76y0" path="res://Manager Componenets/combat_manager.gd" id="5_xhbsr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hbceh"]
 size = Vector3(20, 1, 10)
@@ -14,11 +17,21 @@ data = PackedVector3Array(-10, 0.5, 5, 10, 0.5, 5, -10, -0.5, 5, 10, 0.5, 5, 10,
 [sub_resource type="Resource" id="Resource_gon4g"]
 script = ExtResource("3_qgrb7")
 HP = 10
+combat_unit = ExtResource("4_54ngu")
 wrath_generation = 1
 bravery_generation = 1
 discipline_generation = 1
 movement_speed = 10
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xhbsr"]
+shading_mode = 0
+albedo_texture = ExtResource("5_xa0cn")
+texture_filter = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_54ngu"]
+material = SubResource("StandardMaterial3D_xhbsr")
+size = Vector2(13.72, 3.27)
 
 [node name="Game World" type="Node3D" unique_id=1626318213]
 
@@ -32,7 +45,7 @@ collision_layer = 4
 shape = SubResource("ConcavePolygonShape3D_hbceh")
 
 [node name="Wall" type="MeshInstance3D" parent="." unique_id=1971607205]
-transform = Transform3D(1, 0, 0, 0, 0.045188606, 0.9989785, 0, -0.9989785, 0.045188606, 0, 3.2476807, 0)
+transform = Transform3D(1, 0, 0, 0, 0.045188606, 0.9989785, 0, -0.9989785, 0.045188606, 0, 5.368171, -3.037067)
 mesh = SubResource("BoxMesh_hbceh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall" unique_id=1287022568]
@@ -64,3 +77,45 @@ transform = Transform3D(1, 0, 0, 0, 0.70348155, 0.7107135, 0, -0.7107135, 0.7034
 [node name="Brute Hex" parent="Actor Manager/Enemy Actors" unique_id=196334002 instance=ExtResource("2_hbceh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8071289, 1.0486755)
 stat_block = SubResource("Resource_gon4g")
+
+[node name="Combat Manager" type="Node" parent="." unique_id=341431183 node_paths=PackedStringArray("actor_manager_component")]
+script = ExtResource("5_xhbsr")
+actor_manager_component = NodePath("../Actor Manager")
+
+[node name="Battle Environment" type="Node3D" parent="Combat Manager" unique_id=1633137800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.39977, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Combat Manager/Battle Environment" unique_id=1600178299]
+transform = Transform3D(8.3832035, 0, 0, 0, 12.968009, 0, 0, 0, 5.2527876, 0, 20.322542, 95.86212)
+mesh = SubResource("QuadMesh_54ngu")
+
+[node name="Player Placements" type="Node" parent="Combat Manager/Battle Environment" unique_id=1097477737]
+
+[node name="Player Position 1" type="Node3D" parent="Combat Manager/Battle Environment/Player Placements" unique_id=1098322481]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.021888, 36.072807, 120.60878)
+
+[node name="Player Position 2" type="Node3D" parent="Combat Manager/Battle Environment/Player Placements" unique_id=1167246431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02666378, 36.072807, 120.60878)
+
+[node name="Player Position 3" type="Node3D" parent="Combat Manager/Battle Environment/Player Placements" unique_id=642180192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.072094, 36.072807, 120.60878)
+
+[node name="Enemy Placements" type="Node" parent="Combat Manager/Battle Environment" unique_id=1696147544]
+
+[node name="Enemy Position 1" type="Node3D" parent="Combat Manager/Battle Environment/Enemy Placements" unique_id=1602208476]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.021888, 36.072807, 115.75519)
+
+[node name="Enemy Position 2" type="Node3D" parent="Combat Manager/Battle Environment/Enemy Placements" unique_id=1611470826]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02666378, 36.072807, 115.75519)
+
+[node name="Enemy Position 3" type="Node3D" parent="Combat Manager/Battle Environment/Enemy Placements" unique_id=26681498]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.072094, 36.072807, 115.75519)
+
+[node name="Battle Camera" type="Camera3D" parent="Combat Manager/Battle Environment" unique_id=1631920453]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.27973, 139.8839)
+fov = 35.1
