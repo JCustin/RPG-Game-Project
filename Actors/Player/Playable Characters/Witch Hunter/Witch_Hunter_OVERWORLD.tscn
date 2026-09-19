@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dybrwybg4025j" path="res://Actors/Player/Base Player Scripts/base_player_actor.gd" id="1_qluhb"]
 [ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="2_4n3nh"]
 [ext_resource type="PackedScene" uid="uid://t1ar604p2w2t" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_COMBATANT.tscn" id="2_856ek"]
-[ext_resource type="Texture2D" uid="uid://bcg1nrlmb8gmk" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_Overworld-Sheet.png" id="3_856ek"]
+[ext_resource type="Texture2D" uid="uid://1w8rab2c0ekk" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_Idle.png" id="4_4n3nh"]
 [ext_resource type="Texture2D" uid="uid://bqg5xh5toa52p" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_MoveNorth-Sheet.png" id="4_qql0f"]
 [ext_resource type="Texture2D" uid="uid://qk234ixsmuhb" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/BETA_WitchHunter_MoveSouth-Sheet.png" id="5_kcjm6"]
 [ext_resource type="Script" uid="uid://bpicu8gr5qyvc" path="res://Actors/Base Resources/base_actor_texture_component.gd" id="6_1roxc"]
@@ -16,49 +16,17 @@ wrath_generation = 1
 movement_speed = 10
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_grhob"]
-atlas = ExtResource("3_856ek")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4n3nh"]
+atlas = ExtResource("4_4n3nh")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qwh4a"]
-atlas = ExtResource("3_856ek")
+[sub_resource type="AtlasTexture" id="AtlasTexture_856ek"]
+atlas = ExtResource("4_4n3nh")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7rycg"]
-atlas = ExtResource("3_856ek")
+[sub_resource type="AtlasTexture" id="AtlasTexture_qql0f"]
+atlas = ExtResource("4_4n3nh")
 region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8iki8"]
-atlas = ExtResource("3_856ek")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pqrxf"]
-atlas = ExtResource("3_856ek")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hrwfk"]
-atlas = ExtResource("3_856ek")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q5jqf"]
-atlas = ExtResource("3_856ek")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bto6r"]
-atlas = ExtResource("3_856ek")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_14cxi"]
-atlas = ExtResource("3_856ek")
-region = Rect2(256, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xjgby"]
-atlas = ExtResource("3_856ek")
-region = Rect2(288, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1te2c"]
-atlas = ExtResource("3_856ek")
-region = Rect2(320, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2bvb3"]
 atlas = ExtResource("4_qql0f")
@@ -96,41 +64,17 @@ region = Rect2(96, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_grhob")
+"texture": SubResource("AtlasTexture_4n3nh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qwh4a")
+"texture": SubResource("AtlasTexture_856ek")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7rycg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8iki8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pqrxf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hrwfk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q5jqf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bto6r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_14cxi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xjgby")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1te2c")
+"texture": SubResource("AtlasTexture_qql0f")
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 8.0
+"speed": 4.0
 }, {
 "frames": [],
 "loop": true,
@@ -178,7 +122,7 @@ animations = [{
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nr8bl"]
-size = Vector3(0.2, 0.35, 0.045)
+size = Vector3(0.2, 0.35712892, 0.045)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4n3nh"]
 size = Vector3(0.38, 0.205, 0.245)
@@ -206,7 +150,7 @@ autoplay = "Idle"
 script = ExtResource("6_1roxc")
 
 [node name="Collision Box" type="CollisionShape3D" parent="." unique_id=2095459847]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01412867, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.019212693, 0)
 shape = SubResource("BoxShape3D_nr8bl")
 debug_color = Color(0.19713867, 0.60169137, 0.627599, 0.41960785)
 
