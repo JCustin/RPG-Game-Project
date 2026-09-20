@@ -16,6 +16,8 @@ wrath_generation = 1
 movement_speed = 10
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4n3nh"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4n3nh"]
 atlas = ExtResource("4_4n3nh")
 region = Rect2(0, 0, 32, 32)
@@ -141,6 +143,7 @@ metadata/_custom_type_script = "uid://dybrwybg4025j"
 
 [node name="Texture" type="AnimatedSprite3D" parent="." unique_id=101695831]
 editor_description = "Sprites should be 32x32. "
+material_overlay = SubResource("ShaderMaterial_4n3nh")
 shaded = true
 alpha_cut = 1
 texture_filter = 0
