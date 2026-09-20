@@ -13,7 +13,7 @@ script = ExtResource("2_4n3nh")
 HP = 3
 combat_unit = ExtResource("2_856ek")
 wrath_generation = 1
-movement_speed = 10
+movement_speed = 2
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4n3nh"]
