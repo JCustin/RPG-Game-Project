@@ -13,7 +13,7 @@ script = ExtResource("2_4n3nh")
 HP = 3
 combat_unit = ExtResource("2_856ek")
 wrath_generation = 1
-movement_speed = 6
+movement_speed = 4
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4n3nh"]
@@ -123,8 +123,9 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_nr8bl"]
-size = Vector3(0.2, 0.35712892, 0.045)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4n3nh"]
+radius = 0.025
+height = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4n3nh"]
 size = Vector3(0.38, 0.205, 0.245)
@@ -153,8 +154,8 @@ autoplay = "Idle"
 script = ExtResource("6_1roxc")
 
 [node name="Collision Box" type="CollisionShape3D" parent="." unique_id=2095459847]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.019212693, 0)
-shape = SubResource("BoxShape3D_nr8bl")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09361221, 0)
+shape = SubResource("CapsuleShape3D_4n3nh")
 debug_color = Color(0.19713867, 0.60169137, 0.627599, 0.41960785)
 
 [node name="Combat_Initiation_Range" type="Area3D" parent="." unique_id=1010287658]

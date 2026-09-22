@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cnlo2ly15rqlq"]
+
+[ext_resource type="PackedScene" uid="uid://djg0fbjderilg" path="res://WIP Blender/WIP Levels/Riverbed/Riverbed._Experiment2.glb" id="1_wdgy7"]
+
+[node name="Riverbed__Experiment2" unique_id=888708146 instance=ExtResource("1_wdgy7")]
+
+[node name="StaticBody3D" parent="Stairway " parent_id_path=PackedInt32Array(1516417322) index="0" unique_id=1584175245]
+collision_layer = 4
+
+[node name="StaticBody3D" parent="Riverbed " parent_id_path=PackedInt32Array(1058561493) index="0" unique_id=172241081]
+collision_layer = 4
+
+[node name="StaticBody3D" parent="Water " parent_id_path=PackedInt32Array(892213102) index="0" unique_id=2031375602]
+collision_layer = 4
+
+[node name="StaticBody3D" parent="Foundation " parent_id_path=PackedInt32Array(1521797429) index="0" unique_id=2044817104]
+collision_layer = 4
+
+[node name="StaticBody3D" parent="Hills " parent_id_path=PackedInt32Array(2132097974) index="0" unique_id=721608642]
+collision_layer = 4
+
+[node name="Bridge " parent="." index="7" unique_id=283586810]
+collision_layer = 4
+
+[node name="StaticBody3D" parent="Tower " parent_id_path=PackedInt32Array(311749367) index="0" unique_id=366287559]
+collision_layer = 4
+
+[node name="StaticBody3D" parent="Tower Walkway " parent_id_path=PackedInt32Array(1525059849) index="0" unique_id=1268839109]
+collision_layer = 4
