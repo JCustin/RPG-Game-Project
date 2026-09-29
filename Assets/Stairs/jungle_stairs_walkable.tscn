@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dt0i37jyj7gtt"]
+
+[ext_resource type="PackedScene" uid="uid://tex7od737eln" path="res://WIP Blender/Blender Assets/Stairs/Jungle_Stairs_walkable.glb" id="1_6owpa"]
+
+[node name="Jungle_Stairs_walkable" unique_id=1034180694 instance=ExtResource("1_6owpa")]
+
+[node name="StairLeftCollision " parent="." index="0" unique_id=614713540]
+collision_layer = 4
+
+[node name="Stair platform " parent="." index="1" unique_id=101138021]
+collision_layer = 4
+
+[node name="Stair Back " parent="." index="2" unique_id=305020903]
+collision_layer = 4
+
+[node name="Stair Wall " parent="." index="3" unique_id=1907404132]
+collision_layer = 4
+
+[node name="Other Stair Wall " parent="." index="5" unique_id=1418499983]
+collision_layer = 4
+
+[node name="StairRightCollision " parent="." index="6" unique_id=720560495]
+collision_layer = 4
+
+[node name="StairLeftCollision2 " parent="." index="7" unique_id=1014947381]
+collision_layer = 4
