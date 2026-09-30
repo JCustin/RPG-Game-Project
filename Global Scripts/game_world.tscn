@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dt0i37jyj7gtt" path="res://Assets/Stairs/jungle_stairs_walkable.tscn" id="8_fhiv2"]
 [ext_resource type="PackedScene" uid="uid://cqbmdsd5eo03m" path="res://Assets/Stairs/jungle_stair_2.tscn" id="9_xx7jr"]
 [ext_resource type="Texture2D" uid="uid://dejj4xeo7pcqq" path="res://WIP ART/General/Tree/TreesSample.png" id="11_1wpbt"]
+[ext_resource type="PackedScene" uid="uid://cs5l3kdhukdag" path="res://WIP Blender/Blender Assets/Pedestal/Item_Pedestal.glb" id="12_ucdsi"]
 
 [sub_resource type="Resource" id="Resource_gon4g"]
 script = ExtResource("3_qgrb7")
@@ -157,3 +158,6 @@ shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("11_1wpbt")
+
+[node name="Item_Pedestal" parent="Map Manager" unique_id=591347835 instance=ExtResource("12_ucdsi")]
+transform = Transform3D(0.6191488, 0, 0.7852737, 0, 1, 0, -0.7852737, 0, 0.6191488, -20.491758, 0.49148166, -5.6353407)
