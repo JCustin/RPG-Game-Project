@@ -5,10 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://dpx0prdy4rscj" path="res://Actors/Enemy/Haven Enemies/Brute Hex/OVERWORLD_Brute_Hex.tscn" id="2_hbceh"]
 [ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="3_qgrb7"]
 [ext_resource type="PackedScene" uid="uid://br3e7elbsyp5e" path="res://Actors/Enemy/Haven Enemies/Brute Hex/COMBAT_Brute_Hex.tscn" id="4_54ngu"]
-[ext_resource type="Texture2D" uid="uid://c6cblm4gsecaj" path="res://Actors/Enemy/Haven Enemies/Brute Hex/Art/TALL_BruteHex_OVERWORLD_Sheet.png" id="5_xa0cn"]
 [ext_resource type="Script" uid="uid://cp4jmhj1w76y0" path="res://Manager Componenets/combat_manager.gd" id="5_xhbsr"]
+[ext_resource type="Texture2D" uid="uid://bjp78s65wweje" path="res://WIP ART/Combat Art/Background/Test_background_2000_2000.png" id="7_3c3bi"]
 [ext_resource type="Script" uid="uid://cfm1qrm887dfk" path="res://Global Scripts/map_manager.gd" id="8_0dvf1"]
 [ext_resource type="PackedScene" uid="uid://dt0i37jyj7gtt" path="res://Assets/Stairs/jungle_stairs_walkable.tscn" id="8_fhiv2"]
+[ext_resource type="Texture2D" uid="uid://cyfqg8fyrfr48" path="res://WIP ART/Environment/Moon/Moon2.png" id="9_4fqxq"]
 [ext_resource type="PackedScene" uid="uid://cqbmdsd5eo03m" path="res://Assets/Stairs/jungle_stair_2.tscn" id="9_xx7jr"]
 [ext_resource type="Texture2D" uid="uid://dejj4xeo7pcqq" path="res://WIP ART/General/Tree/TreesSample.png" id="11_1wpbt"]
 [ext_resource type="PackedScene" uid="uid://cs5l3kdhukdag" path="res://WIP Blender/Blender Assets/Pedestal/Item_Pedestal.glb" id="12_ucdsi"]
@@ -22,15 +23,6 @@ bravery_generation = 1
 discipline_generation = 1
 movement_speed = 10
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xhbsr"]
-shading_mode = 0
-albedo_texture = ExtResource("5_xa0cn")
-texture_filter = 2
-
-[sub_resource type="QuadMesh" id="QuadMesh_54ngu"]
-material = SubResource("StandardMaterial3D_xhbsr")
-size = Vector2(13.72, 3.27)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0dvf1"]
 size = Vector3(8.565245, 1, 8.735279)
@@ -55,12 +47,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.446228, 0.7017555, 10.146
 
 [node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/Witch Hunter" unique_id=1977171488]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.70348155, 0.7107135, 0, -0.7107135, 0.70348155, -0.00012207031, 1.6084981, 2.3184452)
+transform = Transform3D(1, 0, 0, 0, 0.8724534, 0.48869735, 0, -0.48869735, 0.8724534, -0.00012207031, 1.1544576, 2.3184452)
 
 [node name="Enemy Actors" type="Node" parent="Actor Manager" unique_id=1597088867]
 
 [node name="Brute Hex" parent="Actor Manager/Enemy Actors" unique_id=196334002 instance=ExtResource("2_hbceh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6844482, 0.8071289, 1.0486755)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6844482, 0.23049927, 8.460297)
 stat_block = SubResource("Resource_gon4g")
 
 [node name="Combat Manager" type="Node" parent="." unique_id=341431183 node_paths=PackedStringArray("actor_manager_component")]
@@ -69,11 +61,10 @@ actor_manager_component = NodePath("../Actor Manager")
 
 [node name="Battle Environment" type="Node3D" parent="Combat Manager" unique_id=1633137800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.39977, 0)
-visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Combat Manager/Battle Environment" unique_id=1600178299]
-transform = Transform3D(8.3832035, 0, 0, 0, 12.968009, 0, 0, 0, 5.2527876, 0, 20.322542, 95.86212)
-mesh = SubResource("QuadMesh_54ngu")
+[node name="Background" type="Sprite3D" parent="Combat Manager/Battle Environment" unique_id=1430965855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.322542, 95.86212)
+texture = ExtResource("7_3c3bi")
 
 [node name="Player Placements" type="Node" parent="Combat Manager/Battle Environment" unique_id=1097477737]
 
@@ -103,18 +94,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.072094, 36.072807, 115.755
 
 [node name="Battle Camera" type="Camera3D" parent="Combat Manager/Battle Environment" unique_id=1631920453]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.27973, 139.8839)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.27973, 116.321396)
 fov = 35.1
 
 [node name="Map Manager" type="Node" parent="." unique_id=1212825716]
 script = ExtResource("8_0dvf1")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map Manager" unique_id=1598207436]
-transform = Transform3D(0.97432643, -0.22172464, 0.039067037, 0.21417896, 0.9663132, 0.14270994, -0.069393314, -0.13067873, 0.9889932, 0, 7.4710693, 0)
+[node name="Moon" type="Sprite3D" parent="Map Manager" unique_id=1485845570]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 30, 10, -69.783)
+billboard = 1
+texture = ExtResource("9_4fqxq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map Manager/Moon" unique_id=1598207436]
+transform = Transform3D(0.99167114, -0.084667034, 0.097055644, 0, 0.75356334, 0.6573753, -0.1287956, -0.65190005, 0.7472871, 0, 0, 0)
 light_color = Color(0.14247483, 0.7018538, 0.73306894, 1)
 light_energy = 0.592
+light_specular = 2.224
 light_bake_mode = 0
 shadow_enabled = true
+directional_shadow_mode = 1
 
 [node name="Jungle_Stairs_walkable" parent="Map Manager" unique_id=1071688034 instance=ExtResource("8_fhiv2")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.581722, 0.9978533, 5.175363)
