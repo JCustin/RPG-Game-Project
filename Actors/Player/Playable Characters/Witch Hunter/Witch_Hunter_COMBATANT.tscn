@@ -18,4 +18,5 @@ animations = [{
 script = ExtResource("1_rwrpi")
 
 [node name="Texture" type="AnimatedSprite3D" parent="." unique_id=1609261358]
+layers = 2
 sprite_frames = SubResource("SpriteFrames_h0xgp")

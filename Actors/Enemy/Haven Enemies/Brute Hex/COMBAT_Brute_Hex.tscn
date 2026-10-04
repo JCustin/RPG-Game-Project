@@ -7,4 +7,5 @@
 script = ExtResource("1_rn2dh")
 
 [node name="Texture" type="Sprite3D" parent="." unique_id=1323483986]
+layers = 2
 texture = ExtResource("2_cg3mo")
