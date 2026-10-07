@@ -6,10 +6,13 @@
 [ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="3_qgrb7"]
 [ext_resource type="PackedScene" uid="uid://br3e7elbsyp5e" path="res://Actors/Enemy/Haven Enemies/Brute Hex/COMBAT_Brute_Hex.tscn" id="4_54ngu"]
 [ext_resource type="Script" uid="uid://cp4jmhj1w76y0" path="res://Manager Componenets/combat_manager.gd" id="5_xhbsr"]
+[ext_resource type="Texture2D" uid="uid://dwmfiyu44ab4" path="res://WIP Blender/Blender Assets/Pedestal/textures/Marble Base Color.png" id="7_4fqxq"]
 [ext_resource type="Script" uid="uid://cfm1qrm887dfk" path="res://Global Scripts/map_manager.gd" id="8_0dvf1"]
+[ext_resource type="Theme" uid="uid://c74wl0ircaefw" path="res://Assets/UI/Combat UI/Themes/Action_Button_Theme.tres" id="8_3c3bi"]
 [ext_resource type="Texture2D" uid="uid://cyfqg8fyrfr48" path="res://WIP ART/Environment/Moon/Moon2.png" id="9_4fqxq"]
 [ext_resource type="PackedScene" uid="uid://cqbmdsd5eo03m" path="res://Assets/Stairs/jungle_stair_2.tscn" id="9_xx7jr"]
 [ext_resource type="Texture2D" uid="uid://dejj4xeo7pcqq" path="res://WIP ART/General/Tree/TreesSample.png" id="11_1wpbt"]
+[ext_resource type="PackedScene" uid="uid://cw6qh6w3oyngl" path="res://Assets/Huts/hut_01.tscn" id="12_4fqxq"]
 [ext_resource type="PackedScene" uid="uid://cs5l3kdhukdag" path="res://WIP Blender/Blender Assets/Pedestal/Item_Pedestal.glb" id="12_ucdsi"]
 
 [sub_resource type="Resource" id="Resource_gon4g"]
@@ -60,14 +63,15 @@ player_center_position = NodePath("Battle Environment/Player Position/Center Pos
 player_left_position = NodePath("Battle Environment/Player Position/Left Position")
 player_right_position = NodePath("Battle Environment/Player Position/Right Position")
 enemy_central_position = NodePath("Battle Environment/Enemy Position/Crown Position")
-battle_camera = NodePath("SubViewportContainer/SubViewport/Battle Camera")
-battle_view = NodePath("SubViewportContainer")
+battle_camera = NodePath("Combat UI/SubViewport/Battle Camera")
+battle_view = NodePath("Combat UI")
 
 [node name="Battle Environment" type="Node3D" parent="Combat Manager" unique_id=1633137800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.39977, 0)
 
 [node name="Background" type="Sprite3D" parent="Combat Manager/Battle Environment" unique_id=1635915441]
-transform = Transform3D(0.58527654, 0, 0, 0, 0.8822521, 0, 0, 0, 1, 0, 20.034212, 137.36372)
+transform = Transform3D(3.6754484, 0, 0, 0, 2.6951644, 0, 0, 0, 1, 0, 20.034212, 137.36372)
+texture = ExtResource("7_4fqxq")
 
 [node name="Player Position" type="Node" parent="Combat Manager/Battle Environment" unique_id=949432645]
 
@@ -85,27 +89,69 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 36.445, 142.958)
 [node name="Crown Position" type="Node3D" parent="Combat Manager/Battle Environment/Enemy Position" unique_id=404001488]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.155582, 140.60147)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Combat Manager" unique_id=1906102741]
+[node name="Combat UI" type="SubViewportContainer" parent="Combat Manager" unique_id=1906102741]
 visible = false
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1200.0
+offset_bottom = 800.0
 
-[node name="SubViewport" type="SubViewport" parent="Combat Manager/SubViewportContainer" unique_id=1444182350]
+[node name="SubViewport" type="SubViewport" parent="Combat Manager/Combat UI" unique_id=1444182350]
 handle_input_locally = false
+size = Vector2i(1800, 800)
 render_target_update_mode = 0
 
-[node name="Label" type="Label" parent="Combat Manager/SubViewportContainer/SubViewport" unique_id=2116585301]
-offset_left = 161.0
-offset_top = 219.0
-offset_right = 491.0
-offset_bottom = 339.0
-text = "TEST TEXT
-"
-
-[node name="Battle Camera" type="Camera3D" parent="Combat Manager/SubViewportContainer/SubViewport" unique_id=1631920453]
+[node name="Battle Camera" type="Camera3D" parent="Combat Manager/Combat UI/SubViewport" unique_id=1631920453]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.6795, 148.53899)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.178249, 36.6795, 148.53899)
 fov = 73.5
+
+[node name="Battle_Text_Container" type="Control" parent="Combat Manager/Combat UI/SubViewport" unique_id=1524033168]
+layout_mode = 3
+anchor_right = 0.24900001
+offset_right = -0.2000122
+offset_bottom = 40.0
+
+[node name="Battle_Text_Label" type="Label" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container" unique_id=2116585301]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.75600004
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 0.2079773
+offset_bottom = 53.0
+text = "TEST TEXT"
+
+[node name="Actions_Container" type="VBoxContainer" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container" unique_id=30158187]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.008928572
+anchor_top = 9.925
+anchor_right = 0.605
+anchor_bottom = 16.225
+offset_top = -20.0
+offset_right = -0.040008545
+offset_bottom = 20.0
+grow_vertical = 2
+alignment = 1
+
+[node name="Attack_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=1592499161]
+layout_mode = 2
+theme = ExtResource("8_3c3bi")
+text = "Attack"
+
+[node name="Skill_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=2131296678]
+layout_mode = 2
+theme = ExtResource("8_3c3bi")
+text = "Skill"
+
+[node name="Item_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=1712582845]
+layout_mode = 2
+theme = ExtResource("8_3c3bi")
+text = "Item"
+
+[node name="Flee_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=1865765965]
+layout_mode = 2
+theme = ExtResource("8_3c3bi")
+text = "Flee"
 
 [node name="Map Manager" type="Node" parent="." unique_id=1212825716]
 script = ExtResource("8_0dvf1")
@@ -168,3 +214,6 @@ texture = ExtResource("11_1wpbt")
 
 [node name="Item_Pedestal" parent="Map Manager" unique_id=591347835 instance=ExtResource("12_ucdsi")]
 transform = Transform3D(0.6191488, 0, 0.7852737, 0, 1, 0, -0.7852737, 0, 0.6191488, -20.491758, 0.49148166, -5.6353407)
+
+[node name="Hut01" parent="Map Manager" unique_id=1367527632 instance=ExtResource("12_4fqxq")]
+transform = Transform3D(-0.49692258, 0.007119886, -0.031518016, 0.007102338, 0.49792108, 0.0005022434, 0.03152198, 5.1657706e-05, -0.49697334, -10.696924, 0, 3.207858)

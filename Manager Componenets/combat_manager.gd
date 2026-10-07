@@ -43,3 +43,4 @@ func start_battle(player_party: Array[base_player_actor], surrounding_enemies: A
 	# activate the battle camera
 	battle_camera.make_current()
 	battle_view.visible = true
+	
