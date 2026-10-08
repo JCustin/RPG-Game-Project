@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://treu21uj0rcp"]
+
+[ext_resource type="PackedScene" uid="uid://8vws5eth8d7j" path="res://WIP Blender/WIP Levels/Jungle_Sample_Level.glb" id="1_xsi1w"]
+
+[node name="Jungle_Sample_Level" unique_id=1441821296 instance=ExtResource("1_xsi1w")]
+
+[node name="FloorCollision " parent="." index="5" unique_id=369787775]
+collision_layer = 5

@@ -10,10 +10,7 @@
 [ext_resource type="Script" uid="uid://cfm1qrm887dfk" path="res://Global Scripts/map_manager.gd" id="8_0dvf1"]
 [ext_resource type="Theme" uid="uid://c74wl0ircaefw" path="res://Assets/UI/Combat UI/Themes/Action_Button_Theme.tres" id="8_3c3bi"]
 [ext_resource type="Texture2D" uid="uid://cyfqg8fyrfr48" path="res://WIP ART/Environment/Moon/Moon2.png" id="9_4fqxq"]
-[ext_resource type="PackedScene" uid="uid://cqbmdsd5eo03m" path="res://Assets/Stairs/jungle_stair_2.tscn" id="9_xx7jr"]
-[ext_resource type="Texture2D" uid="uid://dejj4xeo7pcqq" path="res://WIP ART/General/Tree/TreesSample.png" id="11_1wpbt"]
-[ext_resource type="PackedScene" uid="uid://cw6qh6w3oyngl" path="res://Assets/Huts/hut_01.tscn" id="12_4fqxq"]
-[ext_resource type="PackedScene" uid="uid://cs5l3kdhukdag" path="res://WIP Blender/Blender Assets/Pedestal/Item_Pedestal.glb" id="12_ucdsi"]
+[ext_resource type="PackedScene" uid="uid://treu21uj0rcp" path="res://Assets/Levels/jungle_sample_level.tscn" id="11_1wpbt"]
 
 [sub_resource type="Resource" id="Resource_gon4g"]
 script = ExtResource("3_qgrb7")
@@ -25,15 +22,6 @@ discipline_generation = 1
 movement_speed = 10
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0dvf1"]
-size = Vector3(8.565245, 1, 8.735279)
-
-[sub_resource type="BoxMesh" id="BoxMesh_0dvf1"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1wpbt"]
-size = Vector3(100, 1, 100)
-
 [node name="Game World" type="Node3D" unique_id=1626318213]
 
 [node name="Actor Manager" type="Node" parent="." unique_id=1218480918 node_paths=PackedStringArray("player_actors", "enemy_actors")]
@@ -44,11 +32,12 @@ enemy_actors = NodePath("Enemy Actors")
 [node name="Player Actors" type="Node" parent="Actor Manager" unique_id=1455372440]
 
 [node name="Witch Hunter" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("1_s8l0k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.446228, 0.21248305, 10.146954)
+transform = Transform3D(-0.9987466, 0, 0.050052613, 0, 1, 0, -0.050052613, 0, -0.9987466, -11.833714, -0.94570524, -2.075117)
 
 [node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/Witch Hunter" unique_id=1977171488]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.80636203, 0.5914222, 0, -0.5914222, 0.80636203, -0.00012207031, 1.305851, 2.1654825)
+transform = Transform3D(1, 0, 0, 0, 0.92265254, 0.38563222, 0, -0.38563222, 0.92265254, -0.00012265216, 0.7451118, 2.2209795)
+far = 90000.0
 
 [node name="Enemy Actors" type="Node" parent="Actor Manager" unique_id=1597088867]
 
@@ -162,58 +151,13 @@ billboard = 1
 texture = ExtResource("9_4fqxq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map Manager/Moon" unique_id=1598207436]
-transform = Transform3D(0.99167114, -0.084667034, 0.097055644, 0, 0.75356334, 0.6573753, -0.1287956, -0.65190005, 0.7472871, 0, 0, 0)
-light_color = Color(0.14247483, 0.7018538, 0.73306894, 1)
-light_energy = 0.933
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 1.545
+transform = Transform3D(0.99167114, -0.084667034, 0.097055644, 0, 0.75356334, 0.6573753, -0.1287956, -0.65190005, 0.7472871, 0.69698024, 4.7207723, 5.366451)
+light_color = Color(0.02652168, 0.24016747, 0.25230208, 1)
+light_energy = 1.136
 light_specular = 3.177
 light_bake_mode = 0
 shadow_enabled = true
+shadow_bias = 0.0
 directional_shadow_mode = 1
 
-[node name="Jungle_Stair_2" parent="Map Manager" unique_id=466266798 instance=ExtResource("9_xx7jr")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.059015, 0.086633444, 6.4478283)
-
-[node name="Temple_Camera" type="Camera3D" parent="Map Manager/Jungle_Stair_2" unique_id=1810474741]
-unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, -0.51226777, 0.85882586, -1.7763568e-15, 0.85882586, 0.51226777, -1, 2.2391934e-08, -3.754047e-08, 2.3660443, 2.3187664, 0.3463478)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Map Manager" unique_id=1469246369]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.957016, 4.0451584, -4.669717)
-light_color = Color(0.14117648, 0.7019608, 0.73333335, 1)
-light_energy = 1.415
-shadow_enabled = true
-distance_fade_enabled = true
-
-[node name="Camera_Switch" type="Area3D" parent="Map Manager" unique_id=1769638320]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.982147, 0.68294525, 4.6776953)
-collision_layer = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map Manager/Camera_Switch" unique_id=499342211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16922188, 0, -3.7728138)
-shape = SubResource("BoxShape3D_0dvf1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map Manager" unique_id=1518548008]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.60186386, 3.288208)
-mesh = SubResource("BoxMesh_0dvf1")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Map Manager/MeshInstance3D" unique_id=1510397590]
-collision_layer = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map Manager/MeshInstance3D/StaticBody3D" unique_id=2093959231]
-shape = SubResource("BoxShape3D_1wpbt")
-
-[node name="Sprite3D" type="Sprite3D" parent="Map Manager" unique_id=1496108281]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.83957, 0.8052063, 9.819458)
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("11_1wpbt")
-
-[node name="Item_Pedestal" parent="Map Manager" unique_id=591347835 instance=ExtResource("12_ucdsi")]
-transform = Transform3D(0.6191488, 0, 0.7852737, 0, 1, 0, -0.7852737, 0, 0.6191488, -20.491758, 0.49148166, -5.6353407)
-
-[node name="Hut01" parent="Map Manager" unique_id=1367527632 instance=ExtResource("12_4fqxq")]
-transform = Transform3D(-0.49692258, 0.007119886, -0.031518016, 0.007102338, 0.49792108, 0.0005022434, 0.03152198, 5.1657706e-05, -0.49697334, -10.696924, 0, 3.207858)
+[node name="Jungle_Sample_Level" parent="Map Manager" unique_id=1441821296 instance=ExtResource("11_1wpbt")]
