@@ -32,11 +32,11 @@ enemy_actors = NodePath("Enemy Actors")
 [node name="Player Actors" type="Node" parent="Actor Manager" unique_id=1455372440]
 
 [node name="Witch Hunter" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("1_s8l0k")]
-transform = Transform3D(-0.9987466, 0, 0.050052613, 0, 1, 0, -0.050052613, 0, -0.9987466, -11.833714, -0.94570524, -2.075117)
+transform = Transform3D(-0.9987466, 0, 0.050052613, 0, 1, 0, -0.050052613, 0, -0.9987466, -19.149658, 22.977741, -7.7436895)
 
 [node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/Witch Hunter" unique_id=1977171488]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.92265254, 0.38563222, 0, -0.38563222, 0.92265254, -0.00012265216, 0.7451118, 2.2209795)
+transform = Transform3D(1, 0, 0, 0, 0.8323703, 0.55421984, 0, -0.55421984, 0.8323703, -0.00012222934, 1.2275604, 2.3446066)
 far = 90000.0
 
 [node name="Enemy Actors" type="Node" parent="Actor Manager" unique_id=1597088867]
@@ -153,11 +153,8 @@ texture = ExtResource("9_4fqxq")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map Manager/Moon" unique_id=1598207436]
 transform = Transform3D(0.99167114, -0.084667034, 0.097055644, 0, 0.75356334, 0.6573753, -0.1287956, -0.65190005, 0.7472871, 0.69698024, 4.7207723, 5.366451)
 light_color = Color(0.02652168, 0.24016747, 0.25230208, 1)
-light_energy = 1.136
-light_specular = 3.177
-light_bake_mode = 0
 shadow_enabled = true
-shadow_bias = 0.0
 directional_shadow_mode = 1
 
-[node name="Jungle_Sample_Level" parent="Map Manager" unique_id=1441821296 instance=ExtResource("11_1wpbt")]
+[node name="Jungle_Sample_Level" parent="Map Manager" unique_id=1784672223 instance=ExtResource("11_1wpbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026180267, 0.081638336, 0.058807373)
