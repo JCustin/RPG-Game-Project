@@ -8,11 +8,20 @@ class_name combat_manager extends Node
 @export var enemy_central_position : Node3D
 @export var battle_camera : Camera3D
 @export var battle_view : SubViewportContainer
+@export var combat_logic : battle_logic_manager
+
+enum combat_state {PLAYER, ENEMY,}
+
+var combatants : Array
+ # includes all players and enemies 
 
 
 
 func _ready() -> void:
 	await get_parent().ready
+	%Attack_Button.pressed.connect(process_attack)
+	%Skill_Button.pressed.connect(process_skill_attack)
+	
 	actor_manager_component.initiate_combat.connect(start_battle)
 	
 func start_battle(player_party: Array[base_player_actor], surrounding_enemies: Array[base_enemy_actor]) -> void:
@@ -44,3 +53,14 @@ func start_battle(player_party: Array[base_player_actor], surrounding_enemies: A
 	battle_camera.make_current()
 	battle_view.visible = true
 	
+# combat_menu button handling
+func process_attack():
+	combat_logic.initiate_attack()
+	
+func process_skill_attack():
+	pass
+	
+func process_item_menu():
+	pass
+
+# combat_menu disabling handling	

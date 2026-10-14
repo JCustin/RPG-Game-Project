@@ -10,7 +10,8 @@
 [ext_resource type="Script" uid="uid://cfm1qrm887dfk" path="res://Global Scripts/map_manager.gd" id="8_0dvf1"]
 [ext_resource type="Theme" uid="uid://c74wl0ircaefw" path="res://Assets/UI/Combat UI/Themes/Action_Button_Theme.tres" id="8_3c3bi"]
 [ext_resource type="Texture2D" uid="uid://cyfqg8fyrfr48" path="res://WIP ART/Environment/Moon/Moon2.png" id="9_4fqxq"]
-[ext_resource type="PackedScene" uid="uid://treu21uj0rcp" path="res://Assets/Levels/jungle_sample_level.tscn" id="11_1wpbt"]
+[ext_resource type="Script" uid="uid://c80icxx07pff8" path="res://Manager Componenets/battle_logic_manager.gd" id="9_ucdsi"]
+[ext_resource type="PackedScene" uid="uid://dh10jw4pi0brh" path="res://Assets/Levels/jungle_sample_level_1.tscn" id="11_1wpbt"]
 
 [sub_resource type="Resource" id="Resource_gon4g"]
 script = ExtResource("3_qgrb7")
@@ -32,20 +33,20 @@ enemy_actors = NodePath("Enemy Actors")
 [node name="Player Actors" type="Node" parent="Actor Manager" unique_id=1455372440]
 
 [node name="Witch Hunter" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("1_s8l0k")]
-transform = Transform3D(-0.9987466, 0, 0.050052613, 0, 1, 0, -0.050052613, 0, -0.9987466, 1.5721575, 1.3572783, -2.3785267)
+transform = Transform3D(0.28254232, 0, 0.9592549, 0, 1, 0, -0.9592549, 0, 0.28254232, 4.9703064, 0.19173598, 5.682267)
 
 [node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/Witch Hunter" unique_id=1977171488]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.8323703, 0.55421984, 0, -0.55421984, 0.8323703, -0.00012222934, 1.2275604, 2.3446066)
+transform = Transform3D(1, 0, 0, 0, 0.86669654, 0.49883562, 0, -0.49883562, 0.86669654, -0.13082209, 1.2974012, 1.5911864)
 far = 90000.0
 
 [node name="Enemy Actors" type="Node" parent="Actor Manager" unique_id=1597088867]
 
 [node name="Brute Hex" parent="Actor Manager/Enemy Actors" unique_id=196334002 instance=ExtResource("2_hbceh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.666102, 0.23049927, 8.460297)
+transform = Transform3D(0.41512203, 0, 0.9097657, 0, 1, 0, -0.9097657, 0, 0.41512203, 1.328198, 0.2029295, 8.460297)
 stat_block = SubResource("Resource_gon4g")
 
-[node name="Combat Manager" type="Node" parent="." unique_id=341431183 node_paths=PackedStringArray("actor_manager_component", "player_center_position", "player_left_position", "player_right_position", "enemy_central_position", "battle_camera", "battle_view")]
+[node name="Combat Manager" type="Node" parent="." unique_id=341431183 node_paths=PackedStringArray("actor_manager_component", "player_center_position", "player_left_position", "player_right_position", "enemy_central_position", "battle_camera", "battle_view", "combat_logic")]
 script = ExtResource("5_xhbsr")
 actor_manager_component = NodePath("../Actor Manager")
 player_center_position = NodePath("Battle Environment/Player Position/Center Position")
@@ -54,6 +55,7 @@ player_right_position = NodePath("Battle Environment/Player Position/Right Posit
 enemy_central_position = NodePath("Battle Environment/Enemy Position/Crown Position")
 battle_camera = NodePath("Combat UI/SubViewport/Battle Camera")
 battle_view = NodePath("Combat UI")
+combat_logic = NodePath("Battle Logic")
 
 [node name="Battle Environment" type="Node3D" parent="Combat Manager" unique_id=1633137800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.39977, 0)
@@ -123,38 +125,40 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Attack_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=1592499161]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_3c3bi")
 text = "Attack"
 
 [node name="Skill_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=2131296678]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_3c3bi")
 text = "Skill"
 
 [node name="Item_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=1712582845]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_3c3bi")
 text = "Item"
 
 [node name="Flee_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=1865765965]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_3c3bi")
 text = "Flee"
+
+[node name="Battle Logic" type="Node" parent="Combat Manager" unique_id=180079468 node_paths=PackedStringArray("combat_menu")]
+script = ExtResource("9_ucdsi")
+combat_menu = NodePath("../Combat UI/SubViewport/Battle_Text_Container/Actions_Container")
 
 [node name="Map Manager" type="Node" parent="." unique_id=1212825716]
 script = ExtResource("8_0dvf1")
 
 [node name="Moon" type="Sprite3D" parent="Map Manager" unique_id=1485845570]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 30, 69.82818, -69.783)
+visible = false
 billboard = 1
 texture = ExtResource("9_4fqxq")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map Manager/Moon" unique_id=1598207436]
-transform = Transform3D(0.99167114, -0.084667034, 0.097055644, 0, 0.75356334, 0.6573753, -0.1287956, -0.65190005, 0.7472871, 0.69698024, 4.7207723, 5.366451)
-light_color = Color(0.02652168, 0.24016747, 0.25230208, 1)
-shadow_enabled = true
-directional_shadow_mode = 1
-
-[node name="Jungle_Sample_Level" parent="Map Manager" unique_id=1338120145 instance=ExtResource("11_1wpbt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026180267, 0.081638336, 0.058807373)
+[node name="Jungle_Sample_Level1" parent="Map Manager" unique_id=1729435247 instance=ExtResource("11_1wpbt")]
