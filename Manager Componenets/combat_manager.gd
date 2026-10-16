@@ -12,9 +12,6 @@ class_name combat_manager extends Node
 
 enum combat_state {PLAYER, ENEMY,}
 
-var combatants : Array
- # includes all players and enemies 
-
 
 
 func _ready() -> void:
@@ -36,7 +33,8 @@ func start_battle(player_party: Array[base_player_actor], surrounding_enemies: A
 	for enemy : base_enemy_actor in surrounding_enemies:
 		enemy_combatants.append(enemy.stat_block.combat_unit.instantiate())
 		
-		
+	combat_logic.parse_combatants(player_combatants, enemy_combatants)
+	
 	# after the combat counterpart is extracted, it is added as a child of combat_manager
 	for player : base_player_combatant in player_combatants:
 		add_child(player)
@@ -55,12 +53,18 @@ func start_battle(player_party: Array[base_player_actor], surrounding_enemies: A
 	
 # combat_menu button handling
 func process_attack():
-	combat_logic.initiate_attack()
+	combat_logic.initiate_target_selection()
 	
 func process_skill_attack():
-	pass
+	combat_logic.initiate_target_selection()
 	
 func process_item_menu():
-	pass
+	combat_logic.open_item_menu()
+
+func process_flee():
+	combat_logic.flee()
+
+
+	
 
 # combat_menu disabling handling	
