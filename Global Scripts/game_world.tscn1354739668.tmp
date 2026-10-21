@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://cpu2i88rllucx"]
+
+[ext_resource type="Script" uid="uid://b7iaihieifj6j" path="res://Manager Componenets/actor_manager.gd" id="1_gon4g"]
+[ext_resource type="PackedScene" uid="uid://dmrarh2bkmlqj" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_OVERWORLD.tscn" id="1_s8l0k"]
+[ext_resource type="PackedScene" uid="uid://dpx0prdy4rscj" path="res://Actors/Enemy/Haven Enemies/Brute Hex/OVERWORLD_Brute_Hex.tscn" id="2_hbceh"]
+[ext_resource type="Script" uid="uid://cp4jmhj1w76y0" path="res://Manager Componenets/combat_manager.gd" id="5_xhbsr"]
+[ext_resource type="Texture2D" uid="uid://dwmfiyu44ab4" path="res://WIP Blender/Blender Assets/Pedestal/textures/Marble Base Color.png" id="7_4fqxq"]
+[ext_resource type="Script" uid="uid://cfm1qrm887dfk" path="res://Global Scripts/map_manager.gd" id="8_0dvf1"]
+[ext_resource type="Theme" uid="uid://c74wl0ircaefw" path="res://Assets/UI/Combat UI/Themes/Action_Button_Theme.tres" id="8_3c3bi"]
+[ext_resource type="Texture2D" uid="uid://cyfqg8fyrfr48" path="res://WIP ART/Environment/Moon/Moon2.png" id="9_4fqxq"]
+[ext_resource type="Script" uid="uid://c80icxx07pff8" path="res://Manager Componenets/battle_logic_manager.gd" id="9_ucdsi"]
+[ext_resource type="PackedScene" uid="uid://dh10jw4pi0brh" path="res://Assets/Levels/jungle_sample_level_1.tscn" id="11_1wpbt"]
+
+[node name="Game World" type="Node3D" unique_id=1626318213]
+
+[node name="Actor Manager" type="Node" parent="." unique_id=1218480918 node_paths=PackedStringArray("player_actors", "enemy_actors")]
+script = ExtResource("1_gon4g")
+player_actors = NodePath("Player Actors")
+enemy_actors = NodePath("Enemy Actors")
+
+[node name="Player Actors" type="Node" parent="Actor Manager" unique_id=1455372440]
+
+[node name="Witch Hunter" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("1_s8l0k")]
+transform = Transform3D(0.28254232, 0, 0.9592549, 0, 1, 0, -0.9592549, 0, 0.28254232, 4.9703064, 0.19173598, 5.682267)
+
+[node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/Witch Hunter" unique_id=1977171488]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.83379906, 0.5520679, 0, -0.5520679, 0.83379906, -0.13082184, 1.0805968, 1.3640475)
+far = 90000.0
+
+[node name="Enemy Actors" type="Node" parent="Actor Manager" unique_id=1597088867]
+
+[node name="Brute Hex" parent="Actor Manager/Enemy Actors" unique_id=196334002 instance=ExtResource("2_hbceh")]
+transform = Transform3D(0.41512203, 0, 0.9097657, 0, 1, 0, -0.9097657, 0, 0.41512203, 1.328198, 0.2029295, 8.460297)
+
+[node name="Combat Manager" type="Node" parent="." unique_id=341431183 node_paths=PackedStringArray("actor_manager_component", "player_center_position", "player_left_position", "player_right_position", "enemy_central_position", "battle_camera", "battle_view", "combat_logic", "combat_menu")]
+script = ExtResource("5_xhbsr")
+actor_manager_component = NodePath("../Actor Manager")
+player_center_position = NodePath("Battle Environment/Player Position/Center Position")
+player_left_position = NodePath("Battle Environment/Player Position/Left Position")
+player_right_position = NodePath("Battle Environment/Player Position/Right Position")
+enemy_central_position = NodePath("Battle Environment/Enemy Position/Crown Position")
+battle_camera = NodePath("Combat UI/SubViewport/Battle Camera")
+battle_view = NodePath("Combat UI")
+combat_logic = NodePath("Battle Logic")
+combat_menu = NodePath("Combat UI/SubViewport/Battle_Text_Container/Actions_Container")
+
+[node name="Battle Environment" type="Node3D" parent="Combat Manager" unique_id=1633137800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.39977, 0)
+
+[node name="Background" type="Sprite3D" parent="Combat Manager/Battle Environment" unique_id=1635915441]
+transform = Transform3D(3.6754484, 0, 0, 0, 2.6951644, 0, 0, 0, 1, 0, 20.034212, 137.36372)
+texture = ExtResource("7_4fqxq")
+
+[node name="Player Position" type="Node" parent="Combat Manager/Battle Environment" unique_id=949432645]
+
+[node name="Center Position" type="Node3D" parent="Combat Manager/Battle Environment/Player Position" unique_id=1519520605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.445, 142.9582)
+
+[node name="Right Position" type="Node3D" parent="Combat Manager/Battle Environment/Player Position" unique_id=1080606969]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1454387, 35.514347, 142.958)
+
+[node name="Left Position" type="Node3D" parent="Combat Manager/Battle Environment/Player Position" unique_id=1933025430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 36.445, 142.958)
+
+[node name="Enemy Position" type="Node" parent="Combat Manager/Battle Environment" unique_id=1555229094]
+
+[node name="Crown Position" type="Node3D" parent="Combat Manager/Battle Environment/Enemy Position" unique_id=404001488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.155582, 140.60147)
+
+[node name="Combat UI" type="SubViewportContainer" parent="Combat Manager" unique_id=1906102741]
+visible = false
+offset_right = 1200.0
+offset_bottom = 800.0
+
+[node name="SubViewport" type="SubViewport" parent="Combat Manager/Combat UI" unique_id=1444182350]
+handle_input_locally = false
+size = Vector2i(1800, 800)
+render_target_update_mode = 0
+
+[node name="Battle Camera" type="Camera3D" parent="Combat Manager/Combat UI/SubViewport" unique_id=1631920453]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.178249, 36.6795, 148.53899)
+fov = 73.5
+
+[node name="Battle_Text_Container" type="Control" parent="Combat Manager/Combat UI/SubViewport" unique_id=1524033168]
+layout_mode = 3
+anchor_right = 0.24900001
+offset_right = -0.2000122
+offset_bottom = 40.0
+
+[node name="Battle_Text_Label" type="Label" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container" unique_id=2116585301]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.75600004
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 0.2079773
+offset_bottom = 53.0
+text = "TEST TEXT"
+
+[node name="Actions_Container" type="VBoxContainer" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container" unique_id=30158187]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.008928572
+anchor_top = 9.925
+anchor_right = 0.605
+anchor_bottom = 16.225
+offset_top = -20.0
+offset_right = -0.040008545
+offset_bottom = 20.0
+grow_vertical = 2
+alignment = 1
+
+[node name="Attack_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=1592499161]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_3c3bi")
+text = "Attack"
+
+[node name="Skill_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=2131296678]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_3c3bi")
+text = "Skill"
+
+[node name="Item_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=1712582845]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_3c3bi")
+text = "Item"
+
+[node name="Flee_Button" type="Button" parent="Combat Manager/Combat UI/SubViewport/Battle_Text_Container/Actions_Container" unique_id=1865765965]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_3c3bi")
+text = "Flee"
+
+[node name="Battle Logic" type="Node" parent="Combat Manager" unique_id=180079468 node_paths=PackedStringArray("combat_menu")]
+script = ExtResource("9_ucdsi")
+combat_menu = NodePath("../Combat UI/SubViewport/Battle_Text_Container/Actions_Container")
+
+[node name="Map Manager" type="Node" parent="." unique_id=1212825716]
+script = ExtResource("8_0dvf1")
+
+[node name="Moon" type="Sprite3D" parent="Map Manager" unique_id=1485845570]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 30, 69.82818, -69.783)
+visible = false
+billboard = 1
+texture = ExtResource("9_4fqxq")
+
+[node name="Jungle_Sample_Level1" parent="Map Manager" unique_id=1729435247 instance=ExtResource("11_1wpbt")]

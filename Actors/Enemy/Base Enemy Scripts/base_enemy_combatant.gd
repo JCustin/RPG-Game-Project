@@ -1,1 +1,1 @@
-class_name base_enemy_combatant extends StaticBody3D
+class_name base_enemy_combatant extends base_actor_combatant

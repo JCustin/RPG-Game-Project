@@ -4,6 +4,10 @@ class_name base_player_actor extends base_actor_class
 # signal is sent to Actor Manager
 signal contacted_enemy(surrounding_enemies : Array[base_enemy_actor])
 
+enum all_player_states {MOVING, FIGHTING}
+var current_player_state
+
+
 var local_enemies : Array[base_enemy_actor]
 
 func _ready() -> void:
@@ -41,12 +45,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, stat_block.movement_speed)
 		velocity.z = move_toward(velocity.z, 0, stat_block.movement_speed)
 
-	move_and_slide()
+	if current_player_state != all_player_states.FIGHTING:
+		move_and_slide()
 	
 # checks if body entered is an enemy_actor, and if so, combat shall start
 func validate_combat_initiation(body):
 	if body is base_enemy_actor:
 		contacted_enemy.emit(local_enemies) # since local_enemies tracks all enemies around the player, we send this information out to Actor Manager
+		current_player_state = all_player_states.FIGHTING
 		
 func add_to_local_enemies(body) -> void:
 	if body is base_enemy_actor:

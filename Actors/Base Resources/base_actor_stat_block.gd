@@ -3,9 +3,15 @@ class_name base_actor_stat_block extends Resource
 # this stat_block is based on the current 
 # mana-based resource system for combat
 
-@export var HP: int
-@export var combat_unit : PackedScene
-@export var wrath_generation: int
-@export var bravery_generation: int
-@export var discipline_generation: int
-@export var movement_speed : int
+@export_group("Basic", "basic_")
+@export var basic_HP : int 
+@export var basic_combat_unit : PackedScene
+
+@export_group("Combat", "combat_")
+@export var combat_basic_attack_value: int
+@export var combat_wrath_generation : int
+@export var combat_tranquility_generation: int
+@export var combat_bravery_generation: int 
+
+@export_group("Movement", "movement_")
+@export var movement_speed: int

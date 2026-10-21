@@ -11,9 +11,9 @@
 
 [sub_resource type="Resource" id="Resource_8iki8"]
 script = ExtResource("2_4n3nh")
-HP = 3
-combat_unit = ExtResource("2_856ek")
-wrath_generation = 1
+basic_HP = 100
+basic_combat_unit = ExtResource("2_856ek")
+combat_basic_attack_value = 10
 movement_speed = 4
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 

@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://r0cm2j3sat8p" path="res://Actors/Enemy/Base Enemy Scripts/base_enemy_combatant.gd" id="1_rn2dh"]
 [ext_resource type="Texture2D" uid="uid://b1ohccewqb351" path="res://Actors/Enemy/Haven Enemies/Brute Hex/Art/Brute_Hex_Combat_Art.png" id="2_cg3mo"]
 
-[node name="base_enemy_combatant" type="StaticBody3D" unique_id=750748769]
+[node name="base_enemy_combatant" type="StaticBody3D" unique_id=750748769 node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_rn2dh")
+sprite = NodePath("Texture")
 
 [node name="Texture" type="Sprite3D" parent="." unique_id=1323483986]
 layers = 2
