@@ -43,19 +43,36 @@ func switch_current_active_player(switch_value: int) -> void:
 	else:
 		pass
 	
-	# draw the old current_player out
-	var center_player_position : Vector3 = current_active_player.position
-	tween = current_active_player.create_tween()
-	tween.stop()
-	tween.tween_property(current_active_player, "position", Vector3(1000, 10000, 10000), 0.25)
-	tween.custom_step(1.0)
-	tween.kill()
+	# check if there is more than one player
+	var projected_active_player : base_player_combatant = player_turn_queue[index]
 	
-	current_active_player = player_turn_queue[index]
-	tween = current_active_player.create_tween()
-	tween.stop()
-	tween.tween_property(current_active_player, "position", center_player_position, 0.25)
-	tween.custom_step(1.0)
+	if projected_active_player == current_active_player:
+		pass
+	
+	else:
+		# draw the old current_player out
+		var center_player_position : Vector3 = current_active_player.position
+		var swap_away_point : Vector3 = get_parent().get_parent().player_left_position.position
+		
+		tween = create_tween()
+		tween.tween_property(current_active_player, "position", swap_away_point, 2.0).finished
+		current_active_player = player_turn_queue[index]
+		print_debug(current_active_player)
+		await tween.tween_property(current_active_player, "position", center_player_position, 2.0).finished
+		#tween.kill()
+	
+	
+	#tween = current_active_player.create_tween()
+	#tween.stop()
+	#tween.tween_property(current_active_player, "sprite", 
+	#tween.custom_step(0.5)
+	#tween.kill()
+	#
+	#current_active_player = player_turn_queue[index]
+	#tween = current_active_player.create_tween()
+	#tween.stop()
+	#tween.tween_property(current_active_player, "global_position", center_player_position, 0.25)
+	#tween.custom_step(1.0)
 	
 	
 
