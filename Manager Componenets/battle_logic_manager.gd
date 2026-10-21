@@ -12,6 +12,7 @@ signal attack_canceled
 
 var player_combatants : Array[base_player_combatant]
 var enemy_combatants : Array[base_enemy_combatant]
+
 ## called by combat_manager to inform and relay list of enemies and players when combat_manager performs start_battle function
 ## battle_logic_manager is the source of CONSTANT information for which actors are active in combat
 func activate_battle_logic(player_list : Array, enemy_list : Array) -> void:
@@ -24,8 +25,14 @@ func deactivate_battle_logic() -> void:
 	enemy_combatants.clear()
 	current_combat_turn = combat_turns.FIGHT_NOT_STARTED
 
+func start_new_player_turn() -> void:
+	player_turn_logic.start_player_turn(player_combatants)
+
+func start_new_enemy_turn() -> void:
+	enemy_turn_logic.start_enemy_turn()
+
 func initiate_attack() -> void:
-	pass
+	player_turn_logic.initiate_basic_attack()
 	
 	
 func initiate_skill() -> void:

@@ -23,7 +23,7 @@ enemy_actors = NodePath("Enemy Actors")
 [node name="Player Actors" type="Node" parent="Actor Manager" unique_id=1455372440]
 
 [node name="Witch Hunter" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("1_s8l0k")]
-transform = Transform3D(0.28254232, 0, 0.9592549, 0, 1, 0, -0.9592549, 0, 0.28254232, 4.9703064, 0.19173598, 5.682267)
+transform = Transform3D(0.28254232, 0, 0.9592549, 0, 1, 0, -0.9592549, 0, 0.28254232, 4.9703064, 1.0456722, 5.682267)
 
 [node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/Witch Hunter" unique_id=1977171488]
 unique_name_in_owner = true
@@ -159,4 +159,4 @@ visible = false
 billboard = 1
 texture = ExtResource("9_4fqxq")
 
-[node name="Jungle_Sample_Level1" parent="Map Manager" unique_id=1729435247 instance=ExtResource("11_1wpbt")]
+[node name="Jungle_Sample_Level1" parent="Map Manager" unique_id=367634263 instance=ExtResource("11_1wpbt")]
