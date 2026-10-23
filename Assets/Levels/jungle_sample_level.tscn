@@ -4,21 +4,21 @@
 
 [node name="Jungle_Sample_Level" unique_id=150664727 instance=ExtResource("1_xsi1w")]
 
-[node name="Floor Collision " parent="." index="2" unique_id=1223739123]
+[node name="Floor Collision " parent="." index="2" unique_id=462137006]
 collision_layer = 5
 
-[node name="Bridge Collision " parent="." index="7" unique_id=1492256415]
+[node name="Bridge Collision " parent="." index="7" unique_id=722848900]
 collision_layer = 5
 
-[node name="Right Bridge Collision " parent="." index="8" unique_id=921228239]
+[node name="Right Bridge Collision " parent="." index="8" unique_id=682613530]
 transform = Transform3D(-0.006635666, -0.99997795, -2.9802322e-08, -2.9802322e-08, 0, 1, -0.99997795, 0.006635666, 0, 1.2271006, 1.1458961, 0.021063391)
 collision_layer = 4
 
-[node name="CollisionShape3D" parent="Right Bridge Collision " index="0" unique_id=114351258]
+[node name="CollisionShape3D" parent="Right Bridge Collision " index="0" unique_id=921130191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.17418218)
 
-[node name="Left Bridge Collision " parent="." index="9" unique_id=1467762099]
+[node name="Left Bridge Collision " parent="." index="9" unique_id=1494685147]
 collision_layer = 4
 
-[node name="CollisionShape3D" parent="Left Bridge Collision " index="0" unique_id=1904042322]
+[node name="CollisionShape3D" parent="Left Bridge Collision " index="0" unique_id=180747910]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15869737)
