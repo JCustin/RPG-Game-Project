@@ -27,7 +27,7 @@ transform = Transform3D(0.28254232, 0, 0.9592549, 0, 1, 0, -0.9592549, 0, 0.2825
 
 [node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/Witch Hunter" unique_id=1977171488]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.83379906, 0.5520679, 0, -0.5520679, 0.83379906, -0.13082184, 1.0805968, 1.3640475)
+transform = Transform3D(0.99587685, -0.06700425, -0.06115286, 0.0896286, 0.6227421, 0.7772767, -0.013998389, -0.77955294, 0.6261799, -0.09626198, 1.9054258, 1.4813781)
 far = 90000.0
 
 [node name="Enemy Actors" type="Node" parent="Actor Manager" unique_id=1597088867]

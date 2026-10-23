@@ -4,19 +4,20 @@
 
 [node name="Jungle_Sample_Level1" unique_id=926924751 instance=ExtResource("1_dvj4x")]
 
-[node name="Floor Collison2 " parent="." index="1" unique_id=1212706240]
+[node name="Floor Collison2 " parent="." index="1" unique_id=889613178]
+transform = Transform3D(-18.420618, 0, 0, 0, -18.420618, 0, 0, 0, -18.420618, 5.6276426, 0.64328, -4.3802977)
 collision_layer = 4
 
-[node name="Character Reference" parent="." index="2" unique_id=167838447]
+[node name="Character Reference" parent="." index="2" unique_id=1648999312]
 visible = false
 
-[node name="Right Bridge Collision " parent="." index="6" unique_id=1773582185]
+[node name="Right Bridge Collision " parent="." index="6" unique_id=1966586638]
 collision_layer = 4
 
-[node name="Left Bridge Collision " parent="." index="7" unique_id=544126980]
+[node name="Left Bridge Collision " parent="." index="7" unique_id=290528622]
 collision_layer = 4
 
-[node name="Bridge Collision " parent="." index="8" unique_id=1149561480]
+[node name="Bridge Collision " parent="." index="8" unique_id=520865270]
 collision_layer = 4
 
 [node name="Sun" type="DirectionalLight3D" parent="." index="14" unique_id=1289030693]
