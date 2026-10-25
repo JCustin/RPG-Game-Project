@@ -1,5 +1,5 @@
 class_name base_player_actor extends base_actor_class
-@export var texture : base_actor_texture_component
+#@export var texture : base_actor_texture_component
 
 # signal is sent to Actor Manager
 signal contacted_enemy(surrounding_enemies : Array[base_enemy_actor])
@@ -25,17 +25,17 @@ func _physics_process(delta: float) -> void:
 	
 	#TODO code edge cases where multiple inputs are 
 	# entered simultaneously. Such as Vector(1,1)	
-	match input_dir:
-		Vector2.UP:
-			texture.play("Walk North")
-		Vector2.DOWN:
-			texture.play("Walk South")
-		Vector2.LEFT:
-			texture.play("Walk West")
-		Vector2.RIGHT:
-			texture.play("Walk East")
-		Vector2.ZERO:
-			texture.play("Idle")
+	#match input_dir:
+		#Vector2.UP:
+			#texture.play("Walk North")
+		#Vector2.DOWN:
+			#texture.play("Walk South")
+		#Vector2.LEFT:
+			#texture.play("Walk West")
+		#Vector2.RIGHT:
+			#texture.play("Walk East")
+		#Vector2.ZERO:
+			#texture.play("Idle")
 	
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:

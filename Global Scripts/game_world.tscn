@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cpu2i88rllucx"]
 
 [ext_resource type="Script" uid="uid://b7iaihieifj6j" path="res://Manager Componenets/actor_manager.gd" id="1_gon4g"]
-[ext_resource type="PackedScene" uid="uid://dmrarh2bkmlqj" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_OVERWORLD.tscn" id="1_s8l0k"]
 [ext_resource type="PackedScene" uid="uid://dpx0prdy4rscj" path="res://Actors/Enemy/Haven Enemies/Brute Hex/OVERWORLD_Brute_Hex.tscn" id="2_hbceh"]
+[ext_resource type="PackedScene" uid="uid://6dr4w37sqnga" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_Overworld_3D_TEST.tscn" id="2_ucdsi"]
 [ext_resource type="Script" uid="uid://cp4jmhj1w76y0" path="res://Manager Componenets/combat_manager.gd" id="5_xhbsr"]
 [ext_resource type="Texture2D" uid="uid://dwmfiyu44ab4" path="res://WIP Blender/Blender Assets/Pedestal/textures/Marble Base Color.png" id="7_4fqxq"]
 [ext_resource type="Script" uid="uid://cfm1qrm887dfk" path="res://Global Scripts/map_manager.gd" id="8_0dvf1"]
@@ -22,12 +22,12 @@ enemy_actors = NodePath("Enemy Actors")
 
 [node name="Player Actors" type="Node" parent="Actor Manager" unique_id=1455372440]
 
-[node name="Witch Hunter" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("1_s8l0k")]
-transform = Transform3D(0.28254232, 0, 0.9592549, 0, 1, 0, -0.9592549, 0, 0.28254232, 4.9703064, 1.0456722, 5.682267)
+[node name="base_player_actor" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("2_ucdsi")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4.9703064, 0.19778967, 5.682267)
 
-[node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/Witch Hunter" unique_id=1977171488]
+[node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/base_player_actor" unique_id=1977171488]
 unique_name_in_owner = true
-transform = Transform3D(0.99587685, -0.06700425, -0.06115286, 0.0896286, 0.6227421, 0.7772767, -0.013998389, -0.77955294, 0.6261799, -0.09626198, 1.9054258, 1.4813781)
+transform = Transform3D(-0.26794922, 0.32853353, -0.90568703, 0.089628614, 0.9444858, 0.31609082, 0.9592549, 0.003520806, -0.28252023, -1.4850183, 0.9635, -0.6534438)
 far = 90000.0
 
 [node name="Enemy Actors" type="Node" parent="Actor Manager" unique_id=1597088867]
