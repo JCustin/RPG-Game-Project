@@ -9,7 +9,7 @@ var current_player_status : player_status = player_status.INACTIVE
 enum player_targeting_choice {TARGETING, NOT_TARGETING}
 var current_player_targeting_choice : player_targeting_choice = player_targeting_choice.NOT_TARGETING
 
-var combat_mana: combat_mana_stat_block = combat_mana_stat_block.new()
+
 
 var player_turn_queue : Array[base_player_combatant]
 var current_active_player : base_player_combatant
@@ -144,22 +144,7 @@ func switch_targets(increment_index_value: int) -> void:
 # END TARGET HANDLING #
 
 # MANA HANDLING #
-func generate_mana_at_turn_start() -> void:
-	var generated_wrath : int
-	var generated_tranquility: int
-	var generated_bravery : int
-	
-	for player in player_turn_queue:
-		generated_wrath += player.stat_block.combat_wrath_generation
-		generated_tranquility += player.stat_block.combat_bravery_generation
-		generated_bravery += player.stat_block.combat_bravery_generation
-		
-	combat_mana.wrath += generated_wrath
-	combat_mana.tranquility += generated_tranquility
-	combat_mana.bravery += generated_bravery
 
-func expend_mana() -> void:
-	pass
 # END MANA HANDLING #
 
 # MENU ACTIONS #

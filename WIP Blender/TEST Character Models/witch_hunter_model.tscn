@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bn6jiju5k5okp"]
+
+[ext_resource type="PackedScene" uid="uid://bsd8bk5wp7ugm" path="res://WIP Blender/Blender Assets/Character/witchhunter_testimport.blend" id="1_spev3"]
+
+[node name="witch_hunter_model" unique_id=841206017 instance=ExtResource("1_spev3")]

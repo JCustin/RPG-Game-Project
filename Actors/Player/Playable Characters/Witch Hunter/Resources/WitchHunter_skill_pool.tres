@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="actor_skill_pool_resource" format=3 uid="uid://cjcnjdiv3kwf"]
+
+[ext_resource type="Script" uid="uid://crfe2f1eht8xi" path="res://Actors/Base Resources/actor_skill_pool.gd" id="1_ct30f"]
+[ext_resource type="Script" uid="uid://d36spo8aji7l4" path="res://Actors/Base Resources/combat_skill_resource.gd" id="2_wwn5a"]
+[ext_resource type="Resource" uid="uid://q1oeebtva64b" path="res://Actors/Combat Skills/PowerDrive_TEST.tres" id="3_4x4gn"]
+
+[resource]
+script = ExtResource("1_ct30f")
+skill_pool = Array[ExtResource("2_wwn5a")]([ExtResource("3_4x4gn")])
+metadata/_custom_type_script = "uid://crfe2f1eht8xi"

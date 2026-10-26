@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://cyfqg8fyrfr48" path="res://WIP ART/Environment/Moon/Moon2.png" id="9_4fqxq"]
 [ext_resource type="Script" uid="uid://c80icxx07pff8" path="res://Manager Componenets/battle_logic_manager.gd" id="9_ucdsi"]
 [ext_resource type="PackedScene" uid="uid://dh10jw4pi0brh" path="res://Assets/Levels/jungle_sample_level_1.tscn" id="11_1wpbt"]
+[ext_resource type="Script" uid="uid://bm5tj6g86lrjk" path="res://Manager Componenets/Camera_Manager.gd" id="13_4fqxq"]
+
+[sub_resource type="GDScript" id="GDScript_3c3bi"]
 
 [node name="Game World" type="Node3D" unique_id=1626318213]
 
@@ -23,12 +26,13 @@ enemy_actors = NodePath("Enemy Actors")
 [node name="Player Actors" type="Node" parent="Actor Manager" unique_id=1455372440]
 
 [node name="base_player_actor" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("2_ucdsi")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4.9703064, 0.19778967, 5.682267)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
 
 [node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/base_player_actor" unique_id=1977171488]
 unique_name_in_owner = true
-transform = Transform3D(-0.26794922, 0.32853353, -0.90568703, 0.089628614, 0.9444858, 0.31609082, 0.9592549, 0.003520806, -0.28252023, -1.4850183, 0.9635, -0.6534438)
+transform = Transform3D(0.50103027, 0.5653459, -0.6552503, 0.08962857, 0.7191702, 0.6890291, 0.8607762, -0.40395358, 0.3096549, -1.229836, 2.2586238, 0.8636432)
 far = 90000.0
+script = SubResource("GDScript_3c3bi")
 
 [node name="Enemy Actors" type="Node" parent="Actor Manager" unique_id=1597088867]
 
@@ -160,3 +164,8 @@ billboard = 1
 texture = ExtResource("9_4fqxq")
 
 [node name="Jungle_Sample_Level1" parent="Map Manager" unique_id=367634263 instance=ExtResource("11_1wpbt")]
+
+[node name="Camera Manager" type="Node" parent="." unique_id=139701098 node_paths=PackedStringArray("actor_manager_boss", "main_camera")]
+script = ExtResource("13_4fqxq")
+actor_manager_boss = NodePath("../Actor Manager")
+main_camera = NodePath("../Actor Manager/Player Actors/base_player_actor/Main_Camera")

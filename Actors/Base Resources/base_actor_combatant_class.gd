@@ -15,7 +15,7 @@ var stat_block : base_actor_stat_block
 # of the combatant? Or a parent node that orchestrates 
 # it all...
 
-func assign_stat_block(actor: base_player_actor):
+func assign_stat_block(actor: base_actor_class):
 	stat_block = actor.stat_block.duplicate()
 	# we create a duplicate because changes to the 
 	# stats in combat should not be made permanent 

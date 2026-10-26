@@ -81,6 +81,7 @@ script = ExtResource("1_xf3mb")
 stat_block = SubResource("Resource_0egq7")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=1141939493]
+billboard = 1
 shaded = true
 alpha_cut = 1
 texture_filter = 0

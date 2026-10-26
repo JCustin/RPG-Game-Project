@@ -2,19 +2,21 @@
 
 [ext_resource type="Script" uid="uid://dybrwybg4025j" path="res://Actors/Player/Base Player Scripts/base_player_actor.gd" id="1_551jp"]
 [ext_resource type="PackedScene" uid="uid://t1ar604p2w2t" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_COMBATANT.tscn" id="2_a8a3a"]
+[ext_resource type="Resource" uid="uid://cjcnjdiv3kwf" path="res://Actors/Player/Playable Characters/Witch Hunter/Resources/WitchHunter_skill_pool.tres" id="2_xqsbw"]
 [ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="3_xnk31"]
-[ext_resource type="PackedScene" uid="uid://482tjwvdhhie" path="res://WIP Blender/Blender Assets/Character/Witch_Hunter_TestImport.blend" id="4_a6mag"]
+[ext_resource type="PackedScene" uid="uid://bn6jiju5k5okp" path="res://WIP Blender/TEST Character Models/witch_hunter_model.tscn" id="4_a6mag"]
 
 [sub_resource type="Resource" id="Resource_8iki8"]
 script = ExtResource("3_xnk31")
 basic_HP = 100
 basic_combat_unit = ExtResource("2_a8a3a")
 combat_basic_attack_value = 10
+skill_pool = ExtResource("2_xqsbw")
 movement_speed = 4
 metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_856ek"]
-size = Vector3(0.2, 0.34, 0.125)
+size = Vector3(0.2, 0.74, 0.125)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4n3nh"]
 size = Vector3(0.38, 0.56, 0.245)
@@ -24,19 +26,106 @@ margin = 0.0
 height = 0.001
 radius = 1.51
 
-[node name="base_player_actor" type="CharacterBody3D" unique_id=623377371]
+[sub_resource type="Animation" id="Animation_a6mag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("witch_hunter_model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xqsbw"]
+resource_name = "Walk East"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("witch_hunter_model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0njwb"]
+resource_name = "Walk North"
+length = 0.46666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("witch_hunter_model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.52, 0.53333336),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5707964, 0), Vector3(0, 1.5707964, 0), Vector3(0, 3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5x3np"]
+resource_name = "Walk South"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("witch_hunter_model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, 0), Vector3(0, -1.5707964, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_551jp"]
+resource_name = "Walk West"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("witch_hunter_model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.1415927, 0), Vector3(0, 3.1415927, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a8a3a"]
+_data = {
+&"RESET": SubResource("Animation_a6mag"),
+&"Walk East": SubResource("Animation_xqsbw"),
+&"Walk North": SubResource("Animation_0njwb"),
+&"Walk South": SubResource("Animation_5x3np"),
+&"Walk West": SubResource("Animation_551jp")
+}
+
+[node name="base_player_actor" type="CharacterBody3D" unique_id=623377371 node_paths=PackedStringArray("anim")]
 collision_mask = 6
 script = ExtResource("1_551jp")
+anim = NodePath("AnimationPlayer")
 stat_block = SubResource("Resource_8iki8")
 metadata/_custom_type_script = "uid://dybrwybg4025j"
 
 [node name="Collision Box" type="CollisionShape3D" parent="." unique_id=2095459847]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0274501, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008120775, 0.36787242, -0.054680824)
 shape = SubResource("BoxShape3D_856ek")
 debug_color = Color(0.19713867, 0.60169137, 0.627599, 0.41960785)
 
 [node name="Combat_Initiation_Range" type="Area3D" parent="." unique_id=1010287658]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12339413, 0, -0.057938546)
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Combat_Initiation_Range" unique_id=1727936245]
@@ -51,7 +140,8 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Local Enemy Detector" unique_id=1103955842]
 shape = SubResource("CylinderShape3D_4n3nh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=120188472]
+[node name="witch_hunter_model" parent="." unique_id=841206017 instance=ExtResource("4_a6mag")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="Witch_Hunter_TestImport" parent="MeshInstance3D" unique_id=1597426918 instance=ExtResource("4_a6mag")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7907486, 0, -3.9178858)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=418061100]
+libraries/ = SubResource("AnimationLibrary_a8a3a")

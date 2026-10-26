@@ -30,26 +30,27 @@ func start_battle(player_party: Array[base_player_actor], surrounding_enemies: A
 	var player_combatants : Array[base_player_combatant]
 	
 	for player : base_player_actor in player_party:
-		player_combatants.append(player.stat_block.basic_combat_unit.instantiate())
-	
+		var combatant : base_actor_combatant = player.stat_block.basic_combat_unit.instantiate()
+		
+		player_combatants.append(combatant)
+		add_child(combatant)
+		combatant.reparent(player_right_position)
+		combatant.assign_stat_block(player)
+		combatant.position = get_parent().position
+		
 	var enemy_combatants : Array[base_enemy_combatant]
+	
 	for enemy : base_enemy_actor in surrounding_enemies:
-		enemy_combatants.append(enemy.stat_block.basic_combat_unit.instantiate())
+		var combatant : base_actor_combatant = enemy.stat_block.basic_combat_unit.instantiate()
+		
+		enemy_combatants.append(combatant)
+		add_child(combatant)
+		combatant.reparent(enemy_central_position)
+		combatant.assign_stat_block(enemy)
+		combatant.position = get_parent().position
 		
 	combat_logic.activate_battle_logic(player_combatants, enemy_combatants)
-	
-	# after the combat counterpart is extracted, it is added as a child of combat_manager
-	for player : base_player_combatant in player_combatants:
-		add_child(player)
-		player.reparent(player_right_position)
-		player.position = get_parent().position
-		
-	for enemy : base_enemy_combatant in enemy_combatants:
-		add_child(enemy)
-		enemy.reparent(enemy_central_position)
-		enemy.position = get_parent().position
-		
-	
+
 	# activate the battle camera
 	battle_camera.make_current()
 	battle_view.visible = true
@@ -75,3 +76,6 @@ func disable_combat_menu():
 func enable_combat_menu():
 	for menu_button : Button in combat_menu.get_children():
 		menu_button.disabled = false
+
+
+	

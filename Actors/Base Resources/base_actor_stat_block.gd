@@ -12,6 +12,7 @@ class_name base_actor_stat_block extends Resource
 @export var combat_wrath_generation : int
 @export var combat_tranquility_generation: int
 @export var combat_bravery_generation: int 
+@export var skill_pool : actor_skill_pool_resource
 
 @export_group("Movement", "movement_")
 @export var movement_speed: int

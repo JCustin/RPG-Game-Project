@@ -2,22 +2,29 @@
 
 [ext_resource type="PackedScene" uid="uid://cn3hov65qmtdd" path="res://WIP Blender/WIP Levels/Jungle_Sample_Level1.blend" id="1_dvj4x"]
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dvj4x"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, -1, 0, -1, -1, 0, 1, 1, 0, 1, 1, 0, -1, -1, 0.02534058, 1, 1, 0.02534058, -1, 1, 0.02534058, 1, -1, 0.02534058, 1, -1, 0.02534058, -1, 1, 0.02534058, -1, 1, 0, 1, 1, 0.02534058, -1, 1, 0, -1, 1, 0, 1, 1, 0.02534058, 1, 1, 0.02534058, -1, -1, 0, -1, -1, 0.02534058, 1, -1, 0, 1, -1, 0, -1, -1, 0.02534058, -1, -1, 0.02534058, 1, 1, 0, -1, -1, 0.02534058, -1, -1, 0, -1, 1, 0, -1, 1, 0.02534058, -1, -1, 0.02534058, -1, -1, 0, 1, 1, 0.02534058, 1, 1, 0, 1, -1, 0, 1, -1, 0.02534058, 1, 1, 0.02534058, 1)
+backface_collision = true
+
 [node name="Jungle_Sample_Level1" unique_id=926924751 instance=ExtResource("1_dvj4x")]
 
-[node name="Floor Collison2 " parent="." index="1" unique_id=889613178]
-transform = Transform3D(-18.420618, 0, 0, 0, -18.420618, 0, 0, 0, -18.420618, 5.6276426, 0.64328, -4.3802977)
+[node name="Floor Collison2 " parent="." index="1" unique_id=905468139]
+transform = Transform3D(-18.420618, 0, 0, 0, -18.420618, 0, 0, 0, -18.420618, 5.6276426, 0.33503103, -4.3802977)
 collision_layer = 4
 
-[node name="Character Reference" parent="." index="2" unique_id=1648999312]
+[node name="CollisionShape3D" parent="Floor Collison2 " index="0" unique_id=1196832000]
+shape = SubResource("ConcavePolygonShape3D_dvj4x")
+
+[node name="Character Reference" parent="." index="2" unique_id=1135569116]
 visible = false
 
-[node name="Right Bridge Collision " parent="." index="6" unique_id=1966586638]
+[node name="Right Bridge Collision " parent="." index="6" unique_id=242155350]
 collision_layer = 4
 
-[node name="Left Bridge Collision " parent="." index="7" unique_id=290528622]
+[node name="Left Bridge Collision " parent="." index="7" unique_id=489468605]
 collision_layer = 4
 
-[node name="Bridge Collision " parent="." index="8" unique_id=520865270]
+[node name="Bridge Collision " parent="." index="8" unique_id=1020573392]
 collision_layer = 4
 
 [node name="Sun" type="DirectionalLight3D" parent="." index="14" unique_id=1289030693]
