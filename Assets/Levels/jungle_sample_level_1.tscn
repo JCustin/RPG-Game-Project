@@ -9,7 +9,7 @@ backface_collision = true
 [node name="Jungle_Sample_Level1" unique_id=926924751 instance=ExtResource("1_dvj4x")]
 
 [node name="Floor Collison2 " parent="." index="1" unique_id=905468139]
-transform = Transform3D(-18.420618, 0, 0, 0, -18.420618, 0, 0, 0, -18.420618, 5.6276426, 0.33503103, -4.3802977)
+transform = Transform3D(-18.420618, 0, 0, 0, -18.420618, 0, 0, 0, -18.420618, 5.6276426, 0.43522453, -4.3802977)
 collision_layer = 4
 
 [node name="CollisionShape3D" parent="Floor Collison2 " index="0" unique_id=1196832000]

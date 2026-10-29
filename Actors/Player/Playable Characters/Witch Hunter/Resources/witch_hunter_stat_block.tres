@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="base_actor_stat_block" format=3 uid="uid://c3n2vjtbi4e64"]
+
+[ext_resource type="PackedScene" uid="uid://t1ar604p2w2t" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_COMBATANT.tscn" id="1_nm2jh"]
+[ext_resource type="Resource" uid="uid://bwm1g45gusjy6" path="res://Actors/Combat Skills/Power_Slap_TEST.tres" id="2_8pwke"]
+[ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="2_cx7kw"]
+[ext_resource type="Resource" uid="uid://cjcnjdiv3kwf" path="res://Actors/Player/Playable Characters/Witch Hunter/Resources/WitchHunter_skill_pool.tres" id="3_8pwke"]
+
+[resource]
+script = ExtResource("2_cx7kw")
+basic_HP = 100
+basic_combat_unit = ExtResource("1_nm2jh")
+combat_basic_attack_value = 10
+combat_wrath_generation = 2
+combat_tranquility_generation = 1
+combat_bravery_generation = 1
+combat_skill_pool = ExtResource("3_8pwke")
+combat_default_attack = ExtResource("2_8pwke")
+movement_speed = 5
+metadata/_custom_type_script = "uid://dw0u6d0cepr4l"

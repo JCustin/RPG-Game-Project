@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="combat_skill_resource" format=3 uid="uid://q1oeebtva64b"]
+[gd_resource type="Resource" script_class="special_skill_resource" format=3 uid="uid://q1oeebtva64b"]
 
-[ext_resource type="Script" uid="uid://d36spo8aji7l4" path="res://Actors/Base Resources/combat_skill_resource.gd" id="1_n0xkc"]
+[ext_resource type="Script" uid="uid://bqpb6mystd2in" path="res://Actors/Base Resources/special_skill_resource.gd" id="1_n0xkc"]
 
 [resource]
 script = ExtResource("1_n0xkc")
-TEXT_skill_name = "Power Drive"
-TEXT_skill_desc = "You drive your shih straight thru "
-TEXT_skill_action_desc = "Drive drive that shih"
-skill_value = 20
 wrath_cost = 2
-bravery_cost = 1
-metadata/_custom_type_script = "uid://d36spo8aji7l4"
+tranqulity_cost = 1
+skill_value = 20
+skill_name = "Power Drill"
+skill_desc = "You use the eseteemed Power Drill passed on through legends of Witch Hunters."
+skill_action_desc = "You drill {enemy_name}!"
+metadata/_custom_type_script = "uid://bqpb6mystd2in"

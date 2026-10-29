@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://cpu2i88rllucx"]
 
 [ext_resource type="Script" uid="uid://b7iaihieifj6j" path="res://Manager Componenets/actor_manager.gd" id="1_gon4g"]
+[ext_resource type="PackedScene" uid="uid://dmrarh2bkmlqj" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_OVERWORLD.tscn" id="2_4fqxq"]
 [ext_resource type="PackedScene" uid="uid://dpx0prdy4rscj" path="res://Actors/Enemy/Haven Enemies/Brute Hex/OVERWORLD_Brute_Hex.tscn" id="2_hbceh"]
-[ext_resource type="PackedScene" uid="uid://6dr4w37sqnga" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_Overworld_3D_TEST.tscn" id="2_ucdsi"]
 [ext_resource type="Script" uid="uid://cp4jmhj1w76y0" path="res://Manager Componenets/combat_manager.gd" id="5_xhbsr"]
+[ext_resource type="Script" uid="uid://bcr01lvullfkk" path="res://Manager Componenets/Combat Manager/skill_item_list.gd" id="7_3c3bi"]
 [ext_resource type="Texture2D" uid="uid://dwmfiyu44ab4" path="res://WIP Blender/Blender Assets/Pedestal/textures/Marble Base Color.png" id="7_4fqxq"]
 [ext_resource type="Script" uid="uid://cfm1qrm887dfk" path="res://Global Scripts/map_manager.gd" id="8_0dvf1"]
 [ext_resource type="Script" uid="uid://cmxjn61bu0wjv" path="res://Manager Componenets/player_turn_logic_manager.gd" id="8_1wpbt"]
@@ -25,12 +26,12 @@ enemy_actors = NodePath("Enemy Actors")
 
 [node name="Player Actors" type="Node" parent="Actor Manager" unique_id=1455372440]
 
-[node name="base_player_actor" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("2_ucdsi")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
+[node name="base_player_actor" parent="Actor Manager/Player Actors" unique_id=623377371 instance=ExtResource("2_4fqxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19571507, 0)
 
 [node name="Main_Camera" type="Camera3D" parent="Actor Manager/Player Actors/base_player_actor" unique_id=1977171488]
 unique_name_in_owner = true
-transform = Transform3D(0.50103027, 0.5653459, -0.6552503, 0.08962857, 0.7191702, 0.6890291, 0.8607762, -0.40395358, 0.3096549, -1.229836, 2.2586238, 0.8636432)
+transform = Transform3D(1, 0, 0, 0, 0.73600256, 0.67697877, 0, -0.67697877, 0.73600256, -0.02240014, 1.6904237, 1.5266125)
 far = 90000.0
 script = SubResource("GDScript_3c3bi")
 
@@ -39,7 +40,7 @@ script = SubResource("GDScript_3c3bi")
 [node name="Brute Hex" parent="Actor Manager/Enemy Actors" unique_id=196334002 instance=ExtResource("2_hbceh")]
 transform = Transform3D(0.41512203, 0, 0.9097657, 0, 1, 0, -0.9097657, 0, 0.41512203, 1.328198, 0.2029295, 8.460297)
 
-[node name="Combat Manager" type="Node" parent="." unique_id=341431183 node_paths=PackedStringArray("actor_manager_component", "player_center_position", "player_left_position", "player_right_position", "enemy_central_position", "battle_camera", "battle_view", "combat_logic", "combat_menu")]
+[node name="Combat Manager" type="Node" parent="." unique_id=341431183 node_paths=PackedStringArray("actor_manager_component", "player_center_position", "player_left_position", "player_right_position", "enemy_central_position", "battle_camera", "battle_view", "combat_logic")]
 script = ExtResource("5_xhbsr")
 actor_manager_component = NodePath("../Actor Manager")
 player_center_position = NodePath("Battle Environment/Player Position/Center Position")
@@ -49,7 +50,6 @@ enemy_central_position = NodePath("Battle Environment/Enemy Position/Crown Posit
 battle_camera = NodePath("Combat UI/SubViewport/Battle Camera")
 battle_view = NodePath("Combat UI")
 combat_logic = NodePath("Battle Logic")
-combat_menu = NodePath("Combat UI/SubViewport/Battle_Text_Container/Actions_Container")
 
 [node name="Battle Environment" type="Node3D" parent="Combat Manager" unique_id=1633137800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.39977, 0)
@@ -142,14 +142,30 @@ layout_mode = 2
 theme = ExtResource("8_3c3bi")
 text = "Flee"
 
-[node name="Battle Logic" type="Node" parent="Combat Manager" unique_id=180079468 node_paths=PackedStringArray("player_turn_logic", "enemy_turn_logic", "combat_menu")]
+[node name="Skill_Item_List" type="ItemList" parent="Combat Manager/Combat UI/SubViewport" unique_id=1804509120]
+visible = false
+anchors_preset = -1
+anchor_left = 0.22800002
+anchor_top = 0.16625015
+anchor_right = 0.3298889
+anchor_bottom = 0.6435001
+offset_left = -0.4000244
+offset_top = -0.00012207031
+offset_right = 0.19995117
+offset_bottom = 0.19998169
+script = ExtResource("7_3c3bi")
+
+[node name="Battle Logic" type="Node" parent="Combat Manager" unique_id=180079468 node_paths=PackedStringArray("player_turn_logic", "enemy_turn_logic", "combat_menu", "skill_item_list")]
 script = ExtResource("9_ucdsi")
 player_turn_logic = NodePath("Player Turn Logic")
 enemy_turn_logic = NodePath("Enemy Turn Logic")
 combat_menu = NodePath("../Combat UI/SubViewport/Battle_Text_Container/Actions_Container")
+skill_item_list = NodePath("../Combat UI/SubViewport/Skill_Item_List")
 
-[node name="Player Turn Logic" type="Node" parent="Combat Manager/Battle Logic" unique_id=1184715300]
+[node name="Player Turn Logic" type="Node" parent="Combat Manager/Battle Logic" unique_id=1184715300 node_paths=PackedStringArray("skill_item_list", "combat_menu")]
 script = ExtResource("8_1wpbt")
+skill_item_list = NodePath("../../Combat UI/SubViewport/Skill_Item_List")
+combat_menu = NodePath("../../Combat UI/SubViewport/Battle_Text_Container/Actions_Container")
 
 [node name="Enemy Turn Logic" type="Node" parent="Combat Manager/Battle Logic" unique_id=887012893]
 script = ExtResource("9_3c3bi")

@@ -9,7 +9,6 @@ class_name combat_manager extends Node
 @export var battle_camera : Camera3D
 @export var battle_view : SubViewportContainer
 @export var combat_logic : battle_logic_manager
-@export var combat_menu : VBoxContainer
 
 enum combat_state {PLAYER, ENEMY,}
 
@@ -19,8 +18,6 @@ func _ready() -> void:
 	await get_parent().ready
 	%Attack_Button.pressed.connect(process_attack)
 	%Skill_Button.pressed.connect(process_skill_attack)
-	combat_logic.attack_canceled.connect(enable_combat_menu)
-	combat_logic.attack_launched.connect(disable_combat_menu)
 	
 	actor_manager_component.initiate_combat.connect(start_battle)
 	
@@ -67,15 +64,6 @@ func process_item_menu():
 
 func process_flee():
 	combat_logic.flee()
-
-# combat_menu disabling handling	
-func disable_combat_menu():
-	for menu_button : Button in combat_menu.get_children():
-		menu_button.disabled = true
-		
-func enable_combat_menu():
-	for menu_button : Button in combat_menu.get_children():
-		menu_button.disabled = false
 
 
 	

@@ -3,8 +3,11 @@ class_name player_turn_logic_manager extends Node
 signal player_combatant_died
 signal player_turn_ended
 
-enum player_status {BASIC_ATTACK, SKILL, HOSTILE_SKILL, FRIENDLY_SKILL, INVENTORY, WAITING, ACTING, INACTIVE}
-var current_player_status : player_status = player_status.INACTIVE
+@export var skill_item_list : skill_item_list_logic
+@export var combat_menu : VBoxContainer
+
+enum player_status {BASIC_ATTACK, SELECTING_SKILL, SELECTING_ITEM, HOSTILE_SKILL, FRIENDLY_SKILL, INVENTORY, WAITING, ACTING, INACTIVE}
+var current_player_status : player_status = player_status.INACTIVE 
 
 enum player_targeting_choice {TARGETING, NOT_TARGETING}
 var current_player_targeting_choice : player_targeting_choice = player_targeting_choice.NOT_TARGETING
@@ -18,6 +21,9 @@ var current_target : base_actor_combatant
 var tween : Tween
 
 var target_list : Array
+
+func _ready() -> void:
+	skill_item_list.item_selected.connect(validate_chosen_skill)
 
 # TURN HANDLING
 func start_player_turn(player_combatant_list : Array) -> void:
@@ -87,6 +93,7 @@ func switch_current_active_player(switch_value: int) -> void:
 
 # TARGET HANDLING #
 func start_targeting_mode() -> void:
+	enable_menu(false)
 	var logic_manager : battle_logic_manager = get_parent()
 	current_player_targeting_choice = player_targeting_choice.TARGETING
 	
@@ -99,8 +106,15 @@ func start_targeting_mode() -> void:
 	set_target_from_target_list(0)
 
 func cancel_targeting_mode() -> void:
+	enable_menu(true)
 	stop_highlighting_target()
-	current_player_status = player_status.WAITING
+	
+	if current_player_status == player_status.HOSTILE_SKILL or current_player_status == player_status.FRIENDLY_SKILL:
+		current_player_status = player_status.SELECTING_SKILL
+		call_deferred("open_skill_menu")
+		
+	else:
+		current_player_status = player_status.WAITING
 	
 func attack_target_and_stop_targeting_mode() -> void:
 	stop_highlighting_target()
@@ -154,6 +168,8 @@ func initiate_basic_attack() -> void:
 
 # input handling
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Movement_Up"):
+		print_debug(current_player_status)
 	if current_player_status != player_status.INACTIVE:
 		
 		if current_player_status == player_status.WAITING:
@@ -172,4 +188,47 @@ func _input(event: InputEvent) -> void:
 			
 			if event.is_action_pressed("Exit_GUI"):
 				cancel_targeting_mode()
+				
+			if current_player_status == player_status.HOSTILE_SKILL or current_player_status == player_status.FRIENDLY_SKILL:
+				if event.is_action_pressed("Exit_GUI"):
+					cancel_targeting_mode()
+				
+		if current_player_status == player_status.SELECTING_SKILL:
+			if event.is_action_pressed("Exit_GUI"):
+				cancel_skill_menu()
 		
+	
+		
+func open_skill_menu():
+	enable_menu(false)
+	skill_item_list.open_list(current_active_player.stat_block.combat_skill_pool)
+	current_player_status = player_status.SELECTING_SKILL
+	
+func close_skill_menu() -> void:
+	skill_item_list.close_list()
+	enable_menu(true)
+	
+func cancel_skill_menu() -> void:
+	skill_item_list.close_list()
+	enable_menu(true)
+	current_player_status = player_status.WAITING
+	
+	
+func validate_chosen_skill(item_index : int) -> void:
+	var special_skill : special_skill_resource = skill_item_list.get_item_metadata(item_index)
+	match special_skill.skill_type:
+		
+		special_skill.possible_skill_type.DAMAGING:
+			skill_item_list.close_list()
+			current_player_status = player_status.HOSTILE_SKILL
+			current_player_targeting_choice = player_targeting_choice.TARGETING
+			start_targeting_mode()
+	
+	
+func enable_menu(boolean : bool ) -> void:
+	if boolean == true:
+		for menu_button : Button in combat_menu.get_children():
+			menu_button.disabled = false
+	else:
+		for menu_button : Button in combat_menu.get_children():
+			menu_button.disabled = true

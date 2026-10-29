@@ -1,6 +1,5 @@
 class_name base_player_actor extends base_actor_class
-#@export var texture : base_actor_texture_component
-@export var anim : AnimationPlayer
+@export var texture : base_actor_texture_component
 
 
 # signal is sent to Actor Manager
@@ -29,16 +28,15 @@ func _physics_process(delta: float) -> void:
 	 #entered simultaneously. Such as Vector(1,1)	
 	match input_dir:
 		Vector2.UP:
-			anim.play("Walk North")
+			texture.play("Walk North")
 		Vector2.DOWN:
-			anim.play("Walk South")
+			texture.play("Walk South")
 		Vector2.LEFT: 
-			anim.play("Walk West")
+			texture.play("Walk West")
 		Vector2.RIGHT:
-			anim.play("Walk East")
+			texture.play("Walk East")
 		Vector2.ZERO:
-			#texture.play("Idle")
-			pass
+			texture.play("Idle")
 	
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:

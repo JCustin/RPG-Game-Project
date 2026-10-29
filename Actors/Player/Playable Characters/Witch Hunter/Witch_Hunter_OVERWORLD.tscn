@@ -1,21 +1,12 @@
 [gd_scene format=3 uid="uid://dmrarh2bkmlqj"]
 
 [ext_resource type="Script" uid="uid://dybrwybg4025j" path="res://Actors/Player/Base Player Scripts/base_player_actor.gd" id="1_qluhb"]
-[ext_resource type="Script" uid="uid://dw0u6d0cepr4l" path="res://Actors/Base Resources/base_actor_stat_block.gd" id="2_4n3nh"]
-[ext_resource type="PackedScene" uid="uid://t1ar604p2w2t" path="res://Actors/Player/Playable Characters/Witch Hunter/Witch_Hunter_COMBATANT.tscn" id="2_856ek"]
+[ext_resource type="Resource" uid="uid://c3n2vjtbi4e64" path="res://Actors/Player/Playable Characters/Witch Hunter/Resources/witch_hunter_stat_block.tres" id="2_4n3nh"]
 [ext_resource type="Texture2D" uid="uid://b5xqo4ai32lxp" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/Idle/WitchHunter_IdleFront_Spritesheet.png" id="4_4n3nh"]
 [ext_resource type="Texture2D" uid="uid://bslj45bmo5ptc" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/Idle/WitchHunter_IdleRear_Spritesheet.png" id="5_856ek"]
 [ext_resource type="Script" uid="uid://bpicu8gr5qyvc" path="res://Actors/Base Resources/base_actor_texture_component.gd" id="6_1roxc"]
 [ext_resource type="Texture2D" uid="uid://cl44206wku116" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/Walking/WitchHunter_WalkNorth_Spritesheet.png" id="6_856ek"]
 [ext_resource type="Texture2D" uid="uid://dxpfm4r6fp3p2" path="res://Actors/Player/Playable Characters/Witch Hunter/Art/Walking/WitchHunter_WalkSouth_SpriteSheet.png" id="7_856ek"]
-
-[sub_resource type="Resource" id="Resource_8iki8"]
-script = ExtResource("2_4n3nh")
-basic_HP = 100
-basic_combat_unit = ExtResource("2_856ek")
-combat_basic_attack_value = 10
-movement_speed = 4
-metadata/_custom_type_script = "uid://dw0u6d0cepr4l"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4n3nh"]
 
@@ -165,7 +156,7 @@ radius = 1.51
 collision_mask = 6
 script = ExtResource("1_qluhb")
 texture = NodePath("Texture")
-stat_block = SubResource("Resource_8iki8")
+stat_block = ExtResource("2_4n3nh")
 metadata/_custom_type_script = "uid://dybrwybg4025j"
 
 [node name="Texture" type="AnimatedSprite3D" parent="." unique_id=101695831]
@@ -180,7 +171,7 @@ autoplay = "Idle"
 script = ExtResource("6_1roxc")
 
 [node name="Collision Box" type="CollisionShape3D" parent="." unique_id=2095459847]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0274501, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013049051, 0)
 shape = SubResource("BoxShape3D_856ek")
 debug_color = Color(0.19713867, 0.60169137, 0.627599, 0.41960785)
 

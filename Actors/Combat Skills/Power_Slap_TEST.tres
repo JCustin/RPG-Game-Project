@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="basic_attack_resource" format=3 uid="uid://bwm1g45gusjy6"]
+
+[ext_resource type="Script" uid="uid://byo1470po8lt3" path="res://Actors/Base Resources/basic_attack_resource.gd" id="1_d6qpp"]
+
+[resource]
+script = ExtResource("1_d6qpp")
+wrath_generation = 2
+tranquility_generation = 1
+HP_generation = 10
+skill_name = "Power Slap"
+skill_desc = "A powerful, if humiliating, slap delivered by your hand's righetous hidie. "
+skill_action_desc = "You slap {enemy_name}!"
+metadata/_custom_type_script = "uid://byo1470po8lt3"
